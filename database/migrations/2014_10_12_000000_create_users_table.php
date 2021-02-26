@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('gender')->comment('Male, Female');
             $table->string('marital')->comment('Single,Married');
             $table->date('dob');
+            $table->string('image');
             $table->date('anniversary');
             $table->bigInteger('userType');
             $table->tinyInteger('subscribed')->comment('1:Subscribed,0:unsubscribed')->default(1);
