@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        switch (Auth::user()->userType) {
+            case 1:
+                return redirect('admin/dashboard');break;
+            case 2:
+                return redirect('user/dashboard');break;
+            default:
+                return view('home');break;
+        }
     }
 }

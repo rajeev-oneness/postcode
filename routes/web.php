@@ -18,3 +18,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'],function(){
+	Route::group(['prefix'=>'admin','middleware' => 'admin'],function(){
+		require 'admin.php';
+	});
+
+	Route::group(['prefix'=>'user','middleware' => 'user'],function(){
+		Route::get('dashboard',function(){
+			return 'You are on User Dahboard';
+		});
+	});
+});
