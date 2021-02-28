@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('mobile',15);
             $table->string('gender')->comment('Male, Female');
             $table->string('marital')->comment('Single,Married');
-            $table->date('dob');
+            $table->dateTime('dob');
             $table->string('image');
             $table->date('anniversary');
             $table->bigInteger('userType');

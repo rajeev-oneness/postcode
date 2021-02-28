@@ -11,23 +11,39 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
+Route::get('/ani_signup', function () {
+    return view('portal.ani_signup');
+});
+
+Route::get('/admin', function () {
+	return view('portal.dashboard');
+})->name('admin.dashboard')->middleware(['auth', 'admin']);;
+
+Route::prefix('admin')->group(function () {
+    Route::get('login', function () {
+        return view('portal.login');
+    })->name('adminlogin');
+
+	Route::post('/login_get','AdminController@loginGet')->name('admin.login');
+
+	Route::group(['middleware' => ['auth', 'admin']],function(){
+
+Route::get('/business_profiles', 'BusinessController@BusinessProfiles');
+
+Route::get('/logout', 'AdminController@logout');
+});
+});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => 'auth'],function(){
-	
-	Route::group(['prefix'=>'admin','middleware' => 'admin'],function(){
-		require 'admin.php';
-	});
 
-	Route::group(['prefix'=>'user','middleware' => 'user'],function(){
-		Route::get('dashboard',function(){
-			return 'You are on User Dahboard';
-		});
-	});
-});
+    
+  
+      
+
+
