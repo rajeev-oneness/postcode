@@ -93,7 +93,7 @@
               <div class="row">
                 <div class="col">
                   <div class="page-header-left">
-                    <h3>Add Business Details</h3>
+                    <h3>Add Product Details</h3>
                    
                   </div>
                 </div>
@@ -124,11 +124,26 @@
                                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
-                          <label for="validationCustom05">Business Name</label>
-                          <input class="form-control" id="name" name="name" type="text" placeholder="Business Name" required="">
+                          <label for="validationCustom05">Product Name</label>
+                          <input class="form-control" id="name" name="name" type="text" placeholder="Enter Product Name" required="">
                          
                         </div>
                        
+                        <div class="col-md-4 mb-3">
+                          <label for="validationCustom05">Product Details</label>
+                          <input class="form-control" id="details" name="details" type="text" placeholder="Enter Product Details" required="">
+                         
+                        </div>
+                        
+                      </div>
+                   
+                      <div class="form-row">
+                      <div class="col-md-4 mb-3">
+                          <label for="validationCustom05">Price</label>
+                          <input class="form-control" id="price" name="price" type="text" placeholder="Enter Price" required="">
+                         
+                        </div>
+                     
                         <div class="col-md-4 mb-3">
                           <label for="validationCustomUsername" style="margin-left:7%;">Image</label>
                           <div class="d-flex justify-content-center">
@@ -138,99 +153,10 @@
               </div>
             </div>
                         </div>
-                        
-                      </div>
-                   
-                      <div class="form-row">
-                      <div class="col-md-4 mb-3">
-                          <label for="validationCustom05">Address</label>
-                          <input class="form-control" id="address" name="address" type="text" placeholder="Enter Address" required="">
-                         
-                        </div>
-                     
-                        <div class="col-md-4 mb-3">
-                          <label for="validationCustom05">Mobile</label>
-                          <input class="form-control" id="mobile" name="mobile" type="text" placeholder="Mobile" required="">
-                         
-                        </div>
-                        <div class="col-md-4 mb-3">
-                          <label for="validationCustom05">Opening Hour</label>
-                          <input class="form-control" id="open_hour" name="open_hour" type="text" placeholder="Opening Hour" required="">
-                         
-                        </div>
                      
                       </div>
 
-                      <div class="form-row">
-                      <div class="col-md-4 mb-3">
-                          <label for="validationCustom05">Closing Hour</label>
-                          <input class="form-control" id="closing_hour" name="closing_hour" type="text" placeholder="Closing Hour" required="">
-                         
-                        </div>
-                      
-                      <div class="col-md-4 mb-3">
-                          <label for="validationCustom05">Description</label>
-                          <input class="form-control" id="description" name="description" type="text" placeholder="Description" required="">
-                         
-                        </div>
-                        <div class="col-md-4 mb-3">
-                        <div class="form-group">
-                                                <label for="formrow-inputState">Product</label>
-                                                <select id="products" name="products" class="form-control">
-                                                <option value="">Select</option>
-                                                @foreach($producData as $produData)
-                                                <option value="{{$produData->id}}">{{$produData->name}}</option>
-                                                @endforeach
-                                                </select>
-                                            </div>
-                        </div>
-                        
-                      </div>
-                      <div class="form-row">
-                      <div class="col-md-4 mb-3">
-                        <div class="form-group">
-                                                <label for="formrow-inputState">Service</label>
-                                                <select id="services" name="services" class="form-control">
-                                                <option value="">Select</option>
-                                                @foreach($servicData as $servName)
-                                                <option value="{{$servName->id}}">{{$servName->name}}</option>
-                                                @endforeach
-                                                </select>
-                                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                          <label for="validationCustom05">Facebook link</label>
-                          <input class="form-control" id="facebook_link" name="facebook_link" type="text" placeholder="Facebook link" required="">
-                         
-                        </div>
-                        <div class="col-md-4 mb-3">
-                          <label for="validationCustom05">Instagram link</label>
-                          <input class="form-control" id="instagram_link" name="instagram_link" type="text" placeholder="Instagram link" required="">
-                         
-                        </div>
-                      </div>
-
-                      <div class="form-row">
-                      
-                      <div class="col-md-4 mb-3">
-                          <label for="validationCustom05">Twitter link</label>
-                          <input class="form-control" id="twitter_link" name="twitter_link" type="text" placeholder="Twitter link" required="">
-                         
-                        </div>
-                        <div class="col-md-4 mb-3">
-                          <label for="validationCustom05">Youtube link</label>
-                          <input class="form-control" id="youtube_link" name="youtube_link" type="text" placeholder="Youtube link" required="">
-                         
-                        </div>
-                        <div class="col-md-4 mb-3">
-                          <label for="validationCustom05">Linkedin link</label>
-                          <input class="form-control" id="linkedin_link" name="linkedin_link" type="text" placeholder="Linkedin link" required="">
-                         
-                        </div>
-                       
-                      </div>
-                    
-                      <button class="btn btn-primary" id="submit_business" name="submit_business" type="submit">Submit</button>
+                      <button class="btn btn-primary" id="submit_product" name="submit_product" type="submit">Submit</button>
                     </form>
                   </div>
                 </div>
@@ -286,7 +212,7 @@
             }
            });
               
-                $('#submit_business').click(function(e) {
+                $('#submit_product').click(function(e) {
                    
                     e.preventDefault();
                     // var hid_id=$("#hid_id").val();
@@ -332,7 +258,7 @@
 
                     $.ajax({
                         type: "post",
-                        url: '/admin/add_business',
+                        url: '/admin/product',
                         cache: false,
                         processData: false,
                         contentType: false,

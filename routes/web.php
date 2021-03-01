@@ -20,30 +20,12 @@ Route::get('/ani_signup', function () {
 });
 
 Route::get('/admin', function () {
-	return view('portal.dashboard');
+    return view('portal.dashboard');
 })->name('admin.dashboard')->middleware(['auth', 'admin']);;
 
 Route::prefix('admin')->group(function () {
-    Route::get('login', function () {
-        return view('portal.login');
-    })->name('adminlogin');
-
-	Route::post('/login_get','AdminController@loginGet')->name('admin.login');
-
-	Route::group(['middleware' => ['auth', 'admin']],function(){
-
-Route::get('/business_profiles', 'BusinessController@BusinessProfiles');
-
-Route::get('/logout', 'AdminController@logout');
-});
+    require 'admin.php';
 });
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-
-    
-  
-      
-
-

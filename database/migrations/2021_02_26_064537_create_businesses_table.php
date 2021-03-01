@@ -23,6 +23,8 @@ class CreateBusinessesTable extends Migration
             $table->string('mobile',20);
             $table->string('open_hour',10);
             $table->string('closing_hour',10);
+            $table->string('services');
+            $table->string('products');
             $table->longText('description');
             $table->string('facebook_link');
             $table->string('instagram_link');
@@ -44,4 +46,6 @@ class CreateBusinessesTable extends Migration
     {
         Schema::dropIfExists('businesses');
     }
+
+    
 }
