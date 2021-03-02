@@ -26,7 +26,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	  Route::post('/add_services','BusinessController@addServices')->name('admin.add_services');
 
-	Route::get('/logout', 'AdminController@logout');
+	Route::get('/logout', 'AdminController@logout')->name('admin.logout');
 });
 
  ?>

@@ -74,7 +74,7 @@
                 <div class="dotted-animation"><span class="animate-circle"></span><span class="main-circle"></span></div>
               </div>
               <ul class="profile-dropdown onhover-show-div p-20">
-                <li><a href="/admin/logout"><i data-feather="log-out"></i>Logout</a></li>
+                <li><a href="{{route('admin.logout')}}"><i data-feather="log-out"></i>Logout</a></li>
               </ul>
             </li>
           </ul>
