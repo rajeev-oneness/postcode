@@ -217,48 +217,15 @@
                     e.preventDefault();
                     // var hid_id=$("#hid_id").val();
                   
-                    // var examination_id = $("#examination_id").val();
-                    // var subject_id = $("#subject_id").val();
-                    // var qdesc = $("#qdesc").val();
-                    // var option_a = $("#option_a").val();
-                    // var option_b = $("#option_b").val();
-                    // var option_c = $("#option_c").val();
-                    // var option_d = $("#option_d").val();
-                    // var correct_options_no = $("#correct_options_no").val();
-                    // var correct_option_a = $("#correct_option_a").val();
-                    // var correct_option_b = $("#correct_option_b").val();
-                    // var correct_option_c = $("#correct_option_c").val();
-                    // var correct_option_d = $("#correct_option_d").val();
-                    // var question_marks = $("#question_marks").val();
-                    // var question_negative_marks = $("#question_negative_marks").val();
-                    // var question_optimal_time = $("#question_optimal_time").val();
-                    // var description = $("#description").val();
                     // var token = $('input[name="_token"]').val();
                     var formElement = document.querySelector("form");
                     var formData = new FormData(formElement); //append data
                     // formData.append('hid_id',hid_id);
-                    // formData.append('examination_id', examination_id);
-                    // formData.append('subject_id', subject_id);
-                    // formData.append('qdesc', qdesc);
-                    // formData.append('option_a', option_a);
-                    // formData.append('option_b', option_b);
-                    // formData.append('option_c', option_c);
-                    // formData.append('option_d', option_d);
-                    // formData.append('correct_options_no', correct_options_no);
-                    // formData.append('correct_option_a', correct_option_a);
-                    // formData.append('correct_option_b', correct_option_b);
-                    // formData.append('correct_option_c', correct_option_c);
-                    // formData.append('correct_option_d', correct_option_d);
-                    // formData.append('question_marks', question_marks);
-                    // formData.append('question_negative_marks', question_negative_marks);
-                    // formData.append('question_optimal_time', question_optimal_time);
-                    // formData.append('description', description);
-                    // formData.append('_token', token);
-                   
+                
 
                     $.ajax({
                         type: "post",
-                        url: '/admin/add_services',
+                        url: "{{route('admin.add_services')}}",
                         cache: false,
                         processData: false,
                         contentType: false,
@@ -267,7 +234,7 @@
                         success: function(response) {
 
                             if (response.status == 1) {
-                                window.location.href = "/admin";
+                                window.location.href = "{{route('admin.dashboard')}}";
                             } else {
                                 $('#err_msg').show();
                         $('#err_msg').html(response.message);

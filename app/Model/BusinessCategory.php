@@ -12,6 +12,11 @@ class BusinessCategory extends Model
 
     public function getBusiness()
     {
-        return $this->hasMany('App\Business','business_categoryId','id');
+        return $this->hasMany('App\Model\Business','business_categoryId','id');
+    }
+
+    public function getProducts()
+    {
+        return $this->hasMany('App\Model\Product','businessId','id');
     }
 }

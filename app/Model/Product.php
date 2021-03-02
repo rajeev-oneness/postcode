@@ -10,4 +10,9 @@ class Product extends Model
     use SoftDeletes;
     protected $table = 'products';
 
+    public function businesscategory()
+    {
+        return $this->belongsTo('App\Model\BusinessCategory','businessId','id');
+    }
+
 }

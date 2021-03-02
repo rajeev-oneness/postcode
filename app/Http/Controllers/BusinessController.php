@@ -9,6 +9,7 @@ use App\Model\Product;
 use App\Model\Service;
 use Illuminate\Support\Facades\Auth;
 
+
 class BusinessController extends Controller
 {
     /**
@@ -207,6 +208,70 @@ class BusinessController extends Controller
             $statusCode = 400;
         } finally {
            return response()->json($response, $statusCode);
+        }
+    }
+
+    public function ajaxProductDetails(Request $request) {
+        $response = [];
+        $perm = null;
+        $statusCode = 200;
+        $users = array(); //Should be changed #4
+        $search_val = array();
+        try {
+            $draw = $request->draw;
+            $offset = $request->start;
+            $length = $request->length;
+            $search = $request->search ["value"];
+            $order = $request->order;
+            //print_r($order);die;
+
+            $users = Product::all();
+           
+            $filtered = Product::where(function($q) use ($search) {
+                $q->orwhere('name', 'like', '%' . $search . '%');
+                $q->orwhere('details', 'like', '%' . $search . '%');
+                $q->orwhere('price', 'like', '%' . $search . '%');
+                $q->orwhere('image', 'like', '%' . $search . '%');
+    
+              
+               
+            });
+            $ordered = $filtered;
+            $filtered_count = $filtered->count();
+            //echo count ( $order );die;
+            for ($i = 0; $i < count($order); $i ++) {
+                $ordered = $ordered->orderBy($request->columns [$order [$i] ['column']] ['data'], strtoupper($order [$i] ['dir']));
+            }
+            $page_displayed = $ordered->offset($offset)->limit($length)->get();
+            $data = array();
+            if (!empty($page_displayed)) {
+                foreach ($page_displayed as $user) {
+                    $nestedData['id'] = $user->id;
+                    $nestedData['name'] = $user->exam_name;
+                    $nestedData['details'] = $user->sub_name;
+                    $nestedData['price'] = $user->sub_total_mark;
+                    $nestedData['image'] = $user->image;
+                  
+                
+                    $view = $edit_button = $user->id;
+                    $nestedData['action'] = array('e' => $edit_button);
+                    $data[] = $nestedData;
+                }
+            }
+            $response = array(
+                "draw" => $draw,
+                "recordsTotal" => $users->count(), //Should be changed #7
+                "recordsFiltered" => $filtered_count,
+                'product_details' => $data //Should be changed #8
+            );
+        } catch (\Exception $e) {
+            $response = array(
+                'exception' => true,
+                'exception_message' => $e->getMessage()
+            );
+            $statusCode = 400;
+        } finally {
+            return response()->json($response, $statusCode);
         }
     }
 }

@@ -112,13 +112,15 @@
             <!-- <p>general manager.</p> -->
           </div>
           <ul class="sidebar-menu">
-            <li><a class="sidebar-header" href="/admin/dashboard"><i data-feather="home"></i><span>Dashboard</span><span class="badge badge-pill badge-primary"></span></a>
+            <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span><span class="badge badge-pill badge-primary"></span></a>
 
             </li>
-            <li><a class="sidebar-header" href="/admin/products"><i data-feather="server"></i><span>Products</span></a></li>
-            <li><a class="sidebar-header" href="/admin/services"><i data-feather="server"></i><span>Services</span></a></li>
+            <li><a class="sidebar-header" href="{{route('admin.products')}}"><i data-feather="server"></i><span>Products</span></a></li>
+            <!-- <li><a class="sidebar-header" href="{{route('admin.manage_product')}}"><i data-feather="server"></i><span>Manage Products</span></a></li> -->
 
-              <li><a class="sidebar-header" href="/admin/business_profiles"><i data-feather="server"></i><span>Business</span></a></li>
+            <li><a class="sidebar-header" href="{{route('admin.services')}}"><i data-feather="server"></i><span>Services</span></a></li>
+
+              <li><a class="sidebar-header" href="{{route('admin.business')}}"><i data-feather="server"></i><span>Business</span></a></li>
               <!-- <li><a class="sidebar-header" href="/manage_subjects" ><i data-feather="server"></i><span> Manage Subjects</span></a></li>
               <li><a class="sidebar-header" href="/add_question" ><i data-feather="server"></i><span> Questions</span></a></li>
             -->
