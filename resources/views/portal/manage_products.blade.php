@@ -45,7 +45,7 @@
                             <th>Details</th>
                             <th>Price</th>
                             <th>Image</th>                       
-                            <!-- <th>Action</th> -->
+                            <th>Action</th>
                             
                           </tr>
                         </thead>
@@ -71,21 +71,21 @@
                 create_table();
                 var table1 = $('#subject_manage').DataTable();
                 table1.on('draw.dt', function() {
-                    $(".edit_subject").click(function() {
+                    $(".edit_product").click(function() {
                         var lead_call_id = this.id;
                         var fd = {
                             'lead_edit_id': lead_call_id,
                             '_token': $('input[name="_token"]').val()
                         };
 
-                        redirectPost('edit_subject', fd);
+                        redirectPost('edit_product', fd);
                     });
-                    $(".delete_subjects").click(function() {
+                    $(".delete_products").click(function() {
                         var lead_call_id = this.id;
                         var token = $("input[name='_token']").val();
                         $(".se-pre-con").fadeIn("slow");
                         $.ajax({
-                            url: "delete_subjects_details",
+                            url: "{{route('admin.delete_product')}}",
                             type: "post",
                             data: {
                                 '_token': token,
@@ -94,14 +94,7 @@
                             success: function(response) {
                                 $(".se-pre-con").fadeOut("slow");
                                 if (response.status == 1) {
-                                    $.confirm({
-                                        title: 'Success!',
-                                        content: response.message,
-                                        type: 'green',
-                                        typeAnimated: true,
-                                        icon: 'fa fa-check',
-
-                                    });
+                                    window.location.href = '{{ route("admin.manage_product") }}';
                                 } else {
                                     $.confirm({
                                         title: 'Error!',
@@ -170,7 +163,7 @@
                     "processing": true,
                     "serverSide": true,
                     "ajax": {
-                        url: "/admin/ajax_product_details",
+                        url: "{{route('admin.product_details')}}",
                         type: "post",
                         data: {
                             '_token': $('input[name="_token"]').val()
@@ -220,9 +213,9 @@
                             "sortable": false,
                             "render": function(data, type, full, meta) {
                                 var str_btns = "<div class='form-inline'>";
-                                str_btns += "<a href='javascript:' class='edit_subject btn btn-mini' id='" + data.e + "' title='Click To Edit' style='cursor:pointer'><i class='fa fa-edit' aria-hidden='true'></i></a>&nbsp&nbsp";
+                                str_btns += "<a href='javascript:' class='edit_product btn btn-mini' id='" + data.e + "' title='Click To Edit' style='cursor:pointer'><i class='fa fa-edit' aria-hidden='true'></i></a>&nbsp&nbsp";
 
-                                str_btns += "<a href='javascript:' class='delete_subjects btn btn-mini' id='" + data.e + "' title='Click To Delete' style='cursor:pointer'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                                str_btns += "<a href='javascript:' class='delete_products btn btn-mini' id='" + data.e + "' title='Click To Delete' style='cursor:pointer'><i class='fa fa-trash' aria-hidden='true'></i></a>";
 
 
 

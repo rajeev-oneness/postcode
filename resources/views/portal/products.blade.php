@@ -109,13 +109,15 @@
                  
                   <div class="card-body">
                     <form class="needs-validation" novalidate="">
-                    <input type="hidden" id="hid_id" name="hid_id">
+                    <input type="hidden" id="hid_id" name="hid_id" value="">
+                    <input type="hidden" id="hid_img" name="hid_img" value="">
+
                     {{csrf_field()}}
                       <div class="form-row">
                         <div class="col-md-4 mb-3">
                         <div class="form-group">
                                                 <label for="formrow-inputState">Business Category</label>
-                                                <select id="business_categoryId" name="business_categoryId" class="form-control">
+                                                <select id="businessId" name="businessId" class="form-control">
                                                 <option value="">Select</option>
                                                 @foreach($businessData as $businessName)
                                                 <option value="{{$businessName->id}}">{{$businessName->name}}</option>
@@ -145,11 +147,12 @@
                         </div>
                      
                         <div class="col-md-4 mb-3">
-                          <label for="validationCustomUsername" style="margin-left:7%;">Image</label>
+                          <label for="validationCustomUsername" style="margin-left:13%;">Image</label>
                           <div class="d-flex justify-content-center">
               <div class="btn btn-mdb-color btn-rounded">
-               
-                <input type="file" id="image" name="image">
+              <img src="/uploads/blank_img1.jpg" alt="people" class="" width="56" style="border:1px solid #004694;height:100px;width:200px;margin-bottom:5%;" id="img-upload">
+
+                <input type="file" id="image" name="image" style="margin-left: 12%;">
               </div>
             </div>
                         </div>
@@ -213,16 +216,21 @@
            });
               
                 $('#submit_product').click(function(e) {
-                   
+                  //  alert('hiiii');
                     e.preventDefault();
-                  
+                  var hid_id=$("#hid_id").val();
                     // var token = $('input[name="_token"]').val();
                     var formElement = document.querySelector("form");
                     var formData = new FormData(formElement); //append data
-     
+                    // alert(hid_id);
+                    if (hid_id == '') {
+                        var save_url = "{{route('admin.add_product')}}";
+                    } else {
+                        var save_url = "{{route('admin.update_product')}}";
+                    }
                     $.ajax({
                         type: "post",
-                        url: "{{route('admin.add_product')}}",
+                        url: save_url,
                         cache: false,
                         processData: false,
                         contentType: false,
@@ -231,7 +239,7 @@
                         success: function(response) {
 
                             if (response.status == 1) {
-                                window.location.href = "{{route('admin.dashboard')}}";
+                               window.location.href = "{{ route('admin.manage_product') }}";
                             } else {
                                 $('#err_msg').show();
                         $('#err_msg').html(response.message);
@@ -264,10 +272,43 @@
                     });
                 });
 
-              
+                <?php
+                if (isset($data)) {
+                ?>
+                    // alert('hi');
+                    $('#hid_id').val('<?php echo $data->id; ?>');
+                    $('#businessId').val('<?php echo $data->businessId; ?>');
+                    $('#name').val('<?php echo $data->name; ?>');
+           $('#details').val('<?php echo $data->details; ?>');
+           $('#price').val('<?php echo $data->price; ?>');
+
+           $('#hid_img').val('<?php echo $data->image; ?>');
+
+<?php if ($data->image != NULL && $data->image != '') { ?>
+    $('#img-upload').attr('src', '<?php echo \URL::to('/') ?>/<?php echo $data->image; ?>');
+<?php } else { ?>
+    $('#img-upload').attr('src', '<?php echo \URL::to('/') ?>/uploads/blank_img1.jpg');
+<?php }
+} ?>
                 
             });
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
 
+                    reader.onload = function(e) {
+                        $('#img-upload').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#image").change(function() {
+                readURL(this);
+            });
+
+            $('.file-upload').file_upload();
          
         </script>
       

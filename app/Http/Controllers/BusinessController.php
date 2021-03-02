@@ -46,16 +46,16 @@ class BusinessController extends Controller
             $name = $request->get('name');
             $details = $request->get('details');           
             $price = $request->get('price');
-            $business_categoryId = $request->get('business_categoryId');                  
+            $businessId = $request->get('businessId');                  
            
             $Product = new Product();
-            $Product->businessId = $business_categoryId;         
+            $Product->businessId = $businessId;         
             $Product->name = $name;
             $Product->image = $image;
             $Product->details = $details;           
             $Product->price = $price;
           
-           
+        //    echo json_encode($Product);die;
          
             $Product->save();
             $response = array(
@@ -272,5 +272,73 @@ class BusinessController extends Controller
         } finally {
             return response()->json($response, $statusCode);
         }
+    }
+
+    public function editProduct(Request $request) {      
+        $lead_edit_id = $request->lead_edit_id;
+        $businessData= BusinessCategory::all();
+        $edit_data = Product::where('id', $lead_edit_id)->first();
+        return view('portal.products',compact('businessData'))->with('data', $edit_data);
+        
+    }
+
+    public function updateProduct(Request $request) {
+        $statusCode = 200;
+        if (!$request->ajax()) {
+            $statusCode = 400;
+            $response = array('error' => 'Error occured in Ajax Call.');
+            return response()->json($response, $statusCode);
+        }
+        $this->validate($request, [
+            'name' => 'required',
+            'businessId' => 'required',
+            'details' => 'required',
+            'price' => 'required', 
+            'image' => 'required'     
+                ], [
+            'name.required' => 'Name is required',
+            'businessId.required' => 'Business Type is required',
+            'details.required' => 'Details Value is required',
+            'price.required' => 'Price Value is required',
+            'image.required' => 'Image Value is required'           
+                ]
+        );
+        try {
+            $name = $request->get('name');
+            $businessId = $request->get('businessId');
+            $details = $request->get('details');
+            $price = $request->get('price');
+            $image = $request->get('image');  
+            if($image==''){
+             $fileName = 'image'.time().'.'.$request->image->extension(); 
+             $request->image->move(public_path('uploads'), $fileName);
+             $image ='uploads/'.$fileName;
+            }
+            $hid_id = $request->get('hid_id');
+            $update_product_data = Product::where('id', $hid_id)->update(['name' => $name, 'businessId' => $businessId, 'details' => $details, 'price' => $price, 'image' => $image]);
+            $response = array(
+                'status' => 1,
+                'message' => 'Product Details Are Updated Successfully'
+            );
+        } catch (\Exception $e) {
+            $response = array(
+                'exception' => true,
+                'exception_message' => $e->getMessage(),
+            );
+            $statusCode = 400;
+        } finally {
+            return response()->json($response, $statusCode);
+        }
+
+    }
+
+    public function deleteProductsDetails(Request $request) {
+        $lead_edit_id = $request->lead_call_id;
+        $edit_data = Product::where('id', $lead_edit_id)->delete();
+        $response = array(
+            'status' => 1,
+            'message' => 'Product Details Are Deleted Successfully'
+        );
+        return response()->json($response);
     }
 }

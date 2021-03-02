@@ -18,9 +18,16 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 		return view('portal.manage_products');
 	})->name('admin.manage_product');
 
-	Route::post('/ajax_product_details', 'BusinessController@ajaxProductDetails');
+	Route::post('/ajax_product_details', 'BusinessController@ajaxProductDetails')->name('admin.product_details');
+
+
+	Route::post('/edit_product', 'BusinessController@editProduct')->name('edit_product');;
 
 	  Route::post('/product','BusinessController@addProduct')->name('admin.add_product');
+
+	  Route::post('/update_product', 'BusinessController@updateProduct')->name('admin.update_product');
+
+	  Route::post('/delete_products_details', 'BusinessController@deleteProductsDetails')->name('admin.delete_product');
 
 	  Route::get('/services', 'BusinessController@Services')->name('admin.services');
 
