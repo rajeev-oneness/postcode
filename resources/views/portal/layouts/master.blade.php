@@ -116,7 +116,7 @@
 
             </li>
             <li><a class="sidebar-header" href="{{route('admin.products')}}"><i data-feather="server"></i><span>Products</span></a></li>
-            <!-- <li><a class="sidebar-header" href="{{route('admin.manage_product')}}"><i data-feather="server"></i><span>Manage Products</span></a></li> -->
+            <li><a class="sidebar-header" href="{{route('admin.manage_product')}}"><i data-feather="server"></i><span>Manage Products</span></a></li>
 
             <li><a class="sidebar-header" href="{{route('admin.services')}}"><i data-feather="server"></i><span>Services</span></a></li>
 

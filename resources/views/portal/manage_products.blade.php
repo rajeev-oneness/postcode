@@ -45,7 +45,7 @@
                             <th>Details</th>
                             <th>Price</th>
                             <th>Image</th>                       
-                            <th>Action</th>
+                            <!-- <th>Action</th> -->
                             
                           </tr>
                         </thead>
@@ -189,8 +189,9 @@
                         },
                         {
                             "targets": 1,
-                            "data": "name",
+                            "data": "businessId",
                         },
+                       
                         {
                             "targets": 2,
                             "data": "name",
@@ -207,7 +208,7 @@
                             "targets": 5,
                             "data": "image",
                             "render": function(data, type, full, meta) {
-                                var str_btns = "<img src='/uploads" + data +"' style='width: 40%;'>";
+                                var str_btns = "<img src='/" + data +"' style='width: 40%;'>";
                                 return str_btns;
                             }
                         },

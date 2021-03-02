@@ -226,14 +226,14 @@ class BusinessController extends Controller
             //print_r($order);die;
 
             $users = Product::all();
-           
+            
+            
             $filtered = Product::where(function($q) use ($search) {
+                $q->orwhere('businessId', 'like', '%' . $search . '%');
                 $q->orwhere('name', 'like', '%' . $search . '%');
                 $q->orwhere('details', 'like', '%' . $search . '%');
                 $q->orwhere('price', 'like', '%' . $search . '%');
                 $q->orwhere('image', 'like', '%' . $search . '%');
-    
-              
                
             });
             $ordered = $filtered;
@@ -247,12 +247,11 @@ class BusinessController extends Controller
             if (!empty($page_displayed)) {
                 foreach ($page_displayed as $user) {
                     $nestedData['id'] = $user->id;
-                    $nestedData['name'] = $user->exam_name;
-                    $nestedData['details'] = $user->sub_name;
-                    $nestedData['price'] = $user->sub_total_mark;
+                    $nestedData['businessId'] = $user->businesscategory->name;
+                    $nestedData['name'] = $user->name;
+                    $nestedData['details'] = $user->details;
+                    $nestedData['price'] = $user->price;
                     $nestedData['image'] = $user->image;
-                  
-                
                     $view = $edit_button = $user->id;
                     $nestedData['action'] = array('e' => $edit_button);
                     $data[] = $nestedData;
