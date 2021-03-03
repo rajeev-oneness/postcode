@@ -7,6 +7,7 @@ Use App\Model\Business;
 use App\Model\BusinessCategory;
 use App\Model\Product;
 use App\Model\Service;
+Use App\Model\EventCategory;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -17,6 +18,25 @@ class BusinessController extends Controller
     *
     * @return view
     */
+    public function test(Request $req)
+    {
+        $req->validate([
+            'name' => 'required|min:5|string',
+            'email' => 'required|email|string',
+        ]);
+        $name = $req->name;
+        $input = $req->all();
+        dd($input);
+        $rules= [
+            'name' => 'required',
+        ];
+        $validator = validator()->make($req->all(),$rules);
+        if(!$validator->fails()){
+            return response()->json(['erorr'=>false,'message'=>'data instert success']);
+        }
+        return response()->json(['error'=>true,'message'=>$validator->error()->firts()]);
+    }
+
     public function BusinessProfiles(){
         $businessData= BusinessCategory::all();
         $producData= Product::all();
@@ -81,7 +101,7 @@ class BusinessController extends Controller
     public function Products(){
         $businessData= BusinessCategory::all();
       
-        return view('/portal.products',compact('businessData'));
+        return view('portal.products',compact('businessData'));
     }
 
     /**
@@ -290,8 +310,8 @@ class BusinessController extends Controller
             return response()->json($response, $statusCode);
         }
         $this->validate($request, [
-            'name' => 'required',
-            'businessId' => 'required',
+            'name' => 'required|max:255',
+            'businessId' => 'required|numeric|min:1',
             'details' => 'required',
             'price' => 'required', 
             'image' => 'required'     
@@ -340,5 +360,113 @@ class BusinessController extends Controller
             'message' => 'Product Details Are Deleted Successfully'
         );
         return response()->json($response);
+    }
+    public function eventsCategories(){
+        return view('/portal.events_categories');
+    }
+
+    /**
+    * Go to Add Businesses.
+    *
+    * @return view
+    */
+    public function addEventCategories(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|min:5|string',
+           
+        ]);
+        $EventCategory = new EventCategory();
+            $EventCategory->name = $request->name;               
+            $EventCategory->save();
+            $category = $EventCategory->id;
+           
+            return redirect()->route('admin.dashboard', compact('category'));
+    }
+
+    public function eventCategoryDetails(Request $request) {
+        $response = [];
+        $perm = null;
+        $statusCode = 200;
+        $users = array(); //Should be changed #4
+        $search_val = array();
+        try {
+            $draw = $request->draw;
+            $offset = $request->start;
+            $length = $request->length;
+            $search = $request->search ["value"];
+            $order = $request->order;
+            //print_r($order);die;
+
+            $users = EventCategory::all();
+            
+            
+            $filtered = EventCategory::where(function($q) use ($search) {
+                $q->orwhere('name', 'like', '%' . $search . '%');
+               
+            });
+            $ordered = $filtered;
+            $filtered_count = $filtered->count();
+            //echo count ( $order );die;
+            for ($i = 0; $i < count($order); $i ++) {
+                $ordered = $ordered->orderBy($request->columns [$order [$i] ['column']] ['data'], strtoupper($order [$i] ['dir']));
+            }
+            $page_displayed = $ordered->offset($offset)->limit($length)->get();
+            $data = array();
+            if (!empty($page_displayed)) {
+                foreach ($page_displayed as $user) {
+                    $nestedData['id'] = $user->id;                  
+                    $nestedData['name'] = $user->name;
+                    $view = $edit_button = $user->id;
+                    $nestedData['action'] = array('e' => $edit_button);
+                    $data[] = $nestedData;
+                }
+            }
+            $response = array(
+                "draw" => $draw,
+                "recordsTotal" => $users->count(), //Should be changed #7
+                "recordsFiltered" => $filtered_count,
+                'eventcategory_details' => $data //Should be changed #8
+            );
+        } catch (\Exception $e) {
+            $response = array(
+                'exception' => true,
+                'exception_message' => $e->getMessage()
+            );
+            $statusCode = 400;
+        } finally {
+            return response()->json($response, $statusCode);
+        }
+    }
+
+    public function editEventCategories(Request $request) {      
+        $lead_edit_id = $request->lead_edit_id;
+        $edit_data = EventCategory::where('id', $lead_edit_id)->first();
+        return view('portal.edit_eventcategories',compact('edit_data'));
+        
+    }
+
+      /**
+    * Go to Add Businesses.
+    *
+    * @return view
+    */
+    public function updateEventCategories(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|min:5|string',
+           
+        ]);
+
+        $hid_id = $request->get('hid_id');
+        $name = $request->get('name');
+        $update_product_data = EventCategory::where('id', $hid_id)->update(['name' => $name]);   
+            return redirect()->route('admin.manage_eventcategories');
+    }
+
+    public function deleteEventCategories(Request $request) {
+        $lead_delete_id = $request->lead_delete_id;
+        $edit_data = EventCategory::where('id', $lead_delete_id)->delete();
+        return redirect()->route('admin.manage_eventcategories');
     }
 }

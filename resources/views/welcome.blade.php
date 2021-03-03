@@ -8,6 +8,9 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
         <!-- Styles -->
         <style>
@@ -64,6 +67,19 @@
         </style>
     </head>
     <body>
+
+            <form action="{{route('test')}}" method="post">
+                @csrf
+                <input type="text" name="name" value="{{old('name')}}">
+                @error('name')
+                    {{$message}}
+                @enderror
+                <input type="email" name="email" class="is-invalid" value="{{old('email')}}">
+                @error('email')
+                    {{$message}}
+                @enderror
+                <input type="submit">
+            </form>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">

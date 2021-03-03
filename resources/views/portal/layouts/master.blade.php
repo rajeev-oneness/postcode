@@ -119,6 +119,8 @@
             <li><a class="sidebar-header" href="{{route('admin.manage_product')}}"><i data-feather="server"></i><span>Manage Products</span></a></li>
 
             <li><a class="sidebar-header" href="{{route('admin.services')}}"><i data-feather="server"></i><span>Services</span></a></li>
+            <li><a class="sidebar-header" href="{{route('events_categories')}}"><i data-feather="server"></i><span>Add Event Categories</span></a></li>
+            <li><a class="sidebar-header" href="{{route('admin.manage_eventcategories')}}"><i data-feather="server"></i><span>Manage Event Categories</span></a></li>
 
               <li><a class="sidebar-header" href="{{route('admin.business')}}"><i data-feather="server"></i><span>Business</span></a></li>
               <!-- <li><a class="sidebar-header" href="/manage_subjects" ><i data-feather="server"></i><span> Manage Subjects</span></a></li>

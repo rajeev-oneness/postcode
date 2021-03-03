@@ -3,14 +3,37 @@
 namespace App\Http\Controllers;
 namespace App\Http\Controllers\Auth;
 namespace App\Http\Controllers;
+use Auth;
 use App\Http\Controllers\Controller;
 use App\Model\User;
+
 use App\Model\UserType;
 
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+
+    public function Login(Request $request) {  
+       if(!Auth::user()) {
+        return view('portal.login');
+       }
+       else {
+        switch (Auth::user()->userType) {
+            case 1:
+                 return redirect()->route('admin.dashboard');break;
+            case 2:
+                return redirect()->route('user.dashboard');break;
+            default:
+                return view('home');break;
+        }  
+       }
+         
+      
+      
+        
+    }
+
      /**
      *Backend User Signup
      *
@@ -58,6 +81,6 @@ class AdminController extends Controller
     public function logout(Request $request)
     {
         \Auth::logout();
-        return redirect('/admin/login');
+        return redirect('/');
     }
 }

@@ -41,7 +41,7 @@
                 <p id="demo"></p>
                 <p id="info"></p>
                 <hr>
-
+    {{\Auth::user()->id}}
                 <div class="form-group col-md-6">
                     <label for="username">First Name:</label>
                     <input type="text" class="form-control"  name="f_name" id='f_name' placeholder="Enter First name" autocomplete="off">
