@@ -366,7 +366,7 @@ class BusinessController extends Controller
     }
 
     /**
-    * Go to Add Businesses.
+    * Go to Add Event Categories.
     *
     * @return view
     */
@@ -468,5 +468,28 @@ class BusinessController extends Controller
         $lead_delete_id = $request->lead_delete_id;
         $edit_data = EventCategory::where('id', $lead_delete_id)->delete();
         return redirect()->route('admin.manage_eventcategories');
+    }
+
+    public function businessCategories(){
+        return view('/portal.business_categories');
+    }
+
+    /**
+    * Go to Add Business Categories.
+    *
+    * @return view
+    */
+    public function addBusinessCategories(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|min:5|string',
+           
+        ]);
+        $BusinessCategory = new BusinessCategory();
+            $BusinessCategory->name = $request->name;               
+            $BusinessCategory->save();
+            $busi_category_id = $BusinessCategory->id;
+           
+            return redirect()->route('admin.dashboard', compact('busi_category_id'));
     }
 }

@@ -115,14 +115,37 @@
             <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span><span class="badge badge-pill badge-primary"></span></a>
 
             </li>
-            <li><a class="sidebar-header" href="{{route('admin.products')}}"><i data-feather="server"></i><span>Products</span></a></li>
+            <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
+                <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('admin.products')}}"><i data-feather="server"></i><span>Add Products</span></a></li>
             <li><a class="sidebar-header" href="{{route('admin.manage_product')}}"><i data-feather="server"></i><span>Manage Products</span></a></li>
 
+                </ul>
+              </li>
+            
             <li><a class="sidebar-header" href="{{route('admin.services')}}"><i data-feather="server"></i><span>Services</span></a></li>
-            <li><a class="sidebar-header" href="{{route('events_categories')}}"><i data-feather="server"></i><span>Add Event Categories</span></a></li>
-            <li><a class="sidebar-header" href="{{route('admin.manage_eventcategories')}}"><i data-feather="server"></i><span>Manage Event Categories</span></a></li>
 
-              <li><a class="sidebar-header" href="{{route('admin.business')}}"><i data-feather="server"></i><span>Business</span></a></li>
+            <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Events Categories</span><i class="fa fa-angle-right pull-right"></i></a>
+                <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('events_categories')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
+            <li><a class="sidebar-header" href="{{route('admin.manage_eventcategories')}}"><i data-feather="server"></i><span>Manage Event</span></a></li>
+
+                </ul>
+              </li>
+
+              <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Business</span><i class="fa fa-angle-right pull-right"></i></a>
+                <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('admin.business')}}"><i data-feather="server"></i><span>Business</span></a></li>
+
+                </ul>
+              </li>
+              <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Business Categories</span><i class="fa fa-angle-right pull-right"></i></a>
+                <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('admin.business_categories')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
+
+                </ul>
+              </li>
+            
               <!-- <li><a class="sidebar-header" href="/manage_subjects" ><i data-feather="server"></i><span> Manage Subjects</span></a></li>
               <li><a class="sidebar-header" href="/add_question" ><i data-feather="server"></i><span> Questions</span></a></li>
             -->

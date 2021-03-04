@@ -45,9 +45,15 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	Route::post('/delete_eventcategories', 'BusinessController@deleteEventCategories')->name('admin.delete_eventcategories');
 
-	  Route::post('/event_category_details', 'BusinessController@eventCategoryDetails')->name('admin.event_category_details');
+	Route::post('/event_category_details', 'BusinessController@eventCategoryDetails')->name('admin.event_category_details');
 
-	Route::get('/logout', 'AdminController@logout')->name('admin.logout');
+	Route::get('/business_categories', 'BusinessController@businessCategories')->name('admin.business_categories');
+
+	Route::post('/add_business_categories','BusinessController@addBusinessCategories')->name('admin.add_business_categories');
+
+
+	
+	  Route::get('/logout', 'AdminController@logout')->name('admin.logout');
 });
 
  ?>
