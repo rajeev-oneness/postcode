@@ -10,14 +10,29 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	Route::post('/add_business','BusinessController@addBusiness')->name('admin.add_business');
 
+	Route::get('/manage_businessprofiles', function () {   
+		return view('portal.manage_businessprofiles');
+	})->name('admin.manage_businessprofiles');
+
+	Route::post('/business_category_details', 'BusinessController@businessCategoryDetails')->name('admin.business_category_details');
+
+	Route::post('/edit_businessprofile', 'BusinessController@editBusinessProfiles')->name('edit_businessprofile');
+
+	Route::post('/update_businessprofiles', 'BusinessController@updateBusinessProfiles')->name('admin.update_businessprofiles');
+
+
+
 	Route::get('/products', 'BusinessController@Products')->name('admin.products');
 
 	Route::get('/manage_products', function () {   
 		return view('portal.manage_products');
 	})->name('admin.manage_product');
 
-	Route::post('/ajax_product_details', 'BusinessController@ajaxProductDetails')->name('admin.product_details');
+	Route::post('/business_profile_details', 'BusinessController@businessProfileDetails')->name('admin.business_profile_details');
 
+	Route::post('/delete_businessprofiles', 'BusinessController@deleteBusinessProfiles')->name('admin.delete_businessprofiles');
+
+	Route::post('/product_details', 'BusinessController@ajaxProductDetails')->name('admin.product_details');
 
 	Route::post('/edit_product', 'BusinessController@editProduct')->name('edit_product');
 

@@ -135,7 +135,8 @@
 
               <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Business</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
-                <li><a class="sidebar-header" href="{{route('admin.business')}}"><i data-feather="server"></i><span>Business</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.business')}}"><i data-feather="server"></i><span>Add Business</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.manage_businessprofiles')}}"><i data-feather="server"></i><span>Manage Business</span></a></li>
 
                 </ul>
               </li>

@@ -50,3 +50,5 @@ Route::get('test',function(){
 });
 
 Route::post('test','BusinessController@test')->name('test');
+
+Route::post('/user_contacts','UserController@userContacts')->name('user.user_contacts');

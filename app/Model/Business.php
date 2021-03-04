@@ -12,7 +12,7 @@ class Business extends Model
     
     public function businesstype()
     {
-        return $this->belongsTo('App\BusinessCategory','business_categoryId','id');
+        return $this->belongsTo('App\Model\BusinessCategory','business_categoryId','id');
     }
     public function businessuserid()
     {

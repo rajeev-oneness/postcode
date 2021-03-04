@@ -9,6 +9,9 @@ class BusinessCategory extends Model
 {
     use SoftDeletes;
     protected $table = 'business_categories';
+    protected $fillable = [
+        'name'
+    ];
 
     public function getBusiness()
     {
