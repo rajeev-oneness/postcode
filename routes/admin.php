@@ -51,6 +51,17 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	Route::post('/add_business_categories','BusinessController@addBusinessCategories')->name('admin.add_business_categories');
 
+	Route::get('/manage_businesscategories', function () {   
+		return view('portal.manage_businesscategories');
+	})->name('admin.manage_businesscategories');
+
+	Route::post('/business_category_details', 'BusinessController@businessCategoryDetails')->name('admin.business_category_details');
+
+	Route::post('/edit_businesscategories', 'BusinessController@editBusinessCategories')->name('edit_businesscategories');
+
+	Route::post('/update_businesscategories', 'BusinessController@updateBusinessCategories')->name('admin.update_businesscategories');
+
+	Route::post('/delete_businesscategories', 'BusinessController@deleteBusinessCategories')->name('admin.delete_businesscategories');
 
 	
 	  Route::get('/logout', 'AdminController@logout')->name('admin.logout');
