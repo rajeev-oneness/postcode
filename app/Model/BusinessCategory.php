@@ -22,4 +22,9 @@ class BusinessCategory extends Model
     {
         return $this->hasMany('App\Model\Product','businessId','id');
     }
+
+    public function getServices()
+    {
+        return $this->hasMany('App\Model\Service','businessId','id');
+    }
 }

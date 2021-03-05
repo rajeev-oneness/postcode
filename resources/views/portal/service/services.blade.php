@@ -108,7 +108,7 @@
                 <div class="card">
                  
                   <div class="card-body">
-                    <form class="needs-validation" novalidate="">
+                    <form class="needs-validation" method="post" action="{{route('admin.add_services')}}" enctype="multipart/form-data" novalidate="">
                     <input type="hidden" id="hid_id" name="hid_id">
                     {{csrf_field()}}
                       <div class="form-row">
@@ -145,14 +145,15 @@
                         </div>
                      
                         <div class="col-md-4 mb-3">
-                          <label for="validationCustomUsername" style="margin-left:7%;">Image</label>
-                          <div class="d-flex justify-content-center">
-              <div class="btn btn-mdb-color btn-rounded">
-               
-                <input type="file" id="image" name="image">
-              </div>
-            </div>
+                      <label for="validationCustomUsername" style="margin-left:13%;">Image</label>
+                      <div class="d-flex justify-content-center">
+                        <div class="btn btn-mdb-color btn-rounded">
+                          <img src="/uploads/blank_img1.jpg" alt="people" class="" width="56" style="border:1px solid #004694;height:100px;width:200px;margin-bottom:5%;" id="img-upload">
+
+                          <input type="file" id="image" name="image" style="margin-left: 12%;">
                         </div>
+                      </div>
+                    </div>
                      
                       </div>
 
@@ -171,105 +172,23 @@
         <script>
             $(document).ready(function() {
          
-           $("#toggle-ansa").change(function(){
-            var check_stat=$(this).prop('checked');
-            if(check_stat==true){
-              $(".toggle3").toggleClass("toggel-none");
-              $(".toggle4").toggleClass("toggel-block");
-            }else{
-              $(".toggle3").toggleClass("toggel-none");
-              $(".toggle4").toggleClass("toggel-block");
-            }
-           });
-           $("#toggle-ansb").change(function(){
-            var check_stat=$(this).prop('checked');
-            if(check_stat==true){
-              $(".toggle5").toggleClass("toggel-none");
-              $(".toggle6").toggleClass("toggel-block");
-            }else{
-              $(".toggle5").toggleClass("toggel-none");
-              $(".toggle6").toggleClass("toggel-block");
-            }
-           });
-           $("#toggle-ansc").change(function(){
-            var check_stat=$(this).prop('checked');
-            if(check_stat==true){
-              $(".toggle7").toggleClass("toggel-none");
-              $(".toggle8").toggleClass("toggel-block");
-            }else{
-              $(".toggle7").toggleClass("toggel-none");
-              $(".toggle8").toggleClass("toggel-block");
-            }
-           });
-           $("#toggle-ansd").change(function(){
-            var check_stat=$(this).prop('checked');
-            if(check_stat==true){
-              $(".toggle9").toggleClass("toggel-none");
-              $(".toggle10").toggleClass("toggel-block");
-            }else{
-              $(".toggle9").toggleClass("toggel-none");
-              $(".toggle10").toggleClass("toggel-block");
-            }
-           });
-              
-                $('#submit_product').click(function(e) {
-                   
-                    e.preventDefault();
-                    // var hid_id=$("#hid_id").val();
-                  
-                    // var token = $('input[name="_token"]').val();
-                    var formElement = document.querySelector("form");
-                    var formData = new FormData(formElement); //append data
-                    // formData.append('hid_id',hid_id);
-                
-
-                    $.ajax({
-                        type: "post",
-                        url: "{{route('admin.add_services')}}",
-                        cache: false,
-                        processData: false,
-                        contentType: false,
-                        data: formData,
-                        dataType: "json",
-                        success: function(response) {
-
-                            if (response.status == 1) {
-                                window.location.href = "{{route('admin.dashboard')}}";
-                            } else {
-                                $('#err_msg').show();
-                        $('#err_msg').html(response.message);
-                            }
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            // $('#submit_subject').html("Login");
-                            // $('#submit_subject').attr("disabled", false);
-                            var msg = "";
-                            if (jqXHR.status !== 422 && jqXHR.status !== 400) {
-                                msg += "<strong>" + jqXHR.status + ": " + errorThrown + "</strong>";
-                            } else {
-                                if (jqXHR.responseJSON.hasOwnProperty('exception')) {
-                                    msg += "Exception: <strong>" + jqXHR.responseJSON.exception_message + "</strong>";
-                                } else {
-                                    msg += "<strong><ul style='list-style:none;'>";
-                                    $.each(jqXHR.responseJSON.errors, function(key, value) {
-                                        msg += "<li style='margin-left:0px;'>" + value + "</li>";
-                                    });
-                                    msg += "</ul></strong>";
-                                }
-                            }
-                            toastr.warning(msg, 'Error!', {
-                                "progressBar": true,
-                                positionClass: 'toast-top-right',
-                                containerId: 'toast-top-right'
-                            });
-
-                        }
-                    });
-                });
-
-              
-                
             });
+
+            function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function(e) {
+            $('#img-upload').attr('src', e.target.result);
+          }
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+      $("#image").change(function() {
+        readURL(this);
+      });
 
          
         </script>

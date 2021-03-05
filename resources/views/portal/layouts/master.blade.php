@@ -122,9 +122,16 @@
 
                 </ul>
               </li>
-            
-            <li><a class="sidebar-header" href="{{route('admin.services')}}"><i data-feather="server"></i><span>Services</span></a></li>
 
+              <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Services</span><i class="fa fa-angle-right pull-right"></i></a>
+                <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('admin.services')}}"><i data-feather="server"></i><span>Services</span></a></li>
+            <li><a class="sidebar-header" href="{{route('admin.manage_service')}}"><i data-feather="server"></i><span>Manage Services</span></a></li>
+
+                </ul>
+              </li>
+            
+           
             <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Events Categories</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('events_categories')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>

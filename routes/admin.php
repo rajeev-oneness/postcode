@@ -42,9 +42,18 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	  Route::post('/delete_products_details', 'BusinessController@deleteProductsDetails')->name('admin.delete_product');
 
-	  Route::get('/services', 'BusinessController@Services')->name('admin.services');
+	  Route::get('/services', 'ServiceController@Services')->name('admin.services');
 
-	  Route::post('/add_services','BusinessController@addServices')->name('admin.add_services');
+	  Route::post('/add_services','ServiceController@addServices')->name('admin.add_services');
+
+	  Route::get('/manage_service','ServiceController@manageServiceView')->name('admin.manage_service');
+
+	  Route::post('/edit_services', 'ServiceController@editServices')->name('edit_services');
+
+	  Route::post('/update_services', 'ServiceController@updateServices')->name('admin.update_services');
+
+	  Route::post('/delete_services', 'ServiceController@deleteServices')->name('delete_services');
+
 
 	  Route::get('/events_categories', 'BusinessController@eventsCategories')->name('events_categories');
 
