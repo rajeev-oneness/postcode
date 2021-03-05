@@ -25,6 +25,8 @@
 <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/chartist.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/prism.css')}}">
 <!-- Plugins css Ends-->
+    <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/date-picker.css')}}">
 <!-- Plugins css start-->
 <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/datatables.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/daterange-picker.css')}}">
@@ -38,8 +40,14 @@
 <!-- Font Awesome CDN-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <!-- latest jquery-->
 <script src="{{asset('admin_assets/js/jquery-3.2.1.min.js')}}"></script>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+
 </head>
 
 <body>
@@ -154,6 +162,14 @@
 
                 </ul>
               </li>
+
+              <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Events</span><i class="fa fa-angle-right pull-right"></i></a>
+                <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('admin.events')}}"><i data-feather="server"></i><span>Add Events</span></a></li>
+                <!-- <li><a class="sidebar-header" href="{{route('admin.manage_businesscategories')}}"><i data-feather="server"></i><span>Manage Categories</span></a></li> -->
+
+                </ul>
+              </li>
             
               <!-- <li><a class="sidebar-header" href="/manage_subjects" ><i data-feather="server"></i><span> Manage Subjects</span></a></li>
               <li><a class="sidebar-header" href="/add_question" ><i data-feather="server"></i><span> Questions</span></a></li>
@@ -212,6 +228,9 @@
   <script src="{{asset('admin_assets/js/notify/bootstrap-notify.min.js')}}"></script>
   <script src="{{asset('admin_assets/js/dashboard/default.js')}}"></script>
   <script src="{{asset('admin_assets/js/notify/index.js')}}"></script>
+  <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.js')}}"></script>
+    <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
+    <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
   <script src="{{asset('admin_assets/js/typeahead/handlebars.js')}}"></script>
   <script src="{{asset('admin_assets/js/typeahead/typeahead.bundle.js')}}"></script>
   <script src="{{asset('admin_assets/js/typeahead/typeahead.custom.js')}}"></script>

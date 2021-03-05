@@ -42,7 +42,7 @@ class ServiceController extends Controller
     }
 
       /**
-     * Go to Dashboard view.
+     * Go to manage Services view.
      *
      * @param  Request $request
      * @return view

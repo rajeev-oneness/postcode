@@ -87,6 +87,10 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	Route::post('/delete_businesscategories', 'BusinessController@deleteBusinessCategories')->name('admin.delete_businesscategories');
 
+	Route::get('/events', 'EventsController@Services')->name('admin.events');
+
+	Route::post('/add_events','EventsController@addEvents')->name('admin.add_events');
+
 	
 	  Route::get('/logout', 'AdminController@logout')->name('admin.logout');
 });

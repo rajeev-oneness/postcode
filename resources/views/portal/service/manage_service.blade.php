@@ -6,10 +6,7 @@
 
     <meta charset="utf-8" />
     <title>Admin | Manage Services</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
-
+    
 
     @extends('portal.layouts.master')
     @section('content')
@@ -48,7 +45,7 @@
                             <table class="app_table">
                                     <thead>
                                         <tr>
-                                           
+                                            <th>Business Category</th>
                                             <th>Name</th>
                                             <th>Details</th>
                                             <th>Price</th>
@@ -60,7 +57,7 @@
                                     <tbody>
   @foreach ($service_manage as $service_manage_dt)
     <tr>
-    
+    <td>{{$service_manage_dt->name}}</td>
     <td>{{$service_manage_dt->name}}</td>
     <td>{{$service_manage_dt->details}}</td>
     <td>{{$service_manage_dt->price}}</td>
