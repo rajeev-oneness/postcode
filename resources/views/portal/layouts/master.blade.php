@@ -166,7 +166,7 @@
               <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Events</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.events')}}"><i data-feather="server"></i><span>Add Events</span></a></li>
-                <!-- <li><a class="sidebar-header" href="{{route('admin.manage_businesscategories')}}"><i data-feather="server"></i><span>Manage Categories</span></a></li> -->
+                <li><a class="sidebar-header" href="{{route('admin.manage_events')}}"><i data-feather="server"></i><span>Manage Events</span></a></li>
 
                 </ul>
               </li>

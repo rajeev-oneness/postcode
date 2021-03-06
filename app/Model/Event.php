@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Event extends Model
 {
     use SoftDeletes;
+    protected $table = 'events';
+
+    public function eventcattype()
+    {
+        return $this->belongsTo('App\Model\EventCategory','event_category_id','id');
+    }
+    public function eventbusiesstype()
+    {
+        return $this->belongsTo('App\Model\BusinessCategory','business_id','id');
+    }
 }

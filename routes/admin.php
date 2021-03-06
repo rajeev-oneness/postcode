@@ -91,6 +91,18 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	Route::post('/add_events','EventsController@addEvents')->name('admin.add_events');
 
+	Route::get('/manage_events','EventsController@manageEventsView')->name('admin.manage_events');
+
+	Route::post('/edit_event', 'EventsController@editEvent')->name('edit_event');
+
+	Route::post('/update_event', 'EventsController@updateEvent')->name('admin.update_event');
+
+	Route::post('/delete_events', 'EventsController@deleteEvents')->name('delete_events');
+
+
+
+
+
 	
 	  Route::get('/logout', 'AdminController@logout')->name('admin.logout');
 });

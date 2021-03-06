@@ -27,4 +27,9 @@ class BusinessCategory extends Model
     {
         return $this->hasMany('App\Model\Service','businessId','id');
     }
+
+    public function getevents()
+    {
+        return $this->hasMany('App\Model\Event','business_id','id');
+    }
 }
