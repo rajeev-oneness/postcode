@@ -11,6 +11,7 @@ use App\Model\UserType;
 
 use Illuminate\Http\Request;
 
+
 class AdminController extends Controller
 {
 
@@ -27,15 +28,11 @@ class AdminController extends Controller
             default:
                 return view('home');break;
         }  
-       }
-         
-      
-      
-        
+       }         
     }
 
      /**
-     *Backend User Signup
+     *Backend User Login
      *
      * @param  Request $request
      * @return \Illuminate\Contracts\Validation\Validator,Exception $e,jsonArray
@@ -44,7 +41,7 @@ class AdminController extends Controller
         $statusCode=200;
         $response = [];
         $this->validate($request, [
-            'email' => 'required',
+            'email' => 'required|Min:5|string',
             'password' => 'required',
             ], [
             'email.required' => 'Email is Required',
@@ -60,6 +57,7 @@ class AdminController extends Controller
               
                 $response = array(
                     'status' => 1,
+                    'message'=>"Successfully Entered credentials."
                 );
             } else {
                 $response = array(

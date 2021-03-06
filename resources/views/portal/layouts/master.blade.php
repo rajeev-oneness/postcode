@@ -64,7 +64,7 @@
     <div class="page-main-header">
       <div class="main-header-right row">
         <div class="main-header-left d-lg-none">
-          <div class="logo-wrapper"><a href="index.html"><img src="{{asset('admin_assets/images/endless-logo.png')}}" alt=""></a></div>
+          <div class="logo-wrapper"><a href="index.html"><img src="{{asset('admin_assets/images/postcode.png')}}" alt=""></a></div>
         </div>
         <div class="mobile-sidebar d-block">
           <div class="media-body text-right switch-sm">
@@ -108,15 +108,15 @@
       <!-- Page Sidebar Start-->
       <div class="page-sidebar">
         <div class="main-header-left d-none d-lg-block">
-          <div class="logo-wrapper"><a href="index.html"><img src="{{asset('admin_assets/images/endless-logo.png')}}" alt=""></a></div>
+          <div class="logo-wrapper"><a href="{{route('admin.dashboard')}}"><img src="{{asset('admin_assets/images/postcode.png')}}" class="logoimg" alt=""></a></div>
         </div>
         <div class="sidebar custom-scrollbar">
           <div class="sidebar-user text-center">
             <div><img class="img-60 rounded-circle" src="{{asset('admin_assets/images/user/1.jpg')}}" alt="#">
-              <div class="profile-edit"><a href="edit-profile.html"><i data-feather="edit"></i></a></div>
+              <!-- <div class="profile-edit"><a href="edit-profile.html"><i data-feather="edit"></i></a></div> -->
             </div>
             <h6 class="mt-3 f-14"></h6>
-            <h3>{{\Auth::user()->name}}</h3>
+            <h3 class="usr_name">{{\Auth::user()->name}}</h3>
             <!-- <p>general manager.</p> -->
           </div>
           <ul class="sidebar-menu">

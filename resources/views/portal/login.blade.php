@@ -9,7 +9,7 @@
     <meta name="description" content="endless admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, endless admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="{{asset('admin_assets/images/favicon.png')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset('admin_assets/images/postcode.png')}}" type="image/x-icon">
     <link rel="shortcut icon" href="{{asset('admin_assets/images/favicon.png')}}" type="image/x-icon">
     <title>Login</title>
     <!-- Google font-->
@@ -56,27 +56,35 @@
             <source src="http://admin.pixelstrap.com/endless/assets/video/auth-bg.mp4" type="video/mp4">
           </video>
           <div class="authentication-box">
-            <div class="text-center"><img src="{{asset('admin_assets/images/endless-logo.png')}}" alt=""></div>
+            <div class="text-center"><img src="{{asset('admin_assets/images/postcode.png')}}" class="logimg" alt=""></div>
             <div class="card mt-4">
               <div class="card-body">
                 <div class="text-center">
                   <h4>LOGIN</h4>
                   <h6>Enter your Credentials </h6>
                 </div>
+                <div id="failur" class="alert alert-danger" style="display: none;">
+                </div>
                 <form class="form-horizontal theme-form" action="" method="post">
                 {{csrf_field()}}
                   <div class="form-group">
                     <label class="col-form-label pt-0">Email</label>
-                    <input class="form-control" id="email" name="email" type="text" required="">
+                    <input class="form-control" id="email" value="{{old('email')}}" name="email" type="text" required="">
+                    @error('email')
+                        {{$message}}
+                        @enderror
                   </div>
                   <div class="form-group">
                     <label class="col-form-label">Password</label>
-                    <input class="form-control" id="password" name="password" type="password" required="">
+                    <input class="form-control" id="password" value="{{old('password')}}" name="password" type="password" required="">
+                    @error('password')
+                        {{$message}}
+                        @enderror
                   </div>
-                  <div class="checkbox p-0">
+                  <!-- <div class="checkbox p-0">
                     <input id="checkbox1" type="checkbox">
                     <label for="checkbox1">Remember me</label>
-                  </div>
+                  </div> -->
                   <div class="form-group form-row mt-3 mb-0">
                     <button class="btn btn-primary btn-block" id="admin_signup" name="admin_signup" type="button">Login</button>
                   </div>
@@ -108,23 +116,18 @@
                 $.ajax({
                     type: 'post',
                     url: '{{ route("admin.login") }}',
-                    cache: false,
+                    cache: false, 
                     processData: false,
                     contentType: false,
                     data: formData,
                     dataType: "json",
                     success: function(response) {
-
+                 
                         if (response.status == 1) {
                             window.location.href = '{{ route("admin.dashboard") }}';
                         } else {
-                            $('.login').html("Login");
-                            $('.login').attr("disabled", false);
-                            toastr.warning(response.message, 'Error!', {
-                                "progressBar": true,
-                                positionClass: 'toast-top-right',
-                                containerId: 'toast-top-right'
-                            });
+                            $('#failur').show();
+                        $('#failur').html(response.message);
                         }
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
