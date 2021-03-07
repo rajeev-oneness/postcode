@@ -80,11 +80,6 @@ class EventsController extends Controller
      */
     public function manageEventsView(Request $request){
         $userId = Auth::user()->id;
-
-        // $sevents_manage=Event::with('eventcattype')->get();
-        // $businescat_manage=BusinessCategory::with('eventbusiesstype')->get();
-
-        // $categories = Event::with('eventcattype','eventbusiesstype')->get();
         $categories1 = Event::with(['eventcattype','eventbusiesstype' => function ($query) {
             $query->orderBy('created_at', 'desc');
         }])->get();
@@ -92,6 +87,12 @@ class EventsController extends Controller
         return view('/portal.events.manage_events',compact('categories1'));
     }
 
+     /**
+     * Go to rdit events view.
+     *
+     * @param  Request $request
+     * @return view
+     */
     public function editEvent(Request $request) {      
         $lead_events_id = $request->app_id;
         $businesserData= BusinessCategory::all();
@@ -103,7 +104,7 @@ class EventsController extends Controller
     }
 
      /**
-    * Go to Update Events Profiles.
+    * Go to Update Events.
     *
     * @return view
     */
@@ -115,17 +116,17 @@ class EventsController extends Controller
         $fileName = time().'.'.$request->image->extension(); 
             $request->image->move(public_path('uploads/'), $fileName);
             $imgevent ='uploads/'.$fileName;
-            
-    //   echo json_encode($image);
-    //   die;
         $hid_id = $request->hid_id;
-        // echo json_encode('$hid_id');
-        // die;
-      
         $update_event_data = Event::where('id', $hid_id)->update(['name' => $request->name, 'business_id' => $request->business_categoryId, 'details' => $request->details, 'image' => $imgevent, 'price' => $request->price, 'event_category_id' => $request->event_category_id, 'address' => $request->address, 'start' => $request->start, 'end' => $request->end, 'frequency' => $request->frequency, 'age_group' => $request->age_group, 'booking_details' => $request->booking_details, 'contact_details' => $request->contact_details]);   
             return redirect()->route('admin.manage_events');
     }
 
+     /**
+     * Go to Delete events.
+     *
+     * @param  Request $request
+     * @return view
+     */
     public function deleteEvents(Request $request) {
         $lead_delete_id = $request->appdel_id;
         $delete_event = Event::where('id', $lead_delete_id)->delete();

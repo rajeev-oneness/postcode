@@ -40,51 +40,64 @@ class BusinessController extends Controller
             $response = array('error' => 'Error occured in Ajax Call.');
             return response()->json($response, $statusCode);
         }
+        $this->validate($request, [
+            'image' => 'required',
+            'name' => 'required',
+            'address' => 'required',
+            'mobile' => 'required',
+            'open_hour' => 'required',
+            'closing_hour' => 'required',
+            'services' => 'required',
+            'products' => 'required',
+            'description' => 'required',
+            'facebook_link' => 'required',
+            'instagram_link' => 'required',
+            'twitter_link' => 'required',
+            'youtube_link' => 'required',
+            'linkedin_link' => 'required',
+            'business_categoryId' => 'required' 
+                ], [
+            'image.required' => 'Image is required',
+            'name.required' => 'Duration is required',
+            'address.required' => 'Details required',
+            'mobile.required' => 'Value is required',
+            'open_hour.required' => 'Value is required',
+            'closing_hour.required' => 'Value is required',
+            'services.required' => 'Value is required',
+            'products.required' => 'Value is required',
+            'description.required' => 'Value is required',
+            'facebook_link.required' => 'Value is required',
+            'instagram_link.required' => 'Value is required',
+            'youtube_link.required' => 'Value is required',
+            'linkedin_link.required' => 'Value is required',
+            'twitter_link.required' => 'Value is required',
+            'business_categoryId.required' => 'BusinessID is required'
+                ]
+        );
         try {
             $userId = Auth::user()->id;
 
-            $image = $request->get('image');
-            if ($image == '') {
-                $fileName = 'image' . time() . '.' . $request->image->extension();
-                $request->image->move(public_path('uploads'), $fileName);
-                $image = 'uploads/' . $fileName;
-            }
-
-            $name = $request->get('name');
-            $address = $request->get('address');
-            $mobile = $request->get('mobile');
-            $business_categoryId = $request->get('business_categoryId');
-            $open_hour = $request->get('open_hour');
-            $closing_hour = $request->get('closing_hour');
-            $services = $request->get('services');
-            $products = $request->get('products');
-            $description = $request->get('description');
-            $facebook_link = $request->get('facebook_link');
-            $instagram_link = $request->get('instagram_link');
-            $twitter_link = $request->get('twitter_link');
-            $youtube_link = $request->get('youtube_link');
-            $linkedin_link = $request->get('linkedin_link');
-
-
+            $fileName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/'), $fileName);
+            $busprofileimg = 'uploads/' . $fileName;  
 
             $Business = new Business();
-            $Business->business_categoryId = $business_categoryId;
+            $Business->business_categoryId = $request->business_categoryId;
             $Business->userId = $userId;
-            $Business->image = $image;
-            $Business->name = $name;
-            $Business->address = $address;
-            $Business->mobile = $mobile;
-            $Business->open_hour = $open_hour;
-            $Business->closing_hour = $closing_hour;
-            $Business->services = $services;
-            $Business->products = $products;
-            $Business->description = $description;
-            $Business->facebook_link = $facebook_link;
-            $Business->facebook_link = $facebook_link;
-            $Business->instagram_link = $instagram_link;
-            $Business->twitter_link = $twitter_link;
-            $Business->youtube_link = $youtube_link;
-            $Business->linkedin_link = $linkedin_link;
+            $Business->image = $busprofileimg;
+            $Business->name = $request->name;
+            $Business->address = $request->address;
+            $Business->mobile = $request->mobile;
+            $Business->open_hour = $request->open_hour;
+            $Business->closing_hour = $request->closing_hour;
+            $Business->services = $request->services;
+            $Business->products = $request->products;
+            $Business->description = $request->description;
+            $Business->facebook_link = $request->facebook_link;
+            $Business->instagram_link = $request->instagram_link;
+            $Business->twitter_link = $request->twitter_link;
+            $Business->youtube_link = $request->youtube_link;
+            $Business->linkedin_link = $request->linkedin_link;
 
             $Business->save();
             $response = array(
@@ -140,6 +153,7 @@ class BusinessController extends Controller
             $data = array();
             if (!empty($page_displayed)) {
                 foreach ($page_displayed as $user) {
+                    
                     $nestedData['id'] = $user->id;
                     $nestedData['businessId'] = $user->businesstype->name;
                     $nestedData['address'] = $user->address;

@@ -16,15 +16,15 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->name('user.welcome');
 
-Route::get('/ani_signup', function () {
-    return view('portal.ani_signup');
-});
-
+//---------------------------------------------------------------Admin Login-----------------------------------------------//
 
 Route::get('/', 'AdminController@Login')->name('adminlogin');
 
 
 Route::post('/login_get', 'AdminController@loginGet')->name('admin.login');
+
+//---------------------------------------------------------------Admin Dashboard-----------------------------------------------//
+
 
 Route::get('/admin', function () {
     return view('portal.dashboard');
@@ -35,6 +35,9 @@ Route::prefix('admin')->group(function () {
 });
 Auth::routes();
 
+//--------------------------------------------------------------User View-----------------------------------------------//
+
+
 Route::get('/home', function () {
     return view('user.index');
 })->name('user.dashboard')->middleware(['auth', 'user']);;
@@ -43,12 +46,10 @@ Route::prefix('user')->group(function () {
     require 'user.php';
 });
 
-// Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('test',function(){
-    return view('welcome');
-});
-
-Route::post('test','BusinessController@test')->name('test');
+//--------------------------------------------------------------User Contact-----------------------------------------------//
 
 Route::post('/user_contacts','UserController@userContacts')->name('user.user_contacts');
+
+//--------------------------------------------------------------User Testimonial-----------------------------------------------//
+
+Route::post('/user_estimonialss','UserController@userTestimonialss')->name('user.user_estimonialss');

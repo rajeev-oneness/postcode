@@ -45,11 +45,11 @@
                             <table class="app_table">
                                     <thead>
                                         <tr>
-                                            <th>Business Category</th>
+                                            <th width="146px;">Business Category</th>
                                             <th>Name</th>
                                             <th>Details</th>
                                             <th>Price</th>
-                                            <th>Image</th>
+                                            <th width="1px;">Image</th>
                                             <th>Action</th>
 
                                         </tr>
@@ -82,7 +82,7 @@
       'order':[]
     });
     $(".edit_app").click(function(){
-        alert('hi');
+      
 var app_id=this.id;
        var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
 			redirectPost('edit_services', fd);

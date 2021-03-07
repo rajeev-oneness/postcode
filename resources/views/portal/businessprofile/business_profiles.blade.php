@@ -33,6 +33,10 @@
             <div class="card">
 
               <div class="card-body">
+              <div class="alert alert-warning" id="error-msg" style="display:none;">
+                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <div id="error-message"></div>
+                    </div>
                 <form class="needs-validation" novalidate="">
                   <input type="hidden" id="hid_id" name="hid_id">
                   {{csrf_field()}}
@@ -193,8 +197,9 @@
               if (response.status == 1) {
                 window.location.href = "{{route('admin.dashboard')}}";
               } else {
-                $('#err_msg').show();
-                $('#err_msg').html(response.message);
+                $("#error-msg").show();
+                           
+                           $("#error-message").html(response.message);
               }
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -214,11 +219,9 @@
                   msg += "</ul></strong>";
                 }
               }
-              toastr.warning(msg, 'Error!', {
-                "progressBar": true,
-                positionClass: 'toast-top-right',
-                containerId: 'toast-top-right'
-              });
+              $("#error-msg").show();
+                           
+$("#error-message").html(msg);
 
             }
           });

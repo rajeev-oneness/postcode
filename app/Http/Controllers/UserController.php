@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Rating;
 use App\Model\Contact;
+use App\Model\Testimonial;
 
 class UserController extends Controller
 {
@@ -60,6 +61,39 @@ class UserController extends Controller
         $Contact->description = $request->description;
         
         $Contact->save();
+
+        return response()->json([
+        'status' => 1,
+        'message' => "Ratings Saved Successfully"
+       ]);
+    }
+
+    /**
+     * Customer Contact Save
+     *    
+     * Request $request 
+     * @return jsonArray
+     */
+    public function userTestimonialss(Request $request)
+    {
+       
+        $request->validate([
+            'tm_name' => 'required|min:5|string',
+            'tm_comment'=>'required|max:200|unique:content',
+            'tm_rating' => 'required',
+            'tm_image' => 'required',
+        ]);
+        $fileName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('uploads/'), $fileName);
+        $testiimg = 'uploads/' . $fileName;
+
+        $Testimonial = new Testimonial();
+        $Testimonial->tm_name = $request->tm_name;
+        $Testimonial->tm_comment = $request->tm_comment;
+        $Testimonial->tm_rating = $request->tm_rating;
+        $Testimonial->tm_image = $testiimg;
+        
+        $Testimonial->save();
 
         return response()->json([
         'status' => 1,

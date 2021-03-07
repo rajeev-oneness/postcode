@@ -92,9 +92,14 @@ class BusinesscategoryController extends Controller
             $BusinessCategory->save();
             $busi_category_id = $BusinessCategory->id;
            
-            return redirect()->route('admin.businesscategory.manage_businesscategories', compact('busi_category_id'));
+            return redirect()->route('admin.manage_businesscategories', compact('busi_category_id'));
     }
 
+     /**
+    * Go to Edit Business Categories.
+    *
+    * @return view
+    */
     public function editBusinessCategories(Request $request) {      
         $lead_edit_id = $request->lead_edit_id;
         $edited_data = BusinessCategory::where('id', $lead_edit_id)->first();
@@ -121,6 +126,12 @@ class BusinesscategoryController extends Controller
             return redirect()->route('admin.manage_businesscategories');
     }
     
+    
+     /**
+    * Go to Delete Businesses categories.
+    *
+    * @return view
+    */
     public function deleteBusinessCategories(Request $request) {
         $lead_delete_id = $request->lead_delete_id;
         $delete_data = BusinessCategory::where('id', $lead_delete_id)->delete();

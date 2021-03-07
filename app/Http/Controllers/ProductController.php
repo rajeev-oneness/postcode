@@ -20,7 +20,7 @@ class ProductController extends Controller
         
     }
     /**
-    * Go to Add Products.
+    * Go to Products View.
     *
     * @return view
     */
@@ -30,6 +30,11 @@ class ProductController extends Controller
         return view('portal.product.products',compact('businessData'));
     }
 
+      /**
+    * Go to Products List View.
+    *
+    * @return view
+    */
     public function ajaxProductDetails(Request $request) {
         $response = [];
         $perm = null;
@@ -44,11 +49,7 @@ class ProductController extends Controller
             $order = $request->order;
             //print_r($order);die;
 
-            $users = Product::all();
-
-            
-            
-            
+            $users = Product::all(); 
             $filtered = Product::with('businesscategory')->where(function($q) use ($search) {
                 $q->orwhere('businessId', 'like', '%' . $search . '%');
                 $q->orwhere('name', 'like', '%' . $search . '%');
@@ -95,6 +96,11 @@ class ProductController extends Controller
         }
     }
 
+      /**
+    * Go to Add Products.
+    *
+    * @return jsonArray
+    */
     public function addProduct(Request $request) {
         $response = [];
         $statusCode = 200;
@@ -103,25 +109,31 @@ class ProductController extends Controller
             $response = array('error' => 'Error occured in Ajax Call.');
             return response()->json($response, $statusCode);
         }
+        $this->validate($request, [
+            'image' => 'required',
+            'name' => 'required',
+            'details' => 'required',
+            'price' => 'required',
+            'businessId' => 'required' 
+                ], [
+            'image.required' => 'Image is required',
+            'name.required' => 'Duration is required',
+            'details.required' => 'Details required',
+            'price.required' => 'Value is required',
+            'businessId.required' => 'BusinessID is required'
+                ]
+        );
         try {
-            $image = $request->get('image');  
-           if($image==''){
-            $fileName = 'image'.time().'.'.$request->image->extension(); 
-            $request->image->move(public_path('uploads'), $fileName);
-            $image ='uploads/'.$fileName;
-           }
-
-            $name = $request->get('name');
-            $details = $request->get('details');           
-            $price = $request->get('price');
-            $businessId = $request->get('businessId');                  
+            $fileName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('uploads/'), $fileName);
+        $produimg = 'uploads/' . $fileName;        
            
             $Product = new Product();
-            $Product->businessId = $businessId;         
-            $Product->name = $name;
-            $Product->image = $image;
-            $Product->details = $details;           
-            $Product->price = $price;
+            $Product->businessId = $request->businessId;         
+            $Product->name = $request->name;
+            $Product->image = $produimg;
+            $Product->details = $request->details;           
+            $Product->price = $request->price;
           
         //    echo json_encode($Product);die;
          
@@ -141,6 +153,11 @@ class ProductController extends Controller
         }
     }
 
+      /**
+    * Go to Update Products View.
+    *
+    * @return view
+    */
     public function updateProduct(Request $request) {
         $statusCode = 200;
         if (!$request->ajax()) {
@@ -191,6 +208,11 @@ class ProductController extends Controller
 
     }
 
+      /**
+    * Go to Delete Products.
+    *
+    * @return view
+    */
     public function deleteProductsDetails(Request $request) {
         $lead_edit_id = $request->lead_call_id;
         $edit_data = Product::where('id', $lead_edit_id)->delete();

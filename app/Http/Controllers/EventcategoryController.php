@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-Use App\Model\Business;
-use App\Model\BusinessCategory;
-use App\Model\Product;
-use App\Model\Service;
 Use App\Model\EventCategory;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,6 +34,12 @@ class EventcategoryController extends Controller
            
             return redirect()->route('admin.manage_eventcategories', compact('category'));
     }
+
+    /**
+    * Go to Edit Event Categories.
+    *
+    * @return view
+    */
     public function editEventCategories(Request $request) {      
         $lead_edit_id = $request->lead_edit_id;
         $edit_data = EventCategory::where('id', $lead_edit_id)->first();
@@ -46,7 +48,7 @@ class EventcategoryController extends Controller
     }
 
      /**
-    * Go to Add Businesses.
+    * Go to Update Event Categories.
     *
     * @return view
     */
@@ -62,12 +64,25 @@ class EventcategoryController extends Controller
         $update_product_data = EventCategory::where('id', $hid_id)->update(['name' => $name]);   
             return redirect()->route('admin.manage_eventcategories');
     }
+
+    
+     /**
+    * Go to Delete Event Categories.
+    *
+    * @return view
+    */
     public function deleteEventCategories(Request $request) {
         $lead_delete_id = $request->lead_delete_id;
         $edit_data = EventCategory::where('id', $lead_delete_id)->delete();
         return redirect()->route('admin.manage_eventcategories');
     }
     
+    
+     /**
+    * Go to Event Categories.
+    *
+    * @return view
+    */
     public function eventCategoryDetails(Request $request) {
         $response = [];
         $perm = null;
