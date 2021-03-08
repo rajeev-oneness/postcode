@@ -58,20 +58,20 @@ class BusinessController extends Controller
             'business_categoryId' => 'required' 
                 ], [
             'image.required' => 'Image is required',
-            'name.required' => 'Duration is required',
-            'address.required' => 'Details required',
-            'mobile.required' => 'Value is required',
-            'open_hour.required' => 'Value is required',
-            'closing_hour.required' => 'Value is required',
-            'services.required' => 'Value is required',
-            'products.required' => 'Value is required',
-            'description.required' => 'Value is required',
-            'facebook_link.required' => 'Value is required',
-            'instagram_link.required' => 'Value is required',
-            'youtube_link.required' => 'Value is required',
-            'linkedin_link.required' => 'Value is required',
-            'twitter_link.required' => 'Value is required',
-            'business_categoryId.required' => 'BusinessID is required'
+            'name.required' => 'Name is required',
+            'address.required' => 'Address required',
+            'mobile.required' => 'Mobile is required',
+            'open_hour.required' => 'Open Hour is required',
+            'closing_hour.required' => 'Closing Hour is required',
+            'services.required' => 'Services required',
+            'products.required' => 'Products required',
+            'description.required' => 'Description is required',
+            'facebook_link.required' => 'Facebook Link is required',
+            'instagram_link.required' => 'Instagram Link is required',
+            'youtube_link.required' => 'Youtube Link is required',
+            'linkedin_link.required' => 'Linkedin Link is required',
+            'twitter_link.required' => 'Twitter is required',
+            'business_categoryId.required' => 'Business Category is required'
                 ]
         );
         try {
