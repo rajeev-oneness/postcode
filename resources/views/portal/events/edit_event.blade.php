@@ -239,12 +239,12 @@
 
 
                     <div class="col-md-4 mb-3">
-                      <label for="validationCustomUsername">Image</label>
+                      <label for="validationCustom05">Image</label>
                       <div class="d-flex justify-content-center">
                         <div class="btn btn-mdb-color btn-rounded">
-                        <img src="/{{$editedevents_data->image}}" alt="people" class="" width="56" style="border:1px solid #004694;height:100px;width:200px;margin-bottom:5%;margin-right:25%;" id="img-upload">
+                        <img src="/{{$editedevents_data->image}}" alt="people" class="evenblck" width="56" id="img-upload">
 
-                          <input type="file" id="image" value="" name="image" required="">
+                          <input class="form-control eventimg"  type="file" id="image" value="" name="image" required="">
                           @error('image')
                           {{$message}}
                           @enderror

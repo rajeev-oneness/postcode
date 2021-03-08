@@ -123,8 +123,8 @@
                   <div class="form-row">
                     <div class="col-md-4 mb-3">
                       <div class="form-group">
-                        <label for="formrow-inputState">Business Category</label>
-                        <select id="businessId" name="businessId" class="form-control">
+                        <label for="validationCustom05">Business Category</label>
+                        <select id="businessId" name="businessId" class="form-control" required="">
                           <option value="">Select</option>
                           @foreach($businessData as $businessName)
                           <option value="{{$businessName->id}}">{{$businessName->name}}</option>

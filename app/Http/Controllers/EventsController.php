@@ -15,7 +15,7 @@ class EventsController extends Controller
     *
     * @return view
     */
-    public function Services(){
+    public function Events(){
         $busCateData= BusinessCategory::all();
         $eventCatData= EventCategory::all();
       

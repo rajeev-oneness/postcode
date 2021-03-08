@@ -110,14 +110,14 @@
             <div class="card">
 
               <div class="card-body">
-                <form class="needs-validation" method="post" action="{{route('admin.add_events')}}" enctype="multipart/form-data" novalidate="">
+                <form class="needs-validation" method="post" name="event" action="{{route('admin.add_events')}}" enctype="multipart/form-data" novalidate="">
                   <input type="hidden" id="hid_id" name="hid_id">
                   {{csrf_field()}}
                   <div class="form-row">
                     <div class="col-md-4 mb-3">
                       <div class="form-group">
-                        <label for="formrow-inputState">Business Category</label>
-                        <select id="business_categoryId" name="business_categoryId" class="form-control">
+                        <label for="validationCustom05">Business Category</label>
+                        <select id="business_categoryId" name="business_categoryId" class="form-control" required="">
                           <option value="{{old('business_categoryId')}}">Select</option>
                           @foreach($busCateData as $businessName)
                           <option value="{{$businessName->id}}">{{$businessName->name}}</option>
@@ -197,8 +197,8 @@
                     </div>
                     <div class="col-md-4 mb-3">
                       <div class="form-group">
-                        <label for="formrow-inputState">Event Category</label>
-                        <select id="event_category_id" name="event_category_id" class="form-control">
+                        <label for="validationCustom06">Event Category</label>
+                        <select id="event_category_id" name="event_category_id" class="form-control" required="">
                           <option value="{{old('event_category_id')}}">Select</option>
                           @foreach($eventCatData as $produData)
                           <option value="{{$produData->id}}">{{$produData->name}}</option>
@@ -242,9 +242,9 @@
                       <label for="validationCustomUsername">Image</label>
                       <div class="d-flex justify-content-center">
                         <div class="btn btn-mdb-color btn-rounded">
-                        <img src="/uploads/blank_img1.jpg" alt="people" class="" width="56" style="border:1px solid #004694;height:100px;width:200px;margin-bottom:5%;margin-right:25%;" id="img-upload">
+                        <img src="/uploads/blank_img1.jpg" alt="people" class="evenblck" width="56" id="img-upload">
 
-                          <input type="file" id="image" value="{{old('image')}}" name="image">
+                        <input class="form-control eventimg"  type="file" id="image" value="" name="image" required="">
                           @error('image')
                           {{$message}}
                           @enderror
@@ -268,7 +268,26 @@
 
     <script>
             $(document).ready(function() {
-         
+          // It has the name attribute "registration"
+  // $("form[name='event']").validate({
+  //   // Specify validation rules
+  //   rules: {
+  //     // The key name on the left side is the name attribute
+  //     // of an input field. Validation rules are defined
+  //     // on the right side
+  //     event_category_id: "required"
+
+  //   },
+  //   // Specify validation error messages
+  //   messages: {
+  //     event_category_id: "Please enter your firstname"
+  //   },
+  //   // Make sure the form is submitted to the destination defined
+  //   // in the "action" attribute of the form when valid
+  //   submitHandler: function(form) {
+  //     form.submit();
+  //   }
+  // });
             });
 
             function readURL(input) {

@@ -1,8 +1,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="endless admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-<meta name="keywords" content="admin template, endless admin template, dashboard template, flat admin template, responsive admin template, web app">
+<meta name="description" content="Postcode admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+<meta name="keywords" content="admin template, Postcode admin template, dashboard template, flat admin template, responsive admin template, web app">
 <meta name="author" content="pixelstrap">
 <link rel="icon" href="{{asset('admin_assets/images/favicon.png')}}" type="image/x-icon">
 <link rel="shortcut icon" href="{{asset('admin_assets/images/favicon.png')}}" type="image/x-icon">
@@ -37,16 +37,16 @@
 <link id="color" rel="stylesheet" href="{{asset('admin_assets/css/light-1.css')}}" media="screen">
 <!-- Responsive css-->
 <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/responsive.css')}}">
-<!-- Font Awesome CDN-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+<!-- Jquery Datatable-->
+<link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/jquery.dataTables.css')}}">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- latest jquery-->
 <script src="{{asset('admin_assets/js/jquery-3.2.1.min.js')}}"></script>
 
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="{{asset('admin_assets/js/jquerydatatable/jquery.dataTables.js')}}"></script>
 
 </head>
 
@@ -167,6 +167,14 @@
                 <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.events')}}"><i data-feather="server"></i><span>Add Events</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.manage_events')}}"><i data-feather="server"></i><span>Manage Events</span></a></li>
+
+                </ul>
+              </li>
+
+              <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Offers</span><i class="fa fa-angle-right pull-right"></i></a>
+                <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('admin.offers')}}"><i data-feather="server"></i><span>Add Offers</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.manage_events')}}"><i data-feather="server"></i><span>Manage Offers</span></a></li>
 
                 </ul>
               </li>

@@ -108,7 +108,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 //--------------------------------------------------------------Event Section-----------------------------------------------//
 
-	Route::get('/events', 'EventsController@Services')->name('admin.events');
+	Route::get('/events', 'EventsController@Events')->name('admin.events');
 
 	Route::post('/add_events','EventsController@addEvents')->name('admin.add_events');
 
@@ -121,6 +121,26 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 	Route::post('/update_event', 'EventsController@updateEvent')->name('admin.update_event');
 
 	Route::post('/delete_events', 'EventsController@deleteEvents')->name('delete_events');
+
+	//--------------------------------------------------------------Offers Section-----------------------------------------------//
+
+	Route::get('/offers', 'OfferController@OfferView')->name('admin.offers');
+
+	Route::post('/add_offers','OfferController@addOffers')->name('admin.add_offers');
+
+	Route::post('/ckeditor_upload', 'CKEditorController@ckeditor_upload')->name('ckeditor.upload');
+
+
+	//--------------------------------------------------------------Manage Event Section-----------------------------------------------//
+
+	Route::get('/manage_events','EventsController@manageEventsView')->name('admin.manage_events');
+
+	Route::post('/edit_event', 'EventsController@editEvent')->name('edit_event');
+
+	Route::post('/update_event', 'EventsController@updateEvent')->name('admin.update_event');
+
+	Route::post('/delete_events', 'EventsController@deleteEvents')->name('delete_events');
+
 
 //--------------------------------------------------------------Admin Logout Section-----------------------------------------------//
 	
