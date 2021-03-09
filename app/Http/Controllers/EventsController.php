@@ -31,6 +31,10 @@ class EventsController extends Controller
     public function addEvents(Request $request) {
         $request->validate([
             'name' => 'required|min:5|string',
+            'details' => 'required',
+            'event_category_id' => 'required',
+            'address' => 'required|min:5',
+            'price' => 'required|',
            
         ]);
         $fileName = time().'.'.$request->image->extension(); 

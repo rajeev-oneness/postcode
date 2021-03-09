@@ -136,15 +136,17 @@
                         </div>
                        
                         <div class="col-md-4 mb-3">
-                          <label for="validationCustomUsername" style="margin-left:7%;">Image</label>
-                          <div class="d-flex justify-content-center">
-              <div class="btn btn-mdb-color btn-rounded">
-              <img src="/{{ $businessprofile_data->image }}" alt="people" style="margin-left: -18%; margin-top: -3%;" class="" width="56" id="img-upload">
-
-                <input type="file" id="image" style="margin-top:3%;" name="image">
-              </div>
-            </div>
+                      <label for="validationCustomUsername">Image</label>
+                      <div class="d-flex justify-content-center">
+                        <div class="btn btn-mdb-color btn-rounded">
+                        <img src="\{{$businessprofile_data->image}}" alt="people" class="offrlck" width="56" id="img-upload">
+                          <input class="form-control offimgbuis" type="file" id="image" value="" name="image" required="">
+                          @error('image')
+                          {{$message}}
+                          @enderror
                         </div>
+                      </div>
+                    </div>
                         
                       </div>
                    

@@ -37,25 +37,30 @@
                           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   <div id="error-message"></div>
                     </div>
-                <form class="needs-validation" novalidate="">
+                <form class="needs-validation" method="post" action="{{route('admin.add_businessprofile')}}" enctype="multipart/form-data" novalidate="">
                   <input type="hidden" id="hid_id" name="hid_id">
                   {{csrf_field()}}
                   <div class="form-row">
                     <div class="col-md-4 mb-3">
                       <div class="form-group">
                         <label for="formrow-inputState">Business Category</label>
-                        <select id="business_categoryId" name="business_categoryId" class="form-control">
-                          <option value="">Select</option>
+                        <select id="business_categoryId" name="business_categoryId" class="form-control" required="">
+                          <option value="{{ old('business_categoryId') }}">Select</option>
                           @foreach($businessData as $businessName)
                           <option value="{{$businessName->id}}">{{$businessName->name}}</option>
                           @endforeach
                         </select>
+                        @error('business_categoryId')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                       </div>
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Business Name</label>
-                      <input class="form-control" id="name" name="name" type="text" placeholder="Business Name" required="">
-
+                      <input class="form-control" id="name" name="name" value="{{ old('name') }}" type="text" placeholder="Business Name" required="">
+                      @error('name')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
 
                     <div class="col-md-4 mb-3">
@@ -64,10 +69,10 @@
                         <div class="btn btn-mdb-color btn-rounded">
                           <img src="/uploads/blank_img1.jpg" alt="people" class="busiprofimg" width="56" id="img-upload">
 
-                          <input type="file" id="image" value="{{old('image')}}" name="image">
-                          @error('image')
-                          {{$message}}
-                          @enderror
+                          <input class="form-control offrimg" type="file" id="image" value="{{old('image')}}" name="image" required="">
+                          @error('business_categoryId')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                         </div>
                       </div>
                     </div>
@@ -77,19 +82,25 @@
                   <div class="form-row">
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Address</label>
-                      <input class="form-control" id="address" name="address" type="text" placeholder="Enter Address" required="">
-
+                      <input class="form-control" id="address" value="{{ old('address') }}" name="address" type="text" placeholder="Enter Address" required="">
+                      @error('address')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
 
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Mobile</label>
-                      <input class="form-control" id="mobile" name="mobile" type="text" placeholder="Mobile" required="">
-
+                      <input class="form-control" id="mobile" value="{{ old('mobile') }}" name="mobile" type="text" placeholder="Mobile" required="">
+                      @error('mobile')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Opening Hour</label>
-                      <input class="form-control" id="open_hour" name="open_hour" type="text" placeholder="Opening Hour" required="">
-
+                      <input class="form-control" id="open_hour" value="{{ old('open_hour') }}" name="open_hour" type="text" placeholder="Opening Hour" required="">
+                      @error('open_hour')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
 
                   </div>
@@ -97,24 +108,31 @@
                   <div class="form-row">
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Closing Hour</label>
-                      <input class="form-control" id="closing_hour" name="closing_hour" type="text" placeholder="Closing Hour" required="">
-
+                      <input class="form-control" id="closing_hour" value="{{ old('closing_hour') }}" name="closing_hour" type="text" placeholder="Closing Hour" required="">
+                      @error('closing_hour')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
 
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Description</label>
-                      <input class="form-control" id="description" name="description" type="text" placeholder="Description" required="">
-
+                      <input class="form-control" id="description" value="{{ old('description') }}" name="description" type="text" placeholder="Description" required="">
+                      @error('description')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
                     <div class="col-md-4 mb-3">
                       <div class="form-group">
                         <label for="formrow-inputState">Product</label>
-                        <select id="products" name="products" class="form-control">
-                          <option value="">Select</option>
+                        <select id="products" name="products" class="form-control" required="">
+                          <option value="{{ old('products') }}">Select</option>
                           @foreach($producData as $produData)
                           <option value="{{$produData->id}}">{{$produData->name}}</option>
                           @endforeach
                         </select>
+                        @error('products')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                       </div>
                     </div>
 
@@ -122,24 +140,31 @@
                   <div class="form-row">
                     <div class="col-md-4 mb-3">
                       <div class="form-group">
-                        <label for="formrow-inputState">Service</label>
-                        <select id="services" name="services" class="form-control">
-                          <option value="">Select</option>
+                        <label for="validationCustom05">Service</label>
+                        <select id="services" name="services" class="form-control" required="">
+                          <option value="{{ old('services') }}">Select</option>
                           @foreach($servicData as $servName)
                           <option value="{{$servName->id}}">{{$servName->name}}</option>
                           @endforeach
                         </select>
+                        @error('services')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                       </div>
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Facebook link</label>
-                      <input class="form-control" id="facebook_link" name="facebook_link" type="text" placeholder="Facebook link" required="">
-
+                      <input class="form-control" id="facebook_link" value="{{ old('facebook_link') }}" name="facebook_link" type="text" placeholder="Facebook link" required="">
+                      @error('facebook_link')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Instagram link</label>
-                      <input class="form-control" id="instagram_link" name="instagram_link" type="text" placeholder="Instagram link" required="">
-
+                      <input class="form-control" id="instagram_link" value="{{ old('instagram_link') }}" name="instagram_link" type="text" placeholder="Instagram link" required="">
+                      @error('instagram_link')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
                   </div>
 
@@ -147,18 +172,24 @@
 
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Twitter link</label>
-                      <input class="form-control" id="twitter_link" name="twitter_link" type="text" placeholder="Twitter link" required="">
-
+                      <input class="form-control" id="twitter_link" value="{{ old('twitter_link') }}" name="twitter_link" type="text" placeholder="Twitter link" required="">
+                      @error('twitter_link')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Youtube link</label>
-                      <input class="form-control" id="youtube_link" name="youtube_link" type="text" placeholder="Youtube link" required="">
-
+                      <input class="form-control" id="youtube_link" value="{{ old('youtube_link') }}" name="youtube_link" type="text" placeholder="Youtube link" required="">
+                      @error('youtube_link')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Linkedin link</label>
-                      <input class="form-control" id="linkedin_link" name="linkedin_link" type="text" placeholder="Linkedin link" required="">
-
+                      <input class="form-control" id="linkedin_link" value="{{ old('linkedin_link') }}" name="linkedin_link" type="text" placeholder="Linkedin link" required="">
+                      @error('linkedin_link')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
 
                   </div>
@@ -176,57 +207,7 @@
     </div>
 
     <script>
-      $(document).ready(function() {
-
-        $('#submit_business').click(function(e) {
-          e.preventDefault();
-
-          var formElement = document.querySelector("form");
-          var formData = new FormData(formElement); //append data
-
-          $.ajax({
-            type: "post",
-            url: "{{route('admin.add_business')}}",
-            cache: false,
-            processData: false,
-            contentType: false,
-            data: formData,
-            dataType: "json",
-            success: function(response) {
-
-              if (response.status == 1) {
-                window.location.href = "{{route('admin.dashboard')}}";
-              } else {
-                $("#error-msg").show();
-                           
-                           $("#error-message").html(response.message);
-              }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-              // $('#submit_subject').html("Login");
-              // $('#submit_subject').attr("disabled", false);
-              var msg = "";
-              if (jqXHR.status !== 422 && jqXHR.status !== 400) {
-                msg += "<strong>" + jqXHR.status + ": " + errorThrown + "</strong>";
-              } else {
-                if (jqXHR.responseJSON.hasOwnProperty('exception')) {
-                  msg += "Exception: <strong>" + jqXHR.responseJSON.exception_message + "</strong>";
-                } else {
-                  msg += "<strong><ul style='list-style:none;'>";
-                  $.each(jqXHR.responseJSON.errors, function(key, value) {
-                    msg += "<li style='margin-left:0px;'>" + value + "</li>";
-                  });
-                  msg += "</ul></strong>";
-                }
-              }
-              $("#error-msg").show();
-                           
-$("#error-message").html(msg);
-
-            }
-          });
-        });
-      });
+     
 
       function readURL(input) {
         if (input.files && input.files[0]) {

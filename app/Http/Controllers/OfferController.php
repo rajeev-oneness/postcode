@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\BusinessCategory;
 use App\Model\Offer;
+use Validator,Redirect,Response;
 
 
 class OfferController extends Controller
@@ -27,6 +28,19 @@ class OfferController extends Controller
     * @return view
     */
     public function addOffers(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'business_categoryId' => 'required|min:1|max:20',
+            'title' => 'required',
+            'short_description' => 'required|min:4|max:255',
+            'description' => 'required|min:4|max:255',
+            'price' => 'required|numeric',
+            'promo_code' => 'required',
+            'content' => 'required',
+            'expire_date' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',         
+        ]);
+       $validator->validate();
        
         $fileName = time().'.'.$request->image->extension(); 
             $request->image->move(public_path('uploads/'), $fileName);

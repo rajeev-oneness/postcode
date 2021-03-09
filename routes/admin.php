@@ -9,7 +9,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	Route::get('/business_profiles', 'BusinessController@BusinessProfiles')->name('admin.business');
 
-	Route::post('/add_business','BusinessController@addBusiness')->name('admin.add_business');
+	Route::post('/add_businessprofile','BusinessController@addBusinessProfile')->name('admin.add_businessprofile');
 
 	//------------------------------------------------------------- Manage Business Profile Section-----------------------------------------------//
 

@@ -124,16 +124,16 @@
                           @endforeach
                         </select>
                         @error('business_categoryId')
-                        {{$message}}
-                        @enderror
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                       </div>
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Event Name</label>
                       <input class="form-control" id="name" name="name" value="{{old('name')}}" type="text" placeholder="Business Name" required="">
                       @error('name')
-                      {{$message}}
-                      @enderror
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
 
 
@@ -141,8 +141,8 @@
                       <label for="validationCustom05">Contact Details</label>
                       <input class="form-control" id="contact_details" value="{{old('contact_details')}}" name="contact_details" type="text" placeholder="Contact Details" required="">
                       @error('contact_details')
-                      {{$message}}
-                      @enderror
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
 
                   </div>
@@ -152,16 +152,16 @@
                       <label for="validationCustom05">Details</label>
                       <input class="form-control" id="details" name="details" value="{{old('details')}}" type="text" placeholder="Enter Details" required="">
                       @error('details')
-                      {{$message}}
-                      @enderror
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
 
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Address</label>
                       <input class="form-control" id="address" name="address" value="{{old('address')}}" type="text" placeholder="Kindly Enter" required="">
                       @error('address')
-                      {{$message}}
-                      @enderror
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Start Date</label>
@@ -170,8 +170,8 @@
                             </div>
                       <!-- <input class="form-control" id="start" name="start" value="{{old('start')}}" type="text" placeholder="Starting Hour" required=""> -->
                       @error('start')
-                      {{$message}}
-                      @enderror
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
 
                   </div>
@@ -182,18 +182,17 @@
                       <div class="input-group">
                               <input class="datepicker-here form-control digits" id="end" name="end" value="{{old('end')}}" placeholder="Closing Hour" required="" type="text" data-language="en">
                             </div>
-                     
-                      @error('end')
-                      {{$message}}
-                      @enderror
+                            @error('end')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
 
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Frequency</label>
                       <input class="form-control" id="frequency" value="{{old('frequency')}}" name="frequency" type="text" placeholder="Enter Frequency" required="">
                       @error('frequency')
-                      {{$message}}
-                      @enderror
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
                     <div class="col-md-4 mb-3">
                       <div class="form-group">
@@ -204,9 +203,9 @@
                           <option value="{{$produData->id}}">{{$produData->name}}</option>
                           @endforeach
                         </select>
-                        @error('end')
-                        {{$message}}
-                        @enderror
+                        @error('event_category_id')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                       </div>
                     </div>
 
@@ -216,22 +215,22 @@
                       <label for="validationCustom05">Booking Details</label>
                       <input class="form-control" id="booking_details" value="{{old('booking_details')}}" name="booking_details" type="text" placeholder="Booking Details" required="">
                       @error('booking_details')
-                      {{$message}}
-                      @enderror
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Age Group</label>
                       <input class="form-control" id="age_group" value="{{old('age_group')}}" name="age_group" type="text" placeholder="Provide Age Group" required="">
                       @error('age_group')
-                      {{$message}}
-                      @enderror
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Price</label>
                       <input class="form-control" id="price" value="{{old('price')}}" name="price" type="text" placeholder="Enter Price" required="">
                       @error('price')
-                      {{$message}}
-                      @enderror
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
                   </div>
 
@@ -245,9 +244,9 @@
                         <img src="/uploads/blank_img1.jpg" alt="people" class="evenblck" width="56" id="img-upload">
 
                         <input class="form-control eventimg"  type="file" id="image" value="" name="image" required="">
-                          @error('image')
-                          {{$message}}
-                          @enderror
+                        @error('image')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                         </div>
                       </div>
                     </div>

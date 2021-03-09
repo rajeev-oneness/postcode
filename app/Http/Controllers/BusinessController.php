@@ -8,6 +8,7 @@ use App\Model\BusinessCategory;
 use App\Model\Product;
 use App\Model\Service;
 use Illuminate\Support\Facades\Auth;
+use Validator,Redirect,Response;
 
 
 class BusinessController extends Controller
@@ -31,89 +32,53 @@ class BusinessController extends Controller
      *
      * @return json
      */
-    public function addBusiness(Request $request)
-    {
-        $response = [];
-        $statusCode = 200;
-        if (!$request->ajax()) {
-            $statusCode = 400;
-            $response = array('error' => 'Error occured in Ajax Call.');
-            return response()->json($response, $statusCode);
-        }
-        $this->validate($request, [
-            'image' => 'required',
+    public function addBusinessProfile(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'business_categoryId' => 'required|min:1|max:20',
             'name' => 'required',
-            'address' => 'required',
+            'description' => 'required|min:4|max:255',
+            'address' => 'required|min:4|max:255',
             'mobile' => 'required',
-            'open_hour' => 'required',
-            'closing_hour' => 'required',
-            'services' => 'required',
-            'products' => 'required',
-            'description' => 'required',
             'facebook_link' => 'required',
             'instagram_link' => 'required',
             'twitter_link' => 'required',
-            'youtube_link' => 'required',
-            'linkedin_link' => 'required',
-            'business_categoryId' => 'required' 
-                ], [
-            'image.required' => 'Image is required',
-            'name.required' => 'Name is required',
-            'address.required' => 'Address required',
-            'mobile.required' => 'Mobile is required',
-            'open_hour.required' => 'Open Hour is required',
-            'closing_hour.required' => 'Closing Hour is required',
-            'services.required' => 'Services required',
-            'products.required' => 'Products required',
-            'description.required' => 'Description is required',
-            'facebook_link.required' => 'Facebook Link is required',
-            'instagram_link.required' => 'Instagram Link is required',
-            'youtube_link.required' => 'Youtube Link is required',
-            'linkedin_link.required' => 'Linkedin Link is required',
-            'twitter_link.required' => 'Twitter is required',
-            'business_categoryId.required' => 'Business Category is required'
-                ]
-        );
-        try {
-            $userId = Auth::user()->id;
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
+            
+        ]);
+       $validator->validate();
+          
 
-            $fileName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('uploads/'), $fileName);
-            $busprofileimg = 'uploads/' . $fileName;  
+    $fileName = time().'.'.$request->image->extension(); 
+    $request->image->move(public_path('uploads/'), $fileName);
+    $busiprofimg ='uploads/'.$fileName;
 
-            $Business = new Business();
-            $Business->business_categoryId = $request->business_categoryId;
-            $Business->userId = $userId;
-            $Business->image = $busprofileimg;
-            $Business->name = $request->name;
-            $Business->address = $request->address;
-            $Business->mobile = $request->mobile;
-            $Business->open_hour = $request->open_hour;
-            $Business->closing_hour = $request->closing_hour;
-            $Business->services = $request->services;
-            $Business->products = $request->products;
-            $Business->description = $request->description;
-            $Business->facebook_link = $request->facebook_link;
-            $Business->instagram_link = $request->instagram_link;
-            $Business->twitter_link = $request->twitter_link;
-            $Business->youtube_link = $request->youtube_link;
-            $Business->linkedin_link = $request->linkedin_link;
+    $userId = Auth::user()->id;
 
-            $Business->save();
-            $response = array(
-                'status' => 1,
-                'message' => 'Business Details Are Inserted Successfully'
-            );
-        } catch (\Exception $e) {
-            $response = array(
-                'exception' => true,
-                'exception_message' => $e->getMessage(),
-            );
-            $statusCode = 400;
-        } finally {
-            return response()->json($response, $statusCode);
-        }
-    }
+    $Business = new Business();
+    $Business->business_categoryId = $request->business_categoryId;         
+    $Business->userId = $userId;
+    $Business->image = $busiprofimg;
+    $Business->name = $request->name;
+    $Business->address = $request->address;
+    $Business->mobile = $request->mobile;  
+    $Business->open_hour = $request->open_hour;  
+    $Business->closing_hour = $request->closing_hour;  
+    $Business->services = $request->services;  
+    $Business->products = $request->products;  
+    $Business->description = $request->description;  
+    $Business->facebook_link = $request->facebook_link;  
+    $Business->instagram_link = $request->instagram_link;  
+    $Business->twitter_link = $request->twitter_link; 
+    $Business->youtube_link = $request->youtube_link; 
+    $Business->linkedin_link = $request->linkedin_link;     
+    
+    // echo json_encode($Business);die;
+
+    $Business->save();
+       
+        return redirect()->route('admin.dashboard');
+}
 
     /**
      * Go to Manage Business Profile View.

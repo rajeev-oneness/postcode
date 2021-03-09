@@ -126,25 +126,25 @@
                           @endforeach
                         </select>
                         @error('business_categoryId')
-                        {{$message}}
-                        @enderror
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                       </div>
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Title</label>
                       <input class="form-control" id="title" name="title" value="{{old('title')}}" type="text" placeholder="Title Required" required="">
-                      @error('name')
-                      {{$message}}
-                      @enderror
+                      @error('title')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
 
 
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Short Description</label>
                       <input class="form-control" id="short_description" value="{{old('short_description')}}" name="short_description" type="text" placeholder="Short Description" required="">
-                      @error('contact_details')
-                      {{$message}}
-                      @enderror
+                      @error('short_description')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
 
                   </div>
@@ -153,26 +153,26 @@
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Description</label>
                       <input class="form-control" id="description" name="description" value="{{old('description')}}" type="text" placeholder="Description" required="">
-                      @error('details')
-                      {{$message}}
-                      @enderror
+                      @error('description')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
 
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Promo Code</label>
                       <input class="form-control" id="promo_code" name="promo_code" value="{{old('promo_code')}}" type="text" placeholder="Promo Code" required="">
-                      @error('address')
-                      {{$message}}
-                      @enderror
+                      @error('promo_code')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Price</label>
                       <div class="input-group">
                       <input class="form-control" id="price" name="price" value="{{old('price')}}" type="text" placeholder="Enter Promo Code" required="">
                             </div>
-                      @error('start')
-                      {{$message}}
-                      @enderror
+                            @error('price')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
 
                   </div>
@@ -183,9 +183,9 @@
                       <div class="input-group">
                               <input class="datepicker-here form-control digits" id="expire_date" name="expire_date" value="{{old('expire_date')}}" placeholder="Expire Date" required="" type="text" data-language="en">
                             </div>                 
-                      @error('expire_date')
-                      {{$message}}
-                      @enderror
+                            @error('expire_date')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>
                     <div class="col-md-3 mb-3">
                       <label for="validationCustomUsername">Image</label>
@@ -194,17 +194,17 @@
                         <img src="/uploads/blank_img1.jpg" alt="people" class="offrlck" width="56" id="img-upload">
                           <input class="form-control offrimg" type="file" id="image" value="{{old('image')}}" name="image" required="">
                           @error('image')
-                          {{$message}}
-                          @enderror
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                         </div>
                       </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="validationCustom05">How to Redeem</label>
                       <textarea class="form-control editor" name="content" required=""></textarea>
-                       @error('howcanredeem')
-                      {{$message}}
-                      @enderror
+                      @error('content')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                     </div>  
                   </div>
 
