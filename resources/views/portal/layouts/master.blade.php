@@ -125,8 +125,8 @@
             </li>
             <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
-                <li><a class="sidebar-header" href="{{route('admin.products')}}"><i data-feather="server"></i><span>Add Products</span></a></li>
-            <li><a class="sidebar-header" href="{{route('admin.manage_product')}}"><i data-feather="server"></i><span>Manage Products</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.product')}}"><i data-feather="server"></i><span>Add Products</span></a></li>
+            <li><a class="sidebar-header" href="{{route('admin.manage_products')}}"><i data-feather="server"></i><span>Manage Products</span></a></li>
 
                 </ul>
               </li>

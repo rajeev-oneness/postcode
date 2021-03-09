@@ -121,8 +121,8 @@
                       <label for="validationCustom05">Event Name</label>
                       <input class="form-control" id="name" name="name" value="{{old('name')}}" type="text" placeholder="Enter Event Name" required="">
                       @error('name')
-                    {{$message}}
-                @enderror
+                          <span class="text-danger">{{ $message }}</span>
+                          @enderror
                     </div>
 
                   </div>

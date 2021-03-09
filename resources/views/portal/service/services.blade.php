@@ -114,25 +114,33 @@
                       <div class="form-row">
                         <div class="col-md-4 mb-3">
                         <div class="form-group">
-                                                <label for="formrow-inputState">Business Category</label>
-                                                <select id="business_categoryId" name="business_categoryId" class="form-control">
-                                                <option value="">Select</option>
+                                                <label for="validationCustom05">Business Category</label>
+                                                <select id="businessId" name="businessId" class="form-control" required="">
+                                                <option value="{{ old('businessId') }}">Select</option>
                                                 @foreach($servicesData as $servicesName)
                                                 <option value="{{$servicesName->id}}">{{$servicesName->name}}</option>
                                                 @endforeach
                                                 </select>
+                                                @error('businessId')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
                                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                           <label for="validationCustom05">Service Name</label>
-                          <input class="form-control" id="name" name="name" type="text" placeholder="Enter Product Name" required="">
-                         
+                          <input class="form-control" id="name" name="name" type="text" value="{{ old('name') }}" placeholder="Enter Product Name" required="">
+                          @error('name')
+                      <span class="text-danger">{{ $message }}</span>
+                      @enderror
                         </div>
                        
                         <div class="col-md-4 mb-3">
                           <label for="validationCustom05">Product Details</label>
-                          <input class="form-control" id="details" name="details" type="text" placeholder="Enter Product Details" required="">
+                          <input class="form-control" id="details" name="details" value="{{ old('details') }}" type="text" placeholder="Enter Product Details" required="">
                          
+                      @error('details')
+                      <span class="text-danger">{{ $message }}</span>
+                      @enderror
                         </div>
                         
                       </div>
@@ -140,17 +148,23 @@
                       <div class="form-row">
                       <div class="col-md-4 mb-3">
                           <label for="validationCustom05">Price</label>
-                          <input class="form-control" id="price" name="price" type="text" placeholder="Enter Price" required="">
+                          <input class="form-control" id="price" name="price" value="{{ old('price') }}" type="text" placeholder="Enter Price" required="">
                          
+                      @error('price')
+                      <span class="text-danger">{{ $message }}</span>
+                      @enderror
                         </div>
                      
                         <div class="col-md-4 mb-3">
                       <label for="validationCustomUsername" style="margin-left:13%;">Image</label>
                       <div class="d-flex justify-content-center">
                         <div class="btn btn-mdb-color btn-rounded">
-                          <img src="/uploads/blank_img1.jpg" alt="people" class="" width="56" style="border:1px solid #004694;height:100px;width:200px;margin-bottom:5%;" id="img-upload">
+                          <img src="/uploads/blank_img1.jpg" alt="people" class="offrlckimg" width="56" id="img-upload">
 
-                          <input type="file" id="image" name="image" style="margin-left: 12%;">
+                          <input class="form-control offrimg" type="file" id="image" name="image" value="{{ old('image') }}" required="">
+                          @error('image')
+                          <span class="text-danger">{{ $message }}</span>
+                          @enderror
                         </div>
                       </div>
                     </div>

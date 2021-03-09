@@ -6,6 +6,7 @@ use App\Model\Service;
 use App\Model\BusinessCategory;
 
 use Illuminate\Http\Request;
+use Validator,Redirect,Response;
 use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
@@ -28,16 +29,21 @@ class ServiceController extends Controller
      */
     public function addServices(Request $request)
     {
-        $request->validate([
-            'name' => 'required|min:5|string',
-
+        $validator = Validator::make($request->all(), [
+            'businessId' => 'required|min:1|max:20',
+            'name' => 'required|min:4|max:255',
+            'details' => 'required|min:4|max:255',
+            'price' => 'required|numeric',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            
         ]);
+       $validator->validate();
         $fileName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('uploads/'), $fileName);
         $servicedesc = 'uploads/' . $fileName;
 
         $Service = new Service();
-        $Service->businessId = $request->business_categoryId;
+        $Service->businessId = $request->businessId;
         $Service->name = $request->name;
         $Service->image = $servicedesc;
         $Service->details = $request->details;

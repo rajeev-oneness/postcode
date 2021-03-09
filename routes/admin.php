@@ -29,21 +29,19 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 //--------------------------------------------------------------Product Section-----------------------------------------------//
 
 
-	Route::get('/products', 'ProductController@Products')->name('admin.products');
+	Route::get('/product', 'ProductController@Products')->name('admin.product');
 
-	Route::post('/product_details', 'ProductController@ajaxProductDetails')->name('admin.product_details');
+	Route::post('/add_products', 'ProductController@addProducts')->name('admin.add_products');
 
 	//-------------------------------------------------------------Manage Product Section-----------------------------------------------//
 
-	Route::get('/manage_products', function () {   
-		return view('portal.product.manage_products');
-	})->name('admin.manage_product');
+	Route::get('/manage_products','ProductController@manageProducts')->name('admin.manage_products');
 
 	Route::post('/edit_product', 'ProductController@editProduct')->name('edit_product');
 
 	  Route::post('/product','ProductController@addProduct')->name('admin.add_product');
 
-	  Route::post('/update_product', 'ProductController@updateProduct')->name('admin.update_product');
+	  Route::post('/update_products', 'ProductController@updateProduct')->name('admin.update_products');
 
 	  Route::post('/delete_products_details', 'ProductController@deleteProductsDetails')->name('admin.delete_product');
 
@@ -73,9 +71,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	  //--------------------------------------------------------------Manage Event Category Section-----------------------------------------------//
 
-	  Route::get('/manage_eventcategories', function () {   
-		return view('portal.eventcategory.manage_eventcategories');
-	})->name('admin.manage_eventcategories');
+	  Route::get('/manage_eventcategories','EventcategoryController@manageEventCategories')->name('admin.manage_eventcategories');
+
 
 	Route::post('/edit_eventcategories', 'EventcategoryController@editEventCategories')->name('edit_eventcategories');
 

@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Admin | Manage Employee</title>
+    <title>Admin | Manage Products</title>
 
     @extends('portal.layouts.master')
     @section('content')
@@ -36,22 +36,33 @@
                 {{csrf_field()}}
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table class="display" id="subject_manage">
+                      <table class="app_table" id="subject_manage">
                         <thead>
                           <tr>
-                          <th>Sl No.</th>
-                            <th>Business Category</th>
+                            <th width="163px;">Business Category</th>
                             <th>Name</th>
                             <th>Details</th>
                             <th>Price</th>
-                            <th>Image</th>                       
+                            <th width="40px;">Image</th>                       
                             <th>Action</th>
                             
                           </tr>
                         </thead>
-                        <tbody>                   
-                         
-                        </tbody>
+                                          
+                        <tbody>
+  @foreach ($categories as $offercategories)
+    <tr>
+    <td>{{$offercategories->businesscategory->name}}</td>
+    <td>{{$offercategories->name}}</td>
+    <td>{{$offercategories->details}}</td>
+    <td>{{$offercategories->price}}</td>
+  
+<td><img src='/{{ $offercategories->image }}' style='width: 40%;'></td>
+<td><a class="edit_product" id="{{$offercategories->id}}"><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$offercategories->id}}"><i class="fa fa-trash"></i></a></td>
+  </tr>
+@endforeach
+</tbody>
+                       
                       </table>
                     </div>
                   </div>
@@ -64,184 +75,39 @@
               
           <!-- Container-fluid Ends-->
         </div>
-
-
         <script>
-            $(document).ready(function() {
-                create_table();
-                var table1 = $('#subject_manage').DataTable();
-                table1.on('draw.dt', function() {
-                    $(".edit_product").click(function() {
-                        var lead_call_id = this.id;
-                        var fd = {
-                            'lead_edit_id': lead_call_id,
-                            '_token': $('input[name="_token"]').val()
-                        };
-
-                        redirectPost('edit_product', fd);
-                    });
-                    $(".delete_products").click(function() {
-                        var lead_call_id = this.id;
-                        var token = $("input[name='_token']").val();
-                        $(".se-pre-con").fadeIn("slow");
-                        $.ajax({
-                            url: "{{route('admin.delete_product')}}",
-                            type: "post",
-                            data: {
-                                '_token': token,
-                                'lead_call_id': lead_call_id
-                            },
-                            success: function(response) {
-                                $(".se-pre-con").fadeOut("slow");
-                                if (response.status == 1) {
-                                    window.location.href = '{{ route("admin.manage_product") }}';
-                                } else {
-                                    $.confirm({
-                                        title: 'Error!',
-                                        content: response.message,
-                                        type: 'red',
-                                        typeAnimated: true,
-                                        icon: 'fa fa-exclamation-triangle',
-                                    });
-                                }
-
-                            },
-                            error: function(jqXHR, textStatus, errorThrown) {
-                                $(".se-pre-con").fadeOut("slow");
-                                var msg = "";
-                                if (jqXHR.status !== 422 && jqXHR.status !== 400) {
-                                    msg += "<strong>" + jqXHR.status + ": " + errorThrown + "</strong>";
-                                } else {
-                                    if (jqXHR.responseJSON.hasOwnProperty('exception')) {
-                                        msg += "Exception: <strong>" + jqXHR.responseJSON.exception_message + "</strong>";
-                                    } else {
-                                        msg += "Error(s):<strong><ul>";
-                                        $.each(jqXHR.responseJSON, function(key, value) {
-                                            msg += "<li>" + value + "</li>";
-                                        });
-                                        msg += "</ul></strong>";
-                                    }
-                                }
-                                $.alert({
-                                    title: 'Error!!',
-                                    type: 'red',
-                                    icon: 'fa fa-warning',
-                                    content: msg,
-                                });
-                            }
-
-
-                        });
-                        create_table();
-                    });
-
-                });
-            });
-
-            var redirectPost = function(url, data = null, method = 'post') {
-                var form = document.createElement('form');
-                form.method = method;
-                form.action = url;
-                for (var name in data) {
-                    var input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = name;
-                    input.value = data[name];
-                    form.appendChild(input);
+               $(document).ready(function (){
+                $('.app_table').DataTable({
+      'order':[]
+    });
+    $(".edit_product").click(function(){
+        
+var app_id=this.id;
+       var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
+			redirectPost('edit_product', fd);
+    });
+    $(".delete_app").click(function(){
+       
+var appdel_id=this.id;
+       var fd = {'appdel_id': appdel_id,'_token':$('input[name="_token"]').val()};
+			redirectPost('delete_products_details', fd);
+    });
+               });
+               var redirectPost = function (url, data = null, method = 'post') {
+                    var form = document.createElement('form');
+                    form.method = method;
+                    form.action = url;
+                    for (var name in data) {
+                        var input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = name;
+                        input.value = data[name];
+                        form.appendChild(input);
+                    }
+                    $('body').append(form);
+                    form.submit();
                 }
-                $('body').append(form);
-                form.submit();
-            };
-
-            function create_table() {
-                var table = "";
-                var token = $('input[name="_token"]').val();
-
-
-                $("#subject_manage").dataTable().fnDestroy()
-                table = $('#subject_manage').DataTable({
-                    "processing": true,
-                    "serverSide": true,
-                    "ajax": {
-                        url: "{{route('admin.product_details')}}",
-                        type: "post",
-                        data: {
-                            '_token': $('input[name="_token"]').val()
-                        },
-                        dataSrc: "product_details"
-                    },
-                    "dataType": 'json',
-                    "columnDefs": [{
-                            className: "table-text",
-                            "targets": "_all"
-                        },
-                        {
-                            "targets": 0,
-                            "data": "id",
-                            "defaultContent": "",
-                        },
-                        {
-                            "targets": 1,
-                            "data": "businessId",
-                        },
-                       
-                        {
-                            "targets": 2,
-                            "data": "name",
-                        },
-                        {
-                            "targets": 3,
-                            "data": "details",
-                        },
-                        {
-                            "targets": 4,
-                            "data": "price",
-                        },
-                        {
-                            "targets": 5,
-                            "data": "image",
-                            "render": function(data, type, full, meta) {
-                                var str_btns = "<img src='/" + data +"' style='width: 40%;'>";
-                                return str_btns;
-                            }
-                        },
-                       
-                        {
-                            "targets": -1,
-                            "data": 'action',
-                            "searchable": false,
-                            "sortable": false,
-                            "render": function(data, type, full, meta) {
-                                var str_btns = "<div class='form-inline'>";
-                                str_btns += "<a href='javascript:' class='edit_product btn btn-mini' id='" + data.e + "' title='Click To Edit' style='cursor:pointer'><i class='fa fa-edit' aria-hidden='true'></i></a>&nbsp&nbsp";
-
-                                str_btns += "<a href='javascript:' class='delete_products btn btn-mini' id='" + data.e + "' title='Click To Delete' style='cursor:pointer'><i class='fa fa-trash' aria-hidden='true'></i></a>";
-
-
-
-                                str_btns += "</div>";
-                                return str_btns;
-                            }
-                        }
-                    ],
-
-                    "order": [
-                        [0, 'desc']
-                    ]
-                });
-                table.on('order.dt search.dt draw.dt', function() {
-                    $('[data-toggle="tooltip"]').tooltip();
-                    table.column(0, {
-                        search: 'applied',
-                        order: 'applied'
-                    }).nodes().each(function(cell, i) {
-                        cell.innerHTML = table.page() * table.page.len() + (i + 1);
-                    });
-                });
-
-                // table.columns( [-4,-3,-2,-1] ).visible( false );
-            }
-        </script>
+            </script>
 
 
 

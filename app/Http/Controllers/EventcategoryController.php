@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 Use App\Model\EventCategory;
 use Illuminate\Support\Facades\Auth;
+use Validator,Redirect,Response;
 
 class EventcategoryController extends Controller
 {
@@ -23,16 +24,16 @@ class EventcategoryController extends Controller
     */
     public function addEventCategories(Request $request)
     {
-        $request->validate([
-            'name' => 'required|min:5|string',
-           
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:4|max:255',        
         ]);
+       $validator->validate();
         $EventCategory = new EventCategory();
             $EventCategory->name = $request->name;               
             $EventCategory->save();
             $category = $EventCategory->id;
            
-            return redirect()->route('admin.manage_eventcategories', compact('category'));
+            return redirect()->route('admin.manage_eventcategories');
     }
 
     /**
@@ -136,6 +137,17 @@ class EventcategoryController extends Controller
         } finally {
             return response()->json($response, $statusCode);
         }
+    }
+     /**
+     * Go to manage events view.
+     *
+     * @param  Request $request
+     * @return view
+     */
+    public function manageEventCategories(Request $request){
+        $categories = EventCategory::all();
+        // echo json_encode($categories1);die;
+        return view('/portal.eventcategory.manage_eventcategories',compact('categories'));
     }
 
 }

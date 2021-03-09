@@ -130,4 +130,17 @@ body{background-color:rgba(246,246,246,0.6);font-size:14px;overflow-x:hidden;fon
     border: 1px solid #ced4da !important;
     border-radius: .25rem !important;
   }
+  .offrlckimg {
+    border: 1px solid #004694;
+    height: 100px;
+    width: 200px;
+    margin-bottom: 5%;
+    margin-right: 10%;
+  }
+  .prolabimg {
+    margin-left:4%;
+  }
+  .delete_app {
+    margin-left:20%;
+  }
  
