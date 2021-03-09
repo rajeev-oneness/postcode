@@ -32,4 +32,8 @@ class BusinessCategory extends Model
     {
         return $this->hasMany('App\Model\Event','business_id','id');
     }
+    public function getoffers()
+    {
+        return $this->hasMany('App\Model\Offer','businessId','id');
+    }
 }

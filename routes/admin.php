@@ -131,15 +131,15 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 	Route::post('/ckeditor_upload', 'CKEditorController@ckeditor_upload')->name('ckeditor.upload');
 
 
-	//--------------------------------------------------------------Manage Event Section-----------------------------------------------//
+	//--------------------------------------------------------------Manage Offers Section-----------------------------------------------//
 
-	Route::get('/manage_events','EventsController@manageEventsView')->name('admin.manage_events');
+	Route::get('/manage_offers','OfferController@manageOffers')->name('admin.manage_offers');
 
-	Route::post('/edit_event', 'EventsController@editEvent')->name('edit_event');
+	Route::post('/edit_offer', 'OfferController@editOffer')->name('edit_offer');
 
-	Route::post('/update_event', 'EventsController@updateEvent')->name('admin.update_event');
+	Route::post('/update_offers', 'OfferController@updateOffers')->name('admin.update_offers');
 
-	Route::post('/delete_events', 'EventsController@deleteEvents')->name('delete_events');
+	Route::post('/delete_offers', 'OfferController@deleteOffers')->name('delete_offers');
 
 
 //--------------------------------------------------------------Admin Logout Section-----------------------------------------------//

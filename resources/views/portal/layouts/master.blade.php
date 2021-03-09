@@ -174,7 +174,7 @@
               <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Offers</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.offers')}}"><i data-feather="server"></i><span>Add Offers</span></a></li>
-                <li><a class="sidebar-header" href="{{route('admin.manage_events')}}"><i data-feather="server"></i><span>Manage Offers</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.manage_offers')}}"><i data-feather="server"></i><span>Manage Offers</span></a></li>
 
                 </ul>
               </li>
