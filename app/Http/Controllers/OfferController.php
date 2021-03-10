@@ -38,7 +38,7 @@ class OfferController extends Controller
             'promo_code' => 'required',
             'content' => 'required',
             'expire_date' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',         
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',         
         ]);
        $validator->validate();
        

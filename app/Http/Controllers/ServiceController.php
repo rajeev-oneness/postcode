@@ -34,7 +34,7 @@ class ServiceController extends Controller
             'name' => 'required|min:4|max:255',
             'details' => 'required|min:4|max:255',
             'price' => 'required|numeric',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
             
         ]);
        $validator->validate();

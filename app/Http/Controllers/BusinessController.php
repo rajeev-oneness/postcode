@@ -43,7 +43,7 @@ class BusinessController extends Controller
             'facebook_link' => 'required',
             'instagram_link' => 'required',
             'twitter_link' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048', 
             
         ]);
        $validator->validate();
