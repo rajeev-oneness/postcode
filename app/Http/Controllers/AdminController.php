@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Auth;
 namespace App\Http\Controllers;
 use Auth;
 use App\Http\Controllers\Controller;
+use App\Model\BusinessCategory;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Model\Product;
+use App\Model\Event;
 
 use App\Model\UserType;
 
@@ -109,5 +112,14 @@ class AdminController extends Controller
         $updatedpassdata = User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_pass)]);
         // dd('Password change successfully.');
         return redirect()->route('admin.logout');
+    }
+
+
+    public function dashboardView(Request $request)
+    {
+        $product=Product::all();
+        $BusinessCategory=BusinessCategory::all();
+        $event=Event::all();
+       return view('portal.dashboard',compact('product','BusinessCategory','event'));
     }
 }

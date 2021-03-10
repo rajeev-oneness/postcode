@@ -17,12 +17,12 @@
               <div class="row">
                 <div class="col">
                   <div class="page-header-left">
-                    <h3>Default</h3>
-                    <ol class="breadcrumb">
+                    <h3>Dashboard View</h3>
+                    <!-- <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
                       <li class="breadcrumb-item">Dashboard</li>
                      
-                    </ol>
+                    </ol> -->
                   </div>
                 </div>
                
@@ -40,8 +40,8 @@
                         <div class="chart-widget-dashboard">
                           <div class="media">
                             <div class="media-body">
-                              <h5 class="mt-0 mb-0 f-w-600"><i data-feather="dollar-sign"></i><span class="counter">5789</span></h5>
-                              <p>Total Visits</p>
+                              <h5 class="mt-0 mb-0 f-w-600"><span class="counter">{{ $product->count() }}</span></h5>
+                              <p>Total Products</p>
                             </div><i data-feather="tag"></i>
                           </div>
                           <div class="dashboard-chart-container">
@@ -57,8 +57,8 @@
                         <div class="chart-widget-dashboard">
                           <div class="media">
                             <div class="media-body">
-                              <h5 class="mt-0 mb-0 f-w-600"><i data-feather="dollar-sign"></i><span class="counter">4986</span></h5>
-                              <p>Total Sale</p>
+                              <h5 class="mt-0 mb-0 f-w-600"><span class="counter">{{ $BusinessCategory->count() }}</span></h5>
+                              <p>Business Categories</p>
                             </div><i data-feather="shopping-cart"></i>
                           </div>
                           <div class="dashboard-chart-container">
@@ -74,8 +74,8 @@
                         <div class="chart-widget-dashboard">
                           <div class="media">
                             <div class="media-body">
-                              <h5 class="mt-0 mb-0 f-w-600"><i data-feather="dollar-sign"></i><span class="counter">8568</span></h5>
-                              <p>Total Value</p>
+                              <h5 class="mt-0 mb-0 f-w-600"><span class="counter">{{ $event->count() }}</span></h5>
+                              <p>Events</p>
                             </div><i data-feather="sun"></i>
                           </div>
                           <div class="dashboard-chart-container">
@@ -85,7 +85,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-12">
+                  <!-- <div class="col-lg-12">
                     <div class="card">
                       <div class="card-header">
                         <h5>Production Valuation</h5>
@@ -128,7 +128,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             
