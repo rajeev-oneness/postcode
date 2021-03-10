@@ -25,8 +25,8 @@
 <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/chartist.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/prism.css')}}">
 <!-- Plugins css Ends-->
-    <!-- Plugins css start-->
-    <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/date-picker.css')}}">
+<!-- Plugins css start-->
+<link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/date-picker.css')}}">
 <!-- Plugins css start-->
 <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/datatables.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/daterange-picker.css')}}">
@@ -40,8 +40,8 @@
 
 <!-- Jquery Datatable-->
 <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/jquery.dataTables.css')}}">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- latest jquery-->
 <script src="{{asset('admin_assets/js/jquery-3.2.1.min.js')}}"></script>
@@ -124,71 +124,78 @@
             <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span><span class="badge badge-pill badge-primary"></span></a>
 
             </li>
-            <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
-                <ul class="sidebar-submenu">
+            <li><a class="sidebar-header" href="#"><i data-feather="box"></i><span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.product')}}"><i data-feather="server"></i><span>Add Products</span></a></li>
-            <li><a class="sidebar-header" href="{{route('admin.manage_products')}}"><i data-feather="server"></i><span>Manage Products</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.manage_products')}}"><i data-feather="server"></i><span>Manage Products</span></a></li>
 
-                </ul>
-              </li>
+              </ul>
+            </li>
 
-              <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Services</span><i class="fa fa-angle-right pull-right"></i></a>
-                <ul class="sidebar-submenu">
+            <li><a class="sidebar-header" href="#"><i data-feather="align-justify"></i><span>Services</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.services')}}"><i data-feather="server"></i><span>Services</span></a></li>
-            <li><a class="sidebar-header" href="{{route('admin.manage_service')}}"><i data-feather="server"></i><span>Manage Services</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.manage_service')}}"><i data-feather="server"></i><span>Manage Services</span></a></li>
+              </ul>
+            </li>
 
-                </ul>
-              </li>
-            
-           
+
             <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Events Categories</span><i class="fa fa-angle-right pull-right"></i></a>
-                <ul class="sidebar-submenu">
+              <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('events_categories')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
-            <li><a class="sidebar-header" href="{{route('admin.manage_eventcategories')}}"><i data-feather="server"></i><span>Manage Event</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.manage_eventcategories')}}"><i data-feather="server"></i><span>Manage Event</span></a></li>
 
-                </ul>
-              </li>
+              </ul>
+            </li>
 
-              <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Business</span><i class="fa fa-angle-right pull-right"></i></a>
-                <ul class="sidebar-submenu">
+            <li><a class="sidebar-header" href="#"><i data-feather="folder-plus"></i><span>Business</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.business')}}"><i data-feather="server"></i><span>Add Business</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.manage_businessprofiles')}}"><i data-feather="server"></i><span>Manage Business</span></a></li>
 
-                </ul>
-              </li>
-              <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Business Categories</span><i class="fa fa-angle-right pull-right"></i></a>
-                <ul class="sidebar-submenu">
+              </ul>
+            </li>
+            <li><a class="sidebar-header" href="#"><i data-feather="command"></i><span>Business Categories</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.business_categories')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.manage_businesscategories')}}"><i data-feather="server"></i><span>Manage Categories</span></a></li>
 
-                </ul>
-              </li>
+              </ul>
+            </li>
 
-              <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Events</span><i class="fa fa-angle-right pull-right"></i></a>
-                <ul class="sidebar-submenu">
+            <li><a class="sidebar-header" href="#"><i data-feather="cloud"></i><span>Events</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.events')}}"><i data-feather="server"></i><span>Add Events</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.manage_events')}}"><i data-feather="server"></i><span>Manage Events</span></a></li>
 
-                </ul>
-              </li>
+              </ul>
+            </li>
 
-              <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Offers</span><i class="fa fa-angle-right pull-right"></i></a>
-                <ul class="sidebar-submenu">
+            <li><a class="sidebar-header" href="#"><i data-feather="sliders"></i><span>Offers</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.offers')}}"><i data-feather="server"></i><span>Add Offers</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.manage_offers')}}"><i data-feather="server"></i><span>Manage Offers</span></a></li>
 
-                </ul>
-              </li>
+              </ul>
+            </li>
 
-              <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>State</span><i class="fa fa-angle-right pull-right"></i></a>
-                <ul class="sidebar-submenu">
+            <li><a class="sidebar-header" href="#"><i data-feather="printer"></i><span>State</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.states')}}"><i data-feather="server"></i><span>Add States</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.manage_state')}}"><i data-feather="server"></i><span>Manage States</span></a></li>
 
-                </ul>
-              </li>
+              </ul>
+            </li>
             
-              <!-- <li><a class="sidebar-header" href="/manage_subjects" ><i data-feather="server"></i><span> Manage Subjects</span></a></li>
+              <!-- <li><a class="sidebar-header" href=""><i data-feather="file-text"></i><span>Postcode</span><i class="fa fa-angle-right pull-right"></i></a>
+                <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('admin.postcode')}}"><i data-feather="server"></i><span>Add Postcode</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.manage_postcode')}}"><i data-feather="server"></i><span>Manage States</span></a></li>
+
+                </ul>
+              </li> -->
+
+            <!-- <li><a class="sidebar-header" href="/manage_subjects" ><i data-feather="server"></i><span> Manage Subjects</span></a></li>
               <li><a class="sidebar-header" href="/add_question" ><i data-feather="server"></i><span> Questions</span></a></li>
             -->
           </ul>
@@ -246,8 +253,8 @@
   <script src="{{asset('admin_assets/js/dashboard/default.js')}}"></script>
   <script src="{{asset('admin_assets/js/notify/index.js')}}"></script>
   <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.js')}}"></script>
-    <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
-    <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
+  <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
+  <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
   <script src="{{asset('admin_assets/js/typeahead/handlebars.js')}}"></script>
   <script src="{{asset('admin_assets/js/typeahead/typeahead.bundle.js')}}"></script>
   <script src="{{asset('admin_assets/js/typeahead/typeahead.custom.js')}}"></script>

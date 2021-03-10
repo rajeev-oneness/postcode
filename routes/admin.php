@@ -153,6 +153,15 @@ Route::post('/update_states', 'StateController@updateStates')->name('admin.updat
 
 Route::post('/delete_states', 'StateController@deleteStates')->name('delete_states');
 
+//--------------------------------------------------------------Add PostCode Section-----------------------------------------------//
+Route::get('/postcode', 'PostalController@postcodeView')->name('admin.postcode');
+
+Route::post('/add_states','PostalController@addStates')->name('admin.add_states');
+
+//--------------------------------------------------------------Manage PostCode Section-----------------------------------------------//
+
+Route::get('/manage_postcode','PostalController@managePostcodeView')->name('admin.manage_postcode');
+
 
 //--------------------------------------------------------------Admin Logout Section-----------------------------------------------//
 Route::get('change_password', 'AdminController@changePassword')->name('admin.change_password');	
