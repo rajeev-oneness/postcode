@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth;
 namespace App\Http\Controllers;
 use Auth;
 use App\Http\Controllers\Controller;
-use App\Model\User;
+use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\Hash;
+use App\User;
 
 use App\Model\UserType;
 
@@ -80,5 +82,32 @@ class AdminController extends Controller
     {
         \Auth::logout();
         return redirect('/');
+    }
+
+    /**
+     * Go to  Business Profile.
+     *
+     * @return view
+     */
+    public function changePassword()
+    {
+        return view('/auth.passwords.change_password');
+    }
+       /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'old_pass' => ['required', new MatchOldPassword],
+            'new_pass' => ['required'],
+            'conf_pass' => ['same:new_pass'],
+        ]);
+   
+        $updatedpassdata = User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_pass)]);
+        // dd('Password change successfully.');
+        return redirect()->route('admin.logout');
     }
 }

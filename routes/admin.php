@@ -140,6 +140,9 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 
 //--------------------------------------------------------------Admin Logout Section-----------------------------------------------//
-	
+Route::get('change_password', 'AdminController@changePassword')->name('admin.change_password');	
+
+Route::post('update_password', 'AdminController@updatePassword')->name('admin.update_password');
+
 	  Route::get('/logout', 'AdminController@logout')->name('admin.logout');
 });
