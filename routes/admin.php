@@ -119,7 +119,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	Route::post('/delete_events', 'EventsController@deleteEvents')->name('delete_events');
 
-	//--------------------------------------------------------------Offers Section-----------------------------------------------//
+//--------------------------------------------------------------Offers Section-----------------------------------------------//
 
 	Route::get('/offers', 'OfferController@OfferView')->name('admin.offers');
 
@@ -128,7 +128,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 	Route::post('/ckeditor_upload', 'CKEditorController@ckeditor_upload')->name('ckeditor.upload');
 
 
-	//--------------------------------------------------------------Manage Offers Section-----------------------------------------------//
+//--------------------------------------------------------------Manage Offers Section-----------------------------------------------//
 
 	Route::get('/manage_offers','OfferController@manageOffers')->name('admin.manage_offers');
 
@@ -137,6 +137,21 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 	Route::post('/update_offers', 'OfferController@updateOffers')->name('admin.update_offers');
 
 	Route::post('/delete_offers', 'OfferController@deleteOffers')->name('delete_offers');
+
+//--------------------------------------------------------------Add State Section-----------------------------------------------//
+Route::get('/states', 'StateController@statesView')->name('admin.states');
+
+Route::post('/add_states','StateController@addStates')->name('admin.add_states');
+
+//--------------------------------------------------------------Manage State Section-----------------------------------------------//
+
+Route::get('/manage_state','StateController@manageStateView')->name('admin.manage_state');
+
+Route::post('/edit_states', 'StateController@editStates')->name('edit_states');
+
+Route::post('/update_states', 'StateController@updateStates')->name('admin.update_states');
+
+Route::post('/delete_states', 'StateController@deleteStates')->name('delete_states');
 
 
 //--------------------------------------------------------------Admin Logout Section-----------------------------------------------//
