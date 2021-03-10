@@ -25,11 +25,6 @@ Route::post('/login_get', 'AdminController@loginGet')->name('admin.login');
 
 //---------------------------------------------------------------Admin Dashboard-----------------------------------------------//
 
-
-// Route::get('/admin', function () {
-//     return view('portal.dashboard');
-// })->name('admin.dashboard')->middleware(['auth', 'admin']);
-
 Route::get('/admin','AdminController@dashboardView')->name('admin.dashboard')->middleware(['auth', 'admin']);
 
 
