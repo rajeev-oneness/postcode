@@ -187,13 +187,6 @@
               </ul>
             </li>
             
-              <!-- <li><a class="sidebar-header" href=""><i data-feather="file-text"></i><span>Postcode</span><i class="fa fa-angle-right pull-right"></i></a>
-                <ul class="sidebar-submenu">
-                <li><a class="sidebar-header" href="{{route('admin.postcode')}}"><i data-feather="server"></i><span>Add Postcode</span></a></li>
-                <li><a class="sidebar-header" href="{{route('admin.manage_postcode')}}"><i data-feather="server"></i><span>Manage States</span></a></li>
-
-                </ul>
-              </li> -->
 
             <!-- <li><a class="sidebar-header" href="/manage_subjects" ><i data-feather="server"></i><span> Manage Subjects</span></a></li>
               <li><a class="sidebar-header" href="/add_question" ><i data-feather="server"></i><span> Questions</span></a></li>

@@ -7,6 +7,7 @@ use App\Model\Business;
 use App\Model\BusinessCategory;
 use App\Model\Product;
 use App\Model\Service;
+use App\Model\State;
 use Illuminate\Support\Facades\Auth;
 use Validator,Redirect,Response;
 
@@ -23,8 +24,9 @@ class BusinessController extends Controller
         $businessData = BusinessCategory::all();
         $producData = Product::all();
         $servicData = Service::all();
+        $stateData = State::all();
 
-        return view('/portal.businessprofile.business_profiles', compact('businessData', 'producData', 'servicData'));
+        return view('/portal.businessprofile.business_profiles', compact('businessData', 'producData', 'servicData', 'stateData'));
     }
 
     /**
@@ -39,6 +41,7 @@ class BusinessController extends Controller
             'name' => 'required',
             'description' => 'required|min:4|max:255',
             'address' => 'required|min:4|max:255',
+            'pin_code' => 'required|max:6',
             'mobile' => 'required',
             'facebook_link' => 'required',
             'instagram_link' => 'required',
@@ -66,6 +69,8 @@ class BusinessController extends Controller
     $Business->closing_hour = $request->closing_hour;  
     $Business->services = $request->services;  
     $Business->products = $request->products;  
+    $Business->state_id = $request->state_id;  
+    $Business->pin_code = $request->pin_code;  
     $Business->description = $request->description;  
     $Business->facebook_link = $request->facebook_link;  
     $Business->instagram_link = $request->instagram_link;  
@@ -168,9 +173,10 @@ class BusinessController extends Controller
         $businessCatData = BusinessCategory::all();
         $productsData = Product::all();
         $servicessData = Service::all();
+         $stateData = State::all();
         $lead_edit_id = $request->lead_edit_id;
         $businessprofile_data = Business::where('id', $lead_edit_id)->first();
-        return view('portal.businessprofile.edit_businessprofile', compact('businessprofile_data', 'businessCatData', 'productsData', 'servicessData'));
+        return view('portal.businessprofile.edit_businessprofile', compact('businessprofile_data', 'businessCatData', 'productsData', 'servicessData', 'stateData'));
     }
 
     /**

@@ -238,6 +238,31 @@
                         </div>
                        
                       </div>
+
+                      <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                      <div class="form-group">
+                        <label for="validationCustom05">State Name</label>
+                        <select id="state_id" name="state_id" class="form-control" required="">
+                          <option value="{{ old('state_id') }}">Select</option>
+                          @foreach($stateData as $stateName)
+                          <option value="{{$stateName->id}}" <?php echo $businessprofile_data->state_id ==  $stateName->id ? "selected" : ""; ?>>{{$stateName->name}}</option>
+                          @endforeach
+                        </select>
+                        @error('state_id')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
+                      </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label for="validationCustom05">Pin Code</label>
+                      <input class="form-control" id="pin_code" value="{{ $businessprofile_data->pin_code }}" name="pin_code" type="text" placeholder="Enter Pin Code" required="">
+                      @error('facebook_link')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
+                    </div>
+                 
+                  </div>
                     
                       <button class="btn btn-primary" id="submit_business" name="submit_business" type="submit">Submit</button>
                     </form>

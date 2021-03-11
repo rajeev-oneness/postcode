@@ -19,6 +19,8 @@ class CreateBusinessesTable extends Migration
             $table->bigInteger('userId');
             $table->string('name');
             $table->string('address');
+            $table->integer('state_id');
+            $table->integer('pin_code');
             $table->string('image');
             $table->string('mobile',20);
             $table->string('open_hour',10);
