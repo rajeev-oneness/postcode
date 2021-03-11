@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 10, 2021 at 09:31 AM
+-- Generation Time: Mar 11, 2021 at 08:32 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -50,6 +50,8 @@ CREATE TABLE `businesses` (
   `userId` bigint(20) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state_id` int(11) NOT NULL,
+  `pin_code` int(11) NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `mobile` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `open_hour` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -64,16 +66,18 @@ CREATE TABLE `businesses` (
   `linkedin_link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `latitude` int(11) DEFAULT NULL,
+  `longitude` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `businesses`
 --
 
-INSERT INTO `businesses` (`id`, `business_categoryId`, `userId`, `name`, `address`, `image`, `mobile`, `open_hour`, `closing_hour`, `services`, `products`, `description`, `facebook_link`, `instagram_link`, `twitter_link`, `youtube_link`, `linkedin_link`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 'Ram Fruit Shop', 'Motilal Colony', 'uploads/1615368130.jpg', '7911063898', '11', '12', '1', '1', 'OK job', 'https://www.amazon.in/', 'https://www.amazon.in/', 'https://www.amazon.in/', 'https://www.amazon.in/', 'https://www.amazon.in/', NULL, '2021-03-10 09:22:10', '2021-03-10 09:22:10'),
-(2, 1, 1, 'Ram Kirana Sita', 'kb sarani', 'uploads/1615368203.jpg', '7554219808', '11', '12', '1', '1', 'ok kol', 'https://www.amazon.in/', 'https://www.amazon.in/', 'https://www.amazon.in/', 'https://www.amazon.in/', 'https://www.amazon.in/', NULL, '2021-03-10 09:23:23', '2021-03-10 09:23:23');
+INSERT INTO `businesses` (`id`, `business_categoryId`, `userId`, `name`, `address`, `state_id`, `pin_code`, `image`, `mobile`, `open_hour`, `closing_hour`, `services`, `products`, `description`, `facebook_link`, `instagram_link`, `twitter_link`, `youtube_link`, `linkedin_link`, `deleted_at`, `created_at`, `updated_at`, `latitude`, `longitude`) VALUES
+(1, 2, 1, 'Sai Store', 'kb saranisad', 1, 700080, 'uploads/1615450930.jpg', '5478965874', '11', '12', '1', '1', 'OK kol', 'https://www.amazon.in/', 'https://www.amazon.in/', 'https://www.amazon.in/', 'https://www.amazon.in/', 'https://www.amazon.in/', NULL, '2021-03-11 08:21:38', '2021-03-11 08:22:10', NULL, NULL),
+(2, 1, 1, 'Ram Kirana', 'VILL-LODIPUR', 1, 804407, 'uploads/1615451336.jpg', '2204219808', '11', '12', '1', '1', 'OK cool', 'https://www.amazon.in/', 'https://www.amazon.in/', 'https://www.amazon.in/', 'https://www.amazon.in/', 'https://www.amazon.in/', NULL, '2021-03-11 08:28:56', '2021-03-11 08:28:56', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -94,8 +98,8 @@ CREATE TABLE `business_categories` (
 --
 
 INSERT INTO `business_categories` (`id`, `name`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Grocery', NULL, '2021-03-10 09:10:23', '2021-03-10 09:10:23'),
-(2, 'Household', NULL, '2021-03-10 09:10:36', '2021-03-10 09:10:36');
+(1, 'Grocery', NULL, '2021-03-11 08:03:54', '2021-03-11 08:03:54'),
+(2, 'House Stores', NULL, '2021-03-11 08:05:13', '2021-03-11 08:05:36');
 
 -- --------------------------------------------------------
 
@@ -146,7 +150,7 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `event_category_id`, `business_id`, `name`, `details`, `image`, `address`, `start`, `end`, `frequency`, `age_group`, `price`, `booking_details`, `contact_details`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 'Happy Hour', 'Bus', 'uploads/1615368469.jpg', 'Mani road murarpur', '2021-03-11', '2021-03-14', 50, 18, 599.00, 'Westre', '7898547851', NULL, '2021-03-10 09:25:05', '2021-03-10 09:27:49');
+(1, 1, 1, 'Night Sales', 'Making Tea', 'uploads/1615451023.jpg', 'VILL-LODIPUR', '2021-03-21', '2021-03-26', 50, 18, 200.00, 'Westre', '7898547851', NULL, '2021-03-11 08:23:02', '2021-03-11 08:23:43');
 
 -- --------------------------------------------------------
 
@@ -167,7 +171,7 @@ CREATE TABLE `event_categories` (
 --
 
 INSERT INTO `event_categories` (`id`, `name`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Weekend Sale', NULL, '2021-03-10 09:10:59', '2021-03-10 09:10:59');
+(1, 'Night Roam', NULL, '2021-03-11 08:05:55', '2021-03-11 08:06:10');
 
 -- --------------------------------------------------------
 
@@ -186,27 +190,28 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2016_06_01_000001_create_oauth_auth_codes_table', 1),
-(4, '2016_06_01_000002_create_oauth_access_tokens_table', 1),
-(5, '2016_06_01_000003_create_oauth_refresh_tokens_table', 1),
-(6, '2016_06_01_000004_create_oauth_clients_table', 1),
-(7, '2016_06_01_000005_create_oauth_personal_access_clients_table', 1),
-(8, '2021_02_26_063601_create_user_types_table', 1),
-(9, '2021_02_26_064033_create_addresses_table', 1),
-(10, '2021_02_26_064254_create_contacts_table', 1),
-(11, '2021_02_26_064405_create_services_table', 1),
-(12, '2021_02_26_064509_create_business_categories_table', 1),
-(13, '2021_02_26_064537_create_businesses_table', 1),
-(14, '2021_02_26_064912_create_products_table', 1),
-(15, '2021_02_26_065448_create_ratings_table', 1),
-(16, '2021_02_26_123031_create_offers_table', 1),
-(17, '2021_02_26_123622_create_events_table', 1),
-(18, '2021_02_26_123640_create_event_categories_table', 1),
-(19, '2021_03_08_014035_create_testimonials_table', 1),
-(20, '2021_03_10_140331_create_states_table', 1),
-(21, '2021_03_10_140408_create_postal_codes_table', 1);
+(21, '2021_03_10_140408_create_postal_codes_table', 1),
+(43, '2014_10_12_000000_create_users_table', 2),
+(44, '2014_10_12_100000_create_password_resets_table', 2),
+(45, '2016_06_01_000001_create_oauth_auth_codes_table', 2),
+(46, '2016_06_01_000002_create_oauth_access_tokens_table', 2),
+(47, '2016_06_01_000003_create_oauth_refresh_tokens_table', 2),
+(48, '2016_06_01_000004_create_oauth_clients_table', 2),
+(49, '2016_06_01_000005_create_oauth_personal_access_clients_table', 2),
+(50, '2021_02_26_063601_create_user_types_table', 2),
+(51, '2021_02_26_064033_create_addresses_table', 2),
+(52, '2021_02_26_064254_create_contacts_table', 2),
+(53, '2021_02_26_064405_create_services_table', 2),
+(54, '2021_02_26_064509_create_business_categories_table', 2),
+(55, '2021_02_26_064537_create_businesses_table', 2),
+(56, '2021_02_26_064912_create_products_table', 2),
+(57, '2021_02_26_065448_create_ratings_table', 2),
+(58, '2021_02_26_123031_create_offers_table', 2),
+(59, '2021_02_26_123622_create_events_table', 2),
+(60, '2021_02_26_123640_create_event_categories_table', 2),
+(61, '2021_03_08_014035_create_testimonials_table', 2),
+(62, '2021_03_10_140331_create_states_table', 2),
+(63, '2021_03_11_020111_update_business_table', 2);
 
 -- --------------------------------------------------------
 
@@ -313,7 +318,7 @@ CREATE TABLE `offers` (
 --
 
 INSERT INTO `offers` (`id`, `businessId`, `image`, `title`, `short_description`, `description`, `promo_code`, `price`, `expire_date`, `howcanredeem`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'uploads/1615368553.jpg', 'Flash Deal', 'Buy Anything at flat', 'OK cool', 'Flash2021', 200.00, '2021-03-26', '<p>\r\n	<a href=\"http://127.0.0.1:8000/uploads/ckupload/10032021020305up36468.jpeg\">http://127.0.0.1:8000/uploads/ckupload/10032021020305up36468.jpeg</a>\r\n</p>', NULL, '2021-03-10 09:29:13', '2021-03-10 09:29:13');
+(1, 1, 'uploads/1615451084.jpg', 'Flash Deal', 'Buy Anything at flat', 'Product', 'Flash2021', 200.00, '2021-03-31', '<p>\r\n	<a href=\"http://127.0.0.1:8000/uploads/ckupload/11032021010336up64285.jpg\">http://127.0.0.1:8000/uploads/ckupload/11032021010336up64285.jpg</a>\r\n</p>', NULL, '2021-03-11 08:24:44', '2021-03-11 08:24:44');
 
 -- --------------------------------------------------------
 
@@ -369,7 +374,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `businessId`, `name`, `details`, `price`, `image`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Flour', 'Pack of 2', 200.00, 'uploads/1615367910.jpg', NULL, '2021-03-10 09:15:50', '2021-03-10 09:18:30');
+(1, 2, 'Rice', 'Mini Gates', 200.00, 'uploads/1615450034.jpg', NULL, '2021-03-11 08:06:42', '2021-03-11 08:07:14');
 
 -- --------------------------------------------------------
 
@@ -410,7 +415,7 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`id`, `businessId`, `name`, `details`, `image`, `price`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Development', 'Website Designing', 'uploads/1615367872.jpg', 0.00, NULL, '2021-03-10 09:16:53', '2021-03-10 09:17:52');
+(1, 2, 'Developments', 'Website Designing', 'uploads/1615450216.jpg', 0.00, NULL, '2021-03-11 08:07:49', '2021-03-11 08:10:16');
 
 -- --------------------------------------------------------
 
@@ -426,6 +431,13 @@ CREATE TABLE `states` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `states`
+--
+
+INSERT INTO `states` (`id`, `name`, `code`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 'New South Wales', '3094', NULL, '2021-03-11 08:20:03', '2021-03-11 08:20:03');
 
 -- --------------------------------------------------------
 
@@ -477,8 +489,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `mobile`, `gender`, `marital`, `dob`, `image`, `anniversary`, `userType`, `subscribed`, `alternate_mobile`, `status`, `remember_token`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Animesh', 'animesh@gmail.com', NULL, '$2y$12$6uuZ.0G68VroaV4QO4afAeUogZI07lYpg9xpqwhOwqPQF.cso/wii', '', '', '', '2017-09-01 14:37:39', '', '2020-11-04', 1, 1, '', 1, NULL, NULL, '2021-03-10 09:09:32', '2021-03-10 09:09:32'),
-(2, 'Sagar', 'user@gmail.com', NULL, '$2y$12$6uuZ.0G68VroaV4QO4afAeUogZI07lYpg9xpqwhOwqPQF.cso/wii', '', '', '', '2019-02-01 14:37:39', '', '2021-01-01', 2, 1, '', 1, NULL, NULL, '2021-03-10 09:09:32', '2021-03-10 09:09:32');
+(1, 'Animesh Raj', 'animesh@gmail.com', NULL, '$2y$10$VMgEcNmDTu.Y8uH7Ef7i.OtF2C9akviBK21om6OshmUOULCfuFdii', '', '', '', '2018-10-02 13:31:26', '', '2021-03-01', 1, 1, '', 1, NULL, NULL, '2021-03-11 08:02:49', '2021-03-11 08:31:47'),
+(2, 'Sagar', 'user@gmail.com', NULL, '$2y$12$rTpgeshCD3E8tMclOG/.heeWwK.87sjNjqAFbJdMs8JyEL3SlH9fC', '', '', '', '2019-09-02 13:31:26', '', '2021-03-02', 2, 1, '', 1, NULL, NULL, '2021-03-11 08:02:49', '2021-03-11 08:02:49');
 
 -- --------------------------------------------------------
 
@@ -499,8 +511,8 @@ CREATE TABLE `user_types` (
 --
 
 INSERT INTO `user_types` (`id`, `name`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'admin', NULL, '2021-03-10 09:04:43', '2021-03-10 09:04:43'),
-(2, 'user', NULL, '2021-03-10 09:04:43', '2021-03-10 09:04:43');
+(1, 'admin', NULL, '2021-03-11 07:59:54', '2021-03-11 07:59:54'),
+(2, 'user', NULL, '2021-03-11 07:59:54', '2021-03-11 07:59:54');
 
 --
 -- Indexes for dumped tables
@@ -687,7 +699,7 @@ ALTER TABLE `event_categories`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `oauth_clients`
@@ -735,7 +747,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `states`
 --
 ALTER TABLE `states`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `testimonials`

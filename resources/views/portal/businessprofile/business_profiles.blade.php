@@ -88,20 +88,30 @@
 					@enderror
                     </div>
 
+
                     <div class="col-md-4 mb-3">
-                      <label for="validationCustom05">Mobile</label>
-                      <input class="form-control" id="mobile" value="{{ old('mobile') }}" name="mobile" type="text" placeholder="Mobile" required="">
-                      @error('mobile')
+                      <div class="form-group">
+                        <label for="validationCustom05">State Name</label>
+                        <select id="state_id" name="state_id" class="form-control" required="">
+                          <option value="{{ old('state_id') }}">Select</option>
+                          @foreach($stateData as $stateName)
+                          <option value="{{$stateName->id}}">{{$stateName->name}}</option>
+                          @endforeach
+                        </select>
+                        @error('state_id')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
+                      </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label for="validationCustom05">Pin Code</label>
+                      <input class="form-control" id="pin_code" value="{{ old('pin_code') }}" name="pin_code" type="text" placeholder="Enter Pin Code" required="">
+                      @error('facebook_link')
 					<span class="text-danger">{{ $message }}</span>
 					@enderror
                     </div>
-                    <div class="col-md-4 mb-3">
-                      <label for="validationCustom05">Opening Hour</label>
-                      <input class="form-control" id="open_hour" value="{{ old('open_hour') }}" name="open_hour" type="text" placeholder="Opening Hour" required="">
-                      @error('open_hour')
-					<span class="text-danger">{{ $message }}</span>
-					@enderror
-                    </div>
+
+                   
 
                   </div>
 
@@ -152,20 +162,21 @@
 					@enderror
                       </div>
                     </div>
+
                     <div class="col-md-4 mb-3">
-                      <label for="validationCustom05">Facebook link</label>
-                      <input class="form-control" id="facebook_link" value="{{ old('facebook_link') }}" name="facebook_link" type="text" placeholder="Facebook link" required="">
-                      @error('facebook_link')
+                      <label for="validationCustom05">Mobile</label>
+                      <input class="form-control" id="mobile" value="{{ old('mobile') }}" name="mobile" type="text" placeholder="Mobile" required="">
+                      @error('mobile')
 					<span class="text-danger">{{ $message }}</span>
 					@enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                      <label for="validationCustom05">Instagram link</label>
-                      <input class="form-control" id="instagram_link" value="{{ old('instagram_link') }}" name="instagram_link" type="text" placeholder="Instagram link" required="">
-                      @error('instagram_link')
+                      <label for="validationCustom05">Opening Hour</label>
+                      <input class="form-control" id="open_hour" value="{{ old('open_hour') }}" name="open_hour" type="text" placeholder="Opening Hour" required="">
+                      @error('open_hour')
 					<span class="text-danger">{{ $message }}</span>
 					@enderror
-                    </div>
+                    </div>              
                   </div>
 
                   <div class="form-row">
@@ -195,24 +206,17 @@
                   </div>
 
                   <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                      <div class="form-group">
-                        <label for="validationCustom05">State Name</label>
-                        <select id="state_id" name="state_id" class="form-control" required="">
-                          <option value="{{ old('state_id') }}">Select</option>
-                          @foreach($stateData as $stateName)
-                          <option value="{{$stateName->id}}">{{$stateName->name}}</option>
-                          @endforeach
-                        </select>
-                        @error('state_id')
+                  <div class="col-md-4 mb-3">
+                      <label for="validationCustom05">Facebook link</label>
+                      <input class="form-control" id="facebook_link" value="{{ old('facebook_link') }}" name="facebook_link" type="text" placeholder="Facebook link" required="">
+                      @error('facebook_link')
 					<span class="text-danger">{{ $message }}</span>
 					@enderror
-                      </div>
                     </div>
                     <div class="col-md-4 mb-3">
-                      <label for="validationCustom05">Pin Code</label>
-                      <input class="form-control" id="pin_code" value="{{ old('pin_code') }}" name="pin_code" type="text" placeholder="Enter Pin Code" required="">
-                      @error('facebook_link')
+                      <label for="validationCustom05">Instagram link</label>
+                      <input class="form-control" id="instagram_link" value="{{ old('instagram_link') }}" name="instagram_link" type="text" placeholder="Instagram link" required="">
+                      @error('instagram_link')
 					<span class="text-danger">{{ $message }}</span>
 					@enderror
                     </div>

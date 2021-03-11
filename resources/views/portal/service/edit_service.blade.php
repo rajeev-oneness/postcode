@@ -150,7 +150,7 @@
                         <div class="btn btn-mdb-color btn-rounded">
                           <img src="/{{ $editedservice_data->image }}" alt="people" class="" width="56" style="border:1px solid #004694;height:100px;width:200px;margin-bottom:5%;" id="img-upload">
 
-                          <input type="file" id="image" name="image" style="margin-left: 12%;">
+                          <input class="form-control offrimg" type="file" id="image" name="image" required="">
                         </div>
                       </div>
                     </div>
