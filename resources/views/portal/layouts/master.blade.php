@@ -78,7 +78,7 @@
 
 
             <li class="onhover-dropdown">
-              <div class="media align-items-center"><img class="align-self-center pull-right img-50 rounded-circle" src="{{asset('admin_assets/images/dashboard/user.png')}}" alt="header-user">
+              <div class="media align-items-center"><img class="align-self-center pull-right img-50 rounded-circle" src="{{asset('admin_assets/images/user/user.png')}}" alt="header-user">
                 <div class="dotted-animation"><span class="animate-circle"></span><span class="main-circle"></span></div>
               </div>
               <ul class="profile-dropdown onhover-show-div p-20">
@@ -113,7 +113,7 @@
         </div>
         <div class="sidebar custom-scrollbar">
           <div class="sidebar-user text-center">
-            <div><img class="img-60 rounded-circle" src="{{asset('admin_assets/images/user/1.jpg')}}" alt="#">
+            <div><img class="img-60 rounded-circle" src="{{asset('admin_assets/images/user/user.png')}}" alt="#">
               <!-- <div class="profile-edit"><a href="edit-profile.html"><i data-feather="edit"></i></a></div> -->
             </div>
             <h6 class="mt-3 f-14"></h6>
