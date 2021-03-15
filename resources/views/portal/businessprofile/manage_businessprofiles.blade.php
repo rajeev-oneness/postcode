@@ -39,12 +39,12 @@
                                 <table class="display" id="businessprofile_mnanage">
                                     <thead>
                                         <tr>
-                                            <th width="40px;">Sl No.</th>
-                                            <th>Business Category</th>
+                                            <th width="46px;">Sl No.</th>
+                                            <th width="149px;">Business Category</th>
                                             <th>Name</th>
-                                            <th width="40px;">Address</th>
+                                            <th width="90px;">Address</th>
                                             <th width="40px;">Image</th>
-                                            <th width="152px;">Action</th>
+                                            <th width="197px;">Action</th>
 
                                         </tr>
                                     </thead>

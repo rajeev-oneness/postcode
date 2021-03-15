@@ -80,11 +80,7 @@ body{background-color:rgba(246,246,246,0.6);font-size:14px;overflow-x:hidden;fon
   .toggel-none {
     display: none;
   }
-  .flowid {
-    width: 99%;
-    padding-right: 15px;
-    padding-left: 21%;
-  }
+  
   .busiprofimg {
     border: 1px solid #004694;
     height: 80px;
@@ -149,4 +145,80 @@ body{background-color:rgba(246,246,246,0.6);font-size:14px;overflow-x:hidden;fon
   .keypass {
     width:108% !important;
   }
- 
+
+  .flowid {
+    width: 99%;
+padding-right: 15px;
+padding-left: 21%;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 26px;
+  height: 15px;
+  margin-bottom: -3px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 10px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #2196F3;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(9px);
+  -ms-transform: translateX(9px);
+  transform: translateX(9px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.toggel-block {
+  display: block !important;
+}
+
+.toggel-none {
+  display: none;
+}
+.fa-trash {
+  margin-left: 25px !important;
+}

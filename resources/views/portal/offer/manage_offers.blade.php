@@ -10,11 +10,7 @@
 
     @extends('portal.layouts.master')
     @section('content')
-    <style>
-    .fa-trash {
-        margin-left: 25px;
-    }
-    </style>
+   
     <!-- Right sidebar Ends-->
     <div class="page-body">
         <div class="container-fluid">
