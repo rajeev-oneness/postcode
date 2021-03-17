@@ -19,10 +19,10 @@
     <section class="banner_wraper">
         <div class="container">
             <div class="menu_wrap">
-                <a href="index.html" class="logo_icon"><img src="{{asset('user_assets/image/logo.png')}}"></a>
+                <a href="{{route('user.welcome')}}" class="logo_icon"><img src="{{asset('user_assets/image/logo.png')}}"></a>
                 <ul class="menu_icon">
                     <li>
-                        <a href="#">
+                        <a href="{{route('adminsignup')}}">
                             <img src="{{asset('user_assets/image/log-icon.png')}}">
                             Sign up
                         </a>
