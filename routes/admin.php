@@ -168,5 +168,6 @@ Route::get('change_password', 'AdminController@changePassword')->name('admin.cha
 
 Route::post('update_password', 'AdminController@updatePassword')->name('admin.update_password');
 
-	  Route::get('/logout', 'AdminController@logout')->name('admin.logout');
+Route::get('/logout', 'AdminController@logout')->name('admin.logout');
+
 });

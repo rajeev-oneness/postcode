@@ -12,16 +12,27 @@
 */
 
 
-Route::get('/welcome', function () {
-    return view('welcome');
+Route::get('/', function () {
+    return view('user.index');
 })->name('user.welcome');
+
+Route::get('/signup', 'UserController@Signup')->name('adminsignup');
+
+Route::post('/add_userbusiness','UserController@addUserBusiness')->name('admin.add_userbusiness');
+
+Route::get('/thankyou', function () {
+    return view('user.thankyou');
+})->name('user.thankyou');
+
+
 
 //---------------------------------------------------------------Admin Login-----------------------------------------------//
 
-Route::get('/', 'AdminController@Login')->name('adminlogin');
+Route::get('/admilogin', 'AdminController@Login')->name('adminlogin');
 
 
 Route::post('/login_get', 'AdminController@loginGet')->name('admin.login');
+
 
 //---------------------------------------------------------------Admin Dashboard-----------------------------------------------//
 

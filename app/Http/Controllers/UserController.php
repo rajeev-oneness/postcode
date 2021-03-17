@@ -5,10 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Rating;
 use App\Model\Contact;
+use App\Model\Business;
 use App\Model\Testimonial;
+use Mail;
+use Validator,Redirect,Response;
 
 class UserController extends Controller
 {
+
+    /**
+     * Go to  Business Profile.
+     *
+     * @return view
+     */
+    public function Signup()
+    {      
+        return view('/user.signup');
+    }
   /**
      * Customer Ratings Save
      *    
@@ -100,4 +113,91 @@ class UserController extends Controller
         'message' => "Ratings Saved Successfully"
        ]);
     }
+
+     /**
+     * Go to Add Business.
+     *
+     * @return json
+     */
+    public function addUserBusiness(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'mobile' => 'required',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',           
+        ]);
+       $validator->validate();
+          
+
+    $fileName = time().'.'.$request->image->extension(); 
+    $request->image->move(public_path('uploads/'), $fileName);
+    $busiprofileimg ='uploads/'.$fileName;
+
+    $password = 123456;
+
+    $password1 = \Hash::make($password);
+
+    $servicesid =1;
+    $state_id=1;
+    $address ='New Jersey';
+    $pin_code=700058;
+    $business_categoryId=1;
+    $closing_hour=10;
+    $productId=1;
+    $description='Products Under One Roof';
+    $facebook_link='https://www.amazon.in/';
+    $instagram_link='https://www.amazon.in/';
+    $twitter_link='https://www.amazon.in/';
+    $youtube_link='https://www.amazon.in/';
+    $linkedin_link='https://www.amazon.in/';
+
+    $name = $request->name;
+            $email = $request->email;
+
+    $Business = new Business();        
+    $Business->email = $email;
+    $Business->abn = $request->abn;
+    $Business->password = $password1;
+    $Business->company_website = $request->company_website;
+    $Business->image = $busiprofileimg;
+    $Business->name = $name;
+    $Business->address = $address;
+    $Business->mobile = $request->mobile;  
+    $Business->open_hour = $request->open_hour;  
+    $Business->closing_hour = $closing_hour;  
+    $Business->services = $servicesid; 
+    $Business->products = $productId; 
+    $Business->state_id = $state_id;  
+    $Business->business_categoryId = $business_categoryId;  
+    $Business->pin_code = $pin_code;  
+    $Business->description = $description;  
+    $Business->facebook_link = $facebook_link;  
+    $Business->instagram_link = $instagram_link;  
+    $Business->twitter_link = $twitter_link; 
+    $Business->youtube_link = $youtube_link; 
+    $Business->linkedin_link = $linkedin_link;     
+    
+    // echo json_encode($Business);die;
+
+    $Business->save();
+
+    // $deal= $Business->id;
+
+    $businessname = $Business->name;
+    $businessemail = $Business->email;
+
+    // echo json_encode($Businessemail);die;
+    \Mail::send('emails/mail', array('name'=>$name,'email'=>$email,'password'=>$password),function($message) use ($name,$email,$password) {
+        $message->to($email,$name)->subject('Welcome To PostCode');
+        $message->from('sagaranimesh3317@gmail.com','Post Code');
+                        });
+
+    return view('user.thankyou');
+
+    
+
+
+}
+
+
 }

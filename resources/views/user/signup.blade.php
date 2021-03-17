@@ -12,9 +12,6 @@
     <link rel="stylesheet" type="text/css" href="{{asset('user_assets/css/slick.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('user_assets/css/slick-theme.css')}}"/>
 
-    <!-- latest jquery-->
-<script src="{{asset('user_assets/js/jquery-3.2.1.min.js')}}"></script>
-
     <title>Our Postcode</title>
   </head>
   <body>
@@ -22,10 +19,10 @@
     <section class="banner_wraper">
         <div class="container">
             <div class="menu_wrap">
-                <a href="{{route('user.welcome')}}" class="logo_icon"><img src="{{asset('user_assets/image/logo.png')}}"></a>
+                <a href="index.html" class="logo_icon"><img src="{{asset('user_assets/image/logo.png')}}"></a>
                 <ul class="menu_icon">
                     <li>
-                        <a href="{{route('adminsignup')}}">
+                        <a href="#">
                             <img src="{{asset('user_assets/image/log-icon.png')}}">
                             Sign up
                         </a>
@@ -38,21 +35,82 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-12">
-                <div class="banner_inner">
-                    <h1 class="banner_title font-bebas text-center text-white">OUR POSTCODE</h1>
-                    <h2 class="banner_title2 text-center text-white">Where Local Matters</h2>
-                    <p class="banner_content text-center text-white">Australia’s Newest Website to Help Local Businesses Promote <br>Achieve Marketing Success</p>
-                    <div class="btn_grp text-center">
-                        <a href="{{route('adminsignup')}}" class="orange_btn">SIGN UP MANUALLY</a>
-                        <a href="{{route('adminsignup')}}" class="blue_btn"><img src="{{asset('user_assets/image/Google-mybusiness-1.png')}}"> SIGN UP VIA GOOGLE MY BUSINESS</a>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="banner_inner">
+                        <h2 class="banner_title font-bebas text-white">OUR POSTCODE</h2>
+                        <h2 class="banner_title2 text-white">Where Local Matters</h2>
+                        <p class="banner_content text-white">Australia’s Newest Website to Help Local Businesses Promote Achieve Marketing Success</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form_wrapper">
+                        <img src="{{asset('user_assets/image/form-border.png')}}" class="form_bg">
+                        <form>
+                            <div class="search_wrap">
+                                <input type="search" name="" placeholder="Search business via keyword...">
+                                <button class="search_btn"><img src="{{asset('user_assets/image/search.png')}}"></button>
+                            </div>
+                        </form>
+                            <a href="#" class="buisness_signup"><img src="{{asset('user_assets/image/Google-mybusiness-1.png')}}">sign up via google my business</a>
+                           
+                            <form class="needs-validation" method="post" name="" action="{{route('admin.add_userbusiness')}}" enctype="multipart/form-data" novalidate>
+                                {{csrf_field()}}
+                            <div class="sign_in_form">
+                                <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">
+                                <label>BUSINESS NAME</label>
+                                <input type="text" name="name" id="name"  class="textbox">
+                               
+                            </div>
+                            <div class="sign_in_form">
+                                <img src="{{asset('user_assets/image/abn.png')}}">
+                                <label>ABN</label>
+                                <input type="text" name="abn" id="abn"  class="textbox">
+                                
+                            </div>
+                            <div class="sign_in_form">
+                                <img src="{{asset('user_assets/image/team.png')}}">
+                                <label>COMPANY WEBSITE</label>
+                                <input type="text" name="company_website" id="company_website" class="textbox">
+                             
+                            </div>
+                            <div class="sign_in_form">
+                                <img src="{{asset('user_assets/image/email-icon.png')}}">
+                                <label>EMAIL ADDRESS</label>
+                                <input type="email" name="email" id="email"  class="textbox">
+                              
+                            </div>
+                            <div class="sign_in_form">
+                                <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">
+                                <label>PHONE NO.</label>
+                                <input type="text" name="mobile" id="mobile"  class="textbox">
+                               
+                            </div>
+                            <div class="sign_in_form">
+                                <img src="{{asset('user_assets/image/upload.png')}}">
+                                <label>UPLOAD AN IMAGE</label>
+                                <input type="file" name="image" id="image"  class="textbox">
+                              
+                                <button class="img_upload">BROWSE</button>
+                            </div>
+                            <div class="sign_in_form">
+                                <img src="{{asset('user_assets/image/clock.png')}}">
+                                <label>opening hours</label>
+                                <input type="text" name="open_hour"  id="open_hour" class="textbox">
+                                
+                            </div>
+                            <div class="form_btn-grp">
+                                <a href="{{route('user.welcome')}}" class="back_btn">back</a>
+                                <input type="submit" class="form_submit" name="" value="SUBMIT">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="feature_wrapper">
+    <section class="feature_wrapper feature_wrapper-mod">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8 text-center">
@@ -111,20 +169,22 @@
         </div>
     </section>
 
-    <script>
-$(document).ready(function (){
-
-});
-
-    </script>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="{{asset('user_assets/js/bootstrap.min.js')}}"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="{{asset('user_assets/js/slick.min.js')}}"></script>
+    <script>
+        $('.textbox').on('keyup keydown keypress change paste', function() {   
+            if ($(this).val() == '') { 
+                $(this).parent().removeClass('label_up'); 
+            } else {
+                $(this).parent().addClass('label_up'); 
+            }
+        });
+    </script>
   </body>
 </html>
