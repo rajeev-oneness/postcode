@@ -60,7 +60,9 @@
                                 <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">
                                 <label>BUSINESS NAME</label>
                                 <input type="text" name="name" id="name"  class="textbox">
-                               
+                                @error('name')
+                          <span class="text-danger">{{ $message }}</span>
+                          @enderror
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/abn.png')}}">
@@ -78,7 +80,9 @@
                                 <img src="{{asset('user_assets/image/email-icon.png')}}">
                                 <label>EMAIL ADDRESS</label>
                                 <input type="email" name="email" id="email"  class="textbox">
-                              
+                                @error('email')
+                          <span class="text-danger">{{ $message }}</span>
+                          @enderror
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">

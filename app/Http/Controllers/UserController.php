@@ -123,6 +123,7 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'email' => 'required|unique:businesses',
             'mobile' => 'required',
             'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',           
         ]);
@@ -154,7 +155,8 @@ class UserController extends Controller
     $name = $request->name;
             $email = $request->email;
 
-    $Business = new Business();        
+        
+  $Business = new Business();        
     $Business->email = $email;
     $Business->abn = $request->abn;
     $Business->password = $password1;
@@ -193,6 +195,8 @@ class UserController extends Controller
                         });
 
     return view('user.thankyou');
+
+    
 
     
 
