@@ -13,6 +13,7 @@ use Validator,Redirect,Response;
 class UserController extends Controller
 {
 
+    private $businesses;
     /**
      * Go to  Business Profile.
      *
@@ -196,12 +197,25 @@ class UserController extends Controller
 
     return view('user.thankyou');
 
-    
-
-    
-
-
 }
 
+// public function BusinessSearch(Request $request) {
+//     $slug = $request->id;
+    
+//     $data = Business::where([ 
+//         ['name', 'LIKE', '%' . $slug . '%'],
+//     ])->get();
+//     // echo json_encode($data);die;
+//     return view('course_filter', compact('data', 'slug'));
+// }
+
+public function search_main(Request $request) {
+    $name = $request->name;
+    // $slug = $request->id;
+    $data = Business::where([ 
+        ['name', 'LIKE', '%' . $name . '%'],
+    ])->pluck('name')->ToArray();
+    return $data;
+}
 
 }
