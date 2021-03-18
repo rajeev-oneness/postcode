@@ -5,7 +5,7 @@
 <head>
 
   <meta charset="utf-8" />
-  <title>Admin | Add Events</title>
+  <title>Admin | Edit Events</title>
 
   @extends('portal.layouts.master')
   @section('content')
@@ -18,7 +18,7 @@
           <div class="row">
             <div class="col">
               <div class="page-header-left">
-                <h3>Add Events Details</h3>
+                <h3>Edit Events Details</h3>
 
               </div>
             </div>

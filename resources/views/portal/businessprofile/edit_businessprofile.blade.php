@@ -19,7 +19,7 @@
               <div class="row">
                 <div class="col">
                   <div class="page-header-left">
-                    <h3>Add Business Details</h3>
+                    <h3>Edit Business Details</h3>
                    
                   </div>
                 </div>

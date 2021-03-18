@@ -5,7 +5,7 @@
 <head>
 
   <meta charset="utf-8" />
-  <title>Admin | Event Categories</title>
+  <title>Admin | Business Categories</title>
 
   @extends('portal.layouts.master')
   @section('content')
@@ -19,7 +19,7 @@
           <div class="row">
             <div class="col">
               <div class="page-header-left">
-                <h3>Edit Event Categories</h3>
+                <h3>Edit Business Categories</h3>
 
               </div>
             </div>
