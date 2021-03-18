@@ -92,7 +92,7 @@ class BusinesscategoryController extends Controller
             $BusinessCategory->save();
             $busi_category_id = $BusinessCategory->id;
            
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.manage_businesscategories');
     }
 
      /**

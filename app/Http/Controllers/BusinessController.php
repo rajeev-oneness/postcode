@@ -39,6 +39,7 @@ class BusinessController extends Controller
         $validator = Validator::make($request->all(), [
             'business_categoryId' => 'required|min:1|max:20',
             'name' => 'required',
+            'email' => 'required|unique:businesses',
             'description' => 'required|min:4|max:255',
             'address' => 'required|min:4|max:255',
             'pin_code' => 'required|max:6',
@@ -56,20 +57,23 @@ class BusinessController extends Controller
     $request->image->move(public_path('uploads/'), $fileName);
     $busiprofimg ='uploads/'.$fileName;
 
-    $userId = Auth::user()->id;
+    $password = \Hash::make($request->password);
 
-    $Business = new Business();
-    $Business->business_categoryId = $request->business_categoryId;         
-    $Business->userId = $userId;
+    $Business = new Business();        
+    $Business->email = $request->email;
+    $Business->abn = $request->abn;
+    $Business->password = $password;
+    $Business->company_website = $request->company_website;
     $Business->image = $busiprofimg;
     $Business->name = $request->name;
     $Business->address = $request->address;
     $Business->mobile = $request->mobile;  
     $Business->open_hour = $request->open_hour;  
     $Business->closing_hour = $request->closing_hour;  
-    $Business->services = $request->services;  
-    $Business->products = $request->products;  
+    $Business->services = $request->services; 
+    $Business->products = $request->products; 
     $Business->state_id = $request->state_id;  
+    $Business->business_categoryId = $request->business_categoryId;  
     $Business->pin_code = $request->pin_code;  
     $Business->description = $request->description;  
     $Business->facebook_link = $request->facebook_link;  
@@ -82,7 +86,7 @@ class BusinessController extends Controller
 
     $Business->save();
        
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.manage_businessprofiles');
 }
 
     /**

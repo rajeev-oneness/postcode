@@ -149,6 +149,31 @@
                   </div>
                   <div class="form-row">
                     <div class="col-md-4 mb-3">
+                      <label for="validationCustom05">Email</label>
+                      <input class="form-control" id="email" value="{{ old('email') }}" name="email" type="text" placeholder="Enter Email" required="">
+                      @error('email')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
+                    </div>
+                  
+                    <div class="col-md-4 mb-3">
+                      <label for="validationCustom05">ABN</label>
+                      <input class="form-control" id="abn" value="{{ old('abn') }}" name="abn" type="text" placeholder="ABN" required="">
+                      @error('abn')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label for="validationCustom05">COMPANY WEBSITE</label>
+                      <input class="form-control" id="company_website" value="{{ old('company_website') }}" name="company_website" type="text" placeholder="Company Website" required="">
+                      @error('company_website')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
+                    </div>
+
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-4 mb-3">
                       <div class="form-group">
                         <label for="validationCustom05">Service</label>
                         <select id="services" name="services" class="form-control" required="">
@@ -220,7 +245,13 @@
 					<span class="text-danger">{{ $message }}</span>
 					@enderror
                     </div>
-                 
+                    <div class="col-md-4 mb-3">
+                      <label for="validationCustom05">Password</label>
+                      <input class="form-control" id="password" value="{{ old('password') }}" name="password" type="text" placeholder="Enter Password" required="">
+                      @error('password')
+					<span class="text-danger">{{ $message }}</span>
+					@enderror
+                    </div>
                   </div>
 
                   <button class="btn btn-primary" id="submit_business" name="submit_business" type="submit">Submit</button>

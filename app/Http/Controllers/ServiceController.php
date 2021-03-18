@@ -50,7 +50,7 @@ class ServiceController extends Controller
         $Service->price = $request->price;
 
         $Service->save();
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.manage_service');
     }
 
     /**

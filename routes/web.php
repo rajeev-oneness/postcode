@@ -25,12 +25,12 @@ Route::get('/thankyou', function () {
 })->name('user.thankyou');
 
 /****************************************************Course Search*************************************/
-Route::get('/business_search/{id}', 'UserController@BusinessSearch');
+// Route::get('/business_search/{id}', 'UserController@BusinessSearch');
 Route::post('/search_main', 'UserController@search_main');
 
 //---------------------------------------------------------------Admin Login-----------------------------------------------//
 
-Route::get('/admilogin', 'AdminController@Login')->name('adminlogin');
+Route::get('/admin_login', 'AdminController@Login')->name('adminlogin');
 
 
 Route::post('/login_get', 'AdminController@loginGet')->name('admin.login');

@@ -37,7 +37,7 @@ class StateController extends Controller
 
         $State->save();
            
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.manage_state');
     }
 
      /**

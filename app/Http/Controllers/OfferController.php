@@ -62,7 +62,7 @@ class OfferController extends Controller
         $Offer->expire_date = $new_date;
         $Offer->save();
            
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.manage_offers');
     }
 
       /**

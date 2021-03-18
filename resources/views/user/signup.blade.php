@@ -216,12 +216,12 @@
         });
 
         $(document).ready(function (){
-            $("#course_butt").click(function() {
-                        var business_search = $("#business_search").val();
-                        if (business_search != '') {
-                            window.location = "/business_search/" + business_search;
-                        }
-                    });
+            // $("#course_butt").click(function() {
+            //             var business_search = $("#business_search").val();
+            //             if (business_search != '') {
+            //                 window.location = "/business_search/" + business_search;
+            //             }
+            //         });
         });
     </script>
        <script>
@@ -277,7 +277,7 @@
                                     /*close the list of autocompleted values,
                                      (or any other open lists of autocompleted values:*/
                                     closeAllLists();
-                                    window.location = "/business_search/" + inp.value;
+                                    // window.location = "/business_search/" + inp.value;
                                 });
                                 a.appendChild(b);
                             }
