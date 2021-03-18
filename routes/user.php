@@ -10,7 +10,7 @@ Route::group(['middleware' => ['auth', 'user']], function () {
     // })->name('user.index');
 
     // Route::get('/logout', 'AdminController@logout')->name('admin.logout');
-    Route::get('/logout', 'AdminController@logout')->name('admin.logout');
+    // Route::get('/logout', 'AdminController@logout')->name('admin.logout');
 	
 });
 
