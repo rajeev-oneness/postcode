@@ -113,7 +113,9 @@
                                 <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">
                                 <label>PHONE NO.</label>
                                 <input type="text" name="mobile" id="mobile" class="textbox">
-
+                                @error('mobile')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/upload.png')}}">
@@ -126,7 +128,9 @@
                                 <img src="{{asset('user_assets/image/clock.png')}}">
                                 <label>opening hours</label>
                                 <input type="text" name="open_hour" id="open_hour" class="textbox">
-
+                                @error('open_hour')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form_btn-grp">
                                 <a href="{{route('user.welcome')}}" class="back_btn">back</a>
