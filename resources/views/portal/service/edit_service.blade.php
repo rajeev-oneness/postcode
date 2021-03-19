@@ -55,7 +55,7 @@
                         </div>
                        
                         <div class="col-md-4 mb-3">
-                          <label for="validationCustom05">Product Details</label>
+                          <label for="validationCustom05">Details</label>
                           <input class="form-control" id="details" name="details" value="{{ $editedservice_data->details }}" type="text" placeholder="Enter Product Details" required="">
                          
                         </div>

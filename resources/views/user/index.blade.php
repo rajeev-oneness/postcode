@@ -23,7 +23,7 @@
         <div class="container">
             <div class="menu_wrap">
                 <a href="{{route('user.welcome')}}" class="logo_icon"><img src="{{asset('user_assets/image/logo.png')}}"></a>
-                <ul class="menu_icon">
+                <!-- <ul class="menu_icon">
                     <li>
                         <a href="{{route('adminsignup')}}">
                             <img src="{{asset('user_assets/image/log-icon.png')}}">
@@ -36,7 +36,7 @@
                             Saved Details
                         </a>
                     </li>
-                </ul>
+                </ul> -->
             </div>
             <div class="col-12">
                 <div class="banner_inner">

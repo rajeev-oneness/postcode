@@ -35,7 +35,7 @@ Route::get('/admin_login', 'AdminController@Login')->name('adminlogin');
 
 Route::post('/login_get', 'AdminController@loginGet')->name('admin.login');
 
-
+Route::get('/logout', 'AdminController@logout')->name('admin.logout');
 //---------------------------------------------------------------Admin Dashboard-----------------------------------------------//
 
 Route::get('/admin','AdminController@dashboardView')->name('admin.dashboard')->middleware(['auth', 'admin']);

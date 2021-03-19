@@ -1,7 +1,7 @@
 <?php 
 
 
-Route::get('/logout', 'AdminController@logout')->name('admin.logout');
+
 //--------------------------------------------------------------Business Profile Section-----------------------------------------------//
 
 

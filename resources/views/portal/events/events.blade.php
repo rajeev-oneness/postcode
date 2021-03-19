@@ -104,7 +104,7 @@
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">End Date</label>
                       <div class="input-group">
-                              <input  autocomplete="off" class="datepicker-here form-control digits" id="end" name="end" value="{{old('end')}}" placeholder="Closing Hour" required="" type="text" data-language="en">
+                              <input  autocomplete="off" class="datepicker-here form-control digits" id="end" name="end" value="{{old('end')}}" placeholder="Kindly Enter" required="" type="text" data-language="en">
                             </div>
                             @error('end')
 					<span class="text-danger">{{ $message }}</span>
