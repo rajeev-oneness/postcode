@@ -60,7 +60,7 @@
                       <label for="validationCustomUsername">Image</label>
                       <div class="d-flex justify-content-center">
                         <div class="btn btn-mdb-color btn-rounded">
-                        <img src="\{{$businessprofile_data->image}}" alt="people" class="offrlck" width="56" id="img-upload">
+                        <img src="{{url($businessprofile_data->image)}}" alt="people" class="offrlck" width="56" id="img-upload">
                           <input class="form-control offimgbuis" type="file" id="image" value="" name="image" required="">
                           @error('image')
                           {{$message}}

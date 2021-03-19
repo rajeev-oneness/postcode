@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-flex align-items-center justify-content-between">
-                            <h4 class="mb-0 font-size-18">Manage Business Profiles</h4>
+                            <h4 class="mb-0 font-size-18">Manage Businesses</h4>
                             <!-- <div class="page-title-right">
                                 <a href="/admin/add_subjects" <button type="button" id="submit_product" name="submit_product" class="btn btn-primary w-md">Add Subjects</button></a>
                             </div> -->
@@ -43,7 +43,6 @@
                                             <th width="149px;">Business Category</th>
                                             <th>Name</th>
                                             <th width="90px;">Address</th>
-                                            <th width="40px;">Image</th>
                                             <th width="197px;">Action</th>
 
                                         </tr>
@@ -145,14 +144,6 @@
                             "data": "name",
                         },
                       
-                        {
-                            "targets": 4,
-                            "data": "image",
-                            "render": function(data, type, full, meta) {
-                                var str_btns = "<img src='/" + data +"' style='width: 40%;'>";
-                                return str_btns;
-                            }
-                        },
                             {
                                 "targets": -1,
                                 "data": 'action',

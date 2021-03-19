@@ -72,8 +72,8 @@
                         <div class="col-md-4 mb-3">
                       <label for="validationCustomUsername" style="margin-left:13%;">Image</label>
                       <div class="d-flex justify-content-center">
-                        <div class="btn btn-mdb-color btn-rounded">
-                          <img src="/{{ $editedservice_data->image }}" alt="people" class="" width="56" style="border:1px solid #004694;height:100px;width:200px;margin-bottom:5%;" id="img-upload">
+                        <div class="btn btn-mdb-color btn-rounded"> 
+                          <img src="{{url($editedservice_data->image)}}" alt="people" class="" width="56" style="border:1px solid #004694;height:100px;width:200px;margin-bottom:5%;" id="img-upload">
 
                           <input class="form-control offrimg" type="file" id="image" name="image" required="">
                         </div>
