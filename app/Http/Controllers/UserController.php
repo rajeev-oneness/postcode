@@ -125,7 +125,8 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|unique:businesses',
-            'mobile' => 'required',
+            'mobile' => 'required|max:20',
+            'open_hour' => 'required|max:10',
             'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',           
         ]);
        $validator->validate();
