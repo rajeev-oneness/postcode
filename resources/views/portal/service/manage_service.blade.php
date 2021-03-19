@@ -57,7 +57,7 @@
     <td>{{$service_manage_dt->name}}</td>
     <td>{{$service_manage_dt->details}}</td>
     <td>{{$service_manage_dt->price}}</td>
-<td><img src='/{{ $service_manage_dt->image }}' style='width: 40%;'></td>
+<td><img src='{{url($service_manage_dt->image)}}' style='width: 40%;'></td>
 <td><a class="edit_app" id="{{$service_manage_dt->id}}"><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$service_manage_dt->id}}"><i class="fa fa-trash"></i></a></td>
   </tr>
 @endforeach
