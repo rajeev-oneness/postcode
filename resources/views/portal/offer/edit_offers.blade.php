@@ -114,7 +114,7 @@
                       <label for="validationCustomUsername">Image</label>
                       <div class="d-flex justify-content-center">
                         <div class="btn btn-mdb-color btn-rounded">
-                        <img src="\{{$editedoffers_data->image}}" alt="people" class="offrlck" width="56" id="img-upload">
+                        <img src="{{url($editedoffers_data->image)}}" alt="people" class="offrlck" width="56" id="img-upload">
                           <input class="form-control offrimg" type="file" id="image" value="" name="image" required="">
                           @error('image')
                           {{$message}}

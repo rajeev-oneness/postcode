@@ -57,7 +57,7 @@
     <td>{{$categories2->eventcattype->name}}</td>
     
   
-<td><img src='/{{ $categories2->image }}' style='width: 40%;'></td>
+<td><img src='{{url($categories2->image)}}' style='width: 40%;'></td>
 <td><a class="edit_event" id="{{$categories2->id}}"><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$categories2->id}}"><i class="fa fa-trash"></i></a></td>
   </tr>
 @endforeach

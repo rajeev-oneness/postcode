@@ -43,7 +43,6 @@
                                             <th width="149px;">Business Category</th>
                                             <th>Name</th>
                                             <th width="90px;">Address</th>
-                                            <th width="40px;">Image</th>
                                             <th width="197px;">Action</th>
 
                                         </tr>
@@ -145,14 +144,6 @@
                             "data": "name",
                         },
                       
-                        {
-                            "targets": 4,
-                            "data": "image",
-                            "render": function(data, type, full, meta) {
-                                var str_btns = "<img src='/" + data +"' style='width: 40%;'>";
-                                return str_btns;
-                            }
-                        },
                             {
                                 "targets": -1,
                                 "data": 'action',

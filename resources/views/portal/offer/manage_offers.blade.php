@@ -60,7 +60,7 @@
     <td>{{$offercategories->price}}</td>
     <td>{{$offercategories->expire_date}}</td>
   
-<td><img src='/{{ $offercategories->image }}' style='width: 40%;'></td>
+<td><img src='{{url($offercategories->image)}}' style='width: 40%;'></td>
 <td><a class="edit_event" id="{{$offercategories->id}}"><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$offercategories->id}}"><i class="fa fa-trash"></i></a></td>
   </tr>
 @endforeach

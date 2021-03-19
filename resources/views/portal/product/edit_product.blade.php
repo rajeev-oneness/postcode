@@ -77,7 +77,7 @@
                       <label for="validationCustomUsername" class="prolabimg">Image</label>
                       <div class="d-flex justify-content-center">
                         <div class="btn btn-mdb-color btn-rounded">
-                        <img src="\{{$edited_data->image}}" alt="people" class="offrlckimg" width="56" id="img-upload">
+                        <img src="{{url($edited_data->image)}}" alt="people" class="offrlckimg" width="56" id="img-upload">
                           <input class="form-control offrimg" type="file" id="image" value="" name="image" required="">
                       
                         </div>

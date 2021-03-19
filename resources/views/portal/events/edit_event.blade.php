@@ -165,7 +165,7 @@
                       <label for="validationCustom05">Image</label>
                       <div class="d-flex justify-content-center">
                         <div class="btn btn-mdb-color btn-rounded">
-                        <img src="/{{$editedevents_data->image}}" alt="people" class="evenblck" width="56" id="img-upload">
+                        <img src="{{url($editedevents_data->image)}}" alt="people" class="evenblck" width="56" id="img-upload">
 
                           <input class="form-control eventimg"  type="file" id="image" value="" name="image" required="">
                           @error('image')
