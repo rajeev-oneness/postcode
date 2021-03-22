@@ -14,15 +14,15 @@ use Illuminate\Support\Facades\Auth;
 class ProductController extends Controller
 {
      /**
-     * Go to Edit Offers view.
+     * Go to Edit Product view.
      *
      * @param  Request $request
      * @return view
      */
-    public function editProduct(Request $request) {      
-        $lead_edit_id = $request->app_id;
+    public function editProduct($id) {      
+     
         $businessData= BusinessCategory::all();
-        $edited_data = Product::where('id', $lead_edit_id)->first();
+        $edited_data = Product::findOrFail(decrypt($id));
         // echo json_encode($edited_data);die;
         return view('portal.product.edit_product',compact('businessData', 'edited_data'));
         
@@ -47,7 +47,7 @@ class ProductController extends Controller
     			
     		]);
    		$validator->validate();
-           
+           try {
         $fileName = time().'.'.$request->image->extension(); 
         $request->image->move(public_path('uploads/'), $fileName);
         $productimg ='uploads/'.$fileName;
@@ -62,6 +62,11 @@ class ProductController extends Controller
         $Product->save();
            
             return redirect()->route('admin.manage_products');
+        }catch (\Exception $e) {
+            report($e);
+    
+            return false;
+        }
     }
 
      /**
@@ -95,7 +100,16 @@ class ProductController extends Controller
     */
     public function updateProduct(Request $request)
     {
-     
+        $validator = Validator::make($request->all(), [
+            'businessId' => 'required|min:1|max:20',
+            'name' => 'required|min:4|max:255',
+            'details' => 'required|min:4|max:255',
+            'price' => 'required|numeric',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            
+        ]);
+       $validator->validate();
+try {
         $fileName = time().'.'.$request->image->extension(); 
             $request->image->move(public_path('uploads/'), $fileName);
             $imgupdatepro ='uploads/'.$fileName;
@@ -103,6 +117,11 @@ class ProductController extends Controller
         $hid_id = $request->hid_id;
         $update_prouduct_data = Product::where('id', $hid_id)->update(['name' => $request->name, 'businessId' => $request->businessId, 'details' => $request->details, 'image' => $imgupdatepro, 'price' => $request->price]);   
             return redirect()->route('admin.manage_products');
+        }catch (\Exception $e) {
+            report($e);
+    
+            return false;
+        }
     }
 
 

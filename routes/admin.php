@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	Route::get('/manage_products','ProductController@manageProducts')->name('admin.manage_products');
 
-	Route::post('/edit_product', 'ProductController@editProduct')->name('edit_product');
+	Route::get('/edit_product/{id}', 'ProductController@editProduct')->name('edit_product');
 
 	  Route::post('/product','ProductController@addProduct')->name('admin.add_product');
 
@@ -56,7 +56,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	  Route::get('/manage_service','ServiceController@manageServiceView')->name('admin.manage_service');
 
-	  Route::post('/edit_services', 'ServiceController@editServices')->name('edit_services');
+	  Route::get('/edit_services/{id}', 'ServiceController@editServices')->name('edit_services');
 
 	  Route::post('/update_services', 'ServiceController@updateServices')->name('admin.update_services');
 
@@ -74,7 +74,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 	  Route::get('/manage_eventcategories','EventcategoryController@manageEventCategories')->name('admin.manage_eventcategories');
 
 
-	Route::post('/edit_eventcategories', 'EventcategoryController@editEventCategories')->name('edit_eventcategories');
+	Route::get('/edit_eventcategories/{id}', 'EventcategoryController@editEventCategories')->name('edit_eventcategories');
 
 	Route::post('/update_eventcategories', 'EventcategoryController@updateEventCategories')->name('admin.update_eventcategories');
 
@@ -113,7 +113,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	Route::get('/manage_events','EventsController@manageEventsView')->name('admin.manage_events');
 
-	Route::post('/edit_event', 'EventsController@editEvent')->name('edit_event');
+	Route::get('/edit_event/{id}', 'EventsController@editEvent')->name('edit_event');
 
 	Route::post('/update_event', 'EventsController@updateEvent')->name('admin.update_event');
 
@@ -132,7 +132,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	Route::get('/manage_offers','OfferController@manageOffers')->name('admin.manage_offers');
 
-	Route::post('/edit_offer', 'OfferController@editOffer')->name('edit_offer');
+	Route::get('/edit_offer/{id}', 'OfferController@editOffer')->name('edit_offer');
 
 	Route::post('/update_offers', 'OfferController@updateOffers')->name('admin.update_offers');
 
@@ -147,7 +147,7 @@ Route::post('/add_states','StateController@addStates')->name('admin.add_states')
 
 Route::get('/manage_state','StateController@manageStateView')->name('admin.manage_state');
 
-Route::post('/edit_states', 'StateController@editStates')->name('edit_states');
+Route::get('/edit_states/{id}', 'StateController@editStates')->name('edit_states');
 
 Route::post('/update_states', 'StateController@updateStates')->name('admin.update_states');
 

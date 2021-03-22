@@ -58,7 +58,7 @@
     <td>{{$service_manage_dt->details}}</td>
     <td>{{$service_manage_dt->price}}</td>
 <td><img src='{{url($service_manage_dt->image)}}' style='width: 40%;'></td>
-<td><a class="edit_app" id="{{$service_manage_dt->id}}"><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$service_manage_dt->id}}"><i class="fa fa-trash"></i></a></td>
+<td><a class="edit_app" href="{{route('edit_services', encrypt($service_manage_dt->id))}}" id=""><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$service_manage_dt->id}}"><i class="fa fa-trash"></i></a></td>
   </tr>
 @endforeach
 </tbody>
@@ -77,12 +77,12 @@
                 $('.app_table').DataTable({
       'order':[]
     });
-    $(".edit_app").click(function(){
+//     $(".edit_app").click(function(){
       
-var app_id=this.id;
-       var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
-			redirectPost('edit_services', fd);
-    });
+// var app_id=this.id;
+//        var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
+// 			redirectPost('edit_services', fd);
+//     });
     $(".delete_app").click(function(){
        
 var appdel_id=this.id;

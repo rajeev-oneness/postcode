@@ -38,6 +38,8 @@ class ServiceController extends Controller
             
         ]);
        $validator->validate();
+
+  try {
         $fileName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('uploads/'), $fileName);
         $servicedesc = 'uploads/' . $fileName;
@@ -51,6 +53,11 @@ class ServiceController extends Controller
 
         $Service->save();
         return redirect()->route('admin.manage_service');
+    }catch (\Exception $e) {
+        report($e);
+
+        return false;
+    }
     }
 
     /**
@@ -74,13 +81,22 @@ class ServiceController extends Controller
      * @param  Request $request
      * @return view
      */
-    public function editServices(Request $request)
-    {
-        $lead_edit_id = $request->app_id;
+    // public function editServices(Request $request)
+    // {
+    //     $lead_edit_id = $request->app_id;
+       
+    //     $editedservice_data = Service::where('id', $lead_edit_id)->first();
+    //     // echo json_encode($businessSerData);die;
+    //     return view('portal.service.edit_service', compact('editedservice_data', 'businessSerData'));
+    // }
+
+    public function editServices($id) {      
+     
         $businessSerData = BusinessCategory::all();
-        $editedservice_data = Service::where('id', $lead_edit_id)->first();
-        // echo json_encode($businessSerData);die;
-        return view('portal.service.edit_service', compact('editedservice_data', 'businessSerData'));
+        $editedservice_data = Service::findOrFail(decrypt($id));
+        // echo json_encode($edited_data);die;
+        return view('portal.service.edit_service',compact('editedservice_data', 'businessSerData'));
+        
     }
 
     /**
@@ -90,6 +106,15 @@ class ServiceController extends Controller
      */
     public function updateServices(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:4|max:255',
+            'details' => 'required|min:4|max:255',
+            'price' => 'required|numeric',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            
+        ]);
+       $validator->validate();
+       try {
         $fileName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('uploads/'), $fileName);
         $servc = 'uploads/' . $fileName;
@@ -97,6 +122,11 @@ class ServiceController extends Controller
 
         $update_service_data = Service::where('id', $hid_id)->update(['name' => $request->name, 'businessId' => $request->business_categoryId, 'details' => $request->details, 'image' => $servc, 'price' => $request->price]);
         return redirect()->route('admin.manage_service');
+    }catch (\Exception $e) {
+        report($e);
+
+        return false;
+    }
     }
 
     /**

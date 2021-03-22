@@ -31,7 +31,16 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="card">
-                 
+                @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+        
                   <div class="card-body">
                     <form class="needs-validation" method="post" action="{{route('admin.add_services')}}" enctype="multipart/form-data" novalidate="">
                     <input type="hidden" id="hid_id" name="hid_id">
