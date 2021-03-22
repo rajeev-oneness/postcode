@@ -54,7 +54,7 @@
     <td>{{$statecategories->code}}</td>
   
 
-<td><a class="edit_states" id="{{$statecategories->id}}"><i class="fa fa-edit"></i></a><a class="delete_states" id="{{$statecategories->id}}"><i class="fa fa-trash"></i></a></td>
+<td><a class="edit_states" href="{{route('edit_states', encrypt($statecategories->id))}}" id=""><i class="fa fa-edit"></i></a><a class="delete_states" id="{{$statecategories->id}}"><i class="fa fa-trash"></i></a></td>
   </tr>
 @endforeach
 </tbody>
@@ -73,12 +73,12 @@
                 $('.app_table').DataTable({
       'order':[]
     });
-    $(".edit_states").click(function(){
+//     $(".edit_states").click(function(){
         
-var app_id=this.id;
-       var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
-			redirectPost('edit_states', fd);
-    });
+// var app_id=this.id;
+//        var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
+// 			redirectPost('edit_states', fd);
+//     });
     $(".delete_states").click(function(){
        
 var appdel_id=this.id;

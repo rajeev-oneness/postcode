@@ -44,8 +44,11 @@
                     <h2 class="banner_title2 text-center text-white">Where Local Matters</h2>
                     <p class="banner_content text-center text-white">Australia’s Newest Website to Help Local Businesses Promote <br>Achieve Marketing Success</p>
                     <div class="btn_grp text-center">
-                        <a href="{{route('adminsignup')}}" class="orange_btn">SIGN UP MANUALLY</a>
+                    <a href="/signup?via=man" id="sign_mannually" class="orange_btn">SIGN UP MANUALLY</a>
                         <a href="{{route('adminsignup')}}" class="blue_btn"><img src="{{asset('user_assets/image/Google-mybusiness-1.png')}}"> SIGN UP VIA GOOGLE MY BUSINESS</a>
+                    
+                        <!-- <a href="{{route('adminsignup')}}" id="sign_mannually" class="orange_btn">SIGN UP MANUALLY</a>
+                        <a href="{{route('adminsignup')}}" class="blue_btn"><img src="{{asset('user_assets/image/Google-mybusiness-1.png')}}"> SIGN UP VIA GOOGLE MY BUSINESS</a> -->
                     </div>
                 </div>
             </div>
@@ -111,12 +114,16 @@
         </div>
     </section>
 
-    <script>
-$(document).ready(function (){
 
-});
 
-    </script>
+<script>
+
+ 
+
+  
+
+</script>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

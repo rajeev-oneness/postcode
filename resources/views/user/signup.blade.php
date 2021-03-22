@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <link rel="stylesheet" type="text/css" href="{{asset('user_assets/css/slick.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('user_assets/css/slick-theme.css')}}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
     <title>Our Postcode</title>
     <style>
@@ -67,24 +70,39 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
+              
                     <div class="form_wrapper">
                         <img src="{{asset('user_assets/image/form-border.png')}}" class="form_bg">
-
-                        <div class="search_wrap wd-search">
-                            <div class="autocomplete">
-                                <input type="search" class="searchBox" id="business_search" autocomplete="off" name="business_search" placeholder="Search business via keyword...">
-                            </div>
-                            <button class="search_btn" id="course_butt" name="course_butt"><img src="{{asset('user_assets/image/search.png')}}"></button>
+                    <?php
+                    if(isset($_REQUEST['via'])!='man'){
+                    ?>
+                    <div class="search_wrap wd-search">
+                        <div class="autocomplete">
+                            <input type="search" class="searchBox" id="business_search" autocomplete="off" name="business_search" placeholder="Search business via keyword...">
                         </div>
+                        <button class="search_btn" id="course_butt" name="course_butt"><img src="{{asset('user_assets/image/search.png')}}"></button>
+                    </div>
+                    <a href="#" class="buisness_signup"><img src="{{asset('user_assets/image/Google-mybusiness-1.png')}}">sign up via google my business</a>
+                    <?php
+                    }
+                    ?>
+                       
 
-                        <a href="#" class="buisness_signup"><img src="{{asset('user_assets/image/Google-mybusiness-1.png')}}">sign up via google my business</a>
-
+                        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
                         <form class="needs-validation" method="post" name="" action="{{route('admin.add_userbusiness')}}" enctype="multipart/form-data" novalidate>
                             {{csrf_field()}}
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">
                                 <label>BUSINESS NAME</label>
-                                <input type="text" name="name" id="name" class="textbox">
+                                <input type="text" name="name" value="{{old('name')}}" id="name" class="textbox">
                                 @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -92,19 +110,23 @@
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/abn.png')}}">
                                 <label>ABN</label>
-                                <input type="text" name="abn" id="abn" class="textbox">
-
+                                <input type="text" name="abn" value="{{ old('abn') }}" id="abn" class="textbox">
+                                @error('abn')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/team.png')}}">
                                 <label>COMPANY WEBSITE</label>
-                                <input type="text" name="company_website" id="company_website" class="textbox">
-
+                                <input type="text" name="company_website" value="{{ old('company_website') }}" id="company_website" class="textbox">
+                                @error('company_website')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/email-icon.png')}}">
                                 <label>EMAIL ADDRESS</label>
-                                <input type="email" name="email" id="email" class="textbox">
+                                <input type="email" name="email" value="{{ old('email') }}" id="email" class="textbox">
                                 @error('email')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -112,7 +134,7 @@
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">
                                 <label>PHONE NO.</label>
-                                <input type="text" name="mobile" id="mobile" class="textbox">
+                                <input type="text" name="mobile" value="{{ old('mobile') }}" id="mobile" class="textbox">
                                 @error('mobile')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -120,14 +142,17 @@
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/upload.png')}}">
                                 <label>UPLOAD AN IMAGE</label>
-                                <input type="file" name="image" id="image" class="textbox">
+                                <input type="file" name="image" value="{{ old('image') }}" id="image" class="textbox">
+                                @error('image')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                                 <div id="file-upload-filename"></div>
                                 <button class="img_upload">BROWSE</button>
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/clock.png')}}">
                                 <label>opening hours</label>
-                                <input type="text" name="open_hour" id="open_hour" class="textbox">
+                                <input type="text" name="open_hour" value="{{ old('open_hour') }}" id="open_hour" class="textbox">
                                 @error('open_hour')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -207,7 +232,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="{{asset('user_assets/js/slick.min.js')}}"></script>
     <script>

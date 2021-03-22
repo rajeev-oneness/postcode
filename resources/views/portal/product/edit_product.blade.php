@@ -34,7 +34,15 @@
         <div class="row">
           <div class="col-sm-12">
             <div class="card">
-
+            @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
               <div class="card-body">
                 <form class="needs-validation" method="post" name="offr" action="{{route('admin.update_products')}}" enctype="multipart/form-data" novalidate="">
                   <input type="hidden" id="hid_id" name="hid_id" value="{{$edited_data->id}}">
@@ -49,12 +57,18 @@
                           <option value="{{$businessName->id}}" <?php echo $edited_data->businessId ==  $businessName->id ? "selected" : ""; ?>>{{$businessName->name}}</option>
                           @endforeach
                         </select>
+                        @error('businessId')
+                      <span class="text-danger">{{ $message }}</span>
+                      @enderror
                       </div>
                     </div>
                     <div class="col-md-4 mb-3">
                     <label for="validationCustom05">Product Name</label>
                       <input class="form-control" id="name" name="name" type="text" value="{{$edited_data->name}}" placeholder="Enter Product Name" required="">
 
+                      @error('name')
+                      <span class="text-danger">{{ $message }}</span>
+                      @enderror
                     </div>
 
 
@@ -62,6 +76,9 @@
                     <label for="validationCustom05">Product Details</label>
                       <input class="form-control" id="details" name="details" value="{{$edited_data->details}}" type="text" placeholder="Enter Product Details" required="">
 
+                      @error('details')
+                      <span class="text-danger">{{ $message }}</span>
+                      @enderror
                     </div>
 
                   </div>
@@ -71,6 +88,9 @@
                     <label for="validationCustom05">Price</label>
                       <input class="form-control" id="price" name="price" value="{{$edited_data->price}}" type="text" placeholder="Enter Price" required="">
 
+                      @error('price')
+                      <span class="text-danger">{{ $message }}</span>
+                      @enderror
                     </div>
 
                     <div class="col-md-4 mb-3">
@@ -80,6 +100,9 @@
                         <img src="{{url($edited_data->image)}}" alt="people" class="offrlckimg" width="56" id="img-upload">
                           <input class="form-control offrimg" type="file" id="image" value="" name="image" required="">
                       
+                          @error('image')
+                      <span class="text-danger">{{ $message }}</span>
+                      @enderror
                         </div>
                       </div>
                     </div> 

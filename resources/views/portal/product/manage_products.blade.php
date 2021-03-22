@@ -56,9 +56,9 @@
     <td>{{$offercategories->name}}</td>
     <td>{{$offercategories->details}}</td>
     <td>{{$offercategories->price}}</td>
-    
-<td><img src="{{url($offercategories->image)}}" style='width: 40%;'></td>
-<td><a class="edit_product" id="{{$offercategories->id}}"><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$offercategories->id}}"><i class="fa fa-trash"></i></a></td>
+  
+<td><img src='{{url($offercategories->image)}}' style='width: 40%;'></td>
+<td><a class="edit_product" href="{{route('edit_product', encrypt($offercategories->id))}}" id="}}"><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$offercategories->id}}"><i class="fa fa-trash"></i></a></td>
   </tr>
 @endforeach
 </tbody>
@@ -80,12 +80,12 @@
                 $('.app_table').DataTable({
       'order':[]
     });
-    $(".edit_product").click(function(){
+//     $(".edit_product").click(function(){
         
-var app_id=this.id;
-       var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
-			redirectPost('edit_product', fd);
-    });
+// var app_id=this.id;
+//        var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
+// 			redirectPost('edit_product', fd);
+//     });
     $(".delete_app").click(function(){
        
 var appdel_id=this.id;

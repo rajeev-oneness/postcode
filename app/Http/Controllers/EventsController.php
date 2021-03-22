@@ -7,6 +7,7 @@ use App\Model\BusinessCategory;
 use App\Model\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Validator,Redirect,Response;
 
 class EventsController extends Controller
 {
@@ -29,14 +30,16 @@ class EventsController extends Controller
     * @return view
     */
     public function addEvents(Request $request) {
-        $request->validate([
-            'name' => 'required|min:5|string',
-            'details' => 'required',
-            'event_category_id' => 'required',
-            'address' => 'required|min:5',
-            'price' => 'required|',
-           
+        $validator = Validator::make($request->all(), [
+            'businessId' => 'required|min:1|max:20',
+            'name' => 'required|min:4|max:255',
+            'details' => 'required|min:4|max:255',
+            'price' => 'required|numeric',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            
         ]);
+       $validator->validate();
+       try {
         $fileName = time().'.'.$request->image->extension(); 
             $request->image->move(public_path('uploads/'), $fileName);
             $eventsdesc ='uploads/'.$fileName;
@@ -74,6 +77,11 @@ class EventsController extends Controller
         $Event->save();
            
             return redirect()->route('admin.manage_events');
+        }catch (\Exception $e) {
+            report($e);
+    
+            return false;
+        }
     }
 
      /**
@@ -97,12 +105,23 @@ class EventsController extends Controller
      * @param  Request $request
      * @return view
      */
-    public function editEvent(Request $request) {      
-        $lead_events_id = $request->app_id;
+    // public function editEvent(Request $request) {      
+    //     $lead_events_id = $request->app_id;
+    //     $businesserData= BusinessCategory::all();
+    //     $eventerData= EventCategory::all();
+    //     $editedevents_data = Event::where('id', $lead_events_id)->first();
+    //     // echo json_encode($businessSerData);die;
+    //     return view('portal.events.edit_event', compact('editedevents_data', 'eventerData', 'businesserData'));
+        
+    // }
+
+    public function editEvent($id) {      
+     
+       
         $businesserData= BusinessCategory::all();
         $eventerData= EventCategory::all();
-        $editedevents_data = Event::where('id', $lead_events_id)->first();
-        // echo json_encode($businessSerData);die;
+        $editedevents_data = Event::findOrFail(decrypt($id));
+        // echo json_encode($edited_data);die;
         return view('portal.events.edit_event', compact('editedevents_data', 'eventerData', 'businesserData'));
         
     }
@@ -114,15 +133,28 @@ class EventsController extends Controller
     */
     public function updateEvent(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
+            'businessId' => 'required|min:1|max:20',
+            'name' => 'required|min:4|max:255',
+            'details' => 'required|min:4|max:255',
+            'price' => 'required|numeric',
             'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
-       ]);
-        $fileName = time().'.'.$request->image->extension(); 
+            
+        ]);
+       $validator->validate();
+      try {
+            $fileName = time().'.'.$request->image->extension(); 
             $request->image->move(public_path('uploads/'), $fileName);
             $imgevent ='uploads/'.$fileName;
         $hid_id = $request->hid_id;
         $update_event_data = Event::where('id', $hid_id)->update(['name' => $request->name, 'business_id' => $request->business_categoryId, 'details' => $request->details, 'image' => $imgevent, 'price' => $request->price, 'event_category_id' => $request->event_category_id, 'address' => $request->address, 'start' => $request->start, 'end' => $request->end, 'frequency' => $request->frequency, 'age_group' => $request->age_group, 'booking_details' => $request->booking_details, 'contact_details' => $request->contact_details]);   
             return redirect()->route('admin.manage_events');
+        }catch (\Exception $e) {
+            report($e);
+    
+            return false;
+        }
+       
     }
 
      /**

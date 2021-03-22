@@ -33,7 +33,15 @@
         <div class="row">
           <div class="col-sm-12">
             <div class="card">
-
+            @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
               <div class="card-body">
                 <form class="needs-validation" method="post" name="offr" action="{{route('admin.update_offers')}}" enctype="multipart/form-data" novalidate="">
                   <input type="hidden" id="hid_id" name="hid_id" value="{{$editedoffers_data->id}}">
@@ -56,7 +64,7 @@
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Title</label>
                       <input class="form-control" id="title" name="title" value="{{$editedoffers_data->title}}" type="text" placeholder="Title Required" required="">
-                      @error('name')
+                      @error('title')
                       {{$message}}
                       @enderror
                     </div>
@@ -65,7 +73,7 @@
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Short Description</label>
                       <input class="form-control" id="short_description" value="{{$editedoffers_data->short_description}}" name="short_description" type="text" placeholder="Short Description" required="">
-                      @error('contact_details')
+                      @error('short_description')
                       {{$message}}
                       @enderror
                     </div>
@@ -76,7 +84,7 @@
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Description</label>
                       <input class="form-control" id="description" name="description" value="{{$editedoffers_data->description}}" type="text" placeholder="Description" required="">
-                      @error('details')
+                      @error('description')
                       {{$message}}
                       @enderror
                     </div>
@@ -84,7 +92,7 @@
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Promo Code</label>
                       <input class="form-control" id="promo_code" name="promo_code" value="{{$editedoffers_data->promo_code}}" type="text" placeholder="Promo Code" required="">
-                      @error('address')
+                      @error('promo_code')
                       {{$message}}
                       @enderror
                     </div>
@@ -93,7 +101,7 @@
                       <div class="input-group">
                       <input class="form-control" id="price" name="price" value="{{$editedoffers_data->price}}" type="price" placeholder="Enter Promo Code" required="">
                             </div>
-                      @error('start')
+                      @error('price')
                       {{$message}}
                       @enderror
                     </div>
@@ -125,7 +133,7 @@
                     <div class="col-md-6 mb-3">
                       <label for="validationCustom05">How to Redeem</label>
                       <textarea class="form-control editor" name="content" value="{{$editedoffers_data->howcanredeem}}" required=""></textarea>
-                       @error('howcanredeem')
+                       @error('content')
                       {{$message}}
                       @enderror
                     </div>  

@@ -41,7 +41,7 @@ class OfferController extends Controller
             'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',         
         ]);
        $validator->validate();
-       
+       try {
         $fileName = time().'.'.$request->image->extension(); 
             $request->image->move(public_path('uploads/'), $fileName);
             $offerimg ='uploads/'.$fileName;
@@ -63,6 +63,11 @@ class OfferController extends Controller
         $Offer->save();
            
             return redirect()->route('admin.manage_offers');
+        }catch (\Exception $e) {
+            report($e);
+    
+            return false;
+        }
     }
 
       /**
@@ -85,11 +90,20 @@ class OfferController extends Controller
      * @param  Request $request
      * @return view
      */
-    public function editOffer(Request $request) {      
-        $lead_events_id = $request->app_id;
+    // public function editOffer(Request $request) {      
+    //     $lead_events_id = $request->app_id;
+    //     $businesofferData= BusinessCategory::all();
+    //     $editedoffers_data = Offer::where('id', $lead_events_id)->first();
+    //     // echo json_encode($businessSerData);die;
+    //     return view('portal.offer.edit_offers', compact('editedoffers_data', 'businesofferData'));
+        
+    // }
+
+    public function editOffer($id) {      
+     
         $businesofferData= BusinessCategory::all();
-        $editedoffers_data = Offer::where('id', $lead_events_id)->first();
-        // echo json_encode($businessSerData);die;
+        $editedoffers_data = Offer::findOrFail(decrypt($id));
+        // echo json_encode($edited_data);die;
         return view('portal.offer.edit_offers', compact('editedoffers_data', 'businesofferData'));
         
     }
@@ -101,9 +115,20 @@ class OfferController extends Controller
     */
     public function updateOffers(Request $request)
     {
-        $request->validate([
-            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
-       ]);
+       
+        $validator = Validator::make($request->all(), [
+            'business_categoryId' => 'required|min:1|max:20',
+            'title' => 'required',
+            'short_description' => 'required|min:4|max:255',
+            'description' => 'required|min:4|max:255',
+            'price' => 'required|numeric',
+            'promo_code' => 'required',
+            'content' => 'required',
+            'expire_date' => 'required',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',         
+        ]);
+       $validator->validate();
+       try {
         $fileName = time().'.'.$request->image->extension(); 
             $request->image->move(public_path('uploads/'), $fileName);
             $imgupdate ='uploads/'.$fileName;
@@ -111,6 +136,11 @@ class OfferController extends Controller
         $hid_id = $request->hid_id;
         $update_offer_data = Offer::where('id', $hid_id)->update(['title' => $request->title, 'businessId' => $request->business_categoryId, 'description' => $request->description, 'image' => $imgupdate, 'price' => $request->price, 'short_description' => $request->short_description, 'promo_code' => $request->promo_code, 'expire_date' => $request->expire_date, 'howcanredeem' => $request->howcanredeem]);   
             return redirect()->route('admin.manage_offers');
+        }catch (\Exception $e) {
+            report($e);
+    
+            return false;
+        }
     }
 
      /**

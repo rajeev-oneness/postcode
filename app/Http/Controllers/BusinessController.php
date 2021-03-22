@@ -42,7 +42,7 @@ class BusinessController extends Controller
             'email' => 'required|unique:businesses',
             'description' => 'required|min:4|max:255',
             'address' => 'required|min:4|max:255',
-            'pin_code' => 'required|max:6',
+            'pin_code' => 'required',
             'mobile' => 'required',
             'facebook_link' => 'required',
             'instagram_link' => 'required',
@@ -51,7 +51,7 @@ class BusinessController extends Controller
             
         ]);
        $validator->validate();
-          
+          try {
 
     $fileName = time().'.'.$request->image->extension(); 
     $request->image->move(public_path('uploads/'), $fileName);
@@ -87,6 +87,11 @@ class BusinessController extends Controller
     $Business->save();
        
         return redirect()->route('admin.manage_businessprofiles');
+    }catch (\Exception $e) {
+        report($e);
+
+        return false;
+    }
 }
 
     /**
@@ -190,6 +195,9 @@ class BusinessController extends Controller
      */
     public function updateBusinessProfiles(Request $request)
     {
+       
+
+        try {
         $fileName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('uploads/'), $fileName);
         $qdesc = 'uploads/' . $fileName;
@@ -197,5 +205,10 @@ class BusinessController extends Controller
 
         $update_businesscategory_data = Business::where('id', $hid_id)->update(['name' => $request->name, 'business_categoryId' => $request->business_categoryId, 'address' => $request->address, 'image' => $qdesc, 'mobile' => $request->mobile, 'open_hour' => $request->open_hour, 'closing_hour' => $request->closing_hour, 'services' => $request->services, 'products' => $request->products, 'description' => $request->description, 'facebook_link' => $request->facebook_link, 'instagram_link' => $request->instagram_link, 'twitter_link' => $request->twitter_link, 'youtube_link' => $request->youtube_link, 'linkedin_link' => $request->linkedin_link]);
         return redirect()->route('admin.manage_businessprofiles');
+    }catch (\Exception $e) {
+        report($e);
+
+        return false;
+    }
     }
 }
