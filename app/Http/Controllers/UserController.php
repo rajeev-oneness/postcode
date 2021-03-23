@@ -7,8 +7,10 @@ use App\Model\Rating;
 use App\Model\Contact;
 use App\Model\Business;
 use App\Model\Testimonial;
+use App\Model\Newsletter;
 use Mail;
 use Validator, Redirect, Response;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -122,79 +124,73 @@ class UserController extends Controller
      */
     public function addUserBusiness(Request $request)
     {
-
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required',
-            'abn' => 'required|string',
+            'abn' => 'required',
             'company_website' => 'required',
-            'email' => 'required|unique:businesses',
-            'mobile' => 'required|numeric',
-            'open_hour' => 'required|max:10',
+            'email' => 'required|email|unique:businesses',
+            'mobile' => 'required|numeric|digits:10',
+            'open_hour' => 'required',
             'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $validator->validate();
  try {
-       
+        // dd(config('mail.username'));
         $fileName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('uploads/'), $fileName);
-        $busiprofileimg = 'uploads/' . $fileName;
+        $businessProfileImg = 'uploads/' . $fileName;
 
-        $password = 123456;
-
-        $password1 = \Hash::make($password);
-
-        $servicesid = 1;
-        $state_id = 1;
-        $address = 'New Jersey';
-        $pin_code = 700058;
-        $business_categoryId = 1;
-        $closing_hour = 10;
-        $productId = 1;
-        $description = 'Products Under One Roof';
-        $facebook_link = 'https://www.amazon.in/';
-        $instagram_link = 'https://www.amazon.in/';
-        $twitter_link = 'https://www.amazon.in/';
-        $youtube_link = 'https://www.amazon.in/';
-        $linkedin_link = 'https://www.amazon.in/';
+        $password = str_random(8);
+        // $servicesid = 1;
+        // $state_id = 1;
+        // $address = 'New Jersey';
+        // $pin_code = 700058;
+        // $business_categoryId = 1;
+        // $closing_hour = 10;
+        // $productId = 1;
+        // $description = 'Products Under One Roof';
+        // $facebook_link = 'https://www.amazon.in/';
+        // $instagram_link = 'https://www.amazon.in/';
+        // $twitter_link = 'https://www.amazon.in/';
+        // $youtube_link = 'https://www.amazon.in/';
+        // $linkedin_link = 'https://www.amazon.in/';
 
         $name = $request->name;
         $email = $request->email;
 
      
 
-        $Business = new Business();
-        $Business->email = $email;
-        $Business->abn = $request->abn;
-        $Business->password = $password1;
-        $Business->company_website = $request->company_website;
-        $Business->image = $busiprofileimg;
-        $Business->name = $name;
-        $Business->address = $address;
-        $Business->mobile = $request->mobile;
-        $Business->open_hour = $request->open_hour;
-        $Business->closing_hour = $closing_hour;
-        $Business->services = $servicesid;
-        $Business->products = $productId;
-        $Business->state_id = $state_id;
-        $Business->business_categoryId = $business_categoryId;
-        $Business->pin_code = $pin_code;
-        $Business->description = $description;
-        $Business->facebook_link = $facebook_link;
-        $Business->instagram_link = $instagram_link;
-        $Business->twitter_link = $twitter_link;
-        $Business->youtube_link = $youtube_link;
-        $Business->linkedin_link = $linkedin_link;
+        $business = new Business();
+        $business->email = $email;
+        $business->abn = $request->abn;
+        $business->password = Hash::make($password);
+        $business->company_website = $request->company_website;
+        $business->image = $businessProfileImg;
+        $business->name = $name;
+        //$business->address = $address;
+        $business->mobile = $request->mobile;
+        $business->open_hour = $request->open_hour;
+        // $business->closing_hour = $closing_hour;
+        //$business->services = $servicesid;
+        //$business->products = $productId;
+        //$business->state_id = $state_id;
+        //$business->business_categoryId = $business_categoryId;
+        //$business->pin_code = $pin_code;
+        //$business->description = $description;
+        //$business->facebook_link = $facebook_link;
+        //$business->instagram_link = $instagram_link;
+        //$business->twitter_link = $twitter_link;
+        //$business->youtube_link = $youtube_link;
+       // $business->linkedin_link = $linkedin_link;
 
-        // echo json_encode($Business);die;
+        // echo json_encode($business);die;
+        $business->save();
+        // dd(hash()->make($password));
+        // $deal= $business->id;
 
-        $Business->save();
+        //$businessname = $business->name;
+        //$businessemail = $business->email;
 
-        // $deal= $Business->id;
-
-        $businessname = $Business->name;
-        $businessemail = $Business->email;
-
-        // echo json_encode($Businessemail);die;
+        // echo json_encode($businessemail);die;
         \Mail::send('emails/mail', array('name' => $name, 'email' => $email, 'password' => $password), function ($message) use ($name, $email, $password) {
             $message->to($email, $name)->subject('Welcome To PostCode');
             $message->from('sagaranimesh3317@gmail.com', 'Post Code');
@@ -227,5 +223,16 @@ class UserController extends Controller
             ['name', 'LIKE', '%' . $name . '%'],
         ])->pluck('name')->ToArray();
         return $data;
+    }
+
+    public function subscribeNewsletter(request $request) {
+        $request->validate([
+            'email' =>['required','email','unique:newsletters'],
+        ]);
+        $newsletter = new Newsletter;
+        $newsletter->email = $request->email;
+        $newsletter->save();
+        $request->session()->flash('newsletter', 'Subscribed successfully!');
+        return back();
     }
 }

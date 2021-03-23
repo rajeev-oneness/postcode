@@ -73,36 +73,12 @@
               
                     <div class="form_wrapper">
                         <img src="{{asset('user_assets/image/form-border.png')}}" class="form_bg">
-                    <?php
-                    if(isset($_REQUEST['via'])!='man'){
-                    ?>
-                    <div class="search_wrap wd-search">
-                        <div class="autocomplete">
-                            <input type="search" class="searchBox" id="business_search" autocomplete="off" name="business_search" placeholder="Search business via keyword...">
-                        </div>
-                        <button class="search_btn" id="course_butt" name="course_butt"><img src="{{asset('user_assets/image/search.png')}}"></button>
-                    </div>
-                    <a href="#" class="buisness_signup"><img src="{{asset('user_assets/image/Google-mybusiness-1.png')}}">sign up via google my business</a>
-                    <?php
-                    }
-                    ?>
-                       
-
-                        @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
                         <form class="needs-validation" method="post" name="" action="{{route('admin.add_userbusiness')}}" enctype="multipart/form-data" novalidate>
                             {{csrf_field()}}
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">
                                 <label>BUSINESS NAME</label>
-                                <input type="text" name="name" value="{{old('name')}}" id="name" class="textbox">
+                                <input type="text" name="name" value="{{old('name')}}" id="name" class="textbox" required>
                                 @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -134,7 +110,7 @@
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">
                                 <label>PHONE NO.</label>
-                                <input type="text" name="mobile" value="{{ old('mobile') }}" id="mobile" class="textbox">
+                                <input type="text" name="mobile" value="{{ old('mobile') }}" id="mobile" class="textbox" onkeypress="return isNumberKey(event);" maxlength="10">
                                 @error('mobile')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -152,7 +128,7 @@
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/clock.png')}}">
                                 <label>opening hours</label>
-                                <input type="text" name="open_hour" value="{{ old('open_hour') }}" id="open_hour" class="textbox">
+                                <input type="time" name="open_hour" value="{{ old('open_hour') }}" id="open_hour" class="textbox" onkeypress="return false;">
                                 @error('open_hour')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -406,6 +382,14 @@
 
             }
         });
+    </script>
+    <script>
+        function isNumberKey(evt){
+            if(evt.charCode >= 48 && evt.charCode <= 57){
+                return true;
+            }
+            return false;
+        }
     </script>
 </body>
 

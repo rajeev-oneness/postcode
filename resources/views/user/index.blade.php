@@ -44,7 +44,7 @@
                     <h2 class="banner_title2 text-center text-white">Where Local Matters</h2>
                     <p class="banner_content text-center text-white">Australia’s Newest Website to Help Local Businesses Promote <br>Achieve Marketing Success</p>
                     <div class="btn_grp text-center">
-                    <a href="/signup?via=man" id="sign_mannually" class="orange_btn">SIGN UP MANUALLY</a>
+                    <a href="{{route('adminsignup')}}" id="sign_mannually" class="orange_btn">SIGN UP MANUALLY</a>
                         <a href="{{route('adminsignup')}}" class="blue_btn"><img src="{{asset('user_assets/image/Google-mybusiness-1.png')}}"> SIGN UP VIA GOOGLE MY BUSINESS</a>
                     
                         <!-- <a href="{{route('adminsignup')}}" id="sign_mannually" class="orange_btn">SIGN UP MANUALLY</a>
@@ -105,9 +105,26 @@
                     <p class="newswrap_content">Whant to be notified about new locations ? Just sign up.</p>
                 </div>
                 <div class="col-12 col-md-6">
-                    <form class="newsletter_form">
-                        <input type="email" name="" placeholder="Enter your email">
+                    @if (Session::has('newsletter'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{session('newsletter')}}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+                    <form method="post" action="{{route('newsletter')}}" class="newsletter_form">
+                        @csrf
+                        <input type="email" name="email" value="{{old('email')}}" placeholder="Enter your email" required>
                         <input type="submit" class="submt_form" value="Send">
+                        @error('email')
+                        <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                            <strong>{{$message}}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @enderror
                     </form>
                 </div>
             </div>

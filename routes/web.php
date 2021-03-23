@@ -24,6 +24,8 @@ Route::get('/thankyou', function () {
     return view('user.thankyou');
 })->name('user.thankyou');
 
+Route::post('/subscribe-newsletter','UserController@subscribeNewsletter')->name('newsletter');
+
 /****************************************************Course Search*************************************/
 // Route::get('/business_search/{id}', 'UserController@BusinessSearch');
 Route::post('/search_main', 'UserController@search_main');
