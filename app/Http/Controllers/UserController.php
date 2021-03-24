@@ -173,7 +173,7 @@ class UserController extends Controller
         //$business->services = $servicesid;
         //$business->products = $productId;
         //$business->state_id = $state_id;
-        //$business->business_categoryId = $business_categoryId;
+        $business->business_categoryId = 1;
         //$business->pin_code = $pin_code;
         //$business->description = $description;
         //$business->facebook_link = $facebook_link;

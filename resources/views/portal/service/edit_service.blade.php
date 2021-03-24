@@ -32,34 +32,34 @@
               <div class="col-sm-12">
                 <div class="card">
                   @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                  @endif
                
               
                   <div class="card-body">
-                    <form class="needs-validation" method="post" action="{{route('admin.update_services')}}" enctype="multipart/form-data" novalidate="">
+                    <form class="needs-validation" method="post" action="{{route('admin.update_services')}}" enctype="multipart/form-data">
                     <input type="hidden" id="hid_id" name="hid_id" value="{{ $editedservice_data->id }}">
                     {{csrf_field()}}
                       <div class="form-row">
                         <div class="col-md-4 mb-3">
-                        <div class="form-group">
-                                                <label for="formrow-inputState">Business Category</label>
-                                                <select id="business_categoryId" name="business_categoryId" class="form-control">
-                                                <option value="">Select</option>
-                                                @foreach($businessSerData as $servicesData)
-                                                <option value="{{$servicesData->id}}"  <?php echo $editedservice_data->businessId ==  $servicesData->id ? "selected" : ""; ?>>{{$servicesData->name}}</option>
-                                                @endforeach
-                                                </select>
-                                                @error('business_categoryId')
-                      <span class="text-danger">{{ $message }}</span>
-                      @enderror
-                                            </div>
+                          <div class="form-group">
+                            <label for="formrow-inputState">Business Category</label>
+                            <select id="business_categoryId" name="business_categoryId" class="form-control">
+                                <option value="">Select</option>
+                                @foreach($businessSerData as $servicesData)
+                                  <option value="{{$servicesData->id}}"  <?php echo $editedservice_data->businessId ==  $servicesData->id ? "selected" : ""; ?>>{{$servicesData->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('business_categoryId')
+                              <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                          </div>
                         </div>
                         <div class="col-md-4 mb-3">
                           <label for="validationCustom05">Service Name</label>
@@ -82,7 +82,7 @@
                       <div class="form-row">
                       <div class="col-md-4 mb-3">
                           <label for="validationCustom05">Price</label>
-                          <input class="form-control" id="price" name="price" value="{{ $editedservice_data->price }}" type="text" placeholder="Enter Price" required="">
+                          <input class="form-control" id="price" name="price" value="{{ $editedservice_data->price }}" type="text" placeholder="Enter Price" onkeypress="return inputPrice(event)" required="">
                           @error('price')
                       <span class="text-danger">{{ $message }}</span>
                       @enderror
@@ -94,7 +94,7 @@
                         <div class="btn btn-mdb-color btn-rounded"> 
                           <img src="{{url($editedservice_data->image)}}" alt="people" class="" width="56" style="border:1px solid #004694;height:100px;width:200px;margin-bottom:5%;" id="img-upload">
 
-                          <input class="form-control offrimg" type="file" id="image" name="image" required="">
+                          <input class="form-control offrimg" type="file" id="image" name="image">
                           @error('image')
                       <span class="text-danger">{{ $message }}</span>
                       @enderror
@@ -139,5 +139,20 @@
 
          
         </script>
-      
+
+        <script>
+          function inputPrice(event) {
+            if(event.charCode >= 48 && event.charCode <= 57) {
+              return true;
+            }
+            return false;
+          }
+  
+          $("form").submit(function() {
+            $(this).submit(function() {
+                return false;
+            });
+            return true;
+          });
+        </script>
         @endsection

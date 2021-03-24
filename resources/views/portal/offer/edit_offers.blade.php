@@ -34,16 +34,16 @@
           <div class="col-sm-12">
             <div class="card">
             @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
               <div class="card-body">
-                <form class="needs-validation" method="post" name="offr" action="{{route('admin.update_offers')}}" enctype="multipart/form-data" novalidate="">
+                <form class="needs-validation" method="post" name="offr" action="{{route('admin.update_offers')}}" enctype="multipart/form-data">
                   <input type="hidden" id="hid_id" name="hid_id" value="{{$editedoffers_data->id}}">
                   {{csrf_field()}}
                   <div class="form-row">
@@ -99,7 +99,7 @@
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Price</label>
                       <div class="input-group">
-                      <input class="form-control" id="price" name="price" value="{{$editedoffers_data->price}}" type="price" placeholder="Enter Promo Code" required="">
+                      <input class="form-control" id="price" name="price" value="{{$editedoffers_data->price}}" type="price" onkeypress="return inputNumeric(event)" placeholder="Enter Price" required="">
                             </div>
                       @error('price')
                       {{$message}}
@@ -112,7 +112,7 @@
                     <div class="col-md-3 mb-3">
                       <label for="validationCustom05">Expire Date</label>
                       <div class="input-group">
-                              <input class="datepicker-here form-control digits" id="expire_date" name="expire_date" value="{{$editedoffers_data->expire_date}}" placeholder="Expire Date" required="" type="text" data-language="en">
+                              <input class="datepicker-here form-control digits" id="expire_date" name="expire_date" value="{{$editedoffers_data->expire_date}}" placeholder="Expire Date" required="" type="text" onkeypress="return false;" data-language="en">
                             </div>                 
                       @error('expire_date')
                       {{$message}}
@@ -123,7 +123,7 @@
                       <div class="d-flex justify-content-center">
                         <div class="btn btn-mdb-color btn-rounded">
                         <img src="{{url($editedoffers_data->image)}}" alt="people" class="offrlck" width="56" id="img-upload">
-                          <input class="form-control offrimg" type="file" id="image" value="" name="image" required="">
+                          <input class="form-control offrimg" type="file" id="image" value="" name="image">
                           @error('image')
                           {{$message}}
                           @enderror
@@ -195,6 +195,20 @@
     });
       
         </script>
-      
+      <script>
+        function inputNumeric(event) {
+          if(event.charCode >= 48 && event.charCode <= 57) {
+            return true;
+          }
+          return false;
+        }
+  
+          $("form").submit(function() {
+              $(this).submit(function() {
+                  return false;
+              });
+              return true;
+          });
+      </script>
 
     @endsection
