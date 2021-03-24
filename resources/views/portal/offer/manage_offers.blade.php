@@ -87,10 +87,11 @@
 // 			redirectPost('edit_offer', fd);
 //     });
     $(".delete_app").click(function(){
-       
-var appdel_id=this.id;
-       var fd = {'appdel_id': appdel_id,'_token':$('input[name="_token"]').val()};
-			redirectPost('delete_offers', fd);
+        if(confirm('Are you sure?')) {
+            var appdel_id=this.id;
+            var fd = {'appdel_id': appdel_id,'_token':$('input[name="_token"]').val()};
+            redirectPost('delete_offers', fd);
+        }
     });
                });
                var redirectPost = function (url, data = null, method = 'post') {

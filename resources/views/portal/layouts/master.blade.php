@@ -143,7 +143,7 @@
             <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Events Categories</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('events_categories')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
-                <li><a class="sidebar-header" href="{{route('admin.manage_eventcategories')}}"><i data-feather="server"></i><span>Manage Event</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.manage_eventcategories')}}"><i data-feather="server"></i><span>Manage Categories</span></a></li>
 
               </ul>
             </li>

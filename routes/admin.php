@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	  Route::post('/update_products', 'ProductController@updateProduct')->name('admin.update_products');
 
-	  Route::post('/delete_products_details', 'ProductController@deleteProductsDetails')->name('admin.delete_product');
+	  Route::get('/delete_products_details/{id}', 'ProductController@deleteProductsDetails')->name('admin.delete_product');
 
 	  //--------------------------------------------------------------Services Section-----------------------------------------------//
 

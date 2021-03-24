@@ -82,14 +82,16 @@
                         redirectPost('edit_businesscategories', fd);
                     });
                     $(".delete_businesscategories").click(function() {
-                        var lead_call_id = this.id;
-                        var fd = {
-                            'lead_delete_id': lead_call_id,
-                            '_token': $('input[name="_token"]').val()
-                        };
+                        if(confirm('Are you sure?')) { 
+                            var lead_call_id = this.id;
+                            var fd = {
+                                'lead_delete_id': lead_call_id,
+                                '_token': $('input[name="_token"]').val()
+                            };
 
-                        redirectPost('delete_businesscategories', fd);
-                        create_table();
+                            redirectPost('delete_businesscategories', fd);
+                            create_table();
+                        }
                     });
 
                 });

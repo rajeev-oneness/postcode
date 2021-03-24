@@ -45,33 +45,29 @@
                             <th>Price</th>
                             <th width="40px;">Image</th>                       
                             <th>Action</th>
-                            
                           </tr>
-                        </thead>
-                                          
+                        </thead>            
                         <tbody>
-  @foreach ($categories as $offercategories)
-    <tr>
-    <td>{{$offercategories->businesscategory->name}}</td>
-    <td>{{$offercategories->name}}</td>
-    <td>{{$offercategories->details}}</td>
-    <td>{{$offercategories->price}}</td>
-  
-<td><img src='{{url($offercategories->image)}}' style='width: 40%;'></td>
-<td><a class="edit_product" href="{{route('edit_product', encrypt($offercategories->id))}}" id="}}"><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$offercategories->id}}"><i class="fa fa-trash"></i></a></td>
-  </tr>
-@endforeach
-</tbody>
-                       
+                          @foreach ($categories as $offercategories)
+                            <tr>
+                              <td>{{$offercategories->businesscategory->name}}</td>
+                              <td>{{$offercategories->name}}</td>
+                              <td>{{$offercategories->details}}</td>
+                              <td>{{$offercategories->price}}</td>
+                              <td><img src='{{url($offercategories->image)}}' style='width: 40%;'></td>
+                              <td>
+                                <a class="edit_product" href="{{route('edit_product', encrypt($offercategories->id))}}" id="}}"><i class="fa fa-edit"></i></a>
+                                <a class="delete_app" onclick="return confirm('Are you sure?')" href="{{route('admin.delete_product', ['id' => encrypt($offercategories->id)])}}"><i class="fa fa-trash"></i></a>
+                              </td>
+                            </tr>
+                          @endforeach
+                        </tbody>
                       </table>
                     </div>
                   </div>
                 </div>
               </div>
               <!-- Zero Configuration  Ends-->
-             
-            
-            
               
           <!-- Container-fluid Ends-->
         </div>
@@ -86,12 +82,9 @@
 //        var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
 // 			redirectPost('edit_product', fd);
 //     });
-    $(".delete_app").click(function(){
-       
-var appdel_id=this.id;
-       var fd = {'appdel_id': appdel_id,'_token':$('input[name="_token"]').val()};
-			redirectPost('delete_products_details', fd);
-    });
+    // function deleteProduct() {
+    //   alert('delete');
+    // }
                });
                var redirectPost = function (url, data = null, method = 'post') {
                     var form = document.createElement('form');
@@ -108,7 +101,5 @@ var appdel_id=this.id;
                     form.submit();
                 }
             </script>
-
-
 
         @endsection

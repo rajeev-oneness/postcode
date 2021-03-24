@@ -79,10 +79,11 @@ var lead_call_id=this.id;
 			redirectPost('edit_eventcategories', fd);
     });
     $(".delete_app").click(function(){
-       
-var lead_call_id=this.id;
-       var fd = {'lead_delete_id': lead_call_id,'_token':$('input[name="_token"]').val()};
-			redirectPost('delete_eventcategories', fd);
+      if(confirm('Are you sure?')) { 
+        var lead_call_id=this.id;
+        var fd = {'lead_delete_id': lead_call_id,'_token':$('input[name="_token"]').val()};
+        redirectPost('delete_eventcategories', fd);
+      }
     });
                });
                var redirectPost = function (url, data = null, method = 'post') {

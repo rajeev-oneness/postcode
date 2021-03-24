@@ -18,9 +18,10 @@ class CreateEventsTable extends Migration
             $table->bigInteger('event_category_id');
             $table->bigInteger('business_id');
             $table->string('name');
-            $table->string('details');
             $table->string('image');
             $table->string('address');
+            $table->string('description');
+            $table->string('short_description');
             $table->date('start');
             $table->date('end');
             $table->integer('frequency');

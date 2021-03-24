@@ -30,34 +30,28 @@ class ServiceController extends Controller
     public function addServices(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'businessId' => 'required|min:1|max:20',
-            'name' => 'required|min:4|max:255',
-            'details' => 'required|min:4|max:255',
-            'price' => 'required|numeric',
             'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            
         ]);
-       $validator->validate();
+        $validator->validate();
+        try {
+            $fileName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/'), $fileName);
+            $servicedesc = 'uploads/' . $fileName;
 
-  try {
-        $fileName = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('uploads/'), $fileName);
-        $servicedesc = 'uploads/' . $fileName;
+            $Service = new Service();
+            $Service->businessId = $request->businessId;
+            $Service->name = $request->name;
+            $Service->image = $servicedesc;
+            $Service->details = $request->details;
+            $Service->price = $request->price;
 
-        $Service = new Service();
-        $Service->businessId = $request->businessId;
-        $Service->name = $request->name;
-        $Service->image = $servicedesc;
-        $Service->details = $request->details;
-        $Service->price = $request->price;
+            $Service->save();
+            return redirect()->route('admin.manage_service');
+        } catch (\Exception $e) {
+            report($e);
 
-        $Service->save();
-        return redirect()->route('admin.manage_service');
-    }catch (\Exception $e) {
-        report($e);
-
-        return false;
-    }
+            return false;
+        }
     }
 
     /**
@@ -69,9 +63,7 @@ class ServiceController extends Controller
     public function manageServiceView(Request $request)
     {
         $userId = Auth::user()->id;
-
         $service_manage = Service::with('busicategorytype')->get();
-        // echo json_encode($service_manage);die;
         return view('/portal.service.manage_service', compact('service_manage'));
     }
 
@@ -107,26 +99,33 @@ class ServiceController extends Controller
     public function updateServices(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:4|max:255',
-            'details' => 'required|min:4|max:255',
-            'price' => 'required|numeric',
-            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
             
         ]);
-       $validator->validate();
-       try {
-        $fileName = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('uploads/'), $fileName);
-        $servc = 'uploads/' . $fileName;
-        $hid_id = $request->hid_id;
+        $validator->validate();
+        try {
+            $hid_id = $request->hid_id;
+            if($request->hasFile('image')) {
+                $fileName = time() . '.' . $request->image->extension();
+                $request->image->move(public_path('uploads/'), $fileName);
+                $servc = 'uploads/' . $fileName;
+                Service::where('id', $hid_id)->update([
+                    'image' => $servc
+                ]);
+            }
 
-        $update_service_data = Service::where('id', $hid_id)->update(['name' => $request->name, 'businessId' => $request->business_categoryId, 'details' => $request->details, 'image' => $servc, 'price' => $request->price]);
-        return redirect()->route('admin.manage_service');
-    }catch (\Exception $e) {
-        report($e);
+            $update_service_data = Service::where('id', $hid_id)->update([
+                'name' => $request->name, 
+                'businessId' => $request->business_categoryId, 
+                'details' => $request->details,
+                'price' => $request->price
+            ]);
+            return redirect()->route('admin.manage_service');
+        } catch (\Exception $e) {
+            report($e);
 
-        return false;
-    }
+            return false;
+        }
     }
 
     /**

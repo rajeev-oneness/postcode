@@ -33,14 +33,14 @@
               <div class="col-sm-12">
                 <div class="card">
                 @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
         
                   <div class="card-body">
                     <form class="needs-validation" method="post" action="{{route('admin.update_businessprofiles')}}" enctype="multipart/form-data" novalidate="">
@@ -75,7 +75,7 @@
                       <div class="d-flex justify-content-center">
                         <div class="btn btn-mdb-color btn-rounded">
                         <img src="{{url($businessprofile_data->image)}}" alt="people" class="offrlck" width="56" id="img-upload">
-                          <input class="form-control offimgbuis" type="file" id="image" value="" name="image" required="">
+                          <input class="form-control offimgbuis" type="file" id="image" value="" name="image">
                           @error('image')
                       <span class="text-danger">{{ $message }}</span>
                       @enderror
@@ -96,17 +96,17 @@
                      
                         <div class="col-md-4 mb-3">
                           <label for="validationCustom05">Mobile</label>
-                          <input class="form-control" id="mobile" name="mobile" type="text" value="{{ $businessprofile_data->mobile }}" placeholder="Mobile" required="">
+                          <input class="form-control" id="mobile" name="mobile" type="text" value="{{ $businessprofile_data->mobile }}" placeholder="Mobile" onkeypress="return inputNumeric(event)" required="">
                           @error('mobile')
                       <span class="text-danger">{{ $message }}</span>
                       @enderror
                         </div>
                         <div class="col-md-4 mb-3">
                           <label for="validationCustom05">Opening Hour</label>
-                          <input class="form-control" id="open_hour" name="open_hour" type="text" value="{{ $businessprofile_data->open_hour }}" placeholder="Opening Hour" required="">
+                          <input class="form-control" id="open_hour" name="open_hour" type="time" value="{{ $businessprofile_data->open_hour }}" onkeypress="return false;" placeholder="Opening Hour" required="">
                           @error('open_hour')
-                      <span class="text-danger">{{ $message }}</span>
-                      @enderror
+                          <span class="text-danger">{{ $message }}</span>
+                          @enderror
                         </div>
                      
                       </div>
@@ -114,7 +114,7 @@
                       <div class="form-row">
                       <div class="col-md-4 mb-3">
                           <label for="validationCustom05">Closing Hour</label>
-                          <input class="form-control" id="closing_hour" name="closing_hour" value="{{ $businessprofile_data->closing_hour }}" type="text" placeholder="Closing Hour" required="">
+                          <input class="form-control" id="closing_hour" name="closing_hour" value="{{ $businessprofile_data->closing_hour }}" type="time" placeholder="Closing Hour" onkeypress="return false;" required="">
                           @error('closing_hour')
                       <span class="text-danger">{{ $message }}</span>
                       @enderror
@@ -217,7 +217,7 @@
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Pin Code</label>
-                      <input class="form-control" id="pin_code" value="{{ $businessprofile_data->pin_code }}" name="pin_code" type="text" placeholder="Enter Pin Code" required="">
+                      <input class="form-control" id="pin_code" value="{{ $businessprofile_data->pin_code }}" name="pin_code" type="text" placeholder="Enter Pin Code" onkeypress="return inputNumeric(event)" required="">
                       @error('pin_code')
                       <span class="text-danger">{{ $message }}</span>
                       @enderror
@@ -258,5 +258,19 @@ $(document).ready(function (){
       $('.file-upload').file_upload();
     });
      </script>
-    
+      <script>
+        function inputNumeric(event) {
+          if(event.charCode >= 48 && event.charCode <= 57) {
+            return true;
+          }
+          return false;
+        }
+  
+          $("form").submit(function() {
+              $(this).submit(function() {
+                  return false;
+              });
+              return true;
+          });
+      </script>
         @endsection
