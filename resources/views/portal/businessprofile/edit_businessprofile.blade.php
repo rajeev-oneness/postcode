@@ -43,7 +43,7 @@
                 @endif
         
                   <div class="card-body">
-                    <form class="needs-validation" method="post" action="{{route('admin.update_businessprofiles')}}" enctype="multipart/form-data" novalidate="">
+                    <form class="needs-validation" method="post" action="{{route('admin.update_businessprofiles')}}" enctype="multipart/form-data">
                     <input type="hidden" id="hid_id" name="hid_id" value="{{ $businessprofile_data->id }}">
                     <input type="hidden" id="hid_img" name="hid_img" value="">
                     {{csrf_field()}}
