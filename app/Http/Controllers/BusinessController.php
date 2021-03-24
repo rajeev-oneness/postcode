@@ -203,7 +203,9 @@ class BusinessController extends Controller
             $update_businesscategory_data = Business::where('id', $hid_id)->update([
                 'name' => $request->name, 
                 'business_categoryId' => $request->business_categoryId, 
-                'address' => $request->address, 
+                'address' => $request->address,
+                'pin_code' => $request->pin_code,
+                'state_id' => $request->state_id, 
                 'mobile' => $request->mobile, 
                 'open_hour' => $request->open_hour, 
                 'closing_hour' => $request->closing_hour, 
