@@ -18,6 +18,8 @@ Route::get('/', function () {
 
 Route::get('/signup', 'UserController@Signup')->name('adminsignup');
 
+Route::get('/signup-google-my-business', 'UserController@Signup')->name('GMBsignup');
+
 Route::post('/add_userbusiness','UserController@addUserBusiness')->name('admin.add_userbusiness');
 
 Route::get('/thankyou', function () {

@@ -125,16 +125,21 @@ class UserController extends Controller
     public function addUserBusiness(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'abn' => 'required',
-            'company_website' => 'required',
-            'email' => 'required|email|unique:businesses',
-            'mobile' => 'required|numeric|digits:10',
-            'open_hour' => 'required',
-            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'email' => 'regex:/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/'
         ]);
  try {
-        // dd(config('mail.username'));
+        // if($request->hasFile('image')){
+        //         $image = $request->file('image');
+        //         $random = date('Ymdhis').rand(0000,9999);
+        //         $image->move('uploads/profile/',$random.'.'.$image->getClientOriginalExtension());
+        //         $imageurl = url('uploads/profile/'.$random.'.'.$image->getClientOriginalExtension());
+        // }elseif(!empty($request->businessIcon)){
+        //     $imageurl = $request->businessIcon;
+        // }else{
+        //     $imageurl = '';
+        // }
+        
         $fileName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('uploads/'), $fileName);
         $businessProfileImg = 'uploads/' . $fileName;
@@ -142,7 +147,6 @@ class UserController extends Controller
         $password = str_random(8);
         // $servicesid = 1;
         // $state_id = 1;
-        // $address = 'New Jersey';
         // $pin_code = 700058;
         // $business_categoryId = 1;
         // $closing_hour = 10;
@@ -157,7 +161,10 @@ class UserController extends Controller
         $name = $request->name;
         $email = $request->email;
 
-     
+        // echo $name;
+        // echo $email;
+        // echo $password;
+        // dd($request->all());
 
         $business = new Business();
         $business->email = $email;
@@ -166,9 +173,13 @@ class UserController extends Controller
         $business->company_website = $request->company_website;
         $business->image = $businessProfileImg;
         $business->name = $name;
-        //$business->address = $address;
+        $business->address = $request->address;
         $business->mobile = $request->mobile;
         $business->open_hour = $request->open_hour;
+        if($request->longitude != '' && $request->latitude != ''){
+            $business->longitude = $request->longitude;
+            $business->latitude = $request->latitude; 
+        }
         // $business->closing_hour = $closing_hour;
         //$business->services = $servicesid;
         //$business->products = $productId;
@@ -227,7 +238,7 @@ class UserController extends Controller
 
     public function subscribeNewsletter(request $request) {
         $request->validate([
-            'email' =>['required','email','unique:newsletters'],
+            'email' =>['required','regex:/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/','unique:newsletters'],
         ]);
         $newsletter = new Newsletter;
         $newsletter->email = $request->email;

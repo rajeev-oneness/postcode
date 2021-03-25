@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPuZ9AcP4PHUBgbUsT6PdCRUUkyczJ66I&libraries=places"></script>
 
     <title>Our Postcode</title>
     <style>
@@ -46,20 +47,6 @@
         <div class="container">
             <div class="menu_wrap">
                 <a href="{{route('user.welcome')}}" class="logo_icon"><img src="{{asset('user_assets/image/logo.png')}}"></a>
-                <!-- <ul class="menu_icon">
-                    <li>
-                        <a href="{{route('adminsignup')}}">
-                            <img src="{{asset('user_assets/image/log-icon.png')}}">
-                            Sign up
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="{{asset('user_assets/image/save-icon.png')}}">
-                            Saved Details
-                        </a>
-                    </li>
-                </ul> -->
             </div>
             <div class="row">
                 <div class="col-12 col-md-6">
@@ -73,44 +60,69 @@
               
                     <div class="form_wrapper">
                         <img src="{{asset('user_assets/image/form-border.png')}}" class="form_bg">
-                        <form class="needs-validation" method="post" name="" action="{{route('admin.add_userbusiness')}}" enctype="multipart/form-data" novalidate>
+                        <form class="needs-validation" method="post" name="" action="{{route('admin.add_userbusiness')}}" enctype="multipart/form-data">
                             {{csrf_field()}}
+                            @if(Route::current()->getName() == 'GMBsignup')
+                            <!--Longitude Latitude-->
+                            
+                            <input type="hidden" name="longitude" id="selectedLongitude" value="">
+                            <input type="hidden" name="latitude" id="selectedLatitude" value="">
+
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">
-                                <label>BUSINESS NAME</label>
-                                <input type="text" name="name" value="{{old('name')}}" id="name" class="textbox" required>
+                                {{-- <label>BUSINESS NAME</label> --}}
+                                <input type="text" name="name" value="{{old('name')}}" id="inputSearchTextFilter" class="textbox" placeholder="BUSINESS NAME" autofocus required>
                                 @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            @else
+                            <div class="sign_in_form">
+                                <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">
+                                {{-- <label>BUSINESS NAME</label> --}}
+                                <input type="text" name="name" value="{{old('name')}}" id="name" class="textbox" required placeholder="BUSINESS NAME">
+                                @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            @endif
+                            
+                            <div class="sign_in_form">
+                                <img src="{{asset('user_assets/image/email-icon.png')}}">
+                                {{-- <label>ADDRESS</label> --}}
+                                <input type="text" name="address" value="{{ old('address') }}" id="address" class="textbox" maxlength="255" placeholder="ADDRESS" required>
+                                @error('address')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/abn.png')}}">
-                                <label>ABN</label>
-                                <input type="text" name="abn" value="{{ old('abn') }}" id="abn" class="textbox">
+                                {{-- <label>ABN</label> --}}
+                                <input type="text" name="abn" value="{{ old('abn') }}" id="abn" class="textbox" placeholder="ABN">
                                 @error('abn')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/team.png')}}">
-                                <label>COMPANY WEBSITE</label>
-                                <input type="text" name="company_website" value="{{ old('company_website') }}" id="company_website" class="textbox">
+                                {{-- <label>COMPANY WEBSITE</label> --}}
+                                <input type="text" name="company_website" value="{{ old('company_website') }}" id="company_website" class="textbox" placeholder="COMPANY WEBSITE">
                                 @error('company_website')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/email-icon.png')}}">
-                                <label>EMAIL ADDRESS</label>
-                                <input type="email" name="email" value="{{ old('email') }}" id="email" class="textbox">
+                                {{-- <label>EMAIL ADDRESS</label> --}}
+                                <input type="email" name="email" value="{{ old('email') }}" id="email" class="textbox" required placeholder="EMAIL ADDRESS">
                                 @error('email')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">
-                                <label>PHONE NO.</label>
-                                <input type="text" name="mobile" value="{{ old('mobile') }}" id="mobile" class="textbox" onkeypress="return isNumberKey(event);" maxlength="10">
+                                {{-- <label>PHONE NO.</label> --}}
+                                <input type="text" name="mobile" value="{{ old('mobile') }}" id="mobile" class="textbox" onkeypress="return isNumberKey(event);" placeholder="PHONE NO." required>
                                 @error('mobile')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -118,7 +130,7 @@
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/upload.png')}}">
                                 <label>UPLOAD AN IMAGE</label>
-                                <input type="file" name="image" value="{{ old('image') }}" id="image" class="textbox">
+                                <input type="file" name="image" value="{{ old('image') }}" id="image" required class="textbox">
                                 @error('image')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -127,8 +139,8 @@
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/clock.png')}}">
-                                <label>opening hours</label>
-                                <input type="time" name="open_hour" value="{{ old('open_hour') }}" id="open_hour" class="textbox" onkeypress="return false;">
+                                {{-- <label>opening hours</label> --}}
+                                <input type="time" name="open_hour" value="{{ old('open_hour') }}" id="open_hour" class="textbox" required placeholder="OPENING HOUR" onkeypress="return false;">
                                 @error('open_hour')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -186,22 +198,11 @@
         </div>
     </section>
 
-    <section class="newsletter_wraper">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    <h3 class="newswrap_title">Subscribe For a Newsletter</h3>
-                    <p class="newswrap_content">Whant to be notified about new locations ? Just sign up.</p>
-                </div>
-                <div class="col-12 col-md-6">
-                    <form class="newsletter_form">
-                        <input type="email" name="" placeholder="Enter your email">
-                        <input type="submit" class="submt_form" value="Send">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+    
+    
+    @include('user.newsletter')
+
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -211,6 +212,51 @@
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="{{asset('user_assets/js/slick.min.js')}}"></script>
+
+    <script>
+        // AutoComplete Start
+
+        google.maps.event.addDomListener(window,'load',initialize);
+
+        function initialize(){
+
+            var autocomplete= new google.maps.places.Autocomplete(document.getElementById('inputSearchTextFilter'));
+
+            google.maps.event.addListener(autocomplete, 'place_changed', function(){
+
+                var places = autocomplete.getPlace();
+                console.log(places);
+                // console.log(places.formatted_address);
+                // console.log(places.name);
+                // console.log(places.website);
+                $('#inputSearchTextFilter').val(places.name);
+                $('#company_website').val(places.website);
+                $('#address').val(places.formatted_address);
+
+                function phpneNumberFormatted(phNum){
+                    var i,newValue='';
+                    for(i = 0; i < phNum.length; i++){
+                        if($.isNumeric(phNum[i])){
+                            newValue+=phNum[i];
+                        }
+                    }
+                    return newValue;
+                }
+                var phNum = phpneNumberFormatted(places.formatted_phone_number);
+                console.log(phNum);
+            
+                $('#mobile').val(phNum);
+                
+                $('#selectedLongitude').val(places.geometry.location.lng());
+
+                $('#selectedLatitude').val(places.geometry.location.lat());
+
+            });
+
+        }
+
+    </script>
+
     <script>
         $('.textbox').on('keyup keydown keypress change paste', function() {
             if ($(this).val() == '') {

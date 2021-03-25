@@ -44,10 +44,10 @@
       </div>
         <h1>Successfully Signed In</h1> 
         <p>Kindly Find Your Credentials Below:-</p>
-		<p>Account Holder Name-<?php echo $name; ?></p>
-		<p>Email-<?php echo $email; ?></p>
-		<p>Password-<?php echo $password; ?></p>
-		 <h3>For any queries kindly revert back!</h3> 
+		    <p>Account Holder Name-<?php echo $name; ?></p>
+		    <p>Email-<?php echo $email; ?></p>
+		    <p>Password-<?php echo $password; ?></p>
+		    <h3>For any queries kindly revert back!</h3> 
       </div>
     </body>
 </html>

@@ -14,8 +14,8 @@ class UpdateBusinessTable extends Migration
     public function up()
     {
         Schema::table('businesses', function (Blueprint $table) {
-            $table->integer('latitude')->nullable();
-            $table->integer('longitude')->nullable();
+            $table->string('latitude', 300)->nullable();
+            $table->string('longitude', 300)->nullable();
         });
     }
 
@@ -26,9 +26,6 @@ class UpdateBusinessTable extends Migration
      */
     public function down()
     {
-        Schema::table('businesses', function($table) {
-            $table->dropColumn('latitude');
-            $table->dropColumn('longitude');
-        });
+        //
     }
 }
