@@ -42,6 +42,12 @@ class CreateUsersTable extends Migration
                 'email' => 'admin@admin.com',
                 'password' => Hash::make('secret'),
                 'userType' => 1,
+            ],
+            [
+                'name' => 'User',
+                'email' => 'user@user.com',
+                'password' => Hash::make('secret'),
+                'userType' => 2,
             ]
         ];
 

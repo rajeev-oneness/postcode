@@ -68,3 +68,14 @@ Route::post('/user_contacts','UserController@userContacts')->name('user.user_con
 //--------------------------------------------------------------User Testimonial-----------------------------------------------//
 
 Route::post('/user_estimonialss','UserController@userTestimonialss')->name('user.user_estimonialss');
+
+
+
+//------------------front-----------------//
+// Route::group(['prefix' => 'front'], function() {
+    Route::get('directory', 'FrontController@directory')->name('directory');
+// });
+Route::group(['prefix' => 'rating'], function() {
+    Route::get('add/{id}', 'RatingController@index')->name('rating.add');
+    Route::post('store', 'RatingController@store')->name('rating.store');
+});
