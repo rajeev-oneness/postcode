@@ -14,6 +14,30 @@ use Validator,Redirect,Response;
 
 class BusinessController extends Controller
 {
+    public function index() {
+        $businessCategories = BusinessCategory::all();
+        $producData = Product::all();
+        $servicData = Service::all();
+        $stateData = State::all();
+        return view('front.business.add', compact('businessCategories', 'producData', 'servicData', 'stateData'));
+    }
+    public function manage() {
+        $businessDatas = Business::all();
+        return view('front.business.manage', compact('businessDatas'));
+    }
+    public function edit($businessId) {
+        $businessCatData = BusinessCategory::all();
+        $productsData = Product::all();
+        $servicessData = Service::all();
+         $stateData = State::all();
+        $businessprofile_data = Business::where('id', $businessId)->first();
+        return view('front.business.edit', compact('businessprofile_data', 'businessCatData', 'productsData', 'servicessData', 'stateData'));
+    }
+    public function delete(request $request) {
+        // dd($request->id);
+        $businessData = Business::find($request->id);
+        $businessData->delete();
+    }
     /**
      * Go to  Business Profile.
      *

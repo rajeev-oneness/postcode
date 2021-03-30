@@ -79,3 +79,23 @@ Route::group(['prefix' => 'rating'], function() {
     Route::get('add/{id}', 'RatingController@index')->name('rating.add');
     Route::post('store', 'RatingController@store')->name('rating.store');
 });
+
+Route::group(['prefix'=> 'business' ,'middleware' => ['auth']], function () {
+
+    Route::get('/add','BusinessController@index')->name('business.add');
+	Route::post('/store','BusinessController@addBusinessProfile')->name('business.add');
+
+	//------------------------------------------------------------- Manage Business Profile Section-----------------------------------------------//
+
+
+	Route::get('/manage', 'BusinessController@manage')->name('admin.manage_businessprofiles');
+
+	Route::post('/business_profile_details', 'BusinessController@businessProfileDetails')->name('admin.business_profile_details');
+
+	Route::post('/delete', 'BusinessController@delete')->name('business.delete');
+
+	Route::get('/edit/{id}', 'BusinessController@edit')->name('business.edit');
+
+	Route::post('/update_businessprofiles', 'BusinessController@updateBusinessProfiles')->name('business.update');
+
+});

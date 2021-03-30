@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\Rating;
 use App\Model\Contact;
 use App\Model\Business;
+use App\Model\BusinessCategory;
 use App\Model\Testimonial;
 use App\Model\Newsletter;
 use Mail;
@@ -23,7 +24,8 @@ class UserController extends Controller
      */
     public function Signup()
     {
-        return view('/user.signup');
+        $businessCategories = BusinessCategory::all();
+        return view('/user.signup', compact('businessCategories'));
     }
     /**
      * Customer Ratings Save
@@ -184,7 +186,7 @@ class UserController extends Controller
         //$business->services = $servicesid;
         //$business->products = $productId;
         //$business->state_id = $state_id;
-        $business->business_categoryId = 1;
+        $business->business_categoryId = $request->business_categoryId;
         //$business->pin_code = $pin_code;
         //$business->description = $description;
         //$business->facebook_link = $facebook_link;

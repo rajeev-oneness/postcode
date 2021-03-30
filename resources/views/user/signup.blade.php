@@ -88,6 +88,19 @@
                             @endif
                             
                             <div class="sign_in_form">
+                                {{-- <img src="{{asset('user_assets/image/Science-Business-icon.png')}}"> --}}
+                                {{-- <label>BUSINESS Category</label> --}}
+                                <select id="business_categoryId" name="business_categoryId" class="form-control" required="">
+                                    <option value="{{ old('business_categoryId') }}">SELECT BUSINESS CATEGORY</option>
+                                    @foreach($businessCategories as $businessCategory)
+                                    <option value="{{$businessCategory->id}}">{{$businessCategory->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('business_categoryId')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/email-icon.png')}}">
                                 {{-- <label>ADDRESS</label> --}}
                                 <input type="text" name="address" value="{{ old('address') }}" id="address" class="textbox" maxlength="255" placeholder="ADDRESS" required>
