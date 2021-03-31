@@ -60,8 +60,8 @@
     <td>{{$offercategories->price}}</td>
     <td>{{$offercategories->expire_date}}</td>
   
-<td><img src='/{{ $offercategories->image }}' style='width: 40%;'></td>
-<td><a class="edit_event" id="{{$offercategories->id}}"><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$offercategories->id}}"><i class="fa fa-trash"></i></a></td>
+<td><img src='{{url($offercategories->image)}}' style='width: 40%;'></td>
+<td><a class="edit_event" href="{{route('edit_offer', encrypt($offercategories->id))}}" id=""><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$offercategories->id}}"><i class="fa fa-trash"></i></a></td>
   </tr>
 @endforeach
 </tbody>
@@ -80,17 +80,18 @@
                 $('.app_table').DataTable({
       'order':[]
     });
-    $(".edit_event").click(function(){
+//     $(".edit_event").click(function(){
         
-var app_id=this.id;
-       var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
-			redirectPost('edit_offer', fd);
-    });
+// var app_id=this.id;
+//        var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
+// 			redirectPost('edit_offer', fd);
+//     });
     $(".delete_app").click(function(){
-       
-var appdel_id=this.id;
-       var fd = {'appdel_id': appdel_id,'_token':$('input[name="_token"]').val()};
-			redirectPost('delete_offers', fd);
+        if(confirm('Are you sure?')) {
+            var appdel_id=this.id;
+            var fd = {'appdel_id': appdel_id,'_token':$('input[name="_token"]').val()};
+            redirectPost('delete_offers', fd);
+        }
     });
                });
                var redirectPost = function (url, data = null, method = 'post') {

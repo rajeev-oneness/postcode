@@ -24,18 +24,37 @@
             <div class="menu_wrap">
                 <a href="{{route('user.welcome')}}" class="logo_icon"><img src="{{asset('user_assets/image/logo.png')}}"></a>
                 <ul class="menu_icon">
-                    <li>
-                        <a href="{{route('adminsignup')}}">
-                            <img src="{{asset('user_assets/image/log-icon.png')}}">
-                            Sign up
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="{{asset('user_assets/image/save-icon.png')}}">
-                            Saved Details
-                        </a>
-                    </li>
+                    @if (auth()->check())
+                        @if (auth()->user()->userType == 2)
+                            <li>
+                                <a href="{{route('business.manage')}}">
+                                    {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
+                                    Business
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('logout')}}">
+                                    {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
+                                    Logout
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->userType == 1)
+                            <li>
+                                <a href="{{route('admin.dashboard')}}">
+                                    {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
+                                    Admin Dashboard
+                                </a>
+                            </li>
+                        @endif
+                    @else
+                        <li>
+                            <a href="{{route('login')}}">
+                                {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
+                                Log in
+                            </a>
+                        </li>
+                    @endif  
                 </ul>
             </div>
             <div class="col-12">
@@ -44,8 +63,11 @@
                     <h2 class="banner_title2 text-center text-white">Where Local Matters</h2>
                     <p class="banner_content text-center text-white">Australia’s Newest Website to Help Local Businesses Promote <br>Achieve Marketing Success</p>
                     <div class="btn_grp text-center">
-                        <a href="{{route('adminsignup')}}" class="orange_btn">SIGN UP MANUALLY</a>
-                        <a href="{{route('adminsignup')}}" class="blue_btn"><img src="{{asset('user_assets/image/Google-mybusiness-1.png')}}"> SIGN UP VIA GOOGLE MY BUSINESS</a>
+                    <a href="{{route('adminsignup')}}" id="sign_mannually" class="orange_btn">SIGN UP MANUALLY</a>
+                        <a href="{{route('GMBsignup')}}" class="blue_btn"><img src="{{asset('user_assets/image/Google-mybusiness-1.png')}}"> SIGN UP VIA GOOGLE MY BUSINESS</a>
+                    
+                        <!-- <a href="{{route('adminsignup')}}" id="sign_mannually" class="orange_btn">SIGN UP MANUALLY</a>
+                        <a href="{{route('adminsignup')}}" class="blue_btn"><img src="{{asset('user_assets/image/Google-mybusiness-1.png')}}"> SIGN UP VIA GOOGLE MY BUSINESS</a> -->
                     </div>
                 </div>
             </div>
@@ -94,29 +116,18 @@
         </div>
     </section>
 
-    <section class="newsletter_wraper">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    <h3 class="newswrap_title">Subscribe For a Newsletter</h3>
-                    <p class="newswrap_content">Whant to be notified about new locations ? Just sign up.</p>
-                </div>
-                <div class="col-12 col-md-6">
-                    <form class="newsletter_form">
-                        <input type="email" name="" placeholder="Enter your email">
-                        <input type="submit" class="submt_form" value="Send">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('user.newsletter')
 
-    <script>
-$(document).ready(function (){
 
-});
 
-    </script>
+<script>
+
+ 
+
+  
+
+</script>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

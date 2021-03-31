@@ -14,6 +14,30 @@ use Validator,Redirect,Response;
 
 class BusinessController extends Controller
 {
+    public function index() {
+        $businessCategories = BusinessCategory::all();
+        $producData = Product::all();
+        $servicData = Service::all();
+        $stateData = State::all();
+        return view('front.business.add', compact('businessCategories', 'producData', 'servicData', 'stateData'));
+    }
+    public function manage() {
+        $businessDatas = Business::all();
+        return view('front.business.manage', compact('businessDatas'));
+    }
+    public function edit($businessId) {
+        $businessCatData = BusinessCategory::all();
+        $productsData = Product::all();
+        $servicessData = Service::all();
+         $stateData = State::all();
+        $businessprofile_data = Business::where('id', $businessId)->first();
+        return view('front.business.edit', compact('businessprofile_data', 'businessCatData', 'productsData', 'servicessData', 'stateData'));
+    }
+    public function delete(request $request) {
+        // dd($request->id);
+        $businessData = Business::find($request->id);
+        $businessData->delete();
+    }
     /**
      * Go to  Business Profile.
      *
@@ -37,57 +61,53 @@ class BusinessController extends Controller
     public function addBusinessProfile(Request $request) {
 
         $validator = Validator::make($request->all(), [
-            'business_categoryId' => 'required|min:1|max:20',
-            'name' => 'required',
-            'email' => 'required|unique:businesses',
-            'description' => 'required|min:4|max:255',
-            'address' => 'required|min:4|max:255',
-            'pin_code' => 'required|max:6',
-            'mobile' => 'required',
-            'facebook_link' => 'required',
-            'instagram_link' => 'required',
-            'twitter_link' => 'required',
+            'email' => 'unique:businesses',
             'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048', 
-            
+            'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6'
         ]);
-       $validator->validate();
-          
+        $validator->validate();
+        try {
 
-    $fileName = time().'.'.$request->image->extension(); 
-    $request->image->move(public_path('uploads/'), $fileName);
-    $busiprofimg ='uploads/'.$fileName;
+            $fileName = time().'.'.$request->image->extension(); 
+            $request->image->move(public_path('uploads/'), $fileName);
+            $busiprofimg ='uploads/'.$fileName;
 
-    $password = \Hash::make($request->password);
+            $password = \Hash::make($request->password);
 
-    $Business = new Business();        
-    $Business->email = $request->email;
-    $Business->abn = $request->abn;
-    $Business->password = $password;
-    $Business->company_website = $request->company_website;
-    $Business->image = $busiprofimg;
-    $Business->name = $request->name;
-    $Business->address = $request->address;
-    $Business->mobile = $request->mobile;  
-    $Business->open_hour = $request->open_hour;  
-    $Business->closing_hour = $request->closing_hour;  
-    $Business->services = $request->services; 
-    $Business->products = $request->products; 
-    $Business->state_id = $request->state_id;  
-    $Business->business_categoryId = $request->business_categoryId;  
-    $Business->pin_code = $request->pin_code;  
-    $Business->description = $request->description;  
-    $Business->facebook_link = $request->facebook_link;  
-    $Business->instagram_link = $request->instagram_link;  
-    $Business->twitter_link = $request->twitter_link; 
-    $Business->youtube_link = $request->youtube_link; 
-    $Business->linkedin_link = $request->linkedin_link;     
-    
-    // echo json_encode($Business);die;
+            $Business = new Business();        
+            $Business->email = $request->email;
+            $Business->abn = $request->abn;
+            $Business->password = $password;
+            $Business->company_website = $request->company_website;
+            $Business->image = $busiprofimg;
+            $Business->name = $request->name;
+            $Business->address = $request->address;
+            $Business->mobile = $request->mobile;  
+            $Business->open_hour = $request->open_hour;  
+            $Business->closing_hour = $request->closing_hour;  
+            $Business->services = $request->services; 
+            $Business->products = $request->products; 
+            $Business->state_id = $request->state_id;  
+            $Business->business_categoryId = $request->business_categoryId;  
+            $Business->pin_code = $request->pin_code;  
+            $Business->description = $request->description;  
+            $Business->facebook_link = $request->facebook_link;  
+            $Business->instagram_link = $request->instagram_link;  
+            $Business->twitter_link = $request->twitter_link; 
+            $Business->youtube_link = $request->youtube_link; 
+            $Business->linkedin_link = $request->linkedin_link;     
+            
+            // echo json_encode($Business);die;
 
-    $Business->save();
-       
-        return redirect()->route('admin.manage_businessprofiles');
-}
+            $Business->save();
+        
+            return redirect()->route('admin.manage_businessprofiles');
+        }catch (\Exception $e) {
+            report($e);
+            return false;
+        }
+    }
 
     /**
      * Go to Manage Business Profile View.
@@ -127,9 +147,9 @@ class BusinessController extends Controller
             $data = array();
             if (!empty($page_displayed)) {
                 foreach ($page_displayed as $user) {
-                    
                     $nestedData['id'] = $user->id;
-                    $nestedData['businessId'] = $user->businesstype->name;
+                    $business_category = BusinessCategory::find($user->business_categoryId);
+                    $nestedData['businessId'] = $business_category->name;
                     $nestedData['address'] = $user->address;
                     $nestedData['name'] = $user->name;
                     $nestedData['image'] = $user->image;
@@ -190,12 +210,42 @@ class BusinessController extends Controller
      */
     public function updateBusinessProfiles(Request $request)
     {
-        $fileName = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('uploads/'), $fileName);
-        $qdesc = 'uploads/' . $fileName;
-        $hid_id = $request->hid_id;
-
-        $update_businesscategory_data = Business::where('id', $hid_id)->update(['name' => $request->name, 'business_categoryId' => $request->business_categoryId, 'address' => $request->address, 'image' => $qdesc, 'mobile' => $request->mobile, 'open_hour' => $request->open_hour, 'closing_hour' => $request->closing_hour, 'services' => $request->services, 'products' => $request->products, 'description' => $request->description, 'facebook_link' => $request->facebook_link, 'instagram_link' => $request->instagram_link, 'twitter_link' => $request->twitter_link, 'youtube_link' => $request->youtube_link, 'linkedin_link' => $request->linkedin_link]);
-        return redirect()->route('admin.manage_businessprofiles');
+        $validator = Validator::make($request->all(), [
+            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+        $validator->validate();
+        try {
+            if($request->hasFile('image')) {
+                $fileName = time() . '.' . $request->image->extension();
+                $request->image->move(public_path('uploads/'), $fileName);
+                $qdesc = 'uploads/' . $fileName;
+                $update_businesscategory_data = Business::where('id', $hid_id)->update([
+                    'image' => $qdesc,
+                ]);
+            }
+            $hid_id = $request->hid_id;
+            $update_businesscategory_data = Business::where('id', $hid_id)->update([
+                'name' => $request->name, 
+                'business_categoryId' => $request->business_categoryId, 
+                'address' => $request->address,
+                'pin_code' => $request->pin_code,
+                'state_id' => $request->state_id, 
+                'mobile' => $request->mobile, 
+                'open_hour' => $request->open_hour, 
+                'closing_hour' => $request->closing_hour, 
+                'services' => $request->services, 
+                'products' => $request->products, 
+                'description' => $request->description, 
+                'facebook_link' => $request->facebook_link, 
+                'instagram_link' => $request->instagram_link, 
+                'twitter_link' => $request->twitter_link, 
+                'youtube_link' => $request->youtube_link, 
+                'linkedin_link' => $request->linkedin_link
+            ]);
+            return redirect()->route('admin.manage_businessprofiles');
+        } catch (\Exception $e) {
+            report($e);
+            return false;
+        }
     }
 }

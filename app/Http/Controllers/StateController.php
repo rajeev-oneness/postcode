@@ -58,14 +58,25 @@ class StateController extends Controller
      * @param  Request $request
      * @return view
      */
-    public function editStates(Request $request) {      
-        $lead_events_id = $request->app_id;
-        $editedstates_data = State::where('id', $lead_events_id)->first();
-        // echo json_encode($businessSerData);die;
-        return view('portal.state.edit_states', compact('editedstates_data'));
+    // public function editStates(Request $request) {      
+    //     $lead_events_id = $request->app_id;
+    //     $editedstates_data = State::where('id', $lead_events_id)->first();
+    //     // echo json_encode($businessSerData);die;
+    //     return view('portal.state.edit_states', compact('editedstates_data'));
         
+    // }
+/**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function editStates($id)
+    {
+        
+        $editedstates_data = State::findOrFail(decrypt($id));
+        return view('portal.state.edit_states', compact('editedstates_data'));
     }
-
     /**
     * Go to Update Offers.
     *
@@ -73,6 +84,11 @@ class StateController extends Controller
     */
     public function updateStates(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'code' => 'required|min:5',
+        ]);
+        $validator->validate();
 
         $hid_id = $request->hid_id;
         $update_state_data = State::where('id', $hid_id)->update(['name' => $request->name, 'code' => $request->code]);   

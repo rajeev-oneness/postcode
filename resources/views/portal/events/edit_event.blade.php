@@ -31,7 +31,15 @@
         <div class="row">
           <div class="col-sm-12">
             <div class="card">
-
+            @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
               <div class="card-body">
                 <form class="needs-validation" method="post" action="{{route('admin.update_event')}}" enctype="multipart/form-data" novalidate="">
                   <input type="hidden" id="hid_id" name="hid_id" value="{{$editedevents_data->id}}">
@@ -72,11 +80,18 @@
 
                   <div class="form-row">
                     <div class="col-md-4 mb-3">
-                      <label for="validationCustom05">Details</label>
-                      <input class="form-control" id="details" name="details" value="{{$editedevents_data->details}}" type="text" placeholder="Enter Details" required="">
-                      @error('details')
-                      {{$message}}
-                      @enderror
+                      <label for="validationCustom05">Short Description</label>
+                      <textarea name="short_description" class="form-control" id="short_description" cols="30" rows="3" placeholder="Enter short description" required>{{$editedevents_data->short_description}}</textarea>
+                      @error('short_description')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label for="validationCustom05">Description</label>
+                      <textarea name="description" class="form-control" id="description" cols="30" rows="3" placeholder="Enter description" required>{{$editedevents_data->description}}</textarea>
+                      @error('description')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="col-md-4 mb-3">
@@ -86,21 +101,21 @@
                       {{$message}}
                       @enderror
                     </div>
-                    <div class="col-md-4 mb-3">
+
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-md-3 mb-3">
                       <label for="validationCustom05">Start Date</label>
-                      <div class="input-group">
-                              <input class="datepicker-here form-control digits" id="start" name="start" value="{{$editedevents_data->start}}" type="text" placeholder="Kindly Enter" required="" data-language="en">
-                            </div>
-                      <!-- <input class="form-control" id="start" name="start" value="{{old('start')}}" type="text" placeholder="Starting Hour" required=""> -->
+                        <div class="input-group">
+                          <input class="datepicker-here form-control digits" id="start" name="start" value="{{$editedevents_data->start}}" type="text" placeholder="Kindly Enter" required="" data-language="en">
+                        </div>
                       @error('start')
                       {{$message}}
                       @enderror
                     </div>
 
-                  </div>
-
-                  <div class="form-row">
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-3 mb-3">
                       <label for="validationCustom05">End Date</label>
                       <div class="input-group">
                               <input class="datepicker-here form-control digits" id="end" name="end" value="{{$editedevents_data->end}}" placeholder="Closing Hour" required="" type="text" data-language="en">
@@ -111,14 +126,14 @@
                       @enderror
                     </div>
 
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-3 mb-3">
                       <label for="validationCustom05">Frequency</label>
                       <input class="form-control" id="frequency" value="{{$editedevents_data->frequency}}" name="frequency" type="text" placeholder="Enter Frequency" required="">
                       @error('frequency')
                       {{$message}}
                       @enderror
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-3 mb-3">
                       <div class="form-group">
                         <label for="formrow-inputState">Event Category</label>
                         <select id="event_category_id" name="event_category_id" class="form-control">
@@ -144,14 +159,19 @@
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Age Group</label>
-                      <input class="form-control" id="age_group" value="{{$editedevents_data->age_group}}" name="age_group" type="text" placeholder="Provide Age Group" required="">
+                      <select id="age_group" name="age_group" class="form-control">
+                        <option value="">Select</option>
+                        @foreach($ageGroups as $ageGroup)
+                        <option value="{{$ageGroup->id}}" <?php echo $editedevents_data->age_group ==  $ageGroup->id ? "selected" : ""; ?>>{{$ageGroup->group}}</option>
+                        @endforeach
+                      </select>
                       @error('age_group')
                       {{$message}}
                       @enderror
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Price</label>
-                      <input class="form-control" id="price" value="{{$editedevents_data->price}}" name="price" type="text" placeholder="Enter Price" required="">
+                      <input class="form-control" id="price" value="{{$editedevents_data->price}}" name="price" onkeypress="return inputNumeric(event)" type="text" placeholder="Enter Price" required="">
                       @error('price')
                       {{$message}}
                       @enderror
@@ -165,9 +185,9 @@
                       <label for="validationCustom05">Image</label>
                       <div class="d-flex justify-content-center">
                         <div class="btn btn-mdb-color btn-rounded">
-                        <img src="/{{$editedevents_data->image}}" alt="people" class="evenblck" width="56" id="img-upload">
+                        <img src="{{url($editedevents_data->image)}}" alt="people" class="evenblck" width="56" id="img-upload">
 
-                          <input class="form-control eventimg"  type="file" id="image" value="" name="image" required="">
+                          <input class="form-control eventimg"  type="file" id="image" value="" name="image">
                           @error('image')
                           {{$message}}
                           @enderror
@@ -212,6 +232,20 @@
 
          
         </script>
-      
+         <script>
+           function inputNumeric(event) {
+             if(event.charCode >= 48 && event.charCode <= 57) {
+               return true;
+             }
+             return false;
+           }
+     
+             $("form").submit(function() {
+                 $(this).submit(function() {
+                     return false;
+                 });
+                 return true;
+             });
+         </script>
 
     @endsection

@@ -50,18 +50,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-  @foreach ($categories1 as $categories2)
-    <tr>
-    <td>{{$categories2->eventbusiesstype->name}}</td>
-    <td>{{$categories2->name}}</td>
-    <td>{{$categories2->eventcattype->name}}</td>
-    
-  
-<td><img src='/{{ $categories2->image }}' style='width: 40%;'></td>
-<td><a class="edit_event" id="{{$categories2->id}}"><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$categories2->id}}"><i class="fa fa-trash"></i></a></td>
-  </tr>
-@endforeach
-</tbody>
+                                        @foreach ($categories1 as $categories2)
+                                            <tr>
+                                                <td>{{$categories2->eventbusiesstype->name}}</td>
+                                                <td>{{$categories2->name}}</td>
+                                                <td>{{$categories2->eventcattype->name}}</td>
+                                                
+                                            
+                                                <td><img src='{{url($categories2->image)}}' style='width: 40%;'></td>
+                                                <td><a class="edit_event" href="{{route('edit_event', encrypt($categories2->id))}}"  id=""><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$categories2->id}}"><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -77,17 +77,18 @@
                 $('.app_table').DataTable({
       'order':[]
     });
-    $(".edit_event").click(function(){
+//     $(".edit_event").click(function(){
         
-var app_id=this.id;
-       var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
-			redirectPost('edit_event', fd);
-    });
+// var app_id=this.id;
+//        var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
+// 			redirectPost('edit_event', fd);
+//     });
     $(".delete_app").click(function(){
-       
-var appdel_id=this.id;
-       var fd = {'appdel_id': appdel_id,'_token':$('input[name="_token"]').val()};
-			redirectPost('delete_events', fd);
+       if(confirm('Are you sure?')){
+        var appdel_id=this.id;
+        var fd = {'appdel_id': appdel_id,'_token':$('input[name="_token"]').val()};
+		redirectPost('delete_events', fd);
+       }
     });
                });
                var redirectPost = function (url, data = null, method = 'post') {

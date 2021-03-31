@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Model\Rating;
 use App\Model\Contact;
 use App\Model\Business;
+use App\Model\BusinessCategory;
 use App\Model\Testimonial;
+use App\Model\Newsletter;
 use Mail;
-use Validator,Redirect,Response;
+use Validator, Redirect, Response;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -20,10 +23,11 @@ class UserController extends Controller
      * @return view
      */
     public function Signup()
-    {      
-        return view('/user.signup');
+    {
+        $businessCategories = BusinessCategory::all();
+        return view('/user.signup', compact('businessCategories'));
     }
-  /**
+    /**
      * Customer Ratings Save
      *    
      * Request $request 
@@ -36,19 +40,19 @@ class UserController extends Controller
             'rating' => 'required|min:1|max:5',
             'description' => 'required|min:4|max:250',
         ]);
-        $user_id=\Auth::user()->id;
+        $user_id = \Auth::user()->id;
 
         $Rating = new Rating();
         $Rating->userId = $user_id;
         $Rating->rating = $request->rating;
         $Rating->description = $request->description;
-        
+
         $Rating->save();
 
         return response()->json([
-        'status' => 1,
-        'message' => "Ratings Saved Successfully"
-       ]);
+            'status' => 1,
+            'message' => "Ratings Saved Successfully"
+        ]);
     }
 
     /**
@@ -59,10 +63,10 @@ class UserController extends Controller
      */
     public function userContacts(Request $request)
     {
-       
+
         $request->validate([
             'name' => 'required|min:5|string',
-            'email'=>'required|unique:content',
+            'email' => 'required|unique:content',
             'mobile' => 'required|numeric',
             'subject' => 'required|min:4|max:25',
             'description' => 'required|min:4|max:250',
@@ -73,13 +77,13 @@ class UserController extends Controller
         $Contact->mobile = $request->mobile;
         $Contact->subject = $request->subject;
         $Contact->description = $request->description;
-        
+
         $Contact->save();
 
         return response()->json([
-        'status' => 1,
-        'message' => "Ratings Saved Successfully"
-       ]);
+            'status' => 1,
+            'message' => "Ratings Saved Successfully"
+        ]);
     }
 
     /**
@@ -90,10 +94,10 @@ class UserController extends Controller
      */
     public function userTestimonialss(Request $request)
     {
-       
+
         $request->validate([
             'tm_name' => 'required|min:5|string',
-            'tm_comment'=>'required|max:200|unique:content',
+            'tm_comment' => 'required|max:200|unique:content',
             'tm_rating' => 'required',
             'tm_image' => 'required',
         ]);
@@ -106,116 +110,142 @@ class UserController extends Controller
         $Testimonial->tm_comment = $request->tm_comment;
         $Testimonial->tm_rating = $request->tm_rating;
         $Testimonial->tm_image = $testiimg;
-        
+
         $Testimonial->save();
 
         return response()->json([
-        'status' => 1,
-        'message' => "Ratings Saved Successfully"
-       ]);
+            'status' => 1,
+            'message' => "Ratings Saved Successfully"
+        ]);
     }
 
-     /**
+    /**
      * Go to Add Business.
      *
      * @return json
      */
-    public function addUserBusiness(Request $request) {
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|unique:businesses',
-            'mobile' => 'required',
-            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',           
+    public function addUserBusiness(Request $request)
+    {
+        $request->validate([
+            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'email' => 'regex:/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/'
         ]);
-       $validator->validate();
-          
-
-    $fileName = time().'.'.$request->image->extension(); 
-    $request->image->move(public_path('uploads/'), $fileName);
-    $busiprofileimg ='uploads/'.$fileName;
-
-    $password = 123456;
-
-    $password1 = \Hash::make($password);
-
-    $servicesid =1;
-    $state_id=1;
-    $address ='New Jersey';
-    $pin_code=700058;
-    $business_categoryId=1;
-    $closing_hour=10;
-    $productId=1;
-    $description='Products Under One Roof';
-    $facebook_link='https://www.amazon.in/';
-    $instagram_link='https://www.amazon.in/';
-    $twitter_link='https://www.amazon.in/';
-    $youtube_link='https://www.amazon.in/';
-    $linkedin_link='https://www.amazon.in/';
-
-    $name = $request->name;
-            $email = $request->email;
-
+ try {
+        // if($request->hasFile('image')){
+        //         $image = $request->file('image');
+        //         $random = date('Ymdhis').rand(0000,9999);
+        //         $image->move('uploads/profile/',$random.'.'.$image->getClientOriginalExtension());
+        //         $imageurl = url('uploads/profile/'.$random.'.'.$image->getClientOriginalExtension());
+        // }elseif(!empty($request->businessIcon)){
+        //     $imageurl = $request->businessIcon;
+        // }else{
+        //     $imageurl = '';
+        // }
         
-  $Business = new Business();        
-    $Business->email = $email;
-    $Business->abn = $request->abn;
-    $Business->password = $password1;
-    $Business->company_website = $request->company_website;
-    $Business->image = $busiprofileimg;
-    $Business->name = $name;
-    $Business->address = $address;
-    $Business->mobile = $request->mobile;  
-    $Business->open_hour = $request->open_hour;  
-    $Business->closing_hour = $closing_hour;  
-    $Business->services = $servicesid; 
-    $Business->products = $productId; 
-    $Business->state_id = $state_id;  
-    $Business->business_categoryId = $business_categoryId;  
-    $Business->pin_code = $pin_code;  
-    $Business->description = $description;  
-    $Business->facebook_link = $facebook_link;  
-    $Business->instagram_link = $instagram_link;  
-    $Business->twitter_link = $twitter_link; 
-    $Business->youtube_link = $youtube_link; 
-    $Business->linkedin_link = $linkedin_link;     
-    
-    // echo json_encode($Business);die;
+        $fileName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('uploads/'), $fileName);
+        $businessProfileImg = 'uploads/' . $fileName;
 
-    $Business->save();
+        $password = str_random(8);
+        // $servicesid = 1;
+        // $state_id = 1;
+        // $pin_code = 700058;
+        // $business_categoryId = 1;
+        // $closing_hour = 10;
+        // $productId = 1;
+        // $description = 'Products Under One Roof';
+        // $facebook_link = 'https://www.amazon.in/';
+        // $instagram_link = 'https://www.amazon.in/';
+        // $twitter_link = 'https://www.amazon.in/';
+        // $youtube_link = 'https://www.amazon.in/';
+        // $linkedin_link = 'https://www.amazon.in/';
 
-    // $deal= $Business->id;
+        $name = $request->name;
+        $email = $request->email;
 
-    $businessname = $Business->name;
-    $businessemail = $Business->email;
+        // echo $name;
+        // echo $email;
+        // echo $password;
+        // dd($request->all());
 
-    // echo json_encode($Businessemail);die;
-    \Mail::send('emails/mail', array('name'=>$name,'email'=>$email,'password'=>$password),function($message) use ($name,$email,$password) {
-        $message->to($email,$name)->subject('Welcome To PostCode');
-        $message->from('sagaranimesh3317@gmail.com','Post Code');
-                        });
+        $business = new Business();
+        $business->email = $email;
+        $business->abn = $request->abn;
+        $business->password = Hash::make($password);
+        $business->company_website = $request->company_website;
+        $business->image = $businessProfileImg;
+        $business->name = $name;
+        $business->address = $request->address;
+        $business->mobile = $request->mobile;
+        $business->open_hour = $request->open_hour;
+        if($request->longitude != '' && $request->latitude != ''){
+            $business->longitude = $request->longitude;
+            $business->latitude = $request->latitude; 
+        }
+        // $business->closing_hour = $closing_hour;
+        //$business->services = $servicesid;
+        //$business->products = $productId;
+        //$business->state_id = $state_id;
+        $business->business_categoryId = $request->business_categoryId;
+        //$business->pin_code = $pin_code;
+        //$business->description = $description;
+        //$business->facebook_link = $facebook_link;
+        //$business->instagram_link = $instagram_link;
+        //$business->twitter_link = $twitter_link;
+        //$business->youtube_link = $youtube_link;
+       // $business->linkedin_link = $linkedin_link;
 
-    return view('user.thankyou');
+        // echo json_encode($business);die;
+        $business->save();
+        // dd(hash()->make($password));
+        // $deal= $business->id;
 
-}
+        //$businessname = $business->name;
+        //$businessemail = $business->email;
 
-// public function BusinessSearch(Request $request) {
-//     $slug = $request->id;
-    
-//     $data = Business::where([ 
-//         ['name', 'LIKE', '%' . $slug . '%'],
-//     ])->get();
-//     // echo json_encode($data);die;
-//     return view('course_filter', compact('data', 'slug'));
-// }
+        // echo json_encode($businessemail);die;
+        \Mail::send('emails/mail', array('name' => $name, 'email' => $email, 'password' => $password), function ($message) use ($name, $email, $password) {
+            $message->to($email, $name)->subject('Welcome To PostCode');
+            $message->from('sagaranimesh3317@gmail.com', 'Post Code');
+        });
 
-public function search_main(Request $request) {
-    $name = $request->name;
-    // $slug = $request->id;
-    $data = Business::where([ 
-        ['name', 'LIKE', '%' . $name . '%'],
-    ])->pluck('name')->ToArray();
-    return $data;
-}
+        return view('user.thankyou');
+       
+    }catch (\Exception $e) {
+        report($e);
 
+        return false;
+    }
+    }
+
+    // public function BusinessSearch(Request $request) {
+    //     $slug = $request->id;
+
+    //     $data = Business::where([ 
+    //         ['name', 'LIKE', '%' . $slug . '%'],
+    //     ])->get();
+    //     // echo json_encode($data);die;
+    //     return view('course_filter', compact('data', 'slug'));
+    // }
+
+    public function search_main(Request $request)
+    {
+        $name = $request->name;
+        // $slug = $request->id;
+        $data = Business::where([
+            ['name', 'LIKE', '%' . $name . '%'],
+        ])->pluck('name')->ToArray();
+        return $data;
+    }
+
+    public function subscribeNewsletter(request $request) {
+        $request->validate([
+            'email' =>['required','regex:/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/','unique:newsletters'],
+        ]);
+        $newsletter = new Newsletter;
+        $newsletter->email = $request->email;
+        $newsletter->save();
+        $request->session()->flash('newsletter', 'Subscribed successfully!');
+        return back();
+    }
 }

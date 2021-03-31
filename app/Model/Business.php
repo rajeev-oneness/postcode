@@ -10,6 +10,10 @@ class Business extends Model
     use SoftDeletes;
     protected $table = 'businesses';
     
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
     public function businesstype()
     {
         return $this->belongsTo('App\Model\BusinessCategory','business_categoryId','id');
