@@ -31,7 +31,7 @@
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <div id="error-message"></div>
               </div>
-                <form class="needs-validation" method="post" action="{{route('business.add')}}" enctype="multipart/form-data">
+                <form class="needs-validation" method="post" action="{{route('business.store')}}" enctype="multipart/form-data">
                   <input type="hidden" id="hid_id" name="hid_id">
                   {{csrf_field()}}
                   <div class="row">

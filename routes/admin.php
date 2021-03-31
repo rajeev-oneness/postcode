@@ -162,6 +162,14 @@ Route::post('/delete_states', 'StateController@deleteStates')->name('delete_stat
 
 // Route::get('/manage_postcode','PostalController@managePostcodeView')->name('admin.manage_postcode');
 
+//-------------customer section----------------//
+Route::get('/customers', 'CustomerController@index')->name('admin.customers');
+Route::get('/customers-add', 'CustomerController@add')->name('admin.customers.add');
+Route::post('/customers-store', 'CustomerController@store')->name('admin.customers.store');
+Route::get('/customers-edit/{id}', 'CustomerController@edit')->name('admin.customers.edit');
+Route::post('/customers-update', 'CustomerController@update')->name('admin.customers.update');
+Route::get('/customers-delete/{id}', 'CustomerController@delete')->name('admin.customers.delete');
+
 
 //--------------------------------------------------------------Admin Logout Section-----------------------------------------------//
 Route::get('change_password', 'AdminController@changePassword')->name('admin.change_password');	

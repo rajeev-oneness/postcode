@@ -122,8 +122,16 @@
           </div>
           <ul class="sidebar-menu">
             <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span><span class="badge badge-pill badge-primary"></span></a>
-
             </li>
+
+            <li><a class="sidebar-header" href="#"><i data-feather="user"></i><span>Customers</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('admin.customers.add')}}"><i data-feather="server"></i><span>Add Customers</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.customers')}}"><i data-feather="server"></i><span>Manage Customers</span></a></li>
+
+              </ul>
+            </li>
+
             <li><a class="sidebar-header" href="#"><i data-feather="box"></i><span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.product')}}"><i data-feather="server"></i><span>Add Products</span></a></li>

@@ -12,11 +12,11 @@
             <!-- start page title -->
             <div class="row">
                 <div class="col-12">
-                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <div class="page-title-box d-flex align-items-center justify-content-between p-5">
                         <h4 class="mb-0 font-size-18">Manage Businesses</h4>
-                        <!-- <div class="page-title-right">
-                            <a href="/admin/add_subjects" <button type="button" id="submit_product" name="submit_product" class="btn btn-primary w-md">Add Subjects</button></a>
-                        </div> -->
+                        <div class="page-title-right">
+                            <a href="{{route('business.add')}}"> <button type="button" id="submit_product" name="submit_product" class="btn btn-primary w-md">Add Business</button></a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -23,20 +23,39 @@
         <div class="container">
             <div class="menu_wrap">
                 <a href="{{route('user.welcome')}}" class="logo_icon"><img src="{{asset('user_assets/image/logo.png')}}"></a>
-                <!-- <ul class="menu_icon">
-                    <li>
-                        <a href="{{route('adminsignup')}}">
-                            <img src="{{asset('user_assets/image/log-icon.png')}}">
-                            Sign up
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="{{asset('user_assets/image/save-icon.png')}}">
-                            Saved Details
-                        </a>
-                    </li>
-                </ul> -->
+                <ul class="menu_icon">
+                    @if (auth()->check())
+                        @if (auth()->user()->userType == 2)
+                            <li>
+                                <a href="{{route('business.manage')}}">
+                                    {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
+                                    Business
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('logout')}}">
+                                    {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
+                                    Logout
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->userType == 1)
+                            <li>
+                                <a href="{{route('admin.dashboard')}}">
+                                    {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
+                                    Admin Dashboard
+                                </a>
+                            </li>
+                        @endif
+                    @else
+                        <li>
+                            <a href="{{route('login')}}">
+                                {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
+                                Log in
+                            </a>
+                        </li>
+                    @endif  
+                </ul>
             </div>
             <div class="col-12">
                 <div class="banner_inner">
