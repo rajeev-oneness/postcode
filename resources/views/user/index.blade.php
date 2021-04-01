@@ -49,6 +49,12 @@
                         @endif
                     @else
                         <li>
+                            <a href="{{route('default.homepage')}}">
+                                {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
+                                Homepage
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{route('login')}}">
                                 {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
                                 Log in

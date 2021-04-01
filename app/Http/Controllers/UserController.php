@@ -12,6 +12,8 @@ use App\Model\Newsletter;
 use Mail;
 use Validator, Redirect, Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
 
 class UserController extends Controller
 {
@@ -130,43 +132,18 @@ class UserController extends Controller
             'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
             'email' => 'regex:/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/'
         ]);
- try {
-        // if($request->hasFile('image')){
-        //         $image = $request->file('image');
-        //         $random = date('Ymdhis').rand(0000,9999);
-        //         $image->move('uploads/profile/',$random.'.'.$image->getClientOriginalExtension());
-        //         $imageurl = url('uploads/profile/'.$random.'.'.$image->getClientOriginalExtension());
-        // }elseif(!empty($request->businessIcon)){
-        //     $imageurl = $request->businessIcon;
-        // }else{
-        //     $imageurl = '';
-        // }
+    
+    DB::beginTransaction();
+    try {
         
         $fileName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('uploads/'), $fileName);
         $businessProfileImg = 'uploads/' . $fileName;
 
         $password = str_random(8);
-        // $servicesid = 1;
-        // $state_id = 1;
-        // $pin_code = 700058;
-        // $business_categoryId = 1;
-        // $closing_hour = 10;
-        // $productId = 1;
-        // $description = 'Products Under One Roof';
-        // $facebook_link = 'https://www.amazon.in/';
-        // $instagram_link = 'https://www.amazon.in/';
-        // $twitter_link = 'https://www.amazon.in/';
-        // $youtube_link = 'https://www.amazon.in/';
-        // $linkedin_link = 'https://www.amazon.in/';
 
         $name = $request->name;
         $email = $request->email;
-
-        // echo $name;
-        // echo $email;
-        // echo $password;
-        // dd($request->all());
 
         $business = new Business();
         $business->email = $email;
@@ -178,24 +155,13 @@ class UserController extends Controller
         $business->address = $request->address;
         $business->mobile = $request->mobile;
         $business->open_hour = $request->open_hour;
-        if($request->longitude != '' && $request->latitude != ''){
+        if($request->longitude != '' && $request->latitude != '' && $request->pincode != ''){
             $business->longitude = $request->longitude;
-            $business->latitude = $request->latitude; 
+            $business->latitude = $request->latitude;
+            $business->pin_code = $request->pincode; 
         }
-        // $business->closing_hour = $closing_hour;
-        //$business->services = $servicesid;
-        //$business->products = $productId;
-        //$business->state_id = $state_id;
         $business->business_categoryId = $request->business_categoryId;
-        //$business->pin_code = $pin_code;
-        //$business->description = $description;
-        //$business->facebook_link = $facebook_link;
-        //$business->instagram_link = $instagram_link;
-        //$business->twitter_link = $twitter_link;
-        //$business->youtube_link = $youtube_link;
-       // $business->linkedin_link = $linkedin_link;
-
-        // echo json_encode($business);die;
+        
         $business->save();
         // dd(hash()->make($password));
         // $deal= $business->id;
@@ -209,11 +175,13 @@ class UserController extends Controller
             $message->from('sagaranimesh3317@gmail.com', 'Post Code');
         });
 
+        DB::commit();
         return view('user.thankyou');
        
     }catch (\Exception $e) {
+        unlink($businessProfileImg);
+        DB::rollback();
         report($e);
-
         return false;
     }
     }

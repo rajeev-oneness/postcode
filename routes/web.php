@@ -71,15 +71,6 @@ Route::post('/user_estimonialss','UserController@userTestimonialss')->name('user
 
 
 
-//------------------front-----------------//
-// Route::group(['prefix' => 'front'], function() {
-    Route::get('directory', 'FrontController@directory')->name('directory');
-// });
-Route::group(['prefix' => 'rating'], function() {
-    Route::get('add/{id}', 'RatingController@index')->name('rating.add');
-    Route::post('store', 'RatingController@store')->name('rating.store');
-});
-
 Route::group(['prefix'=> 'business' ,'middleware' => ['auth']], function () {
 
     Route::get('/add','BusinessController@index')->name('business.add');
@@ -99,3 +90,19 @@ Route::group(['prefix'=> 'business' ,'middleware' => ['auth']], function () {
 	Route::post('/update', 'BusinessController@updateBusinessProfiles')->name('business.update');
 
 });
+
+//------------------front-----------------//
+// Route::group(['prefix' => 'front'], function() {
+    // Route::get('directory', 'FrontController@directory')->name('directory');
+// });
+// Route::group(['prefix' => 'rating'], function() {
+//     Route::get('add/{id}', 'RatingController@index')->name('rating.add');
+//     Route::post('store', 'RatingController@store')->name('rating.store');
+// });
+
+//---------------homepage and directory--------------//
+
+Route::get('/homepage', 'FrontController@homepage')->name('default.homepage');
+Route::post('/serach-business', 'FrontController@search')->name('search.homepage');
+// menu bar(postcodes)
+Route::get('/state-postcodes/{stateId}', 'FrontController@statePostcode')->name('state.postcodes.menu');

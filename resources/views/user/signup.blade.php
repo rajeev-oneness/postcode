@@ -67,6 +67,7 @@
                             
                             <input type="hidden" name="longitude" id="selectedLongitude" value="">
                             <input type="hidden" name="latitude" id="selectedLatitude" value="">
+                            <input type="hidden" name="pincode" id="pincode" value="">
 
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">
@@ -238,9 +239,20 @@
             google.maps.event.addListener(autocomplete, 'place_changed', function(){
 
                 var places = autocomplete.getPlace();
-                console.log(places);
+                // console.log(places);
                 // console.log(places.formatted_address);
-                // console.log(places.name);
+                // console.log(places.address_components.length);
+                addressObj = places.address_components;
+                // console.log(addressObj);
+                addressObjLength = places.address_components.length;
+                // console.log(addressObj.addressObjlength);
+                for (let index = 0; index < addressObjLength; index++) {
+                    if(index = addressObjLength-1) {
+                        const pinCode = addressObj[index].long_name;
+                        console.log(pinCode);
+                        $("#pincode").val(pinCode)
+                    }
+                }
                 // console.log(places.website);
                 $('#inputSearchTextFilter').val(places.name);
                 $('#company_website').val(places.website);
@@ -256,7 +268,7 @@
                     return newValue;
                 }
                 var phNum = phpneNumberFormatted(places.formatted_phone_number);
-                console.log(phNum);
+                // console.log(phNum);
             
                 $('#mobile').val(phNum);
                 
