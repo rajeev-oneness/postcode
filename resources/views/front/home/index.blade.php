@@ -9,7 +9,7 @@
 	<div class="banner-inner">
 		<h1 class="banner-heading bebasnew">Discover thousands of local businesses</h1>
 		<div class="search-area">
-			<form action="{{route('search.homepage')}}" method="post">
+			<form action="{{route('directory')}}" method="get">
 				@csrf
 			<ul class="search-list">
 				<li class="keyword">

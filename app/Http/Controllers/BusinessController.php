@@ -7,6 +7,7 @@ use App\Model\Business;
 use App\Model\BusinessCategory;
 use App\Model\Product;
 use App\Model\Service;
+use App\Model\Event;
 use App\Model\State;
 use Illuminate\Support\Facades\Auth;
 use Validator,Redirect,Response;
@@ -247,5 +248,12 @@ class BusinessController extends Controller
             report($e);
             return false;
         }
+    }
+    public function dashboardView(Request $request)
+    {
+        $product=Product::where('created_by', auth()->user()->id);
+        $BusinessCategory=BusinessCategory::where('created_by', auth()->user()->id);
+        $event=Event::where('created_by', auth()->user()->id);
+       return view('business-portal.dashboard',compact('product','BusinessCategory','event'));
     }
 }

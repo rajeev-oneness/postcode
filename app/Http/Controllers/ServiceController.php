@@ -19,6 +19,9 @@ class ServiceController extends Controller
     public function Services()
     {
         $servicesData = BusinessCategory::all();
+        if(auth()->user()->userType == 3) {
+            return view('business-portal.service.services', compact('servicesData'));
+        }
         return view('/portal.service.services', compact('servicesData'));
     }
 
@@ -44,8 +47,13 @@ class ServiceController extends Controller
             $Service->image = $servicedesc;
             $Service->details = $request->details;
             $Service->price = $request->price;
+            $Service->created_by = auth()->user()->id;
 
             $Service->save();
+
+            if(auth()->user()->userType == 3) {
+                return redirect()->route('business-admin.manage_service');
+            }
             return redirect()->route('admin.manage_service');
         } catch (\Exception $e) {
             report($e);
@@ -62,6 +70,10 @@ class ServiceController extends Controller
      */
     public function manageServiceView(Request $request)
     {
+        if(auth()->user()->userType == 3) {
+            $service_manage = Service::where('created_by', auth()->user()->id)->with('busicategorytype')->get();
+            return view('business-portal.service.manage_service', compact('service_manage'));
+        }
         $userId = Auth::user()->id;
         $service_manage = Service::with('busicategorytype')->get();
         return view('/portal.service.manage_service', compact('service_manage'));
@@ -87,6 +99,9 @@ class ServiceController extends Controller
         $businessSerData = BusinessCategory::all();
         $editedservice_data = Service::findOrFail(decrypt($id));
         // echo json_encode($edited_data);die;
+        if(auth()->user()->userType == 3) {
+            return view('business-portal.service.edit_service',compact('editedservice_data', 'businessSerData'));
+        }
         return view('portal.service.edit_service',compact('editedservice_data', 'businessSerData'));
         
     }
@@ -120,6 +135,9 @@ class ServiceController extends Controller
                 'details' => $request->details,
                 'price' => $request->price
             ]);
+            if(auth()->user()->userType == 3) {
+                return redirect()->route('business-admin.manage_service');
+            }
             return redirect()->route('admin.manage_service');
         } catch (\Exception $e) {
             report($e);
@@ -137,6 +155,9 @@ class ServiceController extends Controller
     {
         $lead_delete_id = $request->appdel_id;
         $delete_ser = Service::where('id', $lead_delete_id)->delete();
+        if(auth()->user()->userType == 3) {
+            return redirect()->route('business-admin.manage_service');
+        }
         return redirect()->route('admin.manage_service');
     }
 }

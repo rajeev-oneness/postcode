@@ -24,6 +24,7 @@ class CreateOffersTable extends Migration
             $table->float('price',8,2);
             $table->date('expire_date');
             $table->longText('howcanredeem');
+            $table->string('created_by');
             $table->softDeletes();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));

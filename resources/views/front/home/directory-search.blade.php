@@ -47,19 +47,11 @@
 				<div class="col-12">
 					<div class="tab-content" id="myTabContent">
 					  	<div class="tab-pane fade show active" id="gird" role="tabpanel" aria-labelledby="gird-tab">
-					  		<h5 class="result_tab_title">{{count($businesses)}} results found in <a href="#">Australia</a></h5>
+					  		{{-- <h5 class="result_tab_title"> <span id="data-count"></span> results found in <a href="#">Australia</a></h5> --}}
 					  		<ul class="history_list">
-								@foreach ($businesses as $business)
-									<li>
-										<h4 class="place_title bebasnew">{{$business->name}}</h4>
-										<p class="location"><img src="{{asset('homepage_assets/images/place.png')}}">{{$business->address}}</p>
-										<p class="rating"><img src="{{asset('homepage_assets/images/rating.png')}}">300 reviews</p>
-										<p class="phone_call"><img src="{{asset('homepage_assets/images/phone-call.png')}}">{{$business->mobile}}</p>
-										<p class="history_details">{{$business->description}}</p>
-									</li>
-								@endforeach
+								{{-- load by ajax --}}
 					  		</ul>
-					  		<a href="#" class="orange-btm load_btn">Load More</a>
+					  		<a href="#" class="orange-btm load_btn" id="load-more1">Load More</a>
 					  	</div>
 					</div>
 				</div>
@@ -76,38 +68,13 @@
 					<div class="tab-content" id="myTabContent">
 					  	<div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
 					  		<div class="result_tab_title_wrap">
-					  			<h5 class="result_tab_title">{{count($businesses)}} results found in <a href="#">Australia</a></h5>
-					  			<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+					  			{{-- <h5 class="result_tab_title"> <span id="data-count"></span> results found in <a href="#">Australia</a></h5>
+					  			<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p> --}}
 					  		</div>
-					  		<ul class="search_list_items search_list_items-mod">
-								@foreach($businesses as $business)
-					  			<li>
-					  				<div class="location_img_wrap">
-					  					<img src="{{asset($business->image)}}">
-					  				</div>
-					  				<div class="list_content_wrap">
-					  					<ul class="rating_coments">
-					  						<li>
-					  							<img src="{{asset('homepage_assets/images/star.png')}}">
-					  							<h5>4.5 <span>(60 reviews)</span></h5>
-					  						</li>
-					  						<li>
-					  							<img src="{{asset('homepage_assets/images/chat.png')}}">
-					  							<h5><span>40 Comments</span></h5>
-					  						</li>
-					  					</ul>
-					  					<h4 class="place_title bebasnew">{{$business->name}}</h4>
-					  					<div class="location_details">
-					  						<p class="location"><img src="{{asset('homepage_assets/images/place.png')}}">{{$business->address}}</p>
-						  					<p class="phone_call"><img src="{{asset('homepage_assets/images/phone-call.png')}}">{{$business->mobile}}</p>
-					  					</div>
-						  				<p class="history_details">{{$business->description}}</p>
-						  				<a href="#"><img src="{{asset('homepage_assets/images/right-arrow.png')}}"></a>
-					  				</div>
-					  			</li>
-					  			@endforeach
+					  		<ul class="search_list_items search_list_items-mod" id="list-data">
+								{{-- load by ajax --}}
 					  		</ul>
-					  		<a href="#" class="orange-btm load_btn">View All</a>
+					  		<a href="#" class="orange-btm load_btn" id="load-more2">Load More</a>
 					  	</div>
 					</div>
 				</div>
@@ -115,6 +82,7 @@
 		</div>
 	</div>
 </section>
+
 
 @section('script')
 <script>
@@ -129,6 +97,75 @@
 		$(".list-view").hide();
 		$(".grid-view").show();
 	}
+
+</script>
+
+<script>
+	$(document).ready(function() {
+		var page = 0;
+		$('#load-more1, #load-more2').click(function() {
+			page += 1;
+			getBusiness();
+		});
+
+		getBusiness();
+		function getBusiness(){
+			// getting parameters
+			let params = {_token:'{{csrf_token()}}',page:page};
+			@foreach($request as $key => $req)
+				params['{{$key}}'] = '{{$req}}';
+			@endforeach
+			console.log(params);
+			// getting Data as per the parameters
+			$.ajax({
+				type:'POST',
+            	url:'{{route('getBusinessByState')}}',
+				data : params,
+				success:function(data){
+					console.log(data);
+					if(data.error == false){
+						if(data.data.length > 0){
+							grid_view = '';
+							list_view = '';
+							$.each(data.data, function( index, value ) {
+								// grid view
+								grid_view += "<li>";
+								grid_view += '<h4 class="place_title bebasnew">'+value.name+'</h4>';
+								grid_view += '<p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p>';
+								grid_view += '';
+								grid_view += '';
+								grid_view += '<p class="rating"><img src="{{url('')}}/'+'homepage_assets/images/rating.png'+'">300 reviews</p>';
+								grid_view += '<p class="phone_call"><img src="{{url('')}}/'+'homepage_assets/images/phone-call.png'+'">'+value.mobile+'</p>';
+								grid_view += '<p class="history_details">'+value.description+'</p>';
+								grid_view += "</li>";
+
+								//list view
+								list_view += "<li>";
+								list_view += '<div class="location_img_wrap"><img src="{{url('')}}/'+value.image+'"></div>';
+								list_view += '<div class="list_content_wrap">';
+								list_view += '<ul class="rating_coments"><li><img src="{{url('')}}/'+'homepage_assets/images/star.png'+'"><h5>4.5 <span>(60 reviews)</span></h5></li><li><img src="{{url('')}}/'+'homepage_assets/images/chat.png'+'"><h5><span>40 Comments</span></h5></li></ul>';
+								list_view += '<h4 class="place_title bebasnew">'+value.name+'</h4>';
+								list_view += '<div class="location_details"><p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p><p class="phone_call"><img src="{{url('')}}/'+'homepage_assets/images/phone-call.png'+'">'+value.mobile+'</p></div>';
+								list_view += '<p class="history_details">'+value.description+'</p>';
+								list_view += '<a href="#"><img src=""></a>';
+								list_view += "</div>"	
+								list_view += "<li>";
+							});
+							$(".history_list").append(grid_view);
+							$("#list-data").append(list_view);
+							$('#load-more1').show();
+							$('#load-more2').show();
+						}else{
+							$('#load-more1').hide();
+							$('#load-more2').show();
+						}
+					}else{
+						// error handling
+					}
+				}
+			});
+		}
+	});
 </script>
 
 {{-- <script type="text/javascript">
@@ -147,6 +184,7 @@
 		});
 	});
 </script> --}}
+
 
 @endsection
 

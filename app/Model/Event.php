@@ -18,4 +18,8 @@ class Event extends Model
     {
         return $this->belongsTo('App\Model\BusinessCategory','business_id','id');
     }
+    public function business()
+    {
+        return $this->hasOne('App\Model\Business','user_id','created_by');
+    }
 }

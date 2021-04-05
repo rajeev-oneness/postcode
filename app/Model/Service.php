@@ -14,5 +14,9 @@ class Service extends Model
     {
         return $this->belongsTo('App\Model\BusinessCategory','businessId','id');
     }
+    public function business()
+    {
+        return $this->hasOne('App\Model\Business','id','created_by');
+    }
 
 }

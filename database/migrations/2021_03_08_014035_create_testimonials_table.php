@@ -19,6 +19,7 @@ class CreateTestimonialsTable extends Migration
             $table->longText('tm_comment');
             $table->string('tm_rating',20);
             $table->string('tm_image');
+            $table->string('created_by');
             $table->softDeletes();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));

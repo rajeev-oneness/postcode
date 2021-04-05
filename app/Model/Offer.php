@@ -14,4 +14,8 @@ class Offer extends Model
     {
         return $this->belongsTo('App\Model\BusinessCategory','businessId','id');
     }
+    public function business()
+    {
+        return $this->hasOne('App\Model\Business','user_id','created_by');
+    }
 }

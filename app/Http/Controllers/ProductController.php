@@ -20,11 +20,18 @@ class ProductController extends Controller
      * @return view
      */
     public function manageProducts(Request $request){
+        if(auth()->user()->userType == 3) {
+            $categories = Product::where('created_by', auth()->user()->id)->with(['businesscategory' => function ($query) {
+                $query->orderBy('created_at', 'desc');
+            }])->get();
+            return view('business-portal.product.manage_products',compact('categories'));
+        }
         $categories = Product::with(['businesscategory' => function ($query) {
             $query->orderBy('created_at', 'desc');
         }])->get();
         // echo json_encode($categories1);die;
-        return view('/portal.product.manage_products',compact('categories'));
+        return view('portal.product.manage_products',compact('categories'));
+        
     }
 
     /**
@@ -34,6 +41,9 @@ class ProductController extends Controller
     */
     public function Products(){
         $businessData= BusinessCategory::all();
+        if(auth()->user()->userType == 3) {
+            return view('business-portal.product.product',compact('businessData'));
+        }
         return view('portal.product.product',compact('businessData'));
     }
 
@@ -58,9 +68,12 @@ class ProductController extends Controller
             $Product->image = $productimg;
             $Product->details = $request->details;
             $Product->price = $request->price;           
-        
+            $Product->created_by = auth()->user()->id;
+
             $Product->save();
-           
+            if(auth()->user()->userType == 3) {
+                return redirect()->route('business-admin.manage_products');
+            }
             return redirect()->route('admin.manage_products');
         } catch (\Exception $e) {
             report($e);
@@ -79,6 +92,9 @@ class ProductController extends Controller
         $businessData= BusinessCategory::all();
         $edited_data = Product::findOrFail(decrypt($id));
         // echo json_encode($edited_data);die;
+        if(auth()->user()->userType == 3) {
+            return view('business-portal.product.edit_product',compact('businessData', 'edited_data'));
+        }
         return view('portal.product.edit_product',compact('businessData', 'edited_data')); 
     }
 
@@ -108,7 +124,10 @@ class ProductController extends Controller
                 'businessId' => $request->businessId, 
                 'details' => $request->details,
                 'price' => $request->price
-            ]);   
+            ]);
+            if(auth()->user()->userType == 3) {
+                return redirect()->route('business-admin.manage_products');
+            }   
             return redirect()->route('admin.manage_products');
         } catch (\Exception $e) {
             report($e);
@@ -125,6 +144,9 @@ class ProductController extends Controller
     public function deleteProductsDetails($id) {
         $lead_delete_id = decrypt($id);
         $delete_product = Product::where('id', $lead_delete_id)->delete();
+        if(auth()->user()->userType == 3) {
+            return redirect()->route('business-admin.manage_products');
+        }
         return redirect()->route('admin.manage_products');
     }
 }

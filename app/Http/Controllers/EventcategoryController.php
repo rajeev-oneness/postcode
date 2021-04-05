@@ -15,6 +15,9 @@ class EventcategoryController extends Controller
     * @return view
     */
     public function eventsCategories(){
+        if(auth()->user()->userType == 3) {
+            return view('business-portal.eventcategory.events_categories');
+        }
         return view('/portal.eventcategory.events_categories');
     }
       /**
@@ -29,10 +32,13 @@ class EventcategoryController extends Controller
         ]);
        $validator->validate();
         $EventCategory = new EventCategory();
-            $EventCategory->name = $request->name;               
+            $EventCategory->name = $request->name;  
+            $EventCategory->created_by = auth()->user()->id;             
             $EventCategory->save();
             $category = $EventCategory->id;
-           
+            if(auth()->user()->userType == 3) {
+                return redirect()->route('business-admin.manage_eventcategories');
+            }
             return redirect()->route('admin.manage_eventcategories');
     }
 
@@ -44,6 +50,9 @@ class EventcategoryController extends Controller
     public function editEventCategories(Request $request) {      
         $lead_edit_id = $request->lead_edit_id;
         $edit_data = EventCategory::where('id', $lead_edit_id)->first();
+        if(auth()->user()->userType == 3) {
+            return view('business-portal.eventcategory.edit_eventcategories',compact('edit_data'));
+        }
         return view('portal.eventcategory.edit_eventcategories',compact('edit_data'));
         
     }
@@ -62,8 +71,11 @@ class EventcategoryController extends Controller
 
         $hid_id = $request->get('hid_id');
         $name = $request->get('name');
-        $update_product_data = EventCategory::where('id', $hid_id)->update(['name' => $name]);   
-            return redirect()->route('admin.manage_eventcategories');
+        $update_product_data = EventCategory::where('id', $hid_id)->update(['name' => $name]);
+        if(auth()->user()->userType == 3) {
+            return redirect()->route('business-admin.manage_eventcategories');
+        }   
+        return redirect()->route('admin.manage_eventcategories');
     }
 
     
@@ -75,6 +87,9 @@ class EventcategoryController extends Controller
     public function deleteEventCategories(Request $request) {
         $lead_delete_id = $request->lead_delete_id;
         $edit_data = EventCategory::where('id', $lead_delete_id)->delete();
+        if(auth()->user()->userType == 3) {
+            return redirect()->route('business-admin.manage_eventcategories');
+        }
         return redirect()->route('admin.manage_eventcategories');
     }
     
@@ -145,6 +160,11 @@ class EventcategoryController extends Controller
      * @return view
      */
     public function manageEventCategories(Request $request){
+        if(auth()->user()->userType == 3) {
+            $categories = EventCategory::where('created_by', auth()->user()->id)->get();
+            // echo json_encode($categories1);die;
+            return view('business-portal.eventcategory.manage_eventcategories',compact('categories'));
+        }
         $categories = EventCategory::all();
         // echo json_encode($categories1);die;
         return view('/portal.eventcategory.manage_eventcategories',compact('categories'));

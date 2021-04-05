@@ -29,6 +29,7 @@ class CreateEventsTable extends Migration
             $table->float('price',8,2);
             $table->longText('booking_details');
             $table->longText('contact_details');
+            $table->string('created_by');
             $table->softDeletes();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));

@@ -67,7 +67,7 @@
                             
                             <input type="hidden" name="longitude" id="selectedLongitude" value="">
                             <input type="hidden" name="latitude" id="selectedLatitude" value="">
-                            <input type="hidden" name="pincode" id="pincode" value="">
+                            {{-- <input type="hidden" name="pincode" id="pincode" value=""> --}}
 
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">
@@ -109,10 +109,22 @@
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
+                            
+
+                            <div class="sign_in_form">
+                                <img src="{{asset('user_assets/image/email-icon.png')}}">
+                                {{-- <label>pincode</label> --}}
+                                <input type="text" name="pincode" value="{{ old('pincode') }}" id="pincode" class="textbox" maxlength="4" placeholder="PINCODE" onkeypress="return isNumberKey(event);" required>
+                                @error('pincode')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/abn.png')}}">
                                 {{-- <label>ABN</label> --}}
-                                <input type="text" name="abn" value="{{ old('abn') }}" id="abn" class="textbox" placeholder="ABN">
+                                <input type="text" name="abn" value="{{ old('abn') }}" id="abn" class="textbox" onkeypress="return isNumberKey(event);" placeholder="ABN">
                                 @error('abn')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror

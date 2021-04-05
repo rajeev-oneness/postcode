@@ -60,34 +60,47 @@
             <div class="card mt-4">
               <div class="card-body">
                 <div class="text-center">
-                  <h4>LOGIN</h4>
+                  <h4><span id="lognin-as"></span> Login</h4>
                   <h6>Enter your Credentials </h6>
                 </div>
                 <div id="failur" class="alert alert-danger" style="display: none;">
                 </div>
                 <form class="form-horizontal theme-form" action="" method="post">
                 {{csrf_field()}}
-                  <div class="form-group">
-                    <label class="col-form-label pt-0">Email</label>
-                    <input class="form-control" id="email" value="{{old('email')}}" name="email" type="text" required="">
-                    @error('email')
-                        {{$message}}
-                        @enderror
+                  <div id="user-type">
+                    <div class="form-group">
+                      <select class="form-control" id="user-type-selected">
+                        <option value="">-Select user type-</option>
+                        <option value="User">User</option>
+                        <option value="Business">Business</option>
+                        <option value="Admin">Admin</option>
+                      </select>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label class="col-form-label">Password</label>
-                    <input class="form-control" id="password" value="{{old('password')}}" name="password" type="password" required="">
-                    @error('password')
-                        {{$message}}
-                        @enderror
+                  <div id="login-form">
+                    <div class="form-group">
+                      <label class="col-form-label pt-0">Email</label>
+                      <input class="form-control" id="email" value="{{old('email')}}" name="email" type="text" required="">
+                      @error('email')
+                          {{$message}}
+                          @enderror
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label">Password</label>
+                      <input class="form-control" id="password" value="{{old('password')}}" name="password" type="password" required="">
+                      @error('password')
+                          {{$message}}
+                          @enderror
+                    </div>
+                    <div class="form-group form-row mt-3 mb-0">
+                      <button class="btn btn-primary btn-block" id="admin_signup" name="admin_signup" type="button">Login</button>
+                    </div>
                   </div>
                   <!-- <div class="checkbox p-0">
                     <input id="checkbox1" type="checkbox">
                     <label for="checkbox1">Remember me</label>
                   </div> -->
-                  <div class="form-group form-row mt-3 mb-0">
-                    <button class="btn btn-primary btn-block" id="admin_signup" name="admin_signup" type="button">Login</button>
-                  </div>
+                  
                 
                 </form>
               </div>
@@ -97,10 +110,21 @@
         <!-- login page with video background end-->
       </div>
     </div>
-
+   
     <script>
         $(document).ready(function() {
-            
+            $('#login-form').hide();
+            $('#user-type-selected').change(function() {
+              var user = $('#user-type-selected').val();
+              if(user) {
+                $('#lognin-as').html(user);
+                $('#login-form').show();
+              }
+              else {
+                $('#login-form').hide();
+              }
+            });
+
             $('#admin_signup').click(function(e) {
                
                 e.preventDefault();

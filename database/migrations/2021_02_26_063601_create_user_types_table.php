@@ -26,6 +26,9 @@ class CreateUserTypesTable extends Migration
             ],
             [
                 'name' => 'user',
+            ],
+            [
+                'name' => 'business',
             ]
         ];
         DB::table('user_types')->insert($data);

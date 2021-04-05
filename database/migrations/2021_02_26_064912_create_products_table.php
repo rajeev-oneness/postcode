@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('details');
             $table->float('price',8,2);
             $table->string('image');
+            $table->string('created_by');
             $table->softDeletes();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));

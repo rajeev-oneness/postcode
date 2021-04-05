@@ -18,7 +18,10 @@ class OfferController extends Controller
     public function OfferView(){
         $busCategData= BusinessCategory::all();
         $offerCatData= Offer::all();
-      
+        if(auth()->user()->userType == 3){
+            $offerCatData= Offer::where('created_by', auth()->user()->id)->get();
+            return view('business-portal.offer.offer',compact('offerCatData', 'busCategData'));
+        }
         return view('/portal.offer.offer',compact('offerCatData', 'busCategData'));
     }
 
@@ -52,8 +55,11 @@ class OfferController extends Controller
         $Offer->promo_code = $request->promo_code;
         $Offer->howcanredeem = $request->content;
         $Offer->expire_date = $new_date;
+        $Offer->created_by = auth()->user()->id;
         $Offer->save();
-           
+            if(auth()->user()->userType == 3){
+                return redirect()->route('business-admin.manage_offers');
+            }
             return redirect()->route('admin.manage_offers');
         }catch (\Exception $e) {
             report($e);
@@ -69,6 +75,13 @@ class OfferController extends Controller
      * @return view
      */
     public function manageOffers(Request $request){
+        if(auth()->user()->userType == 3){
+            $categories = Offer::where('created_by', auth()->user()->id)->with(['offercattype' => function ($query) {
+                $query->orderBy('created_at', 'desc');
+            }])->get();
+            // echo json_encode($categories1);die;
+            return view('business-portal.offer.manage_offers',compact('categories'));
+        }
         $categories = Offer::with(['offercattype' => function ($query) {
             $query->orderBy('created_at', 'desc');
         }])->get();
@@ -96,6 +109,9 @@ class OfferController extends Controller
         $businesofferData= BusinessCategory::all();
         $editedoffers_data = Offer::findOrFail(decrypt($id));
         // echo json_encode($edited_data);die;
+        if(auth()->user()->userType == 3){
+            return view('business-portal.offer.edit_offers', compact('editedoffers_data', 'businesofferData'));
+        }
         return view('portal.offer.edit_offers', compact('editedoffers_data', 'businesofferData'));
         
     }
@@ -133,6 +149,9 @@ class OfferController extends Controller
             'expire_date' => $request->expire_date, 
             'howcanredeem' => $request->howcanredeem
         ]);   
+            if(auth()->user()->userType == 3){
+                return redirect()->route('business-admin.manage_offers');
+            }
             return redirect()->route('admin.manage_offers');
         }catch (\Exception $e) {
             report($e);
@@ -150,6 +169,9 @@ class OfferController extends Controller
     public function deleteOffers(Request $request) {
         $lead_delete_id = $request->appdel_id;
         $delete_event = Offer::where('id', $lead_delete_id)->delete();
+        if(auth()->user()->userType == 3){
+            return redirect()->route('business-admin.manage_offers');
+        }
         return redirect()->route('admin.manage_offers');
     }
 }

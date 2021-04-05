@@ -30,6 +30,8 @@ class AdminController extends Controller
                  return redirect()->route('admin.dashboard');break;
             case 2:
                 return redirect()->route('user.dashboard');break;
+            case 3:
+                return redirect()->route('business.dashboard');break;
             default:
                 return view('home');break;
         }  

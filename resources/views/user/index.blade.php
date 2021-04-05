@@ -24,6 +24,12 @@
             <div class="menu_wrap">
                 <a href="{{route('user.welcome')}}" class="logo_icon"><img src="{{asset('user_assets/image/logo.png')}}"></a>
                 <ul class="menu_icon">
+                    <li>
+                        <a href="{{route('default.homepage')}}">
+                            {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
+                            Homepage
+                        </a>
+                    </li>
                     @if (auth()->check())
                         @if (auth()->user()->userType == 2)
                             <li>
@@ -48,12 +54,6 @@
                             </li>
                         @endif
                     @else
-                        <li>
-                            <a href="{{route('default.homepage')}}">
-                                {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
-                                Homepage
-                            </a>
-                        </li>
                         <li>
                             <a href="{{route('login')}}">
                                 {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}

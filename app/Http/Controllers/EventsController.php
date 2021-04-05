@@ -21,6 +21,9 @@ class EventsController extends Controller
         $busCateData= BusinessCategory::all();
         $eventCatData= EventCategory::all();
         $ageGroups= AgeGroup::all();
+        if(auth()->user()->userType == 3) {
+            return view('business-portal.events.events',compact('eventCatData', 'busCateData','ageGroups'));
+        }
         return view('/portal.events.events',compact('eventCatData', 'busCateData','ageGroups'));
     }
 
@@ -50,6 +53,9 @@ class EventsController extends Controller
             $event->price = $request->price; 
             $event->event_category_id = $request->event_category_id;         
             $event->address = $request->address;
+            $event->country_id = auth()->user()->countryId;
+            $event->state_id = auth()->user()->stateId;
+            $event->postcode = auth()->user()->postcode;
             $dob = $request->start;
             $timestamp = strtotime($dob);
             $new_date = date("Y-m-d", $timestamp);
@@ -61,8 +67,12 @@ class EventsController extends Controller
             $event->frequency = $request->frequency;  
             $event->age_group = $request->age_group;         
             $event->booking_details = $request->booking_details;
-            $event->contact_details = $request->contact_details;           
+            $event->contact_details = $request->contact_details;
+            $event->created_by = auth()->user()->id;
             $event->save();
+            if(auth()->user()->userType == 3) {
+                return redirect()->route('business-admin.manage_events');
+            }
             return redirect()->route('admin.manage_events');
         }catch (\Exception $e) {
             report($e);
@@ -78,7 +88,13 @@ class EventsController extends Controller
      * @return view
      */
     public function manageEventsView(Request $request){
-        $userId = Auth::user()->id;
+        if(auth()->user()->userType == 3) {
+            $categories1 = Event::where('created_by', auth()->user()->id)->with(['eventcattype','eventbusiesstype' => function ($query) {
+                $query->orderBy('created_at', 'desc');
+            }])->get();
+            // echo json_encode($categories1);die;
+            return view('business-portal.events.manage_events',compact('categories1'));
+        }
         $categories1 = Event::with(['eventcattype','eventbusiesstype' => function ($query) {
             $query->orderBy('created_at', 'desc');
         }])->get();
@@ -111,6 +127,9 @@ class EventsController extends Controller
         $editedevents_data = Event::findOrFail(decrypt($id));
         // dd($ageGroups);
         // echo json_encode($edited_data);die;
+        if(auth()->user()->userType == 3) {
+            return view('business-portal.events.edit_event', compact('editedevents_data', 'eventerData', 'businesserData', 'ageGroups'));
+        }
         return view('portal.events.edit_event', compact('editedevents_data', 'eventerData', 'businesserData', 'ageGroups'));
         
     }
@@ -152,7 +171,10 @@ class EventsController extends Controller
             'age_group' => $request->age_group, 
             'booking_details' => $request->booking_details, 
             'contact_details' => $request->contact_details
-        ]);   
+        ]);
+            if(auth()->user()->userType == 3) {
+                return redirect()->route('business-admin.manage_events');
+            }  
             return redirect()->route('admin.manage_events');
         }catch (\Exception $e) {
             report($e);
@@ -171,6 +193,9 @@ class EventsController extends Controller
     public function deleteEvents(Request $request) {
         $lead_delete_id = $request->appdel_id;
         $delete_event = Event::where('id', $lead_delete_id)->delete();
+        if(auth()->user()->userType == 3) {
+            return redirect()->route('business-admin.manage_events');
+        }
         return redirect()->route('admin.manage_events');
     }
 

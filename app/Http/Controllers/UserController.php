@@ -9,6 +9,9 @@ use App\Model\Business;
 use App\Model\BusinessCategory;
 use App\Model\Testimonial;
 use App\Model\Newsletter;
+use App\Model\State;
+use App\Model\Postcode;
+use App\User;
 use Mail;
 use Validator, Redirect, Response;
 use Illuminate\Support\Facades\Hash;
@@ -27,7 +30,8 @@ class UserController extends Controller
     public function Signup()
     {
         $businessCategories = BusinessCategory::all();
-        return view('/user.signup', compact('businessCategories'));
+        $states = State::all();
+        return view('/user.signup', compact('businessCategories', 'states'));
     }
     /**
      * Customer Ratings Save
@@ -141,28 +145,50 @@ class UserController extends Controller
         $businessProfileImg = 'uploads/' . $fileName;
 
         $password = str_random(8);
+        $hashedPassword = Hash::make($password);
 
         $name = $request->name;
         $email = $request->email;
+        
+        $stateId = Postcode::where('postcode', $request->pincode)->with('state')->get();
+
+        $user = new User;
+        $user->name = $name;
+        $user->email = $email;
+        $user->password = $hashedPassword;
+        $user->address = $request->address;
+        $user->stateId = $stateId[0]->stateId;
+        $user->countryId = 1;
+        $user->postcode = $request->pincode;
+        $user->userType = 3;
+        // dd($user);
+        $user->save();
 
         $business = new Business();
+        $business->user_id = $user->id;
         $business->email = $email;
         $business->abn = $request->abn;
-        $business->password = Hash::make($password);
+        $business->password = $hashedPassword;
         $business->company_website = $request->company_website;
         $business->image = $businessProfileImg;
         $business->name = $name;
         $business->address = $request->address;
         $business->mobile = $request->mobile;
         $business->open_hour = $request->open_hour;
-        if($request->longitude != '' && $request->latitude != '' && $request->pincode != ''){
+        if($request->longitude != '' && $request->latitude != ''){
             $business->longitude = $request->longitude;
-            $business->latitude = $request->latitude;
-            $business->pin_code = $request->pincode; 
+            $business->latitude = $request->latitude; 
         }
         $business->business_categoryId = $request->business_categoryId;
-        
+        $business->pin_code = $request->pincode;
+
+
+        $business->state_id = $stateId[0]->stateId;
+        $business->country_id = 1;
         $business->save();
+
+        
+        
         // dd(hash()->make($password));
         // $deal= $business->id;
 

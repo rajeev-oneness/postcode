@@ -18,6 +18,7 @@ class CreateRatingsTable extends Migration
             $table->bigInteger('userId');
             $table->float('rating',4,2);
             $table->longText('description');
+            $table->string('created_by');
             $table->softDeletes();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));

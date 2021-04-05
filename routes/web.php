@@ -34,7 +34,7 @@ Route::post('/search_main', 'UserController@search_main');
 
 //---------------------------------------------------------------Admin Login-----------------------------------------------//
 
-Route::get('/admin_login', 'AdminController@Login')->name('adminlogin');
+Route::get('/main-login', 'AdminController@Login')->name('adminlogin');
 
 
 Route::post('/login_get', 'AdminController@loginGet')->name('admin.login');
@@ -59,6 +59,15 @@ Route::get('/home', function () {
 
 Route::prefix('user')->group(function () {
     require 'user.php';
+});
+
+//---------------------------------------------------------------Business Admin Dashboard-----------------------------------------------//
+
+Route::get('/business-admin','BusinessController@dashboardView')->name('business.dashboard')->middleware(['auth', 'business']);
+
+
+Route::prefix('business-admin')->group(function () {
+    require 'business.php';
 });
 
 //--------------------------------------------------------------User Contact-----------------------------------------------//
@@ -92,17 +101,15 @@ Route::group(['prefix'=> 'business' ,'middleware' => ['auth']], function () {
 });
 
 //------------------front-----------------//
-// Route::group(['prefix' => 'front'], function() {
-    // Route::get('directory', 'FrontController@directory')->name('directory');
-// });
-// Route::group(['prefix' => 'rating'], function() {
-//     Route::get('add/{id}', 'RatingController@index')->name('rating.add');
-//     Route::post('store', 'RatingController@store')->name('rating.store');
-// });
-
 //---------------homepage and directory--------------//
 
 Route::get('/homepage', 'FrontController@homepage')->name('default.homepage');
-Route::post('/serach-business', 'FrontController@search')->name('search.homepage');
-// menu bar(postcodes)
-Route::get('/state-postcodes/{stateId}', 'FrontController@statePostcode')->name('state.postcodes.menu');
+
+Route::get('/directory', 'FrontController@directory')->name('directory');
+Route::post('/get-business-by-State', 'FrontController@getBusinessByState')->name('getBusinessByState');
+
+//menu bar(events)
+Route::get('/events-listing', 'Frontcontroller@event')->name('event.menu');
+
+//menu bar(events)
+Route::get('/deals-listing', 'Frontcontroller@deal')->name('deal.menu');

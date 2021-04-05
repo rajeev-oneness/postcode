@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+// use App\Model\State;
+use App\Model\Postcode;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -63,9 +65,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $state = Postcode::where('postcode', $data['postcode'])->with('state')->get();
+        // dd($state[0]->stateId);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'address' => $data['address'],
+            'countryId' => 1,
+            'stateId' => $state[0]->stateId,
+            'postcode' => $data['postcode'],
             'password' => Hash::make($data['password']),
             'userType' => 2
         ]);
