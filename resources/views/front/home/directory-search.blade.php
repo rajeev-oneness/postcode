@@ -25,7 +25,7 @@
 	<div class="history_grid_header">
 		<div class="container">
 			<div class="row">
-				<div class="col-12">
+				<div class="col-8">
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
 					  	<li class="nav-item" role="presentation">
 					    	<a class="nav-link" id="list-tab" onclick="listView()"><img class="display-none" src="{{asset('homepage_assets/images/list-2.png')}}"></a>
@@ -37,6 +37,12 @@
 					    	<a class="nav-link" id="map-tab"><img class="display-none" src="{{asset('homepage_assets/images/map.png')}}"></a>
 					  </li>
 					</ul>
+				</div>
+				<div class="search_form_wrap">
+					<form action="{{route('directory')}}">
+						<input type="text" name="search" placeholder="Seatch  by postcode">
+						<button><img src="{{asset('homepage_assets/images/magnify.png')}}"></button>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -129,8 +135,12 @@
 							list_view = '';
 							$.each(data.data, function( index, value ) {
 								// grid view
+								let href = "{{route('directory',['name'=> 'business','id' => 'businessId'])}}";
+								href = href.replace('businessId', value.id);
 								grid_view += "<li>";
-								grid_view += '<h4 class="place_title bebasnew">'+value.name+'</h4>';
+								// grid_view += '';
+								grid_view += '<a href="'+href+'"><h4 class="place_title bebasnew">'+value.name+'</h4></a>'; 	
+								// grid_view += "";
 								grid_view += '<p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p>';
 								grid_view += '';
 								grid_view += '';
@@ -147,17 +157,17 @@
 								list_view += '<h4 class="place_title bebasnew">'+value.name+'</h4>';
 								list_view += '<div class="location_details"><p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p><p class="phone_call"><img src="{{url('')}}/'+'homepage_assets/images/phone-call.png'+'">'+value.mobile+'</p></div>';
 								list_view += '<p class="history_details">'+value.description+'</p>';
-								list_view += '<a href="#"><img src=""></a>';
+								list_view += '<a href="'+href+'"><img src="{{url('')}}/'+'homepage_assets/images/right-arrow.png"></a>';
 								list_view += "</div>"	
 								list_view += "<li>";
 							});
 							$(".history_list").append(grid_view);
 							$("#list-data").append(list_view);
-							$('#load-more1').show();
-							$('#load-more2').show();
+							// $('#load-more1').show();
+							// $('#load-more2').show();
 						}else{
-							$('#load-more1').hide();
-							$('#load-more2').show();
+							$('#load-more1').html('No more data!');
+							$('#load-more2').html('No more data!');
 						}
 					}else{
 						// error handling

@@ -25,7 +25,7 @@
 	<div class="history_grid_header">
 		<div class="container">
 			<div class="row">
-				<div class="col-12">
+				<div class="col-8">
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
 					  	<li class="nav-item" role="presentation">
 					    	<a class="nav-link" id="list-tab" onclick="listView()"><img class="display-none" src="{{asset('homepage_assets/images/list-2.png')}}"></a>
@@ -38,6 +38,14 @@
 					  </li>
 					</ul>
 				</div>
+				<div class="search_form_wrap">
+					<form action="{{route('deals')}}">
+						@csrf
+						<input type="hidden" name="menu" value="deals">
+						<input type="text" name="search" placeholder="Seatch  by postcode">
+						<button><img src="{{asset('homepage_assets/images/magnify.png')}}"></button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -49,7 +57,7 @@
 					  	<div class="tab-pane fade show active" id="gird" role="tabpanel" aria-labelledby="gird-tab">
 					  		{{-- <h5 class="result_tab_title"> <span id="data-count"></span> results found in <a href="#">Australia</a></h5> --}}
 					  		<ul class="history_list">
-								@foreach ($deals as $deal)
+								{{-- @foreach ($deals as $deal)
 									<li>
 										<h4 class="place_title bebasnew">{{$deal->title}}</h4>
 										<h5>{{$deal->promo_code}}</h5>
@@ -62,9 +70,9 @@
                                         </p>
 										<p class="history_details">{{$deal->description}}</p>
 									</li>
-								@endforeach
+								@endforeach --}}
 					  		</ul>
-					  		<a href="#" class="orange-btm load_btn" id="load-more">Load More</a>
+					  		<a href="#" class="orange-btm load_btn" id="load-more1">Load More</a>
 					  	</div>
 					</div>
 				</div>
@@ -85,7 +93,7 @@
 					  			{{-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p> --}}
 					  		</div>
 					  		<ul class="search_list_items search_list_items-mod" id="list-data">
-								@foreach($deals as $deal)
+								{{-- @foreach($deals as $deal)
 					  			<li>
 					  				<div class="location_img_wrap">
 					  					<img src="{{asset($deal->image)}}">
@@ -110,9 +118,9 @@
 						  				<a href="#"><img src="{{asset('homepage_assets/images/right-arrow.png')}}"></a>
 					  				</div>
 					  			</li>
-					  			@endforeach
+					  			@endforeach --}}
 					  		</ul>
-					  		<a href="#" class="orange-btm load_btn" id="load-more">Load More</a>
+					  		<a href="#" class="orange-btm load_btn" id="load-more2">Load More</a>
 					  	</div>
 					</div>
 				</div>
@@ -138,57 +146,74 @@
 
 </script>
 
-{{-- <script>
-	$(document).ready(function() {
-		var click = 0;
-		$('#load-more').click(function() {
-			click += 1;
-			// alert(click);
-			
-		});
+<script>
+	console.log('{{Route::current()->getName()}}');
+	let page = 0;
+	$('#load-more1, #load-more2').click(function() {
+		page += 1;
+		ajaxCall();
+	});
+	ajaxCall();
+	function ajaxCall() {
+		let params = {_token:'{{csrf_token()}}',page:page,menu:'{{Route::current()->getName()}}'};
+		@foreach($request as $key => $req)
+				params['{{$key}}'] = '{{$req}}';
+		@endforeach
+		// console.log(params);
 		$.ajax({
 			type:'POST',
-            url:'{{route('getBusinessByState')}}',
-            data:{
-				_token: '{{csrf_token()}}',
-				page: click,
-				keyword: '{{$request['keyword']}}',
-				postcode: '{{$request['postcode']}}',
-				category: '{{$request['category']}}',
-				stateId: '{{$request['stateId']}}',
-			},
-            success:function(data) {
-                console.log(data.data);
+			url:'{{route('event.deal.ajax')}}',
+			data:params,
+			success:function(data) {
 				grid_view = '';
 				list_view = '';
-				$.each(data.data, function( index, value ) {
-					// grid view
-					grid_view += "<li>";
-					grid_view += '<h4 class="place_title bebasnew">'+value.name+'</h4>';
-					grid_view += '<p class="location"><img src="">'+value.address+'</p>';
-					grid_view += '<p class="rating"><img src="">300 reviews</p>';
-					grid_view += '<p class="phone_call"><img src="">'+value.mobile+'</p>';
-					grid_view += '<p class="history_details">'+value.description+'</p>';
-					grid_view += "</li>";
+				if(data.error == false){
+					if(data.data.length > 0) {
+						// console.log(data.data.length);
+						$.each(data.data, function(index, value){
+							// grid view
+							grid_view += "<li>";
+							grid_view += '<h4 class="place_title bebasnew">'+value.title+'</h4>';
+							grid_view += '<h5>'+value.promo_code+'</h5>';
+							grid_view += '<p class="phone_call"><strong>Deal organiser: <a href="#">'+value.business.name+'</a></strong></p>';
+							grid_view += '<p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p>';
+							grid_view += '<p class="location"><strong>Reedeem before '+'{{date("d M,y", strtotime('+value.expire_date+'))}}'+'</strong></p>';
+							grid_view += '<p class="rating"><img src="{{url('')}}/'+'homepage_assets/images/rating.png'+'">300 reviews</p>';
+							grid_view += '<p class="history_details">'+value.description+'</p>';
+							grid_view += "</li>";
 
-					//list view
-					list_view += "<li>";
-					list_view += '<div class="location_img_wrap"><img src=""></div>';
-					list_view += '<div class="list_content_wrap">';
-					list_view += '<ul class="rating_coments"><li><img src=""><h5>4.5 <span>(60 reviews)</span></h5></li><li><img src=""><h5><span>40 Comments</span></h5></li></ul>';
-					list_view += '<h4 class="place_title bebasnew">'+value.name+'</h4>';
-					list_view += '<div class="location_details"><p class="location"><img src="">'+value.address+'</p><p class="phone_call"><img src="">'+value.mobile+'</p></div>';
-					list_view += '<p class="history_details">'+value.description+'</p>';
-					list_view += '<a href="#"><img src=""></a>';
-					list_view += "</div>"	
-					list_view += "<li>";
-				});
-				$(".history_list").append(grid_view);
-				$("#list-data").append(list_view);
-            }
-		});
-	});
-</script> --}}
+							// list view
+							list_view += "<li>";
+							list_view += '<div class="location_img_wrap"><img src="{{url('')}}/'+value.image+'"></div>';
+							list_view += '<div class="list_content_wrap">';
+							list_view += '<ul class="rating_coments"><h5>'+value.promo_code+'</h5></ul>';
+							list_view += '<h4 class="place_title bebasnew">'+value.title+'</h4>';
+							list_view += '<div class="location_details"><p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p></div>';
+							list_view += '<p class=""><strong>Deal organiser: <a href="#">'+value.business.name+'</a></strong></p>';
+							list_view += '<p class="location"><strong>Reedeem before '+'{{date("d M,y", strtotime('+value.expire_date+'))}}'+'</strong></p>';
+							list_view += '<p class="history_details">'+value.description+'</p>';
+							list_view += '<a href="#"><img src=""></a>';
+							list_view += "</div>"	
+							list_view += "<li>";
+						});
+						$(".history_list").append(grid_view);
+						$("#list-data").append(list_view);
+					} else {
+						$('#load-more1').html('No more data!');
+						$('#load-more2').html('No more data!');
+					}
+				} else {
+					//here goes the error
+					$('#load-more1').html('No more data!');
+					$('#load-more2').html('No more data!');
+				}
+				// $('#load-more').hide();
+				console.log(data);
+			}
+		})
+	}
+</script>
+
 
 {{-- <script type="text/javascript">
 	$(document).ready(function(){

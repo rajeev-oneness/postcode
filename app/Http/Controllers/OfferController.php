@@ -56,6 +56,8 @@ class OfferController extends Controller
         $Offer->howcanredeem = $request->content;
         $Offer->expire_date = $new_date;
         $Offer->created_by = auth()->user()->id;
+        $Offer->address = auth()->user()->address;
+        $Offer->postcode = auth()->user()->postcode;
         $Offer->save();
             if(auth()->user()->userType == 3){
                 return redirect()->route('business-admin.manage_offers');

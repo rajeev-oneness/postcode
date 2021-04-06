@@ -62,7 +62,6 @@ class FrontController extends Controller
         // $business = $business->get();
         //$businesses = [];
         $request = $request->all();
-        // dd($request);
         return view('front.home.directory-search',compact('request'));
     }
 
@@ -92,22 +91,55 @@ class FrontController extends Controller
             if(!empty($request->category)){
                 $business = $business->where('business_categoryId','like','%'.$request->category.'%');
             }
+            if(!empty($request->search)){
+                $business = $business->where('name','like','%'.$request->search.'%')
+                                    ->orWhere('address','like','%'.$request->search.'%')
+                                    ->orWhere('pin_code','like','%'.$request->search.'%');
+            }
             $business = $business->limit(1)->offset($offset)->get();
             return response()->json(['error'=>false,'message'=>'Business Data','data'=>$business]);
         }
         return response()->json(['error'=>true,'message'=>$validate->errors()->first()]);
     }
 
-    public function event() {
-        $events = Event::with('business')->get();
-        if(auth()->check()) {
-            $events = Event::where('state_id', auth()->user()->stateId)->with('business')->get();
-        }
-        return view('front.home.event', compact('events'));
+    public function event(Request $request) {
+        $request = $request->all();
+        return view('front.home.event', compact('request'));
+    }
+    public function deal(Request $request) {
+        $request = $request->all();
+        return view('front.home.deal', compact('request'));
     }
 
-    public function deal() {
-        $deals = Offer::with('business')->get();
-        return view('front.home.deal', compact('deals'));
+    public function eventDealAjax(Request $request) {
+        $rules = [
+            '_token' => 'required',
+            'page'=> 'required|min:0|numeric',
+            'menu' => 'required'
+        ];
+        $validate = Validator::make($request->all(),$rules);
+        if(!$validate->fails()){
+            $offset = $request->page * 1;
+            if($request->search != '') {
+                if($request->menu == 'events') {
+                    $datas = Event::select('*')->where('name','like','%'.$request->search.'%')->orWhere('postcode','like','%'.$request->search.'%')->orWhere('address','like','%'.$request->search.'%');         
+                } else if ($request->menu == 'deals') {
+                    $datas = Offer::select('*')->orWhere('postcode','like','%'.$request->search.'%')->orWhere('address','like','%'.$request->search.'%');
+                }
+            } else {
+                if($request->menu == 'events') {
+                    $datas = Event::select('*');         
+                } else if ($request->menu == 'deals') {
+                    $datas = Offer::select('*');
+                }
+            }
+            if(auth()->check()) {
+                $datas = $datas->where('postcode', auth()->user()->postcode);
+            }
+            $datas = $datas->with('business')->orderBy('created_at', 'DESC')->limit(1)->offset($offset)->get();
+            return response()->json(['error'=>false,'message'=>'Event Data','data'=>$datas]);
+        }
+        return response()->json(['error'=>true,'message'=>$validate->errors()->first()]);
     }
+    
 }

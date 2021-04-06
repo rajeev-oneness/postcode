@@ -35,9 +35,9 @@
 					</ul>
 				</li>
 				<li><a href="{{route('directory')}}">Directory</a></li>
-				<li><a href="{{route('event.menu')}}">Events </a></li>
+				<li><a href="{{route('events')}}">Events </a></li>
 				<li><a href="#">Marketplace</a></li>
-				<li><a href="{{route('deal.menu')}}">Deals </a></li>
+				<li><a href="{{route('deals')}}">Deals </a></li>
 				<li><a href="#">Local Leads</a></li>
 				<li><a href="#">Resources</a></li>
 				<li><a href="#">About Us <span><i class="fas fa-chevron-down"></i></span> </a>
@@ -127,11 +127,11 @@
 			<div class="col-md-2">
 				<h3 class="footer-heading">Products</h3>
 				<ul class="footer-list">
-					<li><a href="{{route('event.menu')}}">Events</a></li>
+					<li><a href="{{route('events')}}">Events</a></li>
 					<li><a href="{{route('directory')}}">Directory</a></li>
 					<li><a href="#">Marketplace</a></li>
 					<li><a href="#">Leads</a></li>
-					<li><a href="{{route('deal.menu')}}">Deals</a></li>
+					<li><a href="{{route('deals')}}">Deals</a></li>
 				</ul>
 			</div>
 			<div class="col-md-2">

@@ -109,7 +109,11 @@ Route::get('/directory', 'FrontController@directory')->name('directory');
 Route::post('/get-business-by-State', 'FrontController@getBusinessByState')->name('getBusinessByState');
 
 //menu bar(events)
-Route::get('/events-listing', 'Frontcontroller@event')->name('event.menu');
+Route::get('/events', 'Frontcontroller@event')->name('events');
+Route::get('/deals', 'Frontcontroller@deal')->name('deals');
+Route::post('/get-events-deals', 'Frontcontroller@eventDealAjax')->name('event.deal.ajax');
 
-//menu bar(events)
-Route::get('/deals-listing', 'Frontcontroller@deal')->name('deal.menu');
+//details
+// Route::get('/details', 'Frontcontroller@event')->name('details');
+
+
