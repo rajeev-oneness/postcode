@@ -55,7 +55,7 @@ Auth::routes();
 
 Route::get('/home', function () {
     return view('user.index');
-})->name('user.dashboard')->middleware(['auth', 'user']);;
+})->name('user.dashboard')->middleware(['auth', 'user']);
 
 Route::prefix('user')->group(function () {
     require 'user.php';
@@ -114,6 +114,13 @@ Route::get('/deals', 'Frontcontroller@deal')->name('deals');
 Route::post('/get-events-deals', 'Frontcontroller@eventDealAjax')->name('event.deal.ajax');
 
 //details
-// Route::get('/details', 'Frontcontroller@event')->name('details');
+Route::get('/details', 'Frontcontroller@details')->name('details');
+
+Route::group(['middleware' => ['auth','user']], function(){
+    Route::get('/rating-add/{id}', 'RatingController@index')->name('rating.add');
+    Route::post('/rating-store', 'RatingController@store')->name('rating.store');
+});
+
+
 
 

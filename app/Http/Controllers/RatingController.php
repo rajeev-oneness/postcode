@@ -15,8 +15,8 @@ class RatingController extends Controller
     public function index($businessId)
     {
         if(auth()->check()) {
-            $id = decrypt($businessId);
-            return view('front.rating', compact('id'));
+            $id = $businessId;
+            return view('front.home.review', compact('id'));
         }
         return redirect()->route('login');
     }
@@ -41,7 +41,7 @@ class RatingController extends Controller
     {
         $rating = new Rating;
         $rating->userId = auth()->user()->id;
-        $rating->business_id = $request->businessId;
+        $rating->business_id = $request->business_id;
         $rating->rating = $request->rating;
         $rating->description = $request->description;
         $rating->save();

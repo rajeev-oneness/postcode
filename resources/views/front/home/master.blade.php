@@ -11,7 +11,11 @@
   <link rel="stylesheet" type="text/css" href="{{asset('homepage_assets/css/slick.css')}}"/>
   <link rel="stylesheet" type="text/css" href="{{asset('homepage_assets/css/slick-theme.css')}}"/>
   <link rel="stylesheet" href="{{asset('homepage_assets/css/style.css')}}">
-
+	<style>
+		a {
+			margin-left: 0px !important;
+		}
+	</style>
 </head>
 <body>
 <header>

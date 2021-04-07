@@ -16,7 +16,7 @@ class Service extends Model
     }
     public function business()
     {
-        return $this->hasOne('App\Model\Business','id','created_by');
+        return $this->hasOne('App\Model\Business','user_id','created_by');
     }
 
 }

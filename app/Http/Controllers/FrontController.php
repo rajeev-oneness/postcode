@@ -18,56 +18,21 @@ use Illuminate\Support\Facades\DB;
 
 class FrontController extends Controller
 {
-    // public function directory() {
-    //     $ratings = Rating::all();
-    //     $businesses = Business::orderBy('created_at', 'DESC')->get();
-    //     return view('front.directory', compact('businesses','ratings'));
-    // }
-    
+
     public function homepage() {
         $businesses = Business::all();
         $postcodes = Postcode::all();
         $categories = BusinessCategory::all();
         return view('front.home.index', compact('businesses','postcodes','categories'));
     }
-
-    // public function search(Request $req) {
-    //     // dd($req->all());
-    //     $keyword = $req->keyword;
-    //     $postcode = $req->postcode;
-    //     $category = $req->category;
-    //     $businesses = Business::where([
-    //         ['name', 'LIKE', '%' . $keyword . '%'],
-    //         ['pin_code', 'LIKE', '%' . $postcode . '%'],
-    //         ['business_categoryId', 'LIKE', '%' . $category . '%'],
-    //     ])->get();
-    //     if(count($businesses) == 0){
-    //         $req->session()->flash('noData', 'Sorry! no data found');
-    //         return back();
-    //     }
-    //     // dd($businesses);
-    //     return view('front.home.directory-search', compact('businesses'));
-    // }
-
-    // public function statePostcode(Request $request) 
-    // {
-        
-    // }
     
     public function directory(Request $request) {
-        // $business = Business::select('*');
-        // if(auth()->check()){
-        //     $business = $business->where('pin_code', auth()->user()->postcode);
-        // }
-        // $business = $business->get();
-        //$businesses = [];
         $request = $request->all();
         return view('front.home.directory-search',compact('request'));
     }
 
     public function getBusinessByState(Request $request)
     {
-        // dd($request->all());
         $rules = [
             'stateId' => '',
             'page'=> 'required|min:0|numeric',
@@ -96,7 +61,11 @@ class FrontController extends Controller
                                     ->orWhere('address','like','%'.$request->search.'%')
                                     ->orWhere('pin_code','like','%'.$request->search.'%');
             }
-            $business = $business->limit(1)->offset($offset)->get();
+            if(!empty($request->id)){
+                $business = $business->where('id', $request->id)->get();
+                return response()->json(['error'=>false,'message'=>'Business Details','data'=>$business, 'details' => 1]);
+            }
+            $business = $business->with('ratings')->limit(1)->offset($offset)->get();
             return response()->json(['error'=>false,'message'=>'Business Data','data'=>$business]);
         }
         return response()->json(['error'=>true,'message'=>$validate->errors()->first()]);
@@ -142,4 +111,25 @@ class FrontController extends Controller
         return response()->json(['error'=>true,'message'=>$validate->errors()->first()]);
     }
     
+    //details of each sections
+    public function details(Request $request) {
+        if($request->name == 'business') {
+
+            $data = Business::where('id', $request->id)->with('businesstype','services','products','events','offers','ratings')->get()->toArray();
+            $ratings = Rating::with('user')->where('business_id' ,$request->id)->get();
+            return view('front.home.business-details', compact('data', 'ratings'));
+        
+        } else if($request->name == 'event') {
+
+            $data = Event::where('id', $request->id)->with('business','agegroup')->get();
+            return view('front.home.event-details', compact('data'));
+        
+        } else if($request->name == 'deal') {
+
+            $data = Offer::where('id', $request->id)->with('business')->get();
+            return view('front.home.deal-details', compact('data'));
+        
+        }  
+    }
+
 }

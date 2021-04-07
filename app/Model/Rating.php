@@ -10,4 +10,8 @@ class Rating extends Model
     use SoftDeletes;
     protected $table = 'ratings';
 
+    public function user() {
+        return $this->hasOne('App\User','id','userId');
+    }
+
 }

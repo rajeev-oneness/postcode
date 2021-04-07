@@ -121,21 +121,22 @@
 			@foreach($request as $key => $req)
 				params['{{$key}}'] = '{{$req}}';
 			@endforeach
-			console.log(params);
+			// console.log(params);
 			// getting Data as per the parameters
 			$.ajax({
 				type:'POST',
             	url:'{{route('getBusinessByState')}}',
 				data : params,
-				success:function(data){
+				success:function(data) {
 					console.log(data);
-					if(data.error == false){
-						if(data.data.length > 0){
+					if(data.error == false) {
+						if(data.data.length > 0) {
 							grid_view = '';
 							list_view = '';
 							$.each(data.data, function( index, value ) {
 								// grid view
-								let href = "{{route('directory',['name'=> 'business','id' => 'businessId'])}}";
+								let href = "{{route('details',['name' => 'business', 'id' => 'businessId'])}}";
+								// encryptedId = '{{encrypt('+value.id+')}}';
 								href = href.replace('businessId', value.id);
 								grid_view += "<li>";
 								// grid_view += '';
@@ -144,7 +145,7 @@
 								grid_view += '<p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p>';
 								grid_view += '';
 								grid_view += '';
-								grid_view += '<p class="rating"><img src="{{url('')}}/'+'homepage_assets/images/rating.png'+'">300 reviews</p>';
+								grid_view += '<p class="rating"><img src="{{url('')}}/'+'homepage_assets/images/rating.png'+'">'+value.ratings.length+' reviews</p>';
 								grid_view += '<p class="phone_call"><img src="{{url('')}}/'+'homepage_assets/images/phone-call.png'+'">'+value.mobile+'</p>';
 								grid_view += '<p class="history_details">'+value.description+'</p>';
 								grid_view += "</li>";
@@ -165,11 +166,11 @@
 							$("#list-data").append(list_view);
 							// $('#load-more1').show();
 							// $('#load-more2').show();
-						}else{
+						} else {
 							$('#load-more1').html('No more data!');
 							$('#load-more2').html('No more data!');
 						}
-					}else{
+					} else {
 						// error handling
 					}
 				}

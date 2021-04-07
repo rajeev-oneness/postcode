@@ -171,11 +171,18 @@
 					if(data.data.length > 0) {
 						// console.log(data.data.length);
 						$.each(data.data, function(index, value){
+							
+							dealHref = "{{route('details',['name' => 'deal', 'id' => 'dealId'])}}";
+							dealHref = dealHref.replace('dealId', value.id);
+
+							businessHref = "{{route('details',['name' => 'business', 'id' => 'businessId'])}}";
+							businessHref = businessHref.replace('businessId', value.business.id);
+							
 							// grid view
 							grid_view += "<li>";
-							grid_view += '<h4 class="place_title bebasnew">'+value.title+'</h4>';
+							grid_view += '<a href ="'+dealHref+'"><h4 class="place_title bebasnew">'+value.title+'</h4></a>';
 							grid_view += '<h5>'+value.promo_code+'</h5>';
-							grid_view += '<p class="phone_call"><strong>Deal organiser: <a href="#">'+value.business.name+'</a></strong></p>';
+							grid_view += '<p class="phone_call"><strong>Deal organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
 							grid_view += '<p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p>';
 							grid_view += '<p class="location"><strong>Reedeem before '+'{{date("d M,y", strtotime('+value.expire_date+'))}}'+'</strong></p>';
 							grid_view += '<p class="rating"><img src="{{url('')}}/'+'homepage_assets/images/rating.png'+'">300 reviews</p>';
@@ -187,9 +194,9 @@
 							list_view += '<div class="location_img_wrap"><img src="{{url('')}}/'+value.image+'"></div>';
 							list_view += '<div class="list_content_wrap">';
 							list_view += '<ul class="rating_coments"><h5>'+value.promo_code+'</h5></ul>';
-							list_view += '<h4 class="place_title bebasnew">'+value.title+'</h4>';
+							list_view += '<a href ="'+dealHref+'"><h4 class="place_title bebasnew">'+value.title+'</h4></a>';
 							list_view += '<div class="location_details"><p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p></div>';
-							list_view += '<p class=""><strong>Deal organiser: <a href="#">'+value.business.name+'</a></strong></p>';
+							list_view += '<p class=""><strong>Deal organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
 							list_view += '<p class="location"><strong>Reedeem before '+'{{date("d M,y", strtotime('+value.expire_date+'))}}'+'</strong></p>';
 							list_view += '<p class="history_details">'+value.description+'</p>';
 							list_view += '<a href="#"><img src=""></a>';

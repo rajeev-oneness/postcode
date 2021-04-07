@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateBusinessesTable extends Migration
+class UpdateOffersTable1 extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class UpdateBusinessesTable extends Migration
      */
     public function up()
     {
-        Schema::table('businesses', function (Blueprint $table) {
-            $table->string('user_id', 300)->after('id');
+        Schema::table('offers', function (Blueprint $table) {
+            $table->string('address', 400)->after('created_by');
         });
     }
 

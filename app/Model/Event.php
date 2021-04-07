@@ -22,4 +22,8 @@ class Event extends Model
     {
         return $this->hasOne('App\Model\Business','user_id','created_by');
     }
+    public function agegroup()
+    {
+        return $this->hasOne('App\Model\AgeGroup','id','age_group');
+    }
 }
