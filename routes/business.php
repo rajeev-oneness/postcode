@@ -68,4 +68,11 @@ Route::group(['middleware' => ['auth', 'business']], function () {
 	Route::post('/update_offers', 'OfferController@updateOffers')->name('business-admin.update_offers');
 	Route::post('/delete_offers', 'OfferController@deleteOffers')->name('delete_offers');
 
+	//--------------------------------------------------------------Manage Ratings Section-----------------------------------------------//
+
+	Route::get('/manage_ratings','RatingController@manage')->name('business-admin.manage_ratings');
+	Route::get('/add_response/{id}', 'RatingController@addResponse')->name('add-response');
+	Route::post('/store_response', 'RatingController@storeResponse')->name('store-response');
+	Route::post('/delete_ratings', 'RatingController@delete')->name('delete_ratings');
+
 });

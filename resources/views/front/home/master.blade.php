@@ -90,19 +90,36 @@
 
 <section class="newsletter-section">
 	<div class="container">
-		<div class="row align-items-center">
-			<div class="col-md-6">
-				<h2 class="main-heading">Subscribe For a Newsletter</h2>
-				<p>Whant to be notified about new locations ? Just sign up.</p>
-			</div>
-			<div class="col-md-6">
-				<form id="" action="" class="news">
-					<input type="text" id="usr" placeholder="Enter your email">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2 class="main-heading">Subscribe For a Newsletter</h2>
+                <p>Whant to be notified about new locations ? Just sign up.</p>
+            </div>
+            <div class="col-md-6">
+                @if (Session::has('newsletter'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{session('newsletter')}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+                <form method="post" action="{{route('newsletter')}}" class="news">
+                    @csrf
+                    <input type="text" name="email" value="{{old('email')}}" id="usr" placeholder="Enter your email" required>
+                    {{-- <input type="submit" class="submt_form" value="Send"> --}}
 					<input type="submit" id="43t" value="Send">
-				</form>
-			</div>
-		</div>
-	</div>
+                    
+                </form>
+            </div>
+			@error('email')
+				<div class="col-md-6"></div>
+                <div class="alert alert-danger alert-dismissible fade show mt-1 col-md-6" role="alert">
+                    <strong>{{$message}}</strong>
+                </div>
+            @enderror
+        </div>
+    </div>
 </section>
 <footer>
 	<div class="container">

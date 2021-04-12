@@ -48,4 +48,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Business','userId','id');
     }
+    public function usercountry()
+    {
+        return $this->hasOne('App\Model\Country','id','countryId');
+    }
+    public function userstate()
+    {
+        return $this->hasOne('App\Model\State','id','stateId');
+    }
 }

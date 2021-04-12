@@ -33,11 +33,16 @@
                     @if (auth()->check())
                         @if (auth()->user()->userType == 2)
                             <li>
-                                <a href="{{route('business.manage')}}">
+                                <a href="{{route('user.portal')}}">
                                     {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
-                                    Business
+                                    User Profile
                                 </a>
                             </li>
+                            {{-- <li>
+                                <a href="{{route('business.manage')}}">
+                                    Business
+                                </a>
+                            </li> --}}
                             <li>
                                 <a href="{{route('logout')}}">
                                     {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
@@ -122,7 +127,9 @@
         </div>
     </section>
 
-    @include('user.newsletter')
+    <section class="newsletter_wraper">
+        @include('user.newsletter')
+    </section>
 
 
 

@@ -14,4 +14,8 @@ class Rating extends Model
         return $this->hasOne('App\User','id','userId');
     }
 
+    public function response() {
+        return $this->hasOne('App\Model\RatingResponse','rating_id','id');
+    }
+
 }

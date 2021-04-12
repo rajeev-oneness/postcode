@@ -167,6 +167,14 @@
               </ul>
             </li>
 
+            <li><a class="sidebar-header" href="#"><i data-feather="star"></i><span>Ratings</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
+                {{-- <li><a class="sidebar-header" href="{{route('business-admin.offers')}}"><i data-feather="server"></i><span>Add Ratings</span></a></li> --}}
+                <li><a class="sidebar-header" href="{{route('business-admin.manage_ratings')}}"><i data-feather="server"></i><span>Manage Ratings</span></a></li>
+
+              </ul>
+            </li>
+
 
             <!-- <li><a class="sidebar-header" href="/manage_subjects" ><i data-feather="server"></i><span> Manage Subjects</span></a></li>
               <li><a class="sidebar-header" href="/add_question" ><i data-feather="server"></i><span> Questions</span></a></li>

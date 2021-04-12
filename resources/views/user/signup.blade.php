@@ -225,9 +225,9 @@
     </section>
 
     
-    
-    @include('user.newsletter')
-
+    <section class="newsletter_wraper">
+        @include('user.newsletter')
+    </section>
 
 
     <!-- Optional JavaScript -->

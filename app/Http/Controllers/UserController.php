@@ -242,4 +242,10 @@ class UserController extends Controller
         $request->session()->flash('newsletter', 'Subscribed successfully!');
         return back();
     }
+
+    public function userPortal() {
+        $user = User::where('id', auth()->id())->where('userType', 2)->with('usercountry','userstate')->get()->toArray();
+        // dd($user);
+        return view('user-portal.dashboard', compact('user'));
+    }
 }

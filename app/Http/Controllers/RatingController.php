@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Rating;
+use App\Model\RatingResponse;
+use App\Model\Business;
 
 class RatingController extends Controller
 {
@@ -54,9 +56,11 @@ class RatingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function manage()
     {
-        //
+        $business_id = Business::where('user_id', auth()->id())->get();
+        $ratings = Rating::where('business_id', $business_id[0]->id)->with('user', 'response')->get();
+        return view('business-portal.rating.manage_ratings', compact('ratings'));
     }
 
     /**
@@ -65,9 +69,11 @@ class RatingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function addResponse($ratingId)
     {
-        //
+        $rating = Rating::find(decrypt($ratingId));
+        $response = RatingResponse::where('rating_id', $rating->id)->get();
+        return view('business-portal.rating.add_response', compact('rating', 'response'));
     }
 
     /**
@@ -77,9 +83,16 @@ class RatingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function storeResponse(Request $request)
     {
-        //
+        // dd($request->all());
+        $response = new RatingResponse;
+        $response->user_id = $request->user_id;
+        $response->business_id = $request->business_id;
+        $response->rating_id = $request->rating_id;
+        $response->response = $request->response;
+        $response->save();
+        return redirect()->route('business-admin.manage_ratings');
     }
 
     /**
@@ -88,8 +101,13 @@ class RatingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        //
+        $lead_delete_id = $request->appdel_id;
+        $delete_event = Rating::where('id', $lead_delete_id)->delete();
+        if(auth()->user()->userType == 3){
+            return redirect()->route('business-admin.manage_ratings');
+        }
+        // return redirect()->route('admin.manage_offers');
     }
 }
