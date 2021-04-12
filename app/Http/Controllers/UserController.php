@@ -11,11 +11,14 @@ use App\Model\Testimonial;
 use App\Model\Newsletter;
 use App\Model\State;
 use App\Model\Postcode;
+use App\Model\Event;
+use App\Model\Offer;
 use App\User;
 use Mail;
 use Validator, Redirect, Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 
 class UserController extends Controller
@@ -243,9 +246,4 @@ class UserController extends Controller
         return back();
     }
 
-    public function userPortal() {
-        $user = User::where('id', auth()->id())->where('userType', 2)->with('usercountry','userstate')->get()->toArray();
-        // dd($user);
-        return view('user-portal.dashboard', compact('user'));
-    }
 }

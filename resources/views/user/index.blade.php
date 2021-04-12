@@ -33,7 +33,7 @@
                     @if (auth()->check())
                         @if (auth()->user()->userType == 2)
                             <li>
-                                <a href="{{route('user.portal')}}">
+                                <a href="{{route('user.newsfeed')}}">
                                     {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
                                     User Profile
                                 </a>

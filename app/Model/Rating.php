@@ -18,4 +18,9 @@ class Rating extends Model
         return $this->hasOne('App\Model\RatingResponse','rating_id','id');
     }
 
+    public function business()
+    {
+        return $this->hasMany('App\Model\Business', 'id', 'business_id');
+    }
+
 }
