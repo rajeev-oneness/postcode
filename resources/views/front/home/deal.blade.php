@@ -185,7 +185,7 @@
 							grid_view += '<p class="phone_call"><strong>Deal organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
 							grid_view += '<p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p>';
 							grid_view += '<p class="location"><strong>Reedeem before '+'{{date("d M,y", strtotime('+value.expire_date+'))}}'+'</strong></p>';
-							grid_view += '<p class="rating"><img src="{{url('')}}/'+'homepage_assets/images/rating.png'+'">300 reviews</p>';
+							// grid_view += '<p class="rating"><img src="{{url('')}}/'+'homepage_assets/images/rating.png'+'">300 reviews</p>';
 							grid_view += '<p class="history_details">'+value.description+'</p>';
 							grid_view += "</li>";
 

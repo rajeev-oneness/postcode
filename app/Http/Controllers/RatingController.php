@@ -60,6 +60,7 @@ class RatingController extends Controller
     {
         $business_id = Business::where('user_id', auth()->id())->get();
         $ratings = Rating::where('business_id', $business_id[0]->id)->with('user', 'response')->get();
+        // dd($ratings);
         return view('business-portal.rating.manage_ratings', compact('ratings'));
     }
 
@@ -72,7 +73,8 @@ class RatingController extends Controller
     public function addResponse($ratingId)
     {
         $rating = Rating::find(decrypt($ratingId));
-        $response = RatingResponse::where('rating_id', $rating->id)->get();
+        $response = RatingResponse::where('rating_id', $rating->id)->get()->toArray();
+        // dd($response);
         return view('business-portal.rating.add_response', compact('rating', 'response'));
     }
 

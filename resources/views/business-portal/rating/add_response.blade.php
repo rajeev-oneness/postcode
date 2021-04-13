@@ -60,7 +60,7 @@
 
                     <div class="col-md-12 mb-3">
                         <label for="validationCustom05">Your Response</label>
-                        <textarea name="response" class="form-control" cols="30" rows="10">{{$response[0]->response}}</textarea>
+                        <textarea name="response" class="form-control" cols="30" rows="10">{{(!empty($response)) ? $response[0]['response'] : ''}}</textarea>
                     </div>
 
                   </div>

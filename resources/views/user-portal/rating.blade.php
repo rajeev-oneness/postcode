@@ -37,7 +37,12 @@
                               <div class="border border-secondary rounded m-2">
                                 <div class="p-3">
                                   <p>{{$rating['description']}}</p>
-                                  <strong>To - <a href="{{route('details',['name' => 'business', 'id' => $rating['business'][0]['id']])}}">{{$rating['business'][0]['name']}}</a></strong>
+                                  <strong>To - <a href="{{route('details',['name' => 'business', 'id' => $rating['business'][0]['id']])}}">{{$rating['business'][0]['name']}}</a></strong><br>
+                                  @if (!empty($rating['response']))
+                                  <strong>Reply : </strong> {{$rating['response']['response']}}
+                                  @else
+                                  <strong>No Reply.</strong>
+                                  @endif
                                 </div>
                               </div>
                           @endforeach

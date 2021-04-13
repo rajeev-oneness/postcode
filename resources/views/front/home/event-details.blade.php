@@ -25,4 +25,7 @@
         <a href="{{route('details',['name' => 'business', 'id' =>$data[0]->business->id ])}}"><h4>{{$data[0]->business->name}}</h4></a>
     </div>
 </div>
+<div class="row mt-5">
+    <a href="{{route('user.event.book',['id' => encrypt($data[0]->id)])}}" class="orange-btm load_btn">Book Event</a>
+</div>
 @endsection

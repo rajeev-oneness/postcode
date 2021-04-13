@@ -56,7 +56,11 @@
                                     @foreach ($ratings as $rating)
                                         <tr>
                                             <td>{{$i++}}</td>
-                                            <td>{{$rating->description}} <br><strong> Reply : </strong><br>{{$rating->response->response}}</td>
+                                            <td>{{$rating->description}} <br><strong> Reply : </strong><br>
+                                                @if (!empty($rating->response))
+                                                    {{$rating->response->response}}
+                                                @endif
+                                            </td>
                                             <td>{{$rating->user->name}}</td>
                                             <td>{{$rating->rating}} stars</td>
                                         

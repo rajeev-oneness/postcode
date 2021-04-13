@@ -125,10 +125,10 @@
             <li><a class="sidebar-header" href="{{route('user.newsfeed')}}"><i data-feather="home"></i><span>News Feed</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
-            <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Settings</span><span class="badge badge-pill badge-primary"></span></a>
+            <li><a class="sidebar-header" href="{{route('user.settings')}}"><i data-feather="home"></i><span>Settings</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
-            <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Messaging</span><span class="badge badge-pill badge-primary"></span></a>
+            <li><a class="sidebar-header" href="{{route('user.message.portal')}}"><i data-feather="home"></i><span>Messaging</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
             <li><a class="sidebar-header" href="{{route('user.rating')}}"><i data-feather="home"></i><span>Reviews</span><span class="badge badge-pill badge-primary"></span></a>
@@ -140,12 +140,14 @@
             <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Market place</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
             
-            <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>My Calender</span><span class="badge badge-pill badge-primary"></span></a>
+            <li><a class="sidebar-header" href="{{route('user.calender')}}"><i data-feather="home"></i><span>My Calender</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
           </ul>
         </div>
       </div>
+
+      @include('user-portal.message')
 
       @yield('content')
 
@@ -214,6 +216,7 @@
   <script src="{{asset('admin_assets/js/script.js')}}"></script>
   <!-- <script src="admin_assets/js/theme-customizer/customizer.js"></script> -->
   <!-- Plugin used-->
+  @yield('script')
 </body>
 
 </html>
