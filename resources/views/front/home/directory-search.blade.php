@@ -4,6 +4,39 @@
 	Directory-grid
 @endsection
 
+@section('head-script')
+
+<script>
+    function initMap() {
+		const map = new google.maps.Map(document.getElementById("map"), {
+			zoom: 4,
+			center: { lat: -28.024, lng: 140.887 },
+		});
+		const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		const markers = locations.map((location, i) => {
+			return new google.maps.Marker({
+			position: location,
+			label: labels[i % labels.length],
+			});
+		});
+		new MarkerClusterer(map, markers, {
+			imagePath:
+			"https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+		});
+	}
+	let locations = [];
+</script>
+  <style type="text/css">
+	/* Set the size of the div element that contains the map */
+	#map {
+	  height: 400px;
+	  /* The height is 400 pixels */
+	  width: 100%;
+	  /* The width is the width of the web page */
+	}
+  </style>
+@endsection
+
 @section('content')
 <section class="breadcumb_wrap">
 	<div class="container">
@@ -34,7 +67,7 @@
 					    	<a class="nav-link" id="gird-tab" onclick="gridView()"><img class="display-none" src="{{asset('homepage_assets/images/grid.png')}}"></a>
 					  	</li>
 					  	<li class="nav-item" role="presentation">
-					    	<a class="nav-link" id="map-tab"><img class="display-none" src="{{asset('homepage_assets/images/map.png')}}"></a>
+					    	<a class="nav-link" id="map-tab" onclick="mapView()"><img class="display-none" src="{{asset('homepage_assets/images/map.png')}}"></a>
 					  </li>
 					</ul>
 				</div>
@@ -87,6 +120,10 @@
 			</div>
 		</div>
 	</div>
+
+	{{-- map view --}}
+
+	<div id="map"></div>
 </section>
 
 
@@ -94,14 +131,22 @@
 <script>
 	$(document).ready(function() {
 		$(".list-view").hide();
+		$("#map").hide();
 	});
 	function listView() {
 		$(".grid-view").hide();
+		$("#map").hide();
 		$(".list-view").show();
 	}
 	function gridView() {
 		$(".list-view").hide();
+		$("#map").hide();
 		$(".grid-view").show();
+	}
+	function mapView() {
+		$(".list-view").hide();
+		$(".grid-view").hide();
+		$("#map").show();
 	}
 
 </script>
@@ -128,12 +173,21 @@
             	url:'{{route('getBusinessByState')}}',
 				data : params,
 				success:function(data) {
-					console.log(data);
+					// console.log(locations);
+					// initMap(data.data[0].latitude, data.data[0].longitude);
 					if(data.error == false) {
 						if(data.data.length > 0) {
 							grid_view = '';
 							list_view = '';
 							$.each(data.data, function( index, value ) {
+								// map view
+								let lat = Number(value.latitude);
+								let lng = Number(value.longitude);
+								if(lat != 0 && lng != 0){
+									locations.push({ lat : lat, lng : lng });
+									initMap();
+								}
+		
 								// grid view
 								let href = "{{route('details',['name' => 'business', 'id' => 'businessId'])}}";
 								// encryptedId = '{{encrypt('+value.id+')}}';
@@ -178,23 +232,6 @@
 		}
 	});
 </script>
-
-{{-- <script type="text/javascript">
-	$(document).ready(function(){
-		$('.ham').click(function(e){
-			e.stopPropagation();
-			$('.navigation').toggleClass('slide');
-		});
-
-		$(document).click(function(){
-			$('.navigation').removeClass('slide');
-		});
-
-		$('.navigation').click(function(e){
-			e.stopPropagation();
-		});
-	});
-</script> --}}
 
 
 @endsection

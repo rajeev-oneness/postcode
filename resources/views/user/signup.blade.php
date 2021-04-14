@@ -232,7 +232,9 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- latest jquery-->
+    <script src="{{asset('user_assets/js/jquery-3.2.1.min.js')}}"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
@@ -251,7 +253,7 @@
             google.maps.event.addListener(autocomplete, 'place_changed', function(){
 
                 var places = autocomplete.getPlace();
-                // console.log(places);
+                console.log(places);
                 // console.log(places.formatted_address);
                 // console.log(places.address_components.length);
                 addressObj = places.address_components;
@@ -270,19 +272,23 @@
                 $('#company_website').val(places.website);
                 $('#address').val(places.formatted_address);
 
-                function phpneNumberFormatted(phNum){
-                    var i,newValue='';
-                    for(i = 0; i < phNum.length; i++){
-                        if($.isNumeric(phNum[i])){
-                            newValue+=phNum[i];
+                if(places.formatted_phone_number){
+                    function phpneNumberFormatted(phNum){
+                        var i,newValue='';
+                        for(i = 0; i < phNum.length; i++){
+                            if($.isNumeric(phNum[i])){
+                                newValue+=phNum[i];
+                            }
                         }
+                        return newValue;
                     }
-                    return newValue;
+                    var phNum = phpneNumberFormatted(places.formatted_phone_number);
+                    // console.log(phNum);
+                
+                    $('#mobile').val(phNum);
+                } else {
+                    $('#mobile').val('');
                 }
-                var phNum = phpneNumberFormatted(places.formatted_phone_number);
-                // console.log(phNum);
-            
-                $('#mobile').val(phNum);
                 
                 $('#selectedLongitude').val(places.geometry.location.lng());
 

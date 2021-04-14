@@ -12,8 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('user_assets/css/slick.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('user_assets/css/slick-theme.css')}}"/>
 
-    <!-- latest jquery-->
-<script src="{{asset('user_assets/js/jquery-3.2.1.min.js')}}"></script>
+    
 
     <title>Our Postcode</title>
   </head>
@@ -31,6 +30,12 @@
                         </a>
                     </li>
                     @if (auth()->check())
+                    <li>
+                        <a href="{{route('logout')}}">
+                            {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
+                            Logout
+                        </a>
+                    </li>
                         @if (auth()->user()->userType == 2)
                             <li>
                                 <a href="{{route('user.newsfeed')}}">
@@ -43,12 +48,7 @@
                                     Business
                                 </a>
                             </li> --}}
-                            <li>
-                                <a href="{{route('logout')}}">
-                                    {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
-                                    Logout
-                                </a>
-                            </li>
+                            
                         @endif
                         @if (auth()->user()->userType == 1)
                             <li>
@@ -144,6 +144,8 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- latest jquery-->
+    <script src="{{asset('user_assets/js/jquery-3.2.1.min.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="{{asset('user_assets/js/bootstrap.min.js')}}"></script>

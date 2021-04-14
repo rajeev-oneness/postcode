@@ -16,6 +16,9 @@
 			margin-left: 0px !important;
 		}
 	</style>
+	<script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
+
+	@yield('head-script')
 </head>
 <body>
 <header>
@@ -54,21 +57,24 @@
 			</ul>
 		</div>
 		<ul class="button-list">
-			@if (auth()->user()->userType == 2)
-                <li>
-                    <a href="{{route('user.newsfeed')}}">
-                        <span><img src="{{asset('user_assets/image/log-icon.png')}}"></span>
-                        User Profile
-                    </a>
-                </li>
-			@elseif (auth()->user()->userType == 3)
-				<li>
-					<a href="{{route('admin.dashboard')}}">
-						<span><img src="{{asset('user_assets/image/log-icon.png')}}"></span>
-						Business Admin
-					</a>
-				</li>
+			@if (auth()->check())	
+				@if (auth()->user()->userType == 2)
+					<li>
+						<a href="{{route('user.newsfeed')}}">
+							<span><img src="{{asset('user_assets/image/log-icon.png')}}"></span>
+							User Profile
+						</a>
+					</li>
+				@elseif (auth()->user()->userType == 3)
+					<li>
+						<a href="{{route('business.dashboard')}}">
+							<span><img src="{{asset('user_assets/image/log-icon.png')}}"></span>
+							Business Admin
+						</a>
+					</li>
+				@endif
 			@endif
+
 			@auth
 			<li>
 				<a href="{{route('logout')}}">
@@ -188,10 +194,14 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/slick.min.js"></script>
+<script
+ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPuZ9AcP4PHUBgbUsT6PdCRUUkyczJ66I&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+{{-- <script src="js/jquery.min.js"></script> --}}
+<script src="{{asset('homepage_assets/js/popper.min.js')}}"></script>
+<script src="{{asset('homepage_assets/js/bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('homepage_assets/js/slick.min.js')}}"></script>
 
 @yield('script')
 

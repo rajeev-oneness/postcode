@@ -33,9 +33,9 @@
 					  	<li class="nav-item" role="presentation">
 					    	<a class="nav-link" id="gird-tab" onclick="gridView()"><img class="display-none" src="{{asset('homepage_assets/images/grid.png')}}"></a>
 					  	</li>
-					  	<li class="nav-item" role="presentation">
+					  	{{-- <li class="nav-item" role="presentation">
 					    	<a class="nav-link" id="map-tab"><img class="display-none" src="{{asset('homepage_assets/images/map.png')}}"></a>
-					  </li>
+					  </li> --}}
 					</ul>
 				</div>
 				<div class="search_form_wrap">
