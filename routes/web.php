@@ -109,12 +109,12 @@ Route::get('/directory', 'FrontController@directory')->name('directory');
 Route::post('/get-business-by-State', 'FrontController@getBusinessByState')->name('getBusinessByState');
 
 //menu bar(events)
-Route::get('/events', 'Frontcontroller@event')->name('events');
-Route::get('/deals', 'Frontcontroller@deal')->name('deals');
-Route::post('/get-events-deals', 'Frontcontroller@eventDealAjax')->name('event.deal.ajax');
+Route::get('/events', 'FrontController@event')->name('events');
+Route::get('/deals', 'FrontController@deal')->name('deals');
+Route::post('/get-events-deals', 'FrontController@eventDealAjax')->name('event.deal.ajax');
 
 //details
-Route::get('/details', 'Frontcontroller@details')->name('details');
+Route::get('/details', 'FrontController@details')->name('details');
 
 Route::group(['middleware' => ['auth','user']], function(){
     Route::get('/rating-add/{id}', 'RatingController@index')->name('rating.add');
