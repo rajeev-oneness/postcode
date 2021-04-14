@@ -122,25 +122,28 @@
           </div>
           <ul class="sidebar-menu">
 
-            <li><a class="sidebar-header" href="{{route('user.newsfeed')}}"><i data-feather="home"></i><span>News Feed</span><span class="badge badge-pill badge-primary"></span></a>
+            <li><a class="sidebar-header" href="{{route('default.homepage')}}"><i data-feather="home"></i><span>Homepage</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
-            <li><a class="sidebar-header" href="{{route('user.settings')}}"><i data-feather="home"></i><span>Settings</span><span class="badge badge-pill badge-primary"></span></a>
+            <li><a class="sidebar-header" href="{{route('user.newsfeed')}}"><i data-feather="layout"></i><span>News Feed</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
-            <li><a class="sidebar-header" href="{{route('user.message.portal')}}"><i data-feather="home"></i><span>Messaging</span><span class="badge badge-pill badge-primary"></span></a>
+            <li><a class="sidebar-header" href="{{route('user.settings')}}"><i data-feather="settings"></i><span>Settings</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
-            <li><a class="sidebar-header" href="{{route('user.rating')}}"><i data-feather="home"></i><span>Reviews</span><span class="badge badge-pill badge-primary"></span></a>
+            <li><a class="sidebar-header" href="{{route('user.message.portal')}}"><i data-feather="send"></i><span>Messaging</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
-            <li><a class="sidebar-header" href="{{route('user.deal')}}"><i data-feather="home"></i><span>Deals</span><span class="badge badge-pill badge-primary"></span></a>
+            <li><a class="sidebar-header" href="{{route('user.rating')}}"><i data-feather="message-circle"></i><span>Reviews</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
-            <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Market place</span><span class="badge badge-pill badge-primary"></span></a>
+            <li><a class="sidebar-header" href="{{route('user.deal')}}"><i data-feather="percent"></i><span>Deals</span><span class="badge badge-pill badge-primary"></span></a>
+            </li>
+
+            <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="shopping-bag"></i><span>Market place</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
             
-            <li><a class="sidebar-header" href="{{route('user.calender')}}"><i data-feather="home"></i><span>My Calender</span><span class="badge badge-pill badge-primary"></span></a>
+            <li><a class="sidebar-header" href="{{route('user.calender')}}"><i data-feather="calendar"></i><span>My Calender</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
           </ul>

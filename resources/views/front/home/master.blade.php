@@ -54,6 +54,21 @@
 			</ul>
 		</div>
 		<ul class="button-list">
+			@if (auth()->user()->userType == 2)
+                <li>
+                    <a href="{{route('user.newsfeed')}}">
+                        <span><img src="{{asset('user_assets/image/log-icon.png')}}"></span>
+                        User Profile
+                    </a>
+                </li>
+			@elseif (auth()->user()->userType == 3)
+				<li>
+					<a href="{{route('admin.dashboard')}}">
+						<span><img src="{{asset('user_assets/image/log-icon.png')}}"></span>
+						Business Admin
+					</a>
+				</li>
+			@endif
 			@auth
 			<li>
 				<a href="{{route('logout')}}">

@@ -121,6 +121,10 @@
             <!-- <p>general manager.</p> -->
           </div>
           <ul class="sidebar-menu">
+
+            <li><a class="sidebar-header" href="{{route('default.homepage')}}"><i data-feather="home"></i><span>Homepage</span><span class="badge badge-pill badge-primary"></span></a>
+            </li>
+
             <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
