@@ -124,6 +124,25 @@
             <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
+            <li><a class="sidebar-header" href="#"><i data-feather="user"></i><span>Company Address</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('admin.manage.address')}}"><i data-feather="server"></i><span>Manage Address</span></a></li>
+              </ul>
+            </li>
+
+            <li><a class="sidebar-header" href="#"><i data-feather="user"></i><span>About Us</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('admin.manage.about-us')}}"><i data-feather="server"></i><span>Manage About Us</span></a></li>
+              </ul>
+            </li>
+
+            <li><a class="sidebar-header" href="#"><i data-feather="user"></i><span>FAQs</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('admin.faq.add')}}"><i data-feather="server"></i><span>Add FAQs</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.faq')}}"><i data-feather="server"></i><span>Manage FAQs</span></a></li>
+              </ul>
+            </li>
+
             <li><a class="sidebar-header" href="#"><i data-feather="user"></i><span>Customers</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.customers.add')}}"><i data-feather="server"></i><span>Add Customers</span></a></li>

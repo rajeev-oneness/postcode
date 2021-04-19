@@ -176,6 +176,24 @@ Route::get('change_password', 'AdminController@changePassword')->name('admin.cha
 
 Route::post('update_password', 'AdminController@updatePassword')->name('admin.update_password');
 
+//--------------------------------------------------------------Address Section-----------------------------------------------//
+Route::get('manage-address', 'ContactController@manageAddress')->name('admin.manage.address');	
+
+Route::post('update-address', 'ContactController@updateAddress')->name('admin.update.address');
+
+//--------------------------------------------------------------About us Section-----------------------------------------------//
+Route::get('manage-about-us', 'AboutUsController@manageAbout')->name('admin.manage.about-us');	
+
+Route::post('update-about-us', 'AboutUsController@updateAbout')->name('admin.update.about-us');
+
+
+//-------------faq section----------------//
+Route::get('/faq', 'FaqController@manage')->name('admin.faq');
+Route::get('/faq-add', 'FaqController@add')->name('admin.faq.add');
+Route::post('/faq-store', 'FaqController@store')->name('admin.faq.store');
+Route::get('/faq-edit/{id}', 'FaqController@edit')->name('admin.faq.edit');
+Route::post('/faq-update', 'FaqController@update')->name('admin.faq.update');
+Route::get('/faq-delete/{id}', 'FaqController@delete')->name('admin.faq.delete');
 
 
 });

@@ -47,13 +47,13 @@
 				<li><a href="{{route('deals')}}">Deals </a></li>
 				<li><a href="#">Local Leads</a></li>
 				<li><a href="#">Resources</a></li>
-				<li><a href="#">About Us <span><i class="fas fa-chevron-down"></i></span> </a>
+				<li><a href="{{route('about-us')}}">About Us <span><i class="fas fa-chevron-down"></i></span> </a>
 					<ul>
-						<li><a href="#">FAQs</a></li>
+						<li><a href="{{route('faq')}}">FAQs</a></li>
 					</ul>
 
 				</li>
-				<li><a href="#">Contact Us</a></li>
+				<li><a href="{{route('contact-us')}}">Contact Us</a></li>
 			</ul>
 		</div>
 		<ul class="button-list">
@@ -181,7 +181,7 @@
 				<ul class="footer-list">
 					<li><a href="#">Resources</a></li>
 					<li><a href="#">About Us</a></li>
-					<li><a href="#">Contact Us</a></li>
+					<li><a href="{{route('contact-us')}}">Contact Us</a></li>
 					<li><a href="#">Social Media</a></li>
 					<li><a href="#">Advertise</a></li>
 				</ul>

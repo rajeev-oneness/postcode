@@ -121,6 +121,17 @@ Route::group(['middleware' => ['auth','user']], function(){
     Route::post('/rating-store', 'RatingController@store')->name('rating.store');
 });
 
+//contact us
+Route::get('/contact-us', 'ContactController@index')->name('contact-us');
+Route::post('/send-contact-us', 'ContactController@store')->name('send.contact-us');
+
+//about us
+Route::get('/about-us', 'AboutUsController@index')->name('about-us');
+
+//faq
+Route::get('/faq', 'FaqController@index')->name('faq');
+
+
 
 
 
