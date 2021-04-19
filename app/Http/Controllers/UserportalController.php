@@ -80,7 +80,11 @@ class UserportalController extends Controller
     public function myCalender() {
         $events = Booking::with('event')->where('user_id', auth()->id())->get()->toArray();
         // dd($events);
-        return view('user-portal.my-calendar', compact('events'));
+        if(count($events) > 0) {
+            return view('user-portal.my-calendar', compact('events'));
+        } else {
+            return back();
+        }
     }
 
     public function getBusiness(Request $req) {
