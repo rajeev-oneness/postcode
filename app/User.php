@@ -56,4 +56,8 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Model\State','id','stateId');
     }
+    public function business()
+    {
+        return $this->hasOne('App\Model\Business', 'user_id', 'id');
+    }
 }

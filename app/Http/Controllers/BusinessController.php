@@ -9,6 +9,7 @@ use App\Model\Product;
 use App\Model\Service;
 use App\Model\Event;
 use App\Model\State;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Validator,Redirect,Response;
 
@@ -201,7 +202,7 @@ class BusinessController extends Controller
         $businessCatData = BusinessCategory::all();
         $productsData = Product::all();
         $servicessData = Service::all();
-         $stateData = State::all();
+        $stateData = State::all();
         $lead_edit_id = $request->lead_edit_id;
         $businessprofile_data = Business::where('id', $lead_edit_id)->first();
         return view('portal.businessprofile.edit_businessprofile', compact('businessprofile_data', 'businessCatData', 'productsData', 'servicessData', 'stateData'));
@@ -246,6 +247,13 @@ class BusinessController extends Controller
                 'youtube_link' => $request->youtube_link, 
                 'linkedin_link' => $request->linkedin_link
             ]);
+            $userId = Business::where('id', $request->hid_id)->first();
+            $user = User::find($userId->user_id);
+            $user->name = $request->name;
+            $user->address = $request->address;
+            $user->postcode = $request->pin_code;
+            $user->stateId = $request->state_id;
+            $user->save();
             return redirect()->route('admin.manage_businessprofiles');
         } catch (\Exception $e) {
             report($e);
@@ -259,4 +267,69 @@ class BusinessController extends Controller
         $event=Event::where('created_by', auth()->user()->id);
        return view('business-portal.dashboard',compact('product','BusinessCategory','event'));
     }
+
+    public function businessProfile()
+    {
+        $business = User::with('business')->where('id', auth()->id())->get();
+        return view('business-portal.profile.index',compact('business'));
+    }
+
+    public function editMyBusinessProfile()
+    {
+        $businessCatData = BusinessCategory::all();
+        $productsData = Product::where('created_by', auth()->id())->get();
+        $servicessData = Service::where('created_by', auth()->id())->get();
+        $stateData = State::all();
+        $businessprofile_data = Business::where('user_id', auth()->id())->first();
+        return view('business-portal.profile.edit',compact('businessprofile_data', 'businessCatData', 'productsData', 'servicessData', 'stateData'));
+    }
+
+    public function updateMyBusinessProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+        $validator->validate();
+        try {
+            if($request->hasFile('image')) {
+                $fileName = time() . '.' . $request->image->extension();
+                $request->image->move(public_path('uploads/'), $fileName);
+                $qdesc = 'uploads/' . $fileName;
+                $update_businesscategory_data = Business::where('id', $hid_id)->update([
+                    'image' => $qdesc,
+                ]);
+            }
+            $update_businesscategory_data = Business::where('user_id', auth()->id())->update([
+                'name' => $request->name, 
+                'business_categoryId' => $request->business_categoryId, 
+                'address' => $request->address,
+                'pin_code' => $request->pin_code,
+                'state_id' => $request->state_id, 
+                'mobile' => $request->mobile, 
+                'open_hour' => $request->open_hour, 
+                'closing_hour' => $request->closing_hour, 
+                'services' => $request->services, 
+                'products' => $request->products, 
+                'description' => $request->description, 
+                'facebook_link' => $request->facebook_link, 
+                'instagram_link' => $request->instagram_link, 
+                'twitter_link' => $request->twitter_link, 
+                'youtube_link' => $request->youtube_link, 
+                'linkedin_link' => $request->linkedin_link
+            ]);
+            $user = User::find(auth()->id());
+            $user->name = $request->name;
+            $user->address = $request->address;
+            $user->postcode = $request->pin_code;
+            $user->stateId = $request->state_id;
+            $user->save();
+
+
+            return redirect()->route('my.business.profile');
+        } catch (\Exception $e) {
+            report($e);
+            return false;
+        }
+    }
+
 }

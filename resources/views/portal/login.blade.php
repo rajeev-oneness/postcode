@@ -95,6 +95,9 @@
                     <div class="form-group form-row mt-3 mb-0">
                       <button class="btn btn-primary btn-block" id="admin_signup" name="admin_signup" type="button">Login</button>
                     </div>
+                    <div id="register" style="display: none; padding-top: 10px;">
+                      <a class="btn btn-warning btn-block" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </div>
                   </div>
                   <!-- <div class="checkbox p-0">
                     <input id="checkbox1" type="checkbox">
@@ -119,6 +122,11 @@
               if(user) {
                 $('#lognin-as').html(user);
                 $('#login-form').show();
+                if(user == 'User') {
+                  $("#register").css('display', 'block');
+                } else {
+                  $("#register").css('display', 'none');
+                }
               }
               else {
                 $('#login-form').hide();

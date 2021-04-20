@@ -84,7 +84,7 @@
 			</li>	
 			@else
 			<li>
-				<a href="{{route('login')}}">
+				<a href="{{route('adminlogin')}}">
 					<span><img src="{{asset('homepage_assets/images/login-icon.png')}}"></span>
 					Login
 				</a>

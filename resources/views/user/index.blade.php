@@ -60,7 +60,7 @@
                         @endif
                     @else
                         <li>
-                            <a href="{{route('login')}}">
+                            <a href="{{route('adminlogin')}}">
                                 {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
                                 Log in
                             </a>

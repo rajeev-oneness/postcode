@@ -125,9 +125,11 @@
             <li><a class="sidebar-header" href="{{route('default.homepage')}}"><i data-feather="home"></i><span>Homepage</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
-            <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span><span class="badge badge-pill badge-primary"></span></a>
+            <li><a class="sidebar-header" href="{{route('business.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
+            <li><a class="sidebar-header" href="{{route('my.business.profile')}}"><i data-feather="home"></i><span>Business Profile</span><span class="badge badge-pill badge-primary"></span></a>
+            </li>
 
             <li><a class="sidebar-header" href="#"><i data-feather="box"></i><span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
