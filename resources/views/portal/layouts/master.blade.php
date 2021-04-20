@@ -124,22 +124,19 @@
             <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
-            <li><a class="sidebar-header" href="#"><i data-feather="user"></i><span>Company Address</span><i class="fa fa-angle-right pull-right"></i></a>
+            <li><a class="sidebar-header" href="#"><i data-feather="command"></i><span>Business Categories</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
-                <li><a class="sidebar-header" href="{{route('admin.manage.address')}}"><i data-feather="server"></i><span>Manage Address</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.business_categories')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.manage_businesscategories')}}"><i data-feather="server"></i><span>Manage Categories</span></a></li>
+
               </ul>
             </li>
 
-            <li><a class="sidebar-header" href="#"><i data-feather="user"></i><span>About Us</span><i class="fa fa-angle-right pull-right"></i></a>
+            <li><a class="sidebar-header" href="#"><i data-feather="folder-plus"></i><span>Business</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
-                <li><a class="sidebar-header" href="{{route('admin.manage.about-us')}}"><i data-feather="server"></i><span>Manage About Us</span></a></li>
-              </ul>
-            </li>
+                <li><a class="sidebar-header" href="{{route('admin.business')}}"><i data-feather="server"></i><span>Add Business</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.manage_businessprofiles')}}"><i data-feather="server"></i><span>Manage Business</span></a></li>
 
-            <li><a class="sidebar-header" href="#"><i data-feather="user"></i><span>FAQs</span><i class="fa fa-angle-right pull-right"></i></a>
-              <ul class="sidebar-submenu">
-                <li><a class="sidebar-header" href="{{route('admin.faq.add')}}"><i data-feather="server"></i><span>Add FAQs</span></a></li>
-                <li><a class="sidebar-header" href="{{route('admin.faq')}}"><i data-feather="server"></i><span>Manage FAQs</span></a></li>
               </ul>
             </li>
 
@@ -148,6 +145,25 @@
                 <li><a class="sidebar-header" href="{{route('admin.customers.add')}}"><i data-feather="server"></i><span>Add Customers</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.customers')}}"><i data-feather="server"></i><span>Manage Customers</span></a></li>
 
+              </ul>
+            </li>
+
+            <li><a class="sidebar-header" href="#"><i data-feather="map-pin"></i><span>Company Address</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('admin.manage.address')}}"><i data-feather="server"></i><span>Manage Address</span></a></li>
+              </ul>
+            </li>
+
+            <li><a class="sidebar-header" href="#"><i data-feather="info"></i><span>About Us</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('admin.manage.about-us')}}"><i data-feather="server"></i><span>Manage About Us</span></a></li>
+              </ul>
+            </li>
+
+            <li><a class="sidebar-header" href="#"><i data-feather="help-circle"></i><span>FAQs</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('admin.faq.add')}}"><i data-feather="server"></i><span>Add FAQs</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.faq')}}"><i data-feather="server"></i><span>Manage FAQs</span></a></li>
               </ul>
             </li>
 
@@ -175,21 +191,6 @@
               </ul>
             </li>
 
-            <li><a class="sidebar-header" href="#"><i data-feather="folder-plus"></i><span>Business</span><i class="fa fa-angle-right pull-right"></i></a>
-              <ul class="sidebar-submenu">
-                <li><a class="sidebar-header" href="{{route('admin.business')}}"><i data-feather="server"></i><span>Add Business</span></a></li>
-                <li><a class="sidebar-header" href="{{route('admin.manage_businessprofiles')}}"><i data-feather="server"></i><span>Manage Business</span></a></li>
-
-              </ul>
-            </li>
-            <li><a class="sidebar-header" href="#"><i data-feather="command"></i><span>Business Categories</span><i class="fa fa-angle-right pull-right"></i></a>
-              <ul class="sidebar-submenu">
-                <li><a class="sidebar-header" href="{{route('admin.business_categories')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
-                <li><a class="sidebar-header" href="{{route('admin.manage_businesscategories')}}"><i data-feather="server"></i><span>Manage Categories</span></a></li>
-
-              </ul>
-            </li>
-
             <li><a class="sidebar-header" href="#"><i data-feather="cloud"></i><span>Events</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.events')}}"><i data-feather="server"></i><span>Add Events</span></a></li>
@@ -198,7 +199,7 @@
               </ul>
             </li>
 
-            <li><a class="sidebar-header" href="#"><i data-feather="sliders"></i><span>Offers</span><i class="fa fa-angle-right pull-right"></i></a>
+            <li><a class="sidebar-header" href="#"><i data-feather="percent"></i><span>Offers</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.offers')}}"><i data-feather="server"></i><span>Add Offers</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.manage_offers')}}"><i data-feather="server"></i><span>Manage Offers</span></a></li>

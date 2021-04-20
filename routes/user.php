@@ -9,7 +9,13 @@ Route::group(['middleware' => ['auth', 'user']], function () {
 
     // user portal routes
     Route::get('/newsfeed', 'UserportalController@newsfeed')->name('user.newsfeed');
+    
+    //rating section
     Route::get('/rating', 'UserportalController@rating')->name('user.rating');
+    Route::get('/edit-rating/{id}','UserportalController@editRating')->name('user.rating.edit');
+    Route::post('/update-rating','UserportalController@updateRating')->name('user.rating.update');
+    //end rating section
+
     Route::get('/deal', 'UserportalController@deal')->name('user.deal');
     Route::get('/settings', 'UserportalController@settings')->name('user.settings');
     Route::post('/update-privacy', 'UserportalController@updatePrivacy')->name('update.privacy');

@@ -153,6 +153,9 @@ class BusinessController extends Controller
                     $nestedData['businessId'] = $business_category->name;
                     $nestedData['address'] = $user->address;
                     $nestedData['name'] = $user->name;
+                    $nestedData['email'] = $user->email;
+                    $nestedData['abn'] = $user->abn;
+                    $nestedData['mobile'] = $user->mobile;
                     $nestedData['image'] = $user->image;
                     $view = $edit_button = $user->id;
                     $nestedData['action'] = array('e' => $edit_button);

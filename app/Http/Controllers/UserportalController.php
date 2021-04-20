@@ -45,6 +45,20 @@ class UserportalController extends Controller
         return view('user-portal.rating', compact('ratings'));
     }
 
+    public function editRating($ratingId) {
+        $rating = Rating::find(decrypt($ratingId));
+        return view('user-portal.edit-rating', compact('rating'));
+    }
+
+    public function updateRating(Request $req) {
+        // dd($req->all());
+        $rating = Rating::find(decrypt($req->rating_id));
+        $rating->rating = $req->rating;
+        $rating->description = $req->description;
+        $rating->save();
+        return redirect()->route('user.rating');
+    }
+
     public function deal() {
         $user = User::where('id', auth()->id())->where('userType', 2)->with('usercountry','userstate')->get()->toArray();
         $allOffers = Offer::where('postcode', $user[0]['postcode'])->whereDate('expire_date', '>=', Carbon::now())->with('business')->get()->toArray();

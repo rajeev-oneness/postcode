@@ -34,8 +34,9 @@
                         <hr>
                         <div class="mt-3">
                           @foreach ($ratings as $rating)
-                              <div class="border border-secondary rounded m-2">
-                                <div class="p-3">
+                              <div class="row border border-secondary rounded m-2">
+                                <div class="col-9 p-3">
+                                  <strong>{{$rating['rating']}} stars</strong>
                                   <p>{{$rating['description']}}</p>
                                   <strong>To - <a href="{{route('details',['name' => 'business', 'id' => $rating['business'][0]['id']])}}">{{$rating['business'][0]['name']}}</a></strong><br>
                                   @if (!empty($rating['response']))
@@ -43,6 +44,9 @@
                                   @else
                                   <strong>No Reply.</strong>
                                   @endif
+                                </div>
+                                <div class="col-3 p-3">
+                                  <a href="{{route('user.rating.edit', ['id' => encrypt($rating['id'])])}}" class="btn btn-primary"> <i class="fa fa-pencil"></i> Edit </a>
                                 </div>
                               </div>
                           @endforeach

@@ -39,11 +39,14 @@
                                 <table class="display" id="businessprofile_mnanage">
                                     <thead>
                                         <tr>
-                                            <th width="46px;">Sl No.</th>
-                                            <th width="149px;">Business Category</th>
-                                            <th>Name</th>
+                                            <th>Sl No.</th>
+                                            <th>Business Category</th>
+                                            <th width="160px">Name</th>
                                             <th width="90px;">Address</th>
-                                            <th width="197px;">Action</th>
+                                            <th>Email</th>
+                                            <th>Mobile</th>
+                                            <th>ABN</th>
+                                            <th>Action</th>
 
                                         </tr>
                                     </thead>
@@ -144,6 +147,18 @@
                         {
                             "targets": 2,
                             "data": "name",
+                        },
+                        {
+                            "targets": 4,
+                            "data": "email",
+                        },
+                        {
+                            "targets": 5,
+                            "data": "mobile",
+                        },
+                        {
+                            "targets": 6,
+                            "data": "abn",
                         },
                       
                             {
