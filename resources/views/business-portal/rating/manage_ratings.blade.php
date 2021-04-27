@@ -38,7 +38,7 @@
                         {{csrf_field()}}
                         <div class="card-body">
                             <div class="table-responsive">
-                            <table class="app_table">
+                            <table class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th>Sl No.</th>
@@ -64,7 +64,7 @@
                                             <td>{{$rating->user->name}}</td>
                                             <td>{{$rating->rating}} stars</td>
                                         
-                                            <td><a class="edit_event" href="{{route('add-response', ['id' => encrypt($rating->id)])}}" id=""><i class="fa fa-comment"></i></a><a class="delete_app" id="{{$rating->id}}"><i class="fa fa-trash"></i></a></td>
+                                            <td><a class="edit_event" title="Reply to rating" href="{{route('add-response', ['id' => encrypt($rating->id)])}}" id=""><i class="fa fa-comment"></i></a><a class="delete_app ml-2" title="Delete rating" id="{{$rating->id}}"><i class="fa fa-trash"></i></a></td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -80,15 +80,7 @@
            
         <script>
             $(document).ready(function (){
-                $('.app_table').DataTable({
-                    'order':[]
-                });
-//     $(".edit_event").click(function(){
-        
-// var app_id=this.id;
-//        var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
-// 			redirectPost('edit_offer', fd);
-//     });
+                
                 $(".delete_app").click(function(){
                     if(confirm('Are you sure?')) {
                         var appdel_id=this.id;

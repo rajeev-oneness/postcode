@@ -27,7 +27,7 @@
           <!-- Container-fluid starts-->
           <div class="container-fluid">
             <div class="row">
-              <div class="col-xl-8 xl-100">
+              <div class="col-xl-12 xl-100">
                 <div class="row">
                     <div class="col-12 mt-5">
                         <div>

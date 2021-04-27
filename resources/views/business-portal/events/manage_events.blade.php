@@ -37,8 +37,9 @@
                     <div class="card">
                         {{csrf_field()}}
                         <div class="card-body">
+                            <div class="float-right mb-2"><a class="btn btn-primary" href="{{route('business-admin.events')}}"><i class="fas fa-plus"></i>Add Event</a></div>
                             <div class="table-responsive">
-                            <table class="app_table">
+                            <table class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th width="width: 70px;">Business Category</th>
@@ -58,7 +59,7 @@
                                                 
                                             
                                                 <td><img src='{{url($categories2->image)}}' style='width: 40%;'></td>
-                                                <td><a class="edit_event" href="{{route('edit_event', encrypt($categories2->id))}}"  id=""><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$categories2->id}}"><i class="fa fa-trash"></i></a></td>
+                                                <td><a class="edit_event" href="{{route('edit_event', encrypt($categories2->id))}}"  id=""><i class="fa fa-edit"></i></a><a class="delete_app ml-2" id="{{$categories2->id}}"><i class="fa fa-trash"></i></a></td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -74,9 +75,7 @@
            
             <script>
                $(document).ready(function (){
-                $('.app_table').DataTable({
-      'order':[]
-    });
+                
 //     $(".edit_event").click(function(){
         
 // var app_id=this.id;

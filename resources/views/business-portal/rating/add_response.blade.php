@@ -5,7 +5,7 @@
 <head>
 
   <meta charset="utf-8" />
-  <title>Business-Admin | Edit Offers</title>
+  <title>Business-Admin | Edit Response</title>
   <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
 
@@ -20,8 +20,7 @@
           <div class="row">
             <div class="col">
               <div class="page-header-left">
-                <h3>Edit Offers Details</h3>
-
+                <h3>Reply
               </div>
             </div>
 

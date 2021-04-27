@@ -37,8 +37,9 @@
                     <div class="card">
                         {{csrf_field()}}
                         <div class="card-body">
+                            <div class="float-right mb-2"><a class="btn btn-primary" href="{{route('business-admin.offers')}}"><i class="fas fa-plus"></i>Add Offer</a></div>
                             <div class="table-responsive">
-                            <table class="app_table">
+                            <table class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th>Business Category</th>
@@ -52,19 +53,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-  @foreach ($categories as $offercategories)
-    <tr>
-    <td>{{$offercategories->offercattype->name}}</td>
-    <td>{{$offercategories->title}}</td>
-    <td>{{$offercategories->promo_code}}</td>
-    <td>{{$offercategories->price}}</td>
-    <td>{{$offercategories->expire_date}}</td>
-  
-<td><img src='{{url($offercategories->image)}}' style='width: 40%;'></td>
-<td><a class="edit_event" href="{{route('edit_offer', encrypt($offercategories->id))}}" id=""><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$offercategories->id}}"><i class="fa fa-trash"></i></a></td>
-  </tr>
-@endforeach
-</tbody>
+                                    @foreach ($categories as $offercategories)
+                                        <tr>
+                                        <td>{{$offercategories->offercattype->name}}</td>
+                                        <td>{{$offercategories->title}}</td>
+                                        <td>{{$offercategories->promo_code}}</td>
+                                        <td>{{$offercategories->price}}</td>
+                                        <td>{{$offercategories->expire_date}}</td>
+                                    
+                                        <td><img src='{{url($offercategories->image)}}' style='width: 40%;'></td>
+                                        <td><a class="edit_event" href="{{route('edit_offer', encrypt($offercategories->id))}}" id=""><i class="fa fa-edit"></i></a><a class="delete_app ml-2" id="{{$offercategories->id}}"><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                    @endforeach
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -77,9 +78,6 @@
            
             <script>
                $(document).ready(function (){
-                $('.app_table').DataTable({
-      'order':[]
-    });
 //     $(".edit_event").click(function(){
         
 // var app_id=this.id;

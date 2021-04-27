@@ -35,8 +35,9 @@
                 <div class="card">
                 {{csrf_field()}}
                   <div class="card-body">
+                    <div class="float-right mb-2"><a class="btn btn-primary" href="{{route('business-admin.product')}}"><i class="fas fa-plus"></i>Add Product</a></div>
                     <div class="table-responsive">
-                      <table class="app_table" id="subject_manage">
+                      <table class="table table-hover" id="subject_manage">
                         <thead>
                           <tr>
                             <th width="163px;">Business Category</th>
@@ -57,7 +58,7 @@
                               <td><img src='{{url($offercategories->image)}}' style='width: 40%;'></td>
                               <td>
                                 <a class="edit_product" href="{{route('edit_product', encrypt($offercategories->id))}}" id="}}"><i class="fa fa-edit"></i></a>
-                                <a class="delete_app" onclick="return confirm('Are you sure?')" href="{{route('admin.delete_product', ['id' => encrypt($offercategories->id)])}}"><i class="fa fa-trash"></i></a>
+                                <a class="delete_app ml-2" onclick="return confirm('Are you sure?')" href="{{route('admin.delete_product', ['id' => encrypt($offercategories->id)])}}"><i class="fa fa-trash"></i></a>
                               </td>
                             </tr>
                           @endforeach

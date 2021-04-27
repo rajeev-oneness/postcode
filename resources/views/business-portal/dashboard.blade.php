@@ -42,7 +42,7 @@
                             <div class="media-body">
                               <h5 class="mt-0 mb-0 f-w-600"><span class="counter">{{ $product->count() }}</span></h5>
                               <p>Total Products</p>
-                            </div><i data-feather="tag"></i>
+                            </div><i class="fas fa-shopping-bag"></i>
                           </div>
                           <div class="dashboard-chart-container">
                             <div class="small-chart-gradient-1"></div>
@@ -59,7 +59,7 @@
                             <div class="media-body">
                               <h5 class="mt-0 mb-0 f-w-600"><span class="counter">{{ $BusinessCategory->count() }}</span></h5>
                               <p>Business Categories</p>
-                            </div><i data-feather="shopping-cart"></i>
+                            </div><i class="fas fa-list"></i>
                           </div>
                           <div class="dashboard-chart-container">
                             <div class="small-chart-gradient-2"></div>
@@ -76,7 +76,7 @@
                             <div class="media-body">
                               <h5 class="mt-0 mb-0 f-w-600"><span class="counter">{{ $event->count() }}</span></h5>
                               <p>Events</p>
-                            </div><i data-feather="sun"></i>
+                            </div><i class="fas fa-calendar-alt"></i>
                           </div>
                           <div class="dashboard-chart-container">
                             <div class="small-chart-gradient-3"></div>

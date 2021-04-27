@@ -1,261 +1,127 @@
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Postcode admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-<meta name="keywords" content="admin template, Postcode admin template, dashboard template, flat admin template, responsive admin template, web app">
-<meta name="author" content="pixelstrap">
-<link rel="icon" href="{{asset('admin_assets/images/favicon.png')}}" type="image/x-icon">
-<link rel="shortcut icon" href="{{asset('admin_assets/images/favicon.png')}}" type="image/x-icon">
-
-<!-- Google font-->
-<link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-<!-- Font Awesome-->
-<link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/fontawesome.css')}}">
-<!-- ico-font-->
-<link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/icofont.css')}}">
-<!-- Themify icon-->
-<link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/themify.css')}}">
-<!-- Flag icon-->
-<link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/flag-icon.css')}}">
-<!-- Feather icon-->
-<link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/feather-icon.css')}}">
-<!-- Plugins css start-->
-<link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/chartist.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/prism.css')}}">
-<!-- Plugins css Ends-->
-<!-- Plugins css start-->
-<link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/date-picker.css')}}">
-<!-- Plugins css start-->
-<link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/datatables.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/daterange-picker.css')}}">
-<!-- Bootstrap css-->
-<link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/bootstrap.css')}}">
-<!-- App css-->
-<link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/style.css')}}">
-<link id="color" rel="stylesheet" href="{{asset('admin_assets/css/light-1.css')}}" media="screen">
-<!-- Responsive css-->
-<link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/responsive.css')}}">
-
-<!-- Jquery Datatable-->
-<link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/jquery.dataTables.css')}}">
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<!-- latest jquery-->
-<script src="{{asset('admin_assets/js/jquery-3.2.1.min.js')}}"></script>
-
-<script type="text/javascript" charset="utf8" src="{{asset('admin_assets/js/jquerydatatable/jquery.dataTables.js')}}"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Our postcode | @yield('title')</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{{asset('business_user_asset/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('business_user_asset/css/slick.css')}}"/>
+  <link rel="stylesheet" type="text/css" href="{{asset('business_user_asset/css/slick-theme.css')}}"/>
+  <link rel="stylesheet" href="{{asset('business_user_asset/css/style.css')}}">
+<script src="{{asset('business_user_asset/js/jquery.min.js')}}"></script>
 
 </head>
+<body class="bg-lightgray">
 
-<body>
-  <!-- Loader starts-->
-  <div class="loader-wrapper">
-    <div class="loader bg-white">
-      <div class="whirly-loader"> </div>
+<header>
+  <nav class="mnb navbar navbar-default fixed-top topnav">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <i class="ic fa fa-bars"></i>
+        </button> -->
+        <div>
+           <a href="#" id="msbo" class="menuIcon"><i class="ic fa fa-bars"></i></a>
+           <a href="#" class="admin-brand"><img src="{{asset('business_user_asset/images/admin-logo.png')}}" class="img-fluid"></a>
+        </div>
+      </div>
+      <div id="navbar" class="top-rightmenu">
+        <ul class="navbar-nav ml-aoto">
+          <li>
+            <a href="#"><i class="far fa-bell"></i></a>
+            <span class="count-noti">
+              50
+            </span>
+          </li>
+          <li><a href="#"><i class="fas fa-cog"></i></a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <!-- Loader ends-->
-  <!-- page-wrapper Start-->
-  <div class="page-wrapper">
-    <!-- Page Header Start-->
-    <div class="page-main-header">
-      <div class="main-header-right row">
-        <div class="main-header-left d-lg-none">
-          <div class="logo-wrapper"><a href="index.html"><img src="{{asset('admin_assets/images/postcode.png')}}" alt=""></a></div>
-        </div>
-        <div class="mobile-sidebar d-block">
-          <div class="media-body text-right switch-sm">
-            <label class="switch"><a href="#"><i id="sidebar-toggle" data-feather="align-left"></i></a></label>
-          </div>
-        </div>
-        <div class="nav-right col p-0">
-          <ul class="nav-menus">
-
-            <li><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
-
-
-            <li class="onhover-dropdown">
-              <div class="media align-items-center"><img class="align-self-center pull-right img-50 rounded-circle" src="{{asset('admin_assets/images/user/user.png')}}" alt="header-user">
-                <div class="dotted-animation"><span class="animate-circle"></span><span class="main-circle"></span></div>
+  </nav>
+  <!--msb: main sidebar-->
+  <div class="msb" id="msb">
+      <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <div class="brand-wrapper">
+            <!-- Brand -->
+            <div class="brand-name-wrapper">
+              <div class="user-profile-pic">
+                <img src="{{asset('business_user_asset/images/c2.jpg')}}">
               </div>
-              <ul class="profile-dropdown onhover-show-div p-20">
-                <li><a href="{{route('admin.change_password')}}" class="keypass">&nbsp;<i class="fa fa-key" aria-hidden="true">Change Password</i>
-                <li><a href="{{route('admin.logout')}}"><i data-feather="log-out"></i>Logout</a></li>
+              <h6>{{auth()->user()->name}}</h6>
+              <ul class="left-menuadd">
+                {{-- style="white-space: normal;" --}}
+                <li><i class="fas fa-map-marker-alt"></i> {{auth()->user()->address}}</li>
+                <li><i class="far fa-envelope"></i> {{auth()->user()->email}}</li>
+                {{-- <li><i class="fas fa-globe"></i> www. jdgroup.co.in</li>
+                <li><i class="fas fa-phone-alt"></i> 80-600-800</li> --}}
               </ul>
-            </li>
-          </ul>
-          <div class="d-lg-none mobile-toggle pull-right"><i data-feather="more-horizontal"></i></div>
-        </div>
-        <script id="result-template" type="text/x-handlebars-template">
-          <div class="ProfileCard u-cf">                        
-            <div class="ProfileCard-avatar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay m-0"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></div>
-            <div class="ProfileCard-details">
-            <div class="ProfileCard-realName"></div>
+              <div class="social-div text-center">
+                <ul>
+                  <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                  <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                  <li><a href=""><i class="fab fa-instagram"></i></a></li>
+                  <li><a href=""><i class="fab fa-youtube"></i></a></li>
+                </ul>
+                <div>
+                    <div class="mb-2"><a href="{{route('my.business.profile')}}" class="pro-edit"><i class="far fa-edit"></i> Edit Profile</a></div>
+                    <div><a href="{{route('logout')}}" class="pro-edit"><i class="fas fa-sign-out-alt"></i> LOGOUT</a></div>
+                </div>
+              </div>
             </div>
-            </div>
-          </script>
-        <script id="empty-template" type="text/x-handlebars-template">
-          <div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div>
-            
-          </script>
-      </div>
-    </div>
-    <!-- Page Header Ends                              -->
-    <!-- Page Body Start-->
-    <div class="page-body-wrapper">
-      <!-- Page Sidebar Start-->
-      <div class="page-sidebar">
-        <div class="main-header-left d-none d-lg-block">
-          <div class="logo-wrapper"><a href="{{route('admin.dashboard')}}"><img src="{{asset('admin_assets/images/postcode.png')}}" class="logoimg" alt=""></a></div>
-        </div>
-        <div class="sidebar custom-scrollbar">
-          <div class="sidebar-user text-center">
-            <div><img class="img-60 rounded-circle" src="{{asset('admin_assets/images/user/user.png')}}" alt="#">
-              <!-- <div class="profile-edit"><a href="edit-profile.html"><i data-feather="edit"></i></a></div> -->
-            </div>
-            <h6 class="mt-3 f-14"></h6>
-            <h3 class="usr_name">{{\Auth::user()->name}}</h3>
-            <!-- <p>general manager.</p> -->
+  
           </div>
-          <ul class="sidebar-menu">
-
-            <li><a class="sidebar-header" href="{{route('default.homepage')}}"><i data-feather="home"></i><span>Homepage</span><span class="badge badge-pill badge-primary"></span></a>
-            </li>
-
-            <li><a class="sidebar-header" href="{{route('business.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span><span class="badge badge-pill badge-primary"></span></a>
-            </li>
-
-            <li><a class="sidebar-header" href="{{route('my.business.profile')}}"><i data-feather="home"></i><span>Business Profile</span><span class="badge badge-pill badge-primary"></span></a>
-            </li>
-
-            <li><a class="sidebar-header" href="#"><i data-feather="box"></i><span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
-              <ul class="sidebar-submenu">
-                <li><a class="sidebar-header" href="{{route('business-admin.product')}}"><i data-feather="server"></i><span>Add Products</span></a></li>
-                <li><a class="sidebar-header" href="{{route('business-admin.manage_products')}}"><i data-feather="server"></i><span>Manage Products</span></a></li>
-
-              </ul>
-            </li>
-
-            <li><a class="sidebar-header" href="#"><i data-feather="align-justify"></i><span>Services</span><i class="fa fa-angle-right pull-right"></i></a>
-              <ul class="sidebar-submenu">
-                <li><a class="sidebar-header" href="{{route('business-admin.services')}}"><i data-feather="server"></i><span>Services</span></a></li>
-                <li><a class="sidebar-header" href="{{route('business-admin.manage_service')}}"><i data-feather="server"></i><span>Manage Services</span></a></li>
-              </ul>
-            </li>
-
-
-            <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Events Categories</span><i class="fa fa-angle-right pull-right"></i></a>
-              <ul class="sidebar-submenu">
-                <li><a class="sidebar-header" href="{{route('business.admin.events_categories')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
-                <li><a class="sidebar-header" href="{{route('admin.manage_eventcategories')}}"><i data-feather="server"></i><span>Manage Categories</span></a></li>
-
-              </ul>
-            </li>
-
-            
-
-            <li><a class="sidebar-header" href="#"><i data-feather="cloud"></i><span>Events</span><i class="fa fa-angle-right pull-right"></i></a>
-              <ul class="sidebar-submenu">
-                <li><a class="sidebar-header" href="{{route('business-admin.events')}}"><i data-feather="server"></i><span>Add Events</span></a></li>
-                <li><a class="sidebar-header" href="{{route('business-admin.manage_events')}}"><i data-feather="server"></i><span>Manage Events</span></a></li>
-
-              </ul>
-            </li>
-
-            <li><a class="sidebar-header" href="#"><i data-feather="sliders"></i><span>Offers</span><i class="fa fa-angle-right pull-right"></i></a>
-              <ul class="sidebar-submenu">
-                <li><a class="sidebar-header" href="{{route('business-admin.offers')}}"><i data-feather="server"></i><span>Add Offers</span></a></li>
-                <li><a class="sidebar-header" href="{{route('business-admin.manage_offers')}}"><i data-feather="server"></i><span>Manage Offers</span></a></li>
-
-              </ul>
-            </li>
-
-            <li><a class="sidebar-header" href="#"><i data-feather="star"></i><span>Ratings</span><i class="fa fa-angle-right pull-right"></i></a>
-              <ul class="sidebar-submenu">
-                {{-- <li><a class="sidebar-header" href="{{route('business-admin.offers')}}"><i data-feather="server"></i><span>Add Ratings</span></a></li> --}}
-                <li><a class="sidebar-header" href="{{route('business-admin.manage_ratings')}}"><i data-feather="server"></i><span>Manage Ratings</span></a></li>
-
-              </ul>
-            </li>
-
-
-            <!-- <li><a class="sidebar-header" href="/manage_subjects" ><i data-feather="server"></i><span> Manage Subjects</span></a></li>
-              <li><a class="sidebar-header" href="/add_question" ><i data-feather="server"></i><span> Questions</span></a></li>
-            -->
+  
+        </div>
+  
+        <!-- Main Menu -->
+        <div class="side-menu-container">
+          <ul class="nav navbar-nav">
+            <li><a href="{{route('default.homepage')}}"><i class="fas fa-home"></i>Homepage</a></li>
+            <li class="active"><a href="{{route('business.dashboard')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
+            <li><a href="{{route('business-admin.manage_products')}}"><i class="fas fa-shopping-basket"></i> Products</a></li>
+            <li><a href="{{route('business-admin.manage_service')}}"><i class="far fa-thumbs-up"></i>Services</a></li>
+            <li><a href="{{route('business-admin.manage_eventcategories')}}"><i class="fas fa-list"></i>Event Categories</a></li>
+            <li><a href="{{route('business-admin.manage_events')}}"><i class="fas fa-calendar-alt"></i>Events</a></li>
+            <li><a href="{{route('business-admin.manage_offers')}}"><i class="fas fa-percent"></i>Offers</a></li>
+            <li><a href="{{route('business-admin.manage_ratings')}}"><i class="fas fa-star"></i>Ratings</a></li>
           </ul>
-        </div>
-      </div>
-
-      @yield('content')
-
-
-
-      <!-- footer start-->
-      <footer class="footer">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-6 footer-copyright">
-              <p class="mb-0">Copyright 2021 © All rights reserved.</p>
-            </div>
-            <div class="col-md-6">
-              <!-- <p class="pull-right mb-0">Hand crafted & made with<i class="fa fa-heart"></i></p> -->
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
+        </div><!-- /.navbar-collapse -->
+      </nav>  
   </div>
+  
+  <!--main content wrapper-->
+  <div class="mcw">
+    <div class="container-fluid pl-4">
+        <div class="row m-0">
+            <div class="col-12">
+              <div class="card border-0">
+                <div class="card-body p-0">
+                  <div class="tab-content p-4" id="myTabContent">
+                    @yield('content')
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div><!--end-main content wrapper-->
+</header>
 
-  <!-- Bootstrap js-->
-  <script src="{{asset('admin_assets/js/bootstrap/popper.min.js')}}"></script>
-  <script src="{{asset('admin_assets/js/bootstrap/bootstrap.js')}}"></script>
-  <!-- feather icon js-->
-  <script src="{{asset('admin_assets/js/icons/feather-icon/feather.min.js')}}"></script>
-  <script src="{{asset('admin_assets/js/icons/feather-icon/feather-icon.js')}}"></script>
-  <!-- Sidebar jquery-->
-  <script src="{{asset('admin_assets/js/sidebar-menu.js')}}"></script>
-  <script src="{{asset('admin_assets/js/config.js')}}"></script>
+<!--Script-->
+
+<script src="{{asset('business_user_asset/js/jquery.min.js')}}"></script>
+<script src="{{asset('business_user_asset/js/popper.min.js')}}"></script>
+<script src="{{asset('business_user_asset/js/bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('business_user_asset/js/slick.min.js')}}"></script>
+<script src="{{asset('business_user_asset/js/custom.js')}}"></script>
 
 
 
-  <!-- Plugins JS start-->
-  <script src="{{asset('admin_assets/js/datatable/datatables/jquery.dataTables.min.js')}}"></script>
-  <script src="{{asset('admin_assets/js/datatable/datatables/datatable.custom.js')}}"></script>
-  <script src="{{asset('admin_assets/js/datepicker/daterange-picker/moment.min.js')}}"></script>
-  <script src="{{asset('admin_assets/js/datepicker/daterange-picker/daterangepicker.js')}}"></script>
-  <script src="{{asset('admin_assets/js/datepicker/daterange-picker/daterange-picker.custom.js')}}"></script>
-  <script src="{{asset('admin_assets/js/chart/chartist/chartist.js')}}"></script>
-  <script src="{{asset('admin_assets/js/chart/knob/knob.min.js')}}"></script>
-  <script src="{{asset('admin_assets/js/chart/knob/knob-chart.js')}}"></script>
-  <script src="{{asset('admin_assets/js/prism/prism.min.js')}}"></script>
-  <script src="{{asset('admin_assets/js/clipboard/clipboard.min.js')}}"></script>
-  <script src="{{asset('admin_assets/js/counter/jquery.waypoints.min.js')}}"></script>
-  <script src="{{asset('admin_assets/js/counter/jquery.counterup.min.js')}}"></script>
-  <script src="{{asset('admin_assets/js/counter/counter-custom.js')}}"></script>
-  <script src="{{asset('admin_assets/js/custom-card/custom-card.js')}}"></script>
-  <script src="{{asset('admin_assets/js/notify/bootstrap-notify.min.js')}}"></script>
-  <script src="{{asset('admin_assets/js/dashboard/default.js')}}"></script>
-  <script src="{{asset('admin_assets/js/notify/index.js')}}"></script>
-  <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.js')}}"></script>
-  <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
-  <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
-  <script src="{{asset('admin_assets/js/typeahead/handlebars.js')}}"></script>
-  <script src="{{asset('admin_assets/js/typeahead/typeahead.bundle.js')}}"></script>
-  <script src="{{asset('admin_assets/js/typeahead/typeahead.custom.js')}}"></script>
-  <script src="{{asset('admin_assets/js/chat-menu.js')}}"></script>
-  <script src="{{asset('admin_assets/js/form-validation-custom.js')}}"></script>
-  <script src="{{asset('admin_assets/js/height-equal.js')}}"></script>
-  <script src="{{asset('admin_assets/js/tooltip-init.js')}}"></script>
-  <script src="{{asset('admin_assets/js/typeahead-search/handlebars.js')}}"></script>
-  <script src="{{asset('admin_assets/js/typeahead-search/typeahead-custom.js')}}"></script>
-  <!-- Plugins JS Ends-->
-  <!-- Theme js-->
-  <script src="{{asset('admin_assets/js/script.js')}}"></script>
-  <!-- <script src="admin_assets/js/theme-customizer/customizer.js"></script> -->
-  <!-- Plugin used-->
+
 </body>
-
 </html>

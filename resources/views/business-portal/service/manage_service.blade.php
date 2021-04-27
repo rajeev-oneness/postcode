@@ -37,8 +37,9 @@
                     <div class="card">
                         {{csrf_field()}}
                         <div class="card-body">
+                            <div class="float-right mb-2"><a class="btn btn-primary" href="{{route('business-admin.services')}}"><i class="fas fa-plus"></i>Add Service</a></div>
                             <div class="table-responsive">
-                            <table class="app_table">
+                            <table class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th width="146px;">Business Category</th>
@@ -59,7 +60,7 @@
                                                 <td><img src='{{url($service_manage_dt->image)}}' style='width: 40%;'></td>
                                                 <td>
                                                     <a class="edit_app" href="{{route('edit_services', encrypt($service_manage_dt->id))}}" id=""><i class="fa fa-edit"></i></a>
-                                                    <a class="delete_app" id="{{$service_manage_dt->id}}"><i class="fa fa-trash"></i></a>
+                                                    <a class="delete_app ml-2" id="{{$service_manage_dt->id}}"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -76,9 +77,9 @@
            
             <script>
                 $(document).ready(function (){
-                    $('.app_table').DataTable({
-                        'order':[]
-                    });
+                    // $('.app_table').DataTable({
+                    //     'order':[]
+                    // });
             //     $(".edit_app").click(function(){
             //          var app_id=this.id;
             //          var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
