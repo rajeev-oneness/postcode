@@ -80,8 +80,8 @@ class OfferController extends Controller
         if(auth()->user()->userType == 3){
             $categories = Offer::where('created_by', auth()->user()->id)->with(['offercattype' => function ($query) {
                 $query->orderBy('created_at', 'desc');
-            }])->get();
-            // echo json_encode($categories1);die;
+            }])->paginate(3);
+            // echo json_encode($categories);die;
             return view('business-portal.offer.manage_offers',compact('categories'));
         }
         $categories = Offer::with(['offercattype' => function ($query) {

@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="{{asset('business_user_asset/css/bootstrap.min.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('business_user_asset/css/slick.css')}}"/>
   <link rel="stylesheet" type="text/css" href="{{asset('business_user_asset/css/slick-theme.css')}}"/>
+  <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/date-picker.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/daterange-picker.css')}}">
   <link rel="stylesheet" href="{{asset('business_user_asset/css/style.css')}}">
 <script src="{{asset('business_user_asset/js/jquery.min.js')}}"></script>
 
@@ -69,7 +71,7 @@
                 </ul>
                 <div>
                     <div class="mb-2"><a href="{{route('my.business.profile')}}" class="pro-edit"><i class="far fa-edit"></i> Edit Profile</a></div>
-                    <div><a href="{{route('logout')}}" class="pro-edit"><i class="fas fa-sign-out-alt"></i> LOGOUT</a></div>
+                    {{-- <div><a href="{{route('logout')}}" class="pro-edit"><i class="fas fa-sign-out-alt"></i> LOGOUT</a></div> --}}
                 </div>
               </div>
             </div>
@@ -83,12 +85,13 @@
           <ul class="nav navbar-nav">
             <li><a href="{{route('default.homepage')}}"><i class="fas fa-home"></i>Homepage</a></li>
             <li class="active"><a href="{{route('business.dashboard')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-            <li><a href="{{route('business-admin.manage_products')}}"><i class="fas fa-shopping-basket"></i> Products</a></li>
-            <li><a href="{{route('business-admin.manage_service')}}"><i class="far fa-thumbs-up"></i>Services</a></li>
-            <li><a href="{{route('business-admin.manage_eventcategories')}}"><i class="fas fa-list"></i>Event Categories</a></li>
-            <li><a href="{{route('business-admin.manage_events')}}"><i class="fas fa-calendar-alt"></i>Events</a></li>
+            {{-- <li><a href="{{route('business-admin.manage_products')}}"><i class="fas fa-shopping-basket"></i> Products</a></li> --}}
+            {{-- <li><a href="{{route('business-admin.manage_service')}}"><i class="far fa-thumbs-up"></i>Services</a></li> --}}
+            {{-- <li><a href="{{route('business-admin.manage_eventcategories')}}"><i class="fas fa-list"></i>Event Categories</a></li> --}}
             <li><a href="{{route('business-admin.manage_offers')}}"><i class="fas fa-percent"></i>Offers</a></li>
+            <li><a href="{{route('business-admin.manage_events')}}"><i class="fas fa-calendar-alt"></i>Events</a></li>
             <li><a href="{{route('business-admin.manage_ratings')}}"><i class="fas fa-star"></i>Ratings</a></li>
+            <li><a href="{{route('logout')}}" class="logout-bg"><i class="fas fa-sign-out-alt"></i>LOGOUT</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </nav>  
@@ -120,7 +123,12 @@
 <script type="text/javascript" src="{{asset('business_user_asset/js/slick.min.js')}}"></script>
 <script src="{{asset('business_user_asset/js/custom.js')}}"></script>
 
-
+<script src="{{asset('admin_assets/js/datepicker/daterange-picker/moment.min.js')}}"></script>
+  <script src="{{asset('admin_assets/js/datepicker/daterange-picker/daterangepicker.js')}}"></script>
+  <script src="{{asset('admin_assets/js/datepicker/daterange-picker/daterange-picker.custom.js')}}"></script>
+  <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.js')}}"></script>
+  <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
+  <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
 
 
 </body>

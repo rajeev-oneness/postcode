@@ -91,8 +91,8 @@ class EventsController extends Controller
         if(auth()->user()->userType == 3) {
             $categories1 = Event::where('created_by', auth()->user()->id)->with(['eventcattype','eventbusiesstype' => function ($query) {
                 $query->orderBy('created_at', 'desc');
-            }])->get();
-            // echo json_encode($categories1);die;
+            }])->paginate(3);
+            // dd($categories1);
             return view('business-portal.events.manage_events',compact('categories1'));
         }
         $categories1 = Event::with(['eventcattype','eventbusiesstype' => function ($query) {

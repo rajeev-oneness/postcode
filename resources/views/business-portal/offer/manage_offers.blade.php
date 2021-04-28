@@ -8,82 +8,67 @@
     <title>Business-Admin | Manage Offers</title>
     
 
-    @extends('business-portal.layouts.master')
-    @section('content')
-   
-    <!-- Right sidebar Ends-->
-    <div class="page-body">
-        <div class="container-fluid">
-            <div class="page-header">
-                <!-- start page title -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="page-title-box d-flex align-items-center justify-content-between">
-                            <h4 class="mb-0 font-size-18">Manage Offers</h4>
-                            <!-- <div class="page-title-right">
-                                <a href="/admin/add_subjects" <button type="button" id="submit_product" name="submit_product" class="btn btn-primary w-md">Add Subjects</button></a>
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-                <!-- end page title -->
+@extends('business-portal.layouts.master')
+    
+@section('content')
+<div class="row m-1">
+    <div class="mb-3"><a class="btn btn-primary" href="{{route('business-admin.offers')}}"><i class="fas fa-plus"></i>Add Offer</a></div>
+</div>
+<div class="row m-0">
+    @if (empty($categories))
+      <div class="col-12">
+          <h1 class="text-center">No Offers</h1>
+      </div>
+    @else
+    @foreach ($categories as $offercategories)
+    <div class="col-12 col-md-4 col-lg-4 col-sm-4 mb-3 pl-md-0">
+        <div class="card">
+        {{csrf_field()}}
+          <div class="position-relative">
+            <img src="{{url($offercategories->image)}}" class="card-img-top" alt="Events">
+            <div class="img-retting">
+              <ul>
+                <li><img src="{{asset('business_user_asset/images/event-star.png')}}"> <span>4.5</span> (60 reviews)</li>
+                <li>|</li>
+                <li><i class="far fa-comment-dots"></i> 40 Comments</li>
+              </ul>
             </div>
+          </div>
+          <div class="card-body event-body">
+            <div class="row m-0 col-12 p-0">
+              <div class="col-8 col-md-8 p-0">
+                <h5 class="card-title">{{$offercategories->title}}
+                  <span class="d-block"> {{$offercategories->promo_code}}</span>
+                  <span class="d-block"><i class="fas fa-calendar-alt"></i> Reedem before {{date("d M'y", strtotime($offercategories->expire_date))}}</span>
+                </h5>
+                <div class="card-border"></div>
+              </div>
+              <div class="col-4 col-md-4 p-0 categ-text">
+                <div class="bg-orange offer-price">
+                  <p>PRICE
+                    <span>${{$offercategories->price}}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <p class="card-text">{{$offercategories->short_description}}</p>
+            <a class="edit_event" href="{{route('edit_offer', encrypt($offercategories->id))}}" id=""><i class="fa fa-edit"></i></a>
+            <a class="delete_app ml-2" id="{{$offercategories->id}}"><i class="fa fa-trash"></i></a>
+            <a href="{{route('details',['name' => 'deal', 'id' => $offercategories->id])}}" class="float-right text-dark"><i class="fas fa-long-arrow-alt-right"></i></a>
+          </div>
         </div>
-        <!-- Container-fluid starts-->
-        <div class="container-fluid">
-            <div class="row">
-                <!-- Zero Configuration  Starts-->
-                <div class="col-sm-12">
-                    <div class="card">
-                        {{csrf_field()}}
-                        <div class="card-body">
-                            <div class="float-right mb-2"><a class="btn btn-primary" href="{{route('business-admin.offers')}}"><i class="fas fa-plus"></i>Add Offer</a></div>
-                            <div class="table-responsive">
-                            <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Business Category</th>
-                                            <th width="45px;">Title</th>
-                                            <th>Promo Code</th>
-                                            <th>Price</th>
-                                            <th width="85px;">Expire Date</th>
-                                            <th width="10px;">Image</th>
-                                            <th>Action</th>
+      </div>
+    @endforeach
+</div>
+<div class="row m-0">
+    <nav aria-label="Page navigation example">
+      {{$categories->links()}}
+    </nav>
+</div>
+@endif
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach ($categories as $offercategories)
-                                        <tr>
-                                        <td>{{$offercategories->offercattype->name}}</td>
-                                        <td>{{$offercategories->title}}</td>
-                                        <td>{{$offercategories->promo_code}}</td>
-                                        <td>{{$offercategories->price}}</td>
-                                        <td>{{$offercategories->expire_date}}</td>
-                                    
-                                        <td><img src='{{url($offercategories->image)}}' style='width: 40%;'></td>
-                                        <td><a class="edit_event" href="{{route('edit_offer', encrypt($offercategories->id))}}" id=""><i class="fa fa-edit"></i></a><a class="delete_app ml-2" id="{{$offercategories->id}}"><i class="fa fa-trash"></i></a></td>
-                                    </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Zero Configuration  Ends-->
-
-
-            </div>
-           
-            <script>
-               $(document).ready(function (){
-//     $(".edit_event").click(function(){
-        
-// var app_id=this.id;
-//        var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
-// 			redirectPost('edit_offer', fd);
-//     });
+<script>
+$(document).ready(function (){
     $(".delete_app").click(function(){
         if(confirm('Are you sure?')) {
             var appdel_id=this.id;
@@ -91,23 +76,20 @@
             redirectPost('delete_offers', fd);
         }
     });
-               });
-               var redirectPost = function (url, data = null, method = 'post') {
-                    var form = document.createElement('form');
-                    form.method = method;
-                    form.action = url;
-                    for (var name in data) {
-                        var input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = name;
-                        input.value = data[name];
-                        form.appendChild(input);
-                    }
-                    $('body').append(form);
-                    form.submit();
-                }
-            </script>
-
-
-
-            @endsection
+});
+var redirectPost = function (url, data = null, method = 'post') {
+    var form = document.createElement('form');
+    form.method = method;
+    form.action = url;
+    for (var name in data) {
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = data[name];
+        form.appendChild(input);
+    }
+    $('body').append(form);
+    form.submit();
+}
+</script>
+@endsection
