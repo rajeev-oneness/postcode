@@ -99,6 +99,7 @@
             <div class="col-12">
               <div class="card border-0">
                 <div class="card-body p-0">
+                  @yield('tab-link')
                   <div class="tab-content p-4" id="myTabContent">
                     @yield('content')
                   </div>

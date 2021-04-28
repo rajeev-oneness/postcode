@@ -28,15 +28,15 @@ class UserportalController extends Controller
     public function newsfeed() {
         $user = User::where('id', auth()->id())->where('userType', 2)->with('usercountry','userstate')->get()->toArray();
         
-        $stateEvents = Event::where('state_id', $user[0]['userstate']['id'])->whereDate('created_at', '>', Carbon::now()->subDays(7))->whereDate('created_at', '<=', Carbon::now())->with('eventcattype', 'business', 'agegroup')->get()->toArray();
-        $postcodeEvents = Event::where('postcode', $user[0]['postcode'])->whereDate('created_at', '>', Carbon::now()->subDays(7))->whereDate('created_at', '<=', Carbon::now())->with('eventcattype', 'business', 'agegroup')->get()->toArray();
+        $stateEvents = Event::where('state_id', auth()->user()->stateId)->whereDate('end', '>', Carbon::now())->with('eventcattype', 'business', 'agegroup')->paginate(100);
+        // dd($stateEvents);
+        $postcodeEvents = Event::where('postcode', auth()->user()->postcode)->whereDate('end', '>', Carbon::now())->with('eventcattype', 'business', 'agegroup')->paginate(100);
         
-        $postcodeOffers = Offer::where('postcode', $user[0]['postcode'])->whereDate('created_at', '>', Carbon::now()->subDays(7))->with('business')->whereDate('created_at', '<=', Carbon::now())->get()->toArray();
+        // $postcodeOffers = Offer::where('postcode', $user[0]['postcode'])->whereDate('created_at', '>', Carbon::now()->subDays(7))->with('business')->get()->toArray();
 
         $allEvents = Event::where('postcode', $user[0]['postcode'])->whereDate('end', '>=', Carbon::now())->with('eventcattype', 'business', 'agegroup')->get()->toArray();
-        $allOffers = Offer::where('postcode', $user[0]['postcode'])->whereDate('expire_date', '>=', Carbon::now())->with('business')->get()->toArray();
-
-        return view('user-portal.newsfeed', compact('stateEvents', 'postcodeEvents', 'postcodeOffers', 'allEvents', 'allOffers'));
+        $allOffers = Offer::where('postcode', auth()->user()->postcode)->whereDate('expire_date', '>=', Carbon::now())->with('business')->paginate(100);
+        return view('user-portal.newsfeed', compact('stateEvents', 'postcodeEvents', 'allEvents', 'allOffers'));
     }
 
     public function rating() {
@@ -61,7 +61,7 @@ class UserportalController extends Controller
 
     public function deal() {
         $user = User::where('id', auth()->id())->where('userType', 2)->with('usercountry','userstate')->get()->toArray();
-        $allOffers = Offer::where('postcode', $user[0]['postcode'])->whereDate('expire_date', '>=', Carbon::now())->with('business')->get()->toArray();
+        $allOffers = Offer::where('postcode', $user[0]['postcode'])->whereDate('expire_date', '>=', Carbon::now())->with('business')->paginate(3);
         return view('user-portal.deal', compact('allOffers'));
     }
 
