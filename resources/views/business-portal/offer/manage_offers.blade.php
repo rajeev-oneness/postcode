@@ -15,7 +15,7 @@
     <div class="mb-3"><a class="btn btn-primary" href="{{route('business-admin.offers')}}"><i class="fas fa-plus"></i>Add Offer</a></div>
 </div>
 <div class="row m-0">
-    @if (empty($categories))
+    @if (count($categories) == 0)
       <div class="col-12">
           <h1 class="text-center">No Offers</h1>
       </div>
@@ -59,13 +59,13 @@
         </div>
       </div>
     @endforeach
+    @endif
 </div>
 <div class="row m-0">
     <nav aria-label="Page navigation example">
       {{$categories->links()}}
     </nav>
 </div>
-@endif
 
 <script>
 $(document).ready(function (){

@@ -29,14 +29,14 @@ class UserportalController extends Controller
         $user = User::where('id', auth()->id())->where('userType', 2)->with('usercountry','userstate')->get()->toArray();
         
         $stateEvents = Event::where('state_id', auth()->user()->stateId)->whereDate('end', '>', Carbon::now())->with('eventcattype', 'business', 'agegroup')->paginate(100);
-        // dd($stateEvents);
-        $postcodeEvents = Event::where('postcode', auth()->user()->postcode)->whereDate('end', '>', Carbon::now())->with('eventcattype', 'business', 'agegroup')->paginate(100);
         
+        $postcodeEvents = Event::where('postcode', auth()->user()->postcode)->whereDate('end', '>', Carbon::now())->with('eventcattype', 'business', 'agegroup')->paginate(100);
+        // dd($postcodeEvents);
         // $postcodeOffers = Offer::where('postcode', $user[0]['postcode'])->whereDate('created_at', '>', Carbon::now()->subDays(7))->with('business')->get()->toArray();
 
-        $allEvents = Event::where('postcode', $user[0]['postcode'])->whereDate('end', '>=', Carbon::now())->with('eventcattype', 'business', 'agegroup')->get()->toArray();
+        // $allEvents = Event::where('postcode', $user[0]['postcode'])->whereDate('end', '>=', Carbon::now())->with('eventcattype', 'business', 'agegroup')->get()->toArray();
         $allOffers = Offer::where('postcode', auth()->user()->postcode)->whereDate('expire_date', '>=', Carbon::now())->with('business')->paginate(100);
-        return view('user-portal.newsfeed', compact('stateEvents', 'postcodeEvents', 'allEvents', 'allOffers'));
+        return view('user-portal.newsfeed', compact('stateEvents', 'postcodeEvents', 'allOffers'));
     }
 
     public function rating() {

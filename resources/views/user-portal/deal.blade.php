@@ -13,6 +13,11 @@
 <div class="tab-content p-4" id="myTabContent">
     <div class="tab-pane fade active show" id="offers" role="tabpanel" aria-labelledby="offers-tab">
       <div class="row m-0">
+        @if (count($allOffers) == 0)
+        <div class="col-12">
+            <h1 class="text-center">No Offers</h1>
+        </div>
+        @else
         @foreach ($allOffers as $offer)
         <div class="col-12 col-md-4 col-lg-4 col-sm-4 mb-3 pl-md-0">
           <div class="card">
@@ -49,6 +54,7 @@
           </div>
         </div>
         @endforeach
+        @endif
       </div>
       <div class="row m-0">
         <nav aria-label="Page navigation example">

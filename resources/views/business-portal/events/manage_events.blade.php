@@ -15,7 +15,7 @@
     <div class="mb-3"><a class="btn btn-primary" href="{{route('business-admin.events')}}"><i class="fas fa-plus"></i>Add Event</a></div>
 </div>
 <div class="row m-0">
-    @if (empty($categories1))
+    @if (count($categories1) == 0)
         <div class="col-12">
             <h1 class="text-center">No Events</h1>
         </div>
@@ -58,13 +58,14 @@
         </div>
       </div>
     @endforeach
+    @endif
 </div>
 <div class="row m-0">
     <nav aria-label="Page navigation example">
       {{$categories1->links()}}
     </nav>
 </div>
-@endif
+
 <script>
 $(document).ready(function (){
     $(".delete_app").click(function(){

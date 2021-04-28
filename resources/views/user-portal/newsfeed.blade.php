@@ -27,6 +27,11 @@
 <div class="tab-content p-4" id="myTabContent">
     <div class="tab-pane fade active show" id="offers" role="tabpanel" aria-labelledby="offers-tab">
       <div class="row m-0">
+        @if (count($allOffers) == 0)
+            <div class="col-12">
+                <h1 class="text-center">No Offers</h1>
+            </div>
+        @else
         @foreach ($allOffers as $offer)
         <div class="col-12 col-md-4 col-lg-4 col-sm-4 mb-3 pl-md-0">
           <div class="card">
@@ -63,17 +68,20 @@
           </div>
         </div>
         @endforeach
+        @endif
       </div>
       <div class="row m-0">
         <nav aria-label="Page navigation example">
           {{$allOffers->links()}}
         </nav>
       </div>
+      
     </div>
+    
     
     <div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="events-tab">
         <div class="row m-0">
-            @if (empty($postcodeEvents))
+            @if (count($postcodeEvents) == 0)
                 <div class="col-12">
                     <h1 class="text-center">No Events</h1>
                 </div>
@@ -114,13 +122,13 @@
                 </div>
               </div>
             @endforeach
+            @endif
         </div>
         <div class="row m-0">
             <nav aria-label="Page navigation example">
               {{$postcodeEvents->links()}}
             </nav>
         </div>
-        @endif
     </div>
     
     {{-- <div class="tab-pane fade" id="section" role="tabpanel" aria-labelledby="section-tab">Section</div> --}}

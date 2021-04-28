@@ -68,7 +68,7 @@
                 </ul>
                 <div>
                     <div class="mb-2"><a href="{{route('user.settings')}}" class="pro-edit"><i class="fas fa-cog"></i> Settings</a></div>
-                    <div><a href="{{route('logout')}}" class="pro-edit"><i class="fas fa-sign-out-alt"></i> LOGOUT</a></div>
+                    {{-- <div><a href="{{route('logout')}}" class="pro-edit"><i class="fas fa-sign-out-alt"></i> LOGOUT</a></div> --}}
                 </div>
               </div>
             </div>
@@ -84,9 +84,10 @@
             <li class="active"><a href="{{route('user.newsfeed')}}"><i class="far fa-newspaper"></i>Nesfeed</a></li>
             <li><a href="{{route('user.message.portal')}}"><i class="far fa-comment-dots"></i> Messaging</a></li>
             <li><a href="{{route('user.rating')}}"><i class="far fa-star"></i>Reviews</a></li>
-            <li><a href="{{route('user.deal')}}"><i class="fas fa-percent"></i>Deals</a></li>
+            {{-- <li><a href="{{route('user.deal')}}"><i class="fas fa-percent"></i>Deals</a></li> --}}
             {{-- <li><a href=""><i class="fas fa-calendar-alt"></i>Market place</a></li> --}}
             <li><a href="{{route('user.calender')}}"><i class="fas fa-calendar-alt"></i>Event Calendar</a></li>
+            <li><a href="{{route('logout')}}" class="logout-bg"><i class="fas fa-sign-out-alt"></i>LOGOUT</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </nav>  
