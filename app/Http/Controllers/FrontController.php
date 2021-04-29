@@ -9,6 +9,7 @@ use App\Model\BusinessCategory;
 use App\Model\Event;
 use App\Model\Offer;
 use App\Model\Rating;
+use App\Model\Product;
 use App\Model\Country;
 use App\Model\State;
 use App\Model\Postcode;
@@ -79,8 +80,17 @@ class FrontController extends Controller
         $request = $request->all();
         return view('front.home.deal', compact('request'));
     }
-
+    public function marketplace(Request $request) {
+        $request = $request->all();
+        return view('front.home.marketplace', compact('request'));
+    }
+    public function getmarketplace (Request $request) {
+        $offset = $request->page * 1;
+        $datas = Product::with('category', 'subcategory')->orderBy('created_at', 'DESC')->limit(1)->offset($offset)->get();
+        return response()->json(['error'=>false,'message'=>'Product Data','data'=>$datas]);
+    }
     public function eventDealAjax(Request $request) {
+        // dd($request->all());
         $rules = [
             '_token' => 'required',
             'page'=> 'required|min:0|numeric',

@@ -1,19 +1,19 @@
 <?php
 
 Route::group(['middleware' => ['auth', 'business']], function () {
-    //--------------------------------------------------------------Product Section-----------------------------------------------//
+    // //--------------------------------------------------------------Product Section-----------------------------------------------//
 
 
-	Route::get('/product', 'ProductController@Products')->name('business-admin.product');
-	Route::post('/add_products', 'ProductController@addProducts')->name('business-admin.add_products');
+	// Route::get('/product', 'ProductController@Products')->name('business-admin.product');
+	// Route::post('/add_products', 'ProductController@addProducts')->name('business-admin.add_products');
 
-	//-------------------------------------------------------------Manage Product Section-----------------------------------------------//
+	// //-------------------------------------------------------------Manage Product Section-----------------------------------------------//
 
-	Route::get('/manage_products','ProductController@manageProducts')->name('business-admin.manage_products');
-	Route::get('/edit_product/{id}', 'ProductController@editProduct')->name('edit_product');
-	Route::post('/product','ProductController@addProduct')->name('business-admin.add_product');
-	Route::post('/update_products', 'ProductController@updateProduct')->name('business-admin.update_products');
-	Route::get('/delete_products_details/{id}', 'ProductController@deleteProductsDetails')->name('business-admin.delete_product');
+	// Route::get('/manage_products','ProductController@manageProducts')->name('business-admin.manage_products');
+	// Route::get('/edit_product/{id}', 'ProductController@editProduct')->name('edit_product');
+	// Route::post('/product','ProductController@addProduct')->name('business-admin.add_product');
+	// Route::post('/update_products', 'ProductController@updateProduct')->name('business-admin.update_products');
+	// Route::get('/delete_products_details/{id}', 'ProductController@deleteProductsDetails')->name('business-admin.delete_product');
 
     //--------------------------------------------------------------Services Section-----------------------------------------------//
 

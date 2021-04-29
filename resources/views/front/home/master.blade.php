@@ -43,7 +43,7 @@
 				</li>
 				<li><a href="{{route('directory')}}">Directory</a></li>
 				<li><a href="{{route('events')}}">Events </a></li>
-				<li><a href="#">Marketplace</a></li>
+				<li><a href="{{route('marketplace')}}">Marketplace</a></li>
 				<li><a href="{{route('deals')}}">Deals </a></li>
 				<li><a href="#">Local Leads</a></li>
 				<li><a href="#">Resources</a></li>

@@ -50,16 +50,29 @@
                   <div class="form-row">
                     <div class="col-md-4 mb-3">
                       <div class="form-group">
-                        <label for="validationCustom05">Business Category</label>
-                        <select id="businessId" name="businessId" class="form-control" required="">
+                        <label for="validationCustom05">Product Category</label>
+                        <select id="category_id" name="category_id" class="form-control" required>
                           <option value="">Select</option>
-                          @foreach($businessData as $businessName)
-                          <option value="{{$businessName->id}}" <?php echo $edited_data->businessId ==  $businessName->id ? "selected" : ""; ?>>{{$businessName->name}}</option>
+                          @foreach($productCategory as $item)
+                          <option value="{{$item->id}}" {{($item->id === $edited_data->category_id) ? 'selected' : ''}}>{{$item->name}}</option>
                           @endforeach
                         </select>
-                        @error('businessId')
-                      <span class="text-danger">{{ $message }}</span>
-                      @enderror
+                        @error('category_id')
+					                <span class="text-danger">{{ $message }}</span>
+					              @enderror
+                      </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <div class="form-group">
+                        <label for="validationCustom05">Product Sub Category</label>
+                        <select id="subcategory_id" name="subcategory_id" class="form-control" required>
+                          @foreach($productSubcategory as $item)
+                          <option value="{{$item->id}}" {{($item->id === $edited_data->subcategory_id) ? 'selected' : ''}}>{{$item->name}}</option>
+                          @endforeach
+                        </select>
+                        @error('subcategory_id')
+					                <span class="text-danger">{{ $message }}</span>
+					              @enderror
                       </div>
                     </div>
                     <div class="col-md-4 mb-3">
@@ -81,9 +94,6 @@
                       @enderror
                     </div>
 
-                  </div>
-
-                  <div class="form-row">
                     <div class="col-md-4 mb-3">
                     <label for="validationCustom05">Price</label>
                       <input class="form-control" id="price" name="price" value="{{$edited_data->price}}" type="text" placeholder="Enter Price" onkeypress="return inputPrice(event)" required="">
@@ -140,6 +150,28 @@
         </script>
       
       <script>
+        $("#category_id").on('change',function() {
+          var cat_id = $("#category_id").val();
+          $.ajax({
+            method: "POST",
+            url: "{{route('fetch-product-subcategory')}}",
+            data: {
+              _token: "{{csrf_token()}}",
+              cat_id: cat_id
+            },
+            success:function(data) {
+              $("#subcategory_id").empty();
+              var sub_cat = '';
+              $.each(data.data, function(index, val) {
+                sub_cat += "<option value="+val.id+">";
+                sub_cat += val.name;
+                sub_cat += "</option>";
+
+              });
+              $('#subcategory_id').append(sub_cat);
+            }
+          })
+        });
         function inputPrice(event) {
           if(event.charCode >= 48 && event.charCode <= 57) {
             return true;

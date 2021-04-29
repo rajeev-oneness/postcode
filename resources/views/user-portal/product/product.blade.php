@@ -5,11 +5,11 @@
 <head>
 
   <meta charset="utf-8" />
-  <title>Admin | Add Product</title>
+  <title>User | Add Product</title>
   <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
 
-  @extends('portal.layouts.master')
+  @extends('user-portal.layouts.master')
   @section('content')
 
  
@@ -44,7 +44,7 @@
                   </div>
               @endif
               <div class="card-body">
-                <form class="needs-validation" method="post" name="offr" action="{{route('admin.add_products')}}" enctype="multipart/form-data">
+                <form class="needs-validation" method="post" name="offr" action="{{route('user.marketplace.add_products')}}" enctype="multipart/form-data">
                   <input type="hidden" id="hid_id" name="hid_id">
                   {{csrf_field()}}
                   <div class="form-row">
@@ -122,8 +122,11 @@
       <!-- Container-fluid Ends-->
     </div>
 
+    @endsection
+
+    @section('script')
     <script>
-            function readURL(input) {
+      function readURL(input) {
         if (input.files && input.files[0]) {
           var reader = new FileReader();
 
@@ -134,50 +137,46 @@
           reader.readAsDataURL(input.files[0]);
         }
       }
-
       $("#image").change(function() {
         readURL(this);
       });
-      
-        </script>
-      
-      <script>
-        $("#category_id").change(function() {
-          var cat_id = $("#category_id").val();
-          $.ajax({
-            method: "POST",
-            url: "{{route('fetch-product-subcategory')}}",
-            data: {
-              _token: "{{csrf_token()}}",
-              cat_id: cat_id
-            },
-            success:function(data) {
-              $("#subcategory_id").empty();
-              var sub_cat = '';
-              $.each(data.data, function(index, val) {
-                sub_cat += "<option value="+val.id+">";
-                sub_cat += val.name;
-                sub_cat += "</option>";
+    </script>
 
-              });
-              $('#subcategory_id').append(sub_cat);
-            }
-          })
-        });
-        function inputPrice(event) {
-          if(event.charCode >= 48 && event.charCode <= 57) {
-            return true;
+    <script>
+      $("#category_id").change(function() {
+        var cat_id = $("#category_id").val();
+        $.ajax({
+          method: "POST",
+          url: "{{route('fetch-product-subcategory')}}",
+          data: {
+            _token: "{{csrf_token()}}",
+            cat_id: cat_id
+          },
+          success:function(data) {
+            $("#subcategory_id").empty();
+            var sub_cat = '';
+            $.each(data.data, function(index, val) {
+              sub_cat += "<option value="+val.id+">";
+              sub_cat += val.name;
+              sub_cat += "</option>";
+
+            });
+            $('#subcategory_id').append(sub_cat);
           }
-          return false;
+        })
+      });
+      function inputPrice(event) {
+        if(event.charCode >= 48 && event.charCode <= 57) {
+          return true;
         }
+        return false;
+      }
 
-          $("form").submit(function() {
-              $(this).submit(function() {
-                  return false;
-              });
-              return true;
-          });
-      </script>
-
-
+        $("form").submit(function() {
+            $(this).submit(function() {
+                return false;
+            });
+            return true;
+        });
+    </script>
     @endsection

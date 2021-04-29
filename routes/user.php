@@ -2,6 +2,20 @@
 
 
 Route::group(['middleware' => ['auth', 'user']], function () {
+    Route::post('/fetch-product-subcategory', 'ProductController@fetchSubcategory')->name('fetch-product-subcategory');
+    //--------------------------------------------------------------Product Section-----------------------------------------------//
+
+
+	Route::get('/product', 'ProductController@Products')->name('user.marketplace.product');
+	Route::post('/add_products', 'ProductController@addProducts')->name('user.marketplace.add_products');
+
+	//-------------------------------------------------------------Manage Product Section-----------------------------------------------//
+
+	Route::get('/manage_products','ProductController@manageProducts')->name('user.marketplace.manage_products');
+	Route::get('/user_edit_product/{id}', 'ProductController@editProduct')->name('user.marketplace.edit_product');
+	Route::post('/product','ProductController@addProduct')->name('user.marketplace.add_product');
+	Route::post('/update_products', 'ProductController@updateProduct')->name('user.marketplace.update_products');
+	Route::get('/delete_products_details/{id}', 'ProductController@deleteProductsDetails')->name('user.marketplace.delete_product');
 
     // event booking
     Route::get('/book-event/{id}', 'BookingController@index')->name('user.event.book');

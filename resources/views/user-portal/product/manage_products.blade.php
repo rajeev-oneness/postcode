@@ -5,9 +5,9 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Admin | Manage Products</title>
+    <title>User | Manage Products</title>
 
-    @extends('portal.layouts.master')
+    @extends('user-portal.layouts.master')
     @section('content')
         <!-- Right sidebar Ends-->
         <div class="page-body">
@@ -18,9 +18,6 @@
                     <div class="col-12">
                         <div class="page-title-box d-flex align-items-center justify-content-between">
                             <h4 class="mb-0 font-size-18">Manage Products</h4>
-                            <!-- <div class="page-title-right">
-                                <a href="/admin/add_subjects" <button type="button" id="submit_product" name="submit_product" class="btn btn-primary w-md">Add Subjects</button></a>
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -35,8 +32,9 @@
                 <div class="card">
                 {{csrf_field()}}
                   <div class="card-body">
+                    <div class="float-right mb-2"><a class="btn btn-primary" href="{{route('user.marketplace.product')}}"><i class="fas fa-plus"></i>Add Product</a></div>
                     <div class="table-responsive">
-                      <table class="app_table" id="subject_manage">
+                      <table class="table table-hover" id="subject_manage">
                         <thead>
                           <tr>
                             <th>Sl. </th>
@@ -63,8 +61,8 @@
                               <td>{{$product->price}}</td>
                               <td><img src='{{url($product->image)}}' style='width: 40%;'></td>
                               <td>
-                                <a class="edit_product" href="{{route('edit_products', ['id' => encrypt($product->id)])}}"><i class="fa fa-edit"></i></a>
-                                <a class="delete_app" onclick="return confirm('Are you sure?')" href="{{route('admin.delete_product', ['id' => encrypt($product->id)])}}"><i class="fa fa-trash"></i></a>
+                                <a class="edit_product" href="{{route('user.marketplace.edit_product', ['id' => encrypt($product->id)])}}"><i class="fa fa-edit"></i></a>
+                                <a class="delete_app" onclick="return confirm('Are you sure?')" href="{{route('user.marketplace.delete_product', ['id' => encrypt($product->id)])}}"><i class="fa fa-trash"></i></a>
                               </td>
                             </tr>
                           @endforeach
@@ -78,35 +76,5 @@
               
           <!-- Container-fluid Ends-->
         </div>
-        <script>
-               $(document).ready(function (){
-                $('.app_table').DataTable({
-      'order':[]
-    });
-//     $(".edit_product").click(function(){
-        
-// var app_id=this.id;
-//        var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
-// 			redirectPost('edit_product', fd);
-//     });
-    // function deleteProduct() {
-    //   alert('delete');
-    // }
-               });
-              //  var redirectPost = function (url, data = null, method = 'post') {
-              //       var form = document.createElement('form');
-              //       form.method = method;
-              //       form.action = url;
-              //       for (var name in data) {
-              //           var input = document.createElement('input');
-              //           input.type = 'hidden';
-              //           input.name = name;
-              //           input.value = data[name];
-              //           form.appendChild(input);
-              //       }
-              //       $('body').append(form);
-              //       form.submit();
-              //   }
-            </script>
 
         @endsection

@@ -30,19 +30,19 @@
         </ol>
     </div>
 </div>
-<div class="row mt-5">
+{{-- <div class="row mt-5">
     <div class="col-12">
         <h2 class="bebasnew">Products</h2>
         <hr>
         <ol>
         @foreach ($data[0]['products'] as $item)
             <?php
-                echo '<li>'.$item['name'] . ' - Rs.' . $item['price'] . '/-'.'</li>';
+                // echo '<li>'.$item['name'] . ' - Rs.' . $item['price'] . '/-'.'</li>';
             ?>
         @endforeach
     </ol>
     </div>
-</div>
+</div> --}}
 <div class="row mt-5">
     <div class="col-12">
         <h2 class="bebasnew">Deals</h2>

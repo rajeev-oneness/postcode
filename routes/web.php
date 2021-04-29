@@ -111,6 +111,9 @@ Route::post('/get-business-by-State', 'FrontController@getBusinessByState')->nam
 //menu bar(events)
 Route::get('/events', 'FrontController@event')->name('events');
 Route::get('/deals', 'FrontController@deal')->name('deals');
+Route::get('/marketplace', 'FrontController@marketplace')->name('marketplace');
+Route::post('/getmarketplace', 'FrontController@getmarketplace')->name('getmarketplace');
+
 Route::post('/get-events-deals', 'FrontController@eventDealAjax')->name('event.deal.ajax');
 
 //details

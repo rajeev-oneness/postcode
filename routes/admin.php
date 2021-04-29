@@ -26,8 +26,28 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	Route::post('/update_businessprofiles', 'BusinessController@updateBusinessProfiles')->name('admin.update_businessprofiles');
 
+
+//------------------------------Product Category Section------------------------------//
+Route::get('/product-category', 'ProductCategoryController@manageCategory')->name('product.category');
+Route::get('/product-category-add', 'ProductCategoryController@createCategory')->name('product.category.add');
+Route::post('/product-category-store', 'ProductCategoryController@storeCategory')->name('product.category.store');
+Route::get('/product-category-edit/{id}', 'ProductCategoryController@editCategory')->name('product.category.edit');
+Route::post('/product-category-update', 'ProductCategoryController@updateCategory')->name('product.category.update');
+Route::get('/product-category-delete/{id}', 'ProductCategoryController@deleteCategory')->name('product.category.delete');
+
+
+//----------------------------Product Sub-Category Section-----------------------------//
+Route::get('/product-subcategory', 'ProductSubcategoryController@manageSubcategory')->name('product.subcategory');
+Route::get('/product-subcategory-add', 'ProductSubcategoryController@createSubcategory')->name('product.subcategory.add');
+Route::post('/product-subcategory-store', 'ProductSubcategoryController@storeSubcategory')->name('product.subcategory.store');
+Route::get('/product-subcategory-edit/{id}', 'ProductSubcategoryController@editSubcategory')->name('product.subcategory.edit');
+Route::post('/product-subcategory-update', 'ProductSubcategoryController@updateSubcategory')->name('product.subcategory.update');
+Route::get('/product-subcategory-delete/{id}', 'ProductSubcategoryController@deleteSubcategory')->name('product.subcategory.delete');
+
+
 //--------------------------------------------------------------Product Section-----------------------------------------------//
 
+	Route::post('/fetch-product-subcategory', 'ProductController@fetchSubcategory')->name('fetch-product-subcategory');
 
 	Route::get('/product', 'ProductController@Products')->name('admin.product');
 
@@ -37,7 +57,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 	Route::get('/manage_products','ProductController@manageProducts')->name('admin.manage_products');
 
-	Route::get('/edit_product/{id}', 'ProductController@editProduct')->name('edit_product');
+	Route::get('/edit_products/{id}', 'ProductController@editProduct')->name('edit_products');
 
 	  Route::post('/product','ProductController@addProduct')->name('admin.add_product');
 

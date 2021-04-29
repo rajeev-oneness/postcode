@@ -10,6 +10,8 @@ use App\Model\Service;
 Use App\Model\EventCategory;
 use Validator,Redirect,Response;
 use Illuminate\Support\Facades\Auth;
+use App\Model\ProductCategory;
+use App\Model\ProductSubcategory;
 
 class ProductController extends Controller
 {
@@ -20,17 +22,14 @@ class ProductController extends Controller
      * @return view
      */
     public function manageProducts(Request $request){
-        if(auth()->user()->userType == 3) {
-            $categories = Product::where('created_by', auth()->user()->id)->with(['businesscategory' => function ($query) {
-                $query->orderBy('created_at', 'desc');
-            }])->get();
-            return view('business-portal.product.manage_products',compact('categories'));
+        if(auth()->user()->userType == 2) {
+            $products = Product::where('created_by', auth()->user()->id)->with('category','subcategory')->orderBy('created_at', 'desc')->get();
+            // dd($products);
+            return view('user-portal.product.manage_products',compact('products'));
         }
-        $categories = Product::with(['businesscategory' => function ($query) {
-            $query->orderBy('created_at', 'desc');
-        }])->get();
-        // echo json_encode($categories1);die;
-        return view('portal.product.manage_products',compact('categories'));
+        $products = Product::with('category','subcategory')->orderBy('created_at', 'desc')->get();
+        // dd($products);
+        return view('portal.product.manage_products',compact('products'));
         
     }
 
@@ -41,10 +40,20 @@ class ProductController extends Controller
     */
     public function Products(){
         $businessData= BusinessCategory::all();
-        if(auth()->user()->userType == 3) {
-            return view('business-portal.product.product',compact('businessData'));
+        $productCategory = ProductCategory::all();
+        if(auth()->user()->userType == 2) {
+            return view('user-portal.product.product',compact('businessData', 'productCategory'));
         }
-        return view('portal.product.product',compact('businessData'));
+        return view('portal.product.product',compact('businessData', 'productCategory'));
+    }
+
+    public function fetchSubcategory(Request $req) {
+        $req->validate([
+            '_token' => 'required',
+            'cat_id' => 'required',
+        ]);
+        $productSubcategory = ProductSubcategory::where('category_id', $req->cat_id)->get();
+        return response()->json(['message' => 'success', 'data' => $productSubcategory]);
     }
 
      /**
@@ -58,12 +67,14 @@ class ProductController extends Controller
         ]);
    		$validator->validate();
         try {
+            // dd($request->all());
             $fileName = time().'.'.$request->image->extension(); 
             $request->image->move(public_path('uploads/'), $fileName);
             $productimg ='uploads/'.$fileName;
 
             $Product = new Product();
-            $Product->businessId = $request->businessId;         
+            $Product->category_id = $request->category_id;
+            $Product->subcategory_id = $request->subcategory_id;       
             $Product->name = $request->name;
             $Product->image = $productimg;
             $Product->details = $request->details;
@@ -71,8 +82,8 @@ class ProductController extends Controller
             $Product->created_by = auth()->user()->id;
 
             $Product->save();
-            if(auth()->user()->userType == 3) {
-                return redirect()->route('business-admin.manage_products');
+            if(auth()->user()->userType == 2) {
+                return redirect()->route('user.marketplace.manage_products');
             }
             return redirect()->route('admin.manage_products');
         } catch (\Exception $e) {
@@ -87,15 +98,14 @@ class ProductController extends Controller
      * @param  Request $request
      * @return view
      */
-    public function editProduct($id) {      
-     
-        $businessData= BusinessCategory::all();
+    public function editProduct($id) {
         $edited_data = Product::findOrFail(decrypt($id));
-        // echo json_encode($edited_data);die;
-        if(auth()->user()->userType == 3) {
-            return view('business-portal.product.edit_product',compact('businessData', 'edited_data'));
+        $productCategory = ProductCategory::all();
+        $productSubcategory = ProductSubcategory::where('category_id',$edited_data->category_id)->get();
+        if(auth()->user()->userType == 2) {
+            return view('user-portal.product.edit_product',compact('productCategory', 'edited_data','productSubcategory'));
         }
-        return view('portal.product.edit_product',compact('businessData', 'edited_data')); 
+        return view('portal.product.edit_product',compact('productCategory', 'edited_data','productSubcategory')); 
     }
 
     /**
@@ -120,13 +130,15 @@ class ProductController extends Controller
                 ]);
             };
             $update_prouduct_data = Product::where('id', $hid_id)->update([
-                'name' => $request->name, 
-                'businessId' => $request->businessId, 
+                'name' => $request->name,
+                'category_id' => $request->category_id,
+                'subcategory_id' => $request->subcategory_id, 
                 'details' => $request->details,
-                'price' => $request->price
+                'price' => $request->price,
+                'updated_by' => auth()->user()->id
             ]);
-            if(auth()->user()->userType == 3) {
-                return redirect()->route('business-admin.manage_products');
+            if(auth()->user()->userType == 2) {
+                return redirect()->route('user.marketplace.manage_products');
             }   
             return redirect()->route('admin.manage_products');
         } catch (\Exception $e) {
@@ -144,8 +156,8 @@ class ProductController extends Controller
     public function deleteProductsDetails($id) {
         $lead_delete_id = decrypt($id);
         $delete_product = Product::where('id', $lead_delete_id)->delete();
-        if(auth()->user()->userType == 3) {
-            return redirect()->route('business-admin.manage_products');
+        if(auth()->user()->userType == 2) {
+            return redirect()->route('user.marketplace.manage_products');
         }
         return redirect()->route('admin.manage_products');
     }

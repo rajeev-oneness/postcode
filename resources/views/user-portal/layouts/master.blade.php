@@ -84,6 +84,8 @@
             <li class="active"><a href="{{route('user.newsfeed')}}"><i class="far fa-newspaper"></i>Nesfeed</a></li>
             <li><a href="{{route('user.message.portal')}}"><i class="far fa-comment-dots"></i> Messaging</a></li>
             <li><a href="{{route('user.rating')}}"><i class="far fa-star"></i>Reviews</a></li>
+            <li><a href="{{route('user.marketplace.manage_products')}}"><i class="fas fa-shopping-bag"></i> Marletplace</a></li>
+
             {{-- <li><a href="{{route('user.deal')}}"><i class="fas fa-percent"></i>Deals</a></li> --}}
             {{-- <li><a href=""><i class="fas fa-calendar-alt"></i>Market place</a></li> --}}
             <li><a href="{{route('user.calender')}}"><i class="fas fa-calendar-alt"></i>Event Calendar</a></li>
