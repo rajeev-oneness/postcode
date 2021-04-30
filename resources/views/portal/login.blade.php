@@ -34,8 +34,8 @@
                     <div id="user-type">
                         <div class="form-group">
                           <select class="form-control" id="user-type-selected">
-                            <option value="">-Select user type-</option>
-                            <option value="User">User</option>
+                            {{-- <option value="">-Select user type-</option> --}}
+                            <option value="User" selected>User</option>
                             <option value="Business">Business</option>
                             <option value="Admin">Admin</option>
                           </select>
@@ -45,9 +45,9 @@
                         <div id="social-login" style="display: none;">
                           <div class="row mb-4 px-3">
                               <h6 class="mb-0 mr-4 mt-2 text-dark">Sign in with</h6>
-                              <div class="facebook text-center mr-3">
+                              {{-- <div class="facebook text-center mr-3">
                                   <a href="{{route('socialite.login', 'facebook')}}"><div class="fab fa-facebook-f"></div></a>
-                              </div>
+                              </div> --}}
                               <div class="twitter text-center mr-3">
                                 <a href="{{route('socialite.login', 'google')}}"><div class="fab fa-google"></div></a>
                               </div>
@@ -106,7 +106,11 @@
 
 <script>
     $(document).ready( function() {
-        $('#login-form').hide();
+        // $('#login-form').hide();
+        $('#login-form').show();
+        $("#register").css('display', 'block');
+              $("#social-login").css('display', 'block');
+            
         $('#user-type-selected').change(function() {
           var user = $('#user-type-selected').val();
           if(user) {
