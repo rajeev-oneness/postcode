@@ -147,3 +147,5 @@ Route::get('payment/successfull/thankyou/{stripeTransactionId}','StripePaymentCo
 // SOCIALITE SIGN-IN
 Route::get('/sign-in/{socialite}','AdminController@socialiteLogin')->name('socialite.login');
 Route::get('/sign-in/{socialite}/redirect','AdminController@socialiteLoginRedirect')->name('socialite.login.redirect');
+
+Route::post('/fetch-product-subcategory', 'ProductController@fetchSubcategory')->name('fetch-product-subcategory');

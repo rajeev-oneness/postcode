@@ -47,7 +47,6 @@ Route::get('/product-subcategory-delete/{id}', 'ProductSubcategoryController@del
 
 //--------------------------------------------------------------Product Section-----------------------------------------------//
 
-	Route::post('/fetch-product-subcategory', 'ProductController@fetchSubcategory')->name('fetch-product-subcategory');
 
 	Route::get('/product', 'ProductController@Products')->name('admin.product');
 

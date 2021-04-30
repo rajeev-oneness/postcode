@@ -1,8 +1,7 @@
 <?php 
 
-
 Route::group(['middleware' => ['auth', 'user']], function () {
-    Route::post('/fetch-product-subcategory', 'ProductController@fetchSubcategory')->name('fetch-product-subcategory');
+    
     //--------------------------------------------------------------Product Section-----------------------------------------------//
 
 
