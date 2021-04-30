@@ -17,7 +17,7 @@ class CreateBusinessesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('business_categoryId');       
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('password');
             $table->string('abn');
             $table->string('company_website');
