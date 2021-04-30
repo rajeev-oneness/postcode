@@ -1,0 +1,1 @@
+[07-Apr-2021 17:44:35 Asia/kolkata] PHP Fatal error:  Cannot declare class UpdateBusinessesTable, because the name is already in use in /home/demo9dtx/public_html/dev/postcode/database/migrations/2021_04_05_141316_update_businesses_table.php on line 30
