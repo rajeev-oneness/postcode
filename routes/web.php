@@ -134,7 +134,16 @@ Route::get('/about-us', 'AboutUsController@index')->name('about-us');
 //faq
 Route::get('/faq', 'FaqController@index')->name('faq');
 
+//product purchaase
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/buy-now/product/{productId}', 'FrontController@buyNow')->name('book_now.product');
+    Route::get('item/product/payment/{productId}','FrontController@successfullPayment')->name('item.product.paymet');
+});
+// Stripe Payment Route
+Route::post('stripe/payment/form_submit','StripePaymentController@stripePostForm_Submit')->name('stripe.payment.form_submit');
+Route::get('payment/successfull/thankyou/{stripeTransactionId}','StripePaymentController@thankyouStripePayment')->name('payment.successfull.thankyou');
 
 
-
-
+// SOCIALITE SIGN-IN
+Route::get('/sign-in/{socialite}','AdminController@socialiteLogin')->name('socialite.login');
+Route::get('/sign-in/{socialite}/redirect','AdminController@socialiteLoginRedirect')->name('socialite.login.redirect');

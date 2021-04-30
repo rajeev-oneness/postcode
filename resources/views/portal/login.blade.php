@@ -29,6 +29,7 @@
             
               {{-- <div id="login-form"> --}}
                 <div class="card2 card border-0 px-2 px-md-4 py-3 py-md-5">
+                        
                     <span class="text-dark p-1 text-center">Select a user type first</span>
                     <div id="user-type">
                         <div class="form-group">
@@ -41,25 +42,24 @@
                         </div>
                     </div>
                     <div id="login-form">
-                        <div class="row mb-4 px-3">
-                            <h6 class="mb-0 mr-4 mt-2 text-dark">Sign in with</h6>
-                            <div class="facebook text-center mr-3">
-                                <div class="fab fa-facebook-f"></div>
-                            </div>
-                            <div class="twitter text-center mr-3">
-                                <div class="fab fa-twitter"></div>
-                            </div>
-                            <div class="linkedin text-center mr-3">
-                                <div class="fab fa-linkedin-in"></div>
-                            </div>
-                        </div>
-                        <div class="row px-3 mb-4">
-                            <div class="line"></div> <small class="or text-center text-muted">Or</small>
-                            <div class="line"></div>
+                        <div id="social-login" style="display: none;">
+                          <div class="row mb-4 px-3">
+                              <h6 class="mb-0 mr-4 mt-2 text-dark">Sign in with</h6>
+                              <div class="facebook text-center mr-3">
+                                  <a href="{{route('socialite.login', 'facebook')}}"><div class="fab fa-facebook-f"></div></a>
+                              </div>
+                              <div class="twitter text-center mr-3">
+                                <a href="{{route('socialite.login', 'google')}}"><div class="fab fa-google"></div></a>
+                              </div>
+                          </div>
+                          <div class="row px-3 mb-4">
+                              <div class="line"></div> <small class="or text-center text-muted">Or</small>
+                              <div class="line"></div>
+                          </div>
                         </div>
                         
                         <div id="failur" class="alert alert-danger" style="display: none;"></div>
-      
+                        
                         <form>
                           {{csrf_field()}}
                           <div class="row px-3"> 
@@ -114,8 +114,10 @@
             $('#login-form').show();
             if(user == 'User') {
               $("#register").css('display', 'block');
+              $("#social-login").css('display', 'block');
             } else {
               $("#register").css('display', 'none');
+              $("#social-login").css('display', 'none');
             }
           }
           else {

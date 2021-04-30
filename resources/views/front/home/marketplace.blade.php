@@ -38,14 +38,14 @@
 					  </li> --}}
 					</ul>
 				</div>
-				<div class="search_form_wrap">
-					<form action="{{route('deals')}}">
+				{{-- <div class="search_form_wrap">
+					<form action="{{route('marketplace')}}">
 						@csrf
-						<input type="hidden" name="menu" value="deals">
-						<input type="text" name="search" placeholder="Seatch  by postcode">
+						<input type="hidden" name="menu" value="marketplace">
+						<input type="text" name="search" placeholder="Search by product name">
 						<button><img src="{{asset('homepage_assets/images/magnify.png')}}"></button>
 					</form>
-				</div>
+				</div> --}}
 			</div>
 		</div>
 	</div>
@@ -133,15 +133,15 @@
 						console.log(data.data.length);
 						$.each(data.data, function(index, value){
 							
-							// dealHref = "{{route('details',['name' => 'deal', 'id' => 'dealId'])}}";
-							// dealHref = dealHref.replace('dealId', value.id);
+							productHref = "{{route('details',['name' => 'marketplace', 'id' => 'productId'])}}";
+							productHref = productHref.replace('productId', value.id);
 
 							// businessHref = "{{route('details',['name' => 'business', 'id' => 'businessId'])}}";
 							// businessHref = businessHref.replace('businessId', value.business.id);
 							
 							// grid view
 							grid_view += "<li>";
-							grid_view += '<a href =""><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
+							grid_view += '<a href ="'+productHref+'"><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
 							grid_view += '<h5>$'+value.price+'</h5>';
 							// grid_view += '<p class="phone_call"><strong>Deal organiser: <a href=""></a></strong></p>';
 							grid_view += '<p class="location"><strong>Category: </strong>'+value.category.name+'</p>';
@@ -154,7 +154,7 @@
 							list_view += '<div class="location_img_wrap"><img src="{{url('')}}/'+value.image+'"></div>';
 							list_view += '<div class="list_content_wrap">';
 							list_view += '<ul class="rating_coments"><h5>$ '+value.price+'</h5></ul>';
-							list_view += '<a href =""><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
+							list_view += '<a href ="'+productHref+'"><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
 							list_view += '<p class="location"><strong>Category: '+value.category.name+'</strong></p>';
 							list_view += '<p class="location"><strong>Sub-Category: '+value.subcategory.name+'</strong></p>';
 							list_view += '<p class="history_details">'+value.details+'</p>';

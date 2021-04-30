@@ -16,13 +16,14 @@ use App\Model\UserType;
 
 use Illuminate\Http\Request;
 
+use Socialite;
 
 class AdminController extends Controller
 {
 
     public function Login(Request $request) {  
        if(!Auth::user()) {
-        return view('portal.login');
+            return view('portal.login');
        }
        else {
         switch (Auth::user()->userType) {
@@ -36,6 +37,25 @@ class AdminController extends Controller
                 return view('home');break;
         }  
        }         
+    }
+
+    public function socialiteLogin(Request $req,$socialite)
+    {
+        // dd($socialite);
+        return Socialite::driver($socialite)->redirect();
+    }
+
+    public function socialiteLoginRedirect(Request $req,$socialite)
+    {
+        $socialiteUser = Socialite::driver($socialite)->user();
+        // dd($socialiteUser);
+        $user = User::where('email',  $socialiteUser->email)->first();
+        if($user) {
+            auth()->login($user);
+            return redirect()->route('user.dashboard');
+        } else {
+            return view('auth.register', compact('socialiteUser'));
+        }
     }
 
      /**

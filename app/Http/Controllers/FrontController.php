@@ -13,6 +13,7 @@ use App\Model\Product;
 use App\Model\Country;
 use App\Model\State;
 use App\Model\Postcode;
+use App\Model\UserPurchase;
 use Auth;
 use Validator;
 use Illuminate\Support\Facades\DB;
@@ -85,8 +86,12 @@ class FrontController extends Controller
         return view('front.home.marketplace', compact('request'));
     }
     public function getmarketplace (Request $request) {
-        $offset = $request->page * 1;
-        $datas = Product::with('category', 'subcategory')->orderBy('created_at', 'DESC')->limit(1)->offset($offset)->get();
+        if($request->search == '') {
+            $offset = $request->page * 1;
+            $datas = Product::with('category', 'subcategory')->orderBy('created_at', 'DESC')->limit(1)->offset($offset)->get();
+        } else {
+            $datas = Product::where('name','like','%'.$request->search.'%')->with('category', 'subcategory')->orderBy('created_at', 'DESC')->limit(1)->offset($offset)->get();
+        }
         return response()->json(['error'=>false,'message'=>'Product Data','data'=>$datas]);
     }
     public function eventDealAjax(Request $request) {
@@ -139,7 +144,33 @@ class FrontController extends Controller
             $data = Offer::where('id', $request->id)->with('business')->get();
             return view('front.home.deal-details', compact('data'));
         
-        }  
+        } else if($request->name == 'marketplace') {
+
+            $data = Product::where('id', $request->id)->get();
+            return view('front.home.product-details', compact('data'));
+        
+        } 
+    }
+
+    public function buyNow(Request $request,$product_id)
+    {
+        $product = Product::findorFail(decrypt($product_id));
+        $data = [
+            'redirectUrl' => route('item.product.paymet',$product->id),
+            'price' => $product->price,
+        ];
+        return view('stripe.index',compact('data'));
+    }
+
+    public function successfullPayment(Request $request,$product_id){
+        
+        $userPurchase = new UserPurchase;
+        $userPurchase->user_id = auth()->user()->id;
+        $userPurchase->product_id = $product_id;
+        $userPurchase->stripeTransactionId = $request->stripeTransactionId;
+        $userPurchase->save();
+
+        return redirect(route('payment.successfull.thankyou',$request->stripeTransactionId));
     }
 
 }

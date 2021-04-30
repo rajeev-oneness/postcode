@@ -39,6 +39,10 @@ Route::group(['middleware' => ['auth', 'user']], function () {
     Route::post('/get-businesses', 'UserportalController@getBusiness')->name('get.businesses');    
     Route::post('/send-message', 'UserportalController@sendMessage')->name('user.send.message');    
     Route::get('/message-portal', 'UserportalController@messagePortal')->name('user.message.portal');
+
+    // Buy Product
+    // Route::get('/Buy-now/{id}', 'ProductController@index')->name('user.product.buy-now');
+    // Route::post('/complete-booking', 'BookingController@bookingComplete')->name('complete.booking');
     
 });
 
