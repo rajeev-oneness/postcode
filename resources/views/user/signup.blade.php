@@ -5,6 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{{asset('homepage_assets/images/logo.png')}}" sizes="16x16">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{asset('user_assets/css/bootstrap.min.css')}}">
@@ -166,8 +167,16 @@
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/clock.png')}}">
                                 {{-- <label>opening hours</label> --}}
-                                <input type="time" name="open_hour" value="{{ old('open_hour') }}" id="open_hour" class="textbox" required placeholder="OPENING HOUR" onkeypress="return false;">
+                                <input type="text" name="open_hour" value="{{ old('open_hour') }}" id="open_hour" class="textbox" required placeholder="OPENING HOUR" onfocus="(this.type='time')">
                                 @error('open_hour')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="sign_in_form">
+                                <img src="{{asset('user_assets/image/clock.png')}}">
+                                {{-- <label>opening hours</label> --}}
+                                <input type="text" name="closing_hour" value="{{ old('closing_hour') }}" id="closing_hour" class="textbox" required placeholder="CLOSING HOUR" onfocus="(this.type='time')">
+                                @error('closing_hour')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -305,7 +314,7 @@
             if ($(this).val() == '') {
                 $(this).parent().removeClass('label_up');
             } else {
-                $(this).parent().addClass('label_up');
+                $(this).parent().removeClass('label_up');
             }
         });
 

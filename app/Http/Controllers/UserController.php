@@ -137,7 +137,7 @@ class UserController extends Controller
     {
         $request->validate([
             'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'email' => 'regex:/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/'
+            'email' => 'regex:/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$/'
         ]);
     
     DB::beginTransaction();
@@ -178,6 +178,7 @@ class UserController extends Controller
         $business->address = $request->address;
         $business->mobile = $request->mobile;
         $business->open_hour = $request->open_hour;
+        $business->closing_hour = $request->closing_hour;
         if($request->longitude != '' && $request->latitude != ''){
             $business->longitude = $request->longitude;
             $business->latitude = $request->latitude; 
@@ -185,20 +186,10 @@ class UserController extends Controller
         $business->business_categoryId = $request->business_categoryId;
         $business->pin_code = $request->pincode;
 
-
         $business->state_id = $stateId[0]->stateId;
         $business->country_id = 1;
         $business->save();
 
-        
-        
-        // dd(hash()->make($password));
-        // $deal= $business->id;
-
-        //$businessname = $business->name;
-        //$businessemail = $business->email;
-
-        // echo json_encode($businessemail);die;
         \Mail::send('emails/mail', array('name' => $name, 'email' => $email, 'password' => $password), function ($message) use ($name, $email, $password) {
             $message->to($email, $name)->subject('Welcome To PostCode');
             $message->from('sagaranimesh3317@gmail.com', 'Post Code');
