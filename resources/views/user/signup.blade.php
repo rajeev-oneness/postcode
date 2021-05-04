@@ -17,7 +17,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPuZ9AcP4PHUBgbUsT6PdCRUUkyczJ66I&libraries=places"></script>
-
+    <link href="{{asset('user_assets/css/mdtimepicker.css')}}" rel="stylesheet" type="text/css">
     <title>Our Postcode</title>
     <style>
         .autocomplete-items {
@@ -103,7 +103,7 @@
                                 @enderror
                             </div>
                             <div class="sign_in_form">
-                                <img src="{{asset('user_assets/image/email-icon.png')}}">
+                                <img src="{{asset('user_assets/image/pin.png')}}">
                                 {{-- <label>ADDRESS</label> --}}
                                 <input type="text" name="address" value="{{ old('address') }}" id="address" class="textbox" maxlength="255" placeholder="ADDRESS" required>
                                 @error('address')
@@ -114,7 +114,7 @@
                             
 
                             <div class="sign_in_form">
-                                <img src="{{asset('user_assets/image/email-icon.png')}}">
+                                <img src="{{asset('user_assets/image/postcode.png')}}">
                                 {{-- <label>pincode</label> --}}
                                 <input type="text" name="pincode" value="{{ old('pincode') }}" id="pincode" class="textbox" maxlength="4" placeholder="PINCODE" onkeypress="return isNumberKey(event);" required>
                                 @error('pincode')
@@ -167,7 +167,7 @@
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/clock.png')}}">
                                 {{-- <label>opening hours</label> --}}
-                                <input type="text" name="open_hour" value="{{ old('open_hour') }}" id="open_hour" class="textbox" required placeholder="OPENING HOUR" onfocus="(this.type='time')">
+                                <input type="text" name="open_hour" value="{{ old('open_hour') }}" id="open_hour" class="textbox" required placeholder="OPENING HOUR">
                                 @error('open_hour')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -175,7 +175,7 @@
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/clock.png')}}">
                                 {{-- <label>opening hours</label> --}}
-                                <input type="text" name="closing_hour" value="{{ old('closing_hour') }}" id="closing_hour" class="textbox" required placeholder="CLOSING HOUR" onfocus="(this.type='time')">
+                                <input type="text" name="closing_hour" value="{{ old('closing_hour') }}" id="closing_hour" class="textbox" required placeholder="CLOSING HOUR">
                                 @error('closing_hour')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -249,7 +249,13 @@
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="{{asset('user_assets/js/slick.min.js')}}"></script>
-
+    <script src="{{asset('user_assets/js/mdtimepicker.js')}}"></script>
+    <script>
+    $(document).ready(function(){
+        $('#open_hour').mdtimepicker(); //Initializes the time picker
+        $('#closing_hour').mdtimepicker(); //Initializes the time picker
+    });
+    </script>
     <script>
         // AutoComplete Start
 
