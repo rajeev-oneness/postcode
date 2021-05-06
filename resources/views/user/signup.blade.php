@@ -165,7 +165,7 @@
                                 <button class="img_upload">BROWSE</button>
                             </div>
                             <div class="sign_in_form">
-                                <img src="{{asset('user_assets/image/clock.png')}}">
+                                <img src="{{asset('user_assets/image/open.png')}}">
                                 {{-- <label>opening hours</label> --}}
                                 <input type="text" name="open_hour" value="{{ old('open_hour') }}" id="open_hour" class="textbox" required placeholder="OPENING HOUR">
                                 @error('open_hour')
@@ -173,7 +173,7 @@
                                 @enderror
                             </div>
                             <div class="sign_in_form">
-                                <img src="{{asset('user_assets/image/clock.png')}}">
+                                <img src="{{asset('user_assets/image/closed.png')}}">
                                 {{-- <label>opening hours</label> --}}
                                 <input type="text" name="closing_hour" value="{{ old('closing_hour') }}" id="closing_hour" class="textbox" required placeholder="CLOSING HOUR">
                                 @error('closing_hour')
