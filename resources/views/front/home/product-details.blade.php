@@ -1,23 +1,35 @@
 @extends('front.home.details-master')
 
+@section('brd_name')
+<li><a href="{{route('marketplace')}}">Marketplace</a></li>
+<li><img src="{{asset('homepage_assets/images/down-arrow.png')}}"></li>
+<li>Product details</a></li>
+@endsection
+
 @section('details-content')
+<h2 class="bebasnew">Product Details</h2>
+
 <div class="row">
-    <div class="col-6">
-        <h2 class="bebasnew">Product Details</h2>
-        <hr>
-        <h4>{{$data[0]->name}}</h4>
-        <p>Price: $ {{$data[0]->price}}</p>
-        <p>Details: {{$data[0]->details}}</p>
-        <p>Category: {{$data[0]->category->name}}/-</p>
-        <p>Sub-Caregory: {{$data[0]->subcategory->name}}</p>
-
-    </div>
-    <div class="col-6">
-        <img src="{{asset($data[0]->image)}}" alt="" width="500">
-    </div>
-</div>
-
-<div class="row mt-5">
-    <a href="{{route('book_now.product',['id' => encrypt($data[0]->id)])}}" class="orange-btm load_btn">Buy Now</a>
+    <ul class="search_list_items search_list_items-mod">
+        <li>
+            <div class="location_img_wrap">
+                <img src="{{asset($data[0]->image)}}">
+            </div>
+            <div class="list_content_wrap">
+                <ul class="rating_coments">
+                    <li>
+                        <h5>{{$data[0]->category->name}}</h5>
+                    </li>
+                    <li>
+                        <h5>{{$data[0]->subcategory->name}}</h5>
+                    </li>
+                </ul>
+                <h4 class="place_title bebasnew">{{$data[0]->name}}</h4>
+                <h4 class="place_title bebasnew">${{$data[0]->price}}</h4>
+                <p class="history_details">{{$data[0]->details}}</p>
+                <a href="{{route('book_now.product',['id' => encrypt($data[0]->id)])}}" class="orange-btm load_btn text-center">Buy Now</a>
+            </div>
+        </li>
+    </ul>
 </div>
 @endsection

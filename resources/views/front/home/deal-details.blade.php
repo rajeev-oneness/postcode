@@ -1,24 +1,38 @@
 @extends('front.home.details-master')
 
+@section('brd_name')
+<li><a href="{{route('deals')}}">Deals</a></li>
+<li><img src="{{asset('homepage_assets/images/down-arrow.png')}}"></li>
+<li>Deal Detail</a></li>
+@endsection
+
 @section('details-content')
 <div class="row">
-    <div class="col-6">
-        <h2 class="bebasnew">Event Details</h2>
-        <hr>
-        <h4>{{$data[0]->title}}</h4><span class="bg-warning p-2">{{$data[0]->promo_code}}</span>
-        <p>Description: {{$data[0]->description}}</p>
-        <p>Reedeem Before: {{Date('d M,y', strtotime($data[0]->expire_date))}}</p>
-        <p>Price: Rs.{{$data[0]->price}}/-</p>
-    </div>
-    <div class="col-6">
-        <img src="{{asset($data[0]->image)}}" alt="" width="500">
-    </div>
-</div>
-<div class="row mt-5">
-    <div class="col-12">
-        <h2 class="bebasnew">Deal By</h2>
-        <hr>
-        <a href="{{route('details',['name' => 'business', 'id' =>$data[0]->business->id ])}}"><h4>{{$data[0]->business->name}}</h4></a>
-    </div>
+    <h2 class="bebasnew">Deal Details</h2>
+    <ul class="search_list_items search_list_items-mod">
+        <li>
+            <div class="location_img_wrap">
+                <img src="{{asset($data->image)}}">
+            </div>
+            <div class="list_content_wrap">
+                <ul class="rating_coments">
+                    <li>
+                        <h5>&dollar;{{$data->price}}</h5>
+                    </li>
+                    <li>
+                        <h5>{{$data->promo_code}}</h5>
+                    </li>
+                </ul>
+                <h4 class="place_title bebasnew">{{$data->title}}</h4>
+                <p><a href="{{route('details',['name' => 'business', 'id' =>$data->business->id ])}}">{{$data->business->name}}</a></p>
+                
+                <div class="location_details">
+                    <p class="location"><img src="{{asset('homepage_assets/images/place.png')}}">{{$data->address}}</p>
+                    <p class="phone_call"><strong>Reedem Before: </strong> {{Date('d M,y', strtotime($data->expire_date))}}</p>
+                </div>
+                <p class="history_details">{{$data->description}}</p>
+            </div>
+        </li>
+    </ul>
 </div>
 @endsection

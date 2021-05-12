@@ -14,6 +14,7 @@ use App\Model\Country;
 use App\Model\State;
 use App\Model\Postcode;
 use App\Model\UserPurchase;
+use App\Model\Community;
 use Auth;
 use Validator;
 use Illuminate\Support\Facades\DB;
@@ -23,10 +24,12 @@ class FrontController extends Controller
 
     public function homepage() {
         $businesses = Business::all();
+        $threebusinesses = Business::limit(3)->get();
         $postcodes = Postcode::all();
         $offers = offer::limit(5)->get();
         $categories = BusinessCategory::all();
-        return view('front.home.index', compact('businesses','postcodes','categories','offers'));
+        $communities = Community::all();
+        return view('front.home.index', compact('threebusinesses','businesses','postcodes','categories','offers','communities'));
     }
     
     public function directory(Request $request) {
@@ -137,18 +140,23 @@ class FrontController extends Controller
         
         } else if($request->name == 'event') {
 
-            $data = Event::where('id', $request->id)->with('business','agegroup')->get();
+            $data = Event::where('id', $request->id)->with('business','agegroup')->first();
             return view('front.home.event-details', compact('data'));
         
         } else if($request->name == 'deal') {
 
-            $data = Offer::where('id', $request->id)->with('business')->get();
+            $data = Offer::where('id', $request->id)->with('business')->first();
             return view('front.home.deal-details', compact('data'));
         
         } else if($request->name == 'marketplace') {
 
             $data = Product::where('id', $request->id)->get();
             return view('front.home.product-details', compact('data'));
+        
+        }  else if($request->name == 'community') {
+
+            $data = Community::where('id', $request->id)->first();
+            return view('front.home.community-details', compact('data'));
         
         } 
     }

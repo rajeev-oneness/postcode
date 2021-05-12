@@ -147,7 +147,7 @@
 	<div class="container">
 		<div class="row justify-content-between">
 			<div class="col-md-4">
-				<a href="#" class="footer-logo">
+				<a href="{{route('default.homepage')}}" class="footer-logo">
 					<img src="{{asset('homepage_assets/images/logo.png')}}">
 				</a>
 				<p>
@@ -172,7 +172,7 @@
 				<ul class="footer-list">
 					<li><a href="{{route('events')}}">Events</a></li>
 					<li><a href="{{route('directory')}}">Directory</a></li>
-					<li><a href="#">Marketplace</a></li>
+					<li><a href="{{route('marketplace')}}">Marketplace</a></li>
 					{{-- <li><a href="#">Leads</a></li> --}}
 					<li><a href="{{route('deals')}}">Deals</a></li>
 				</ul>
@@ -181,10 +181,10 @@
 				<h3 class="footer-heading">Other</h3>
 				<ul class="footer-list">
 					{{-- <li><a href="#">Resources</a></li> --}}
-					<li><a href="#">About Us</a></li>
+					<li><a href="{{route('about-us')}}">About Us</a></li>
 					<li><a href="{{route('contact-us')}}">Contact Us</a></li>
-					<li><a href="#">Social Media</a></li>
-					<li><a href="#">Advertise</a></li>
+					{{-- <li><a href="#">Social Media</a></li> --}}
+					<li><a href="{{route('default.homepage')}}">Advertise</a></li>
 				</ul>
 			</div>
 		</div>

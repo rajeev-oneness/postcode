@@ -10,9 +10,9 @@
 		<div class="row">
 			<div class="col-12">
 				<ul class="breadcumb_list">
-					<li><a href="index.html">Home</a></li>
+					<li><a href="{{route('default.homepage')}}">Home</a></li>
 					<li><img src="{{asset('homepage_assets/images/down-arrow.png')}}"></li>
-					<li>Search in Australia</li>
+					<li>Deals</li>
 				</ul>
 			</div>
 		</div>
@@ -93,32 +93,7 @@
 					  			{{-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p> --}}
 					  		</div>
 					  		<ul class="search_list_items search_list_items-mod" id="list-data">
-								{{-- @foreach($deals as $deal)
-					  			<li>
-					  				<div class="location_img_wrap">
-					  					<img src="{{asset($deal->image)}}">
-					  				</div>
-					  				<div class="list_content_wrap">
-					  					<ul class="rating_coments">
-					  						<li>
-												<h5>{{$deal->promo_code}}</h5>
-					  						</li>
-					  					</ul>
-					  					<h4 class="place_title bebasnew">{{$deal->title}}</h4>
-					  					<div class="location_details">
-					  						<p class="location"><img src="{{asset('homepage_assets/images/place.png')}}">{{$deal->business->address}}</p>
-						  					<p class="phone_call"><strong>deal organiser: <a href="#">{{$deal->business->name}}</a></strong></p>
-					  					</div>
-                                          <p class="location">
-                                            <strong>
-                                                Expire Date: {{date("d'M,y", strtotime($deal->expire_date))}}
-                                            </strong>
-                                        </p>
-						  				<p class="history_details">{{$deal->description}}</p>
-						  				<a href="#"><img src="{{asset('homepage_assets/images/right-arrow.png')}}"></a>
-					  				</div>
-					  			</li>
-					  			@endforeach --}}
+								{{-- list goes here --}}
 					  		</ul>
 					  		<a href="#" class="orange-btm load_btn" id="load-more2">Load More</a>
 					  	</div>

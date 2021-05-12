@@ -10,9 +10,9 @@
 		<div class="row">
 			<div class="col-12">
 				<ul class="breadcumb_list">
-					<li><a href="index.html">Home</a></li>
+					<li><a href="{{route('default.homepage')}}">Home</a></li>
 					<li><img src="{{asset('homepage_assets/images/down-arrow.png')}}"></li>
-					<li>Search in Australia</li>
+					<li>Events</li>
 				</ul>
 			</div>
 		</div>

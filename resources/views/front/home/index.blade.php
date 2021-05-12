@@ -54,54 +54,22 @@
 	<div class="category-place">
 		<div class="container">
 			<ul class="cat-list">
+				@forelse ($categories as $category)
 				<li>
-					<a href="#">
-						<figure><img src="{{asset('homepage_assets/images/cat1.png')}}"></figure>
-						Accommodation
+					<a href="{{route('directory', ['_token'=>csrf_token(), 'category'=>$category->id])}}">
+						<figure><img src="{{asset('').$category->icon}}"></figure>
+						{{$category->name}}
 					</a>
 				</li>
-				<li>
-					<a href="#">
-						<figure><img src="{{asset('homepage_assets/images/cat2.png')}}"></figure>
-						Food & Beverages
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<figure><img src="{{asset('homepage_assets/images/cat3.png')}}"></figure>
-						Religion
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<figure><img src="{{asset('homepage_assets/images/cat4.png')}}"></figure>
-						Government
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<figure><img src="{{asset('homepage_assets/images/cat5.png')}}"></figure>
-						Adult
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<figure><img src="{{asset('homepage_assets/images/cat6.png')}}"></figure>
-						Restaurants
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<figure><img src="{{asset('homepage_assets/images/cat7.png')}}"></figure>
-						Automotive
-					</a>
-				</li>
-				<li>
+				@empty
+				<li>No Data!</li>
+				@endforelse
+				{{-- <li>
 					<a href="#">
 						<figure><img src="{{asset('homepage_assets/images/cat-list.png')}}"></figure>
 						See all
 					</a>
-				</li>
+				</li> --}}
 			</ul>
 		</div>
 	</div>
@@ -129,24 +97,24 @@
 			<li>
 				<div class="inner-box" style="background:url({{asset('homepage_assets/images/ev1.jpg')}}) no-repeat center center; background-size: cover;">
 					<div class="caption-area">
-						<h3 class="grid-heading"><a href="#">North NT</a></h3>
-						<a href="#" class="events-tag">150 events</a>
+						<h3 class="grid-heading"><a href="{{route('events')}}">North NT</a></h3>
+						<a href="{{route('events')}}" class="events-tag">See events</a>
 					</div>
 				</div>
 			</li>
 			<li>
 				<div class="inner-box" style="background:url({{asset('homepage_assets/images/ev2.jpg')}}) no-repeat center center; background-size: cover;">
 					<div class="caption-area">
-						<h3 class="grid-heading"><a href="#">Darwin City NT</a></h3>
-						<a href="#" class="events-tag">120 events</a>
+						<h3 class="grid-heading"><a href="{{route('events')}}">Darwin City NT</a></h3>
+						<a href="{{route('events')}}" class="events-tag">See events</a>
 					</div>
 				</div>
 			</li>
 			<li>
 				<div class="inner-box" style="background:url({{asset('homepage_assets/images/ev3.jpg')}}) no-repeat center center; background-size: cover;">
 					<div class="caption-area">
-						<h3 class="grid-heading"><a href="#">QLD Central NT</a></h3>
-						<a href="#" class="events-tag">12 events</a>
+						<h3 class="grid-heading"><a href="{{route('events')}}">QLD Central NT</a></h3>
+						<a href="{{route('events')}}" class="events-tag">See events</a>
 					</div>
 				</div>
 			</li>
@@ -159,64 +127,25 @@
 		<h2 class="main-heading">Connect with your Community</h2>
 
 		<ul class="community-list">
+			@forelse ($communities as $community)
 			<li>
 				<div class="inner-box">
-					<figure style="background:url({{asset('homepage_assets/images/community-bg.jpg')}}) no-repeat center center; background-size: cover;"></figure>
+					<figure style="background:url({{asset('').$community->image}}) no-repeat center center; background-size: cover;"></figure>
 					<figcaption>
 						<h4>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+							{!! $community->description !!}
 						</h4>
-						<a href="#" class="text-button">View More <i class="fas fa-long-arrow-alt-right"></i> </a>
+						<a href="{{route('details',['name' => 'community', 'id' => $community->id])}}" class="text-button">View More <i class="fas fa-long-arrow-alt-right"></i> </a>
 					</figcaption>
 				</div>
 			</li>
-			<li>
-				<div class="inner-box">
-					<figure style="background:url({{asset('homepage_assets/images/community-bg.jpg')}}) no-repeat center center; background-size: cover;"></figure>
-					<figcaption>
-						<h4>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-						</h4>
-						<a href="#" class="text-button">View More <i class="fas fa-long-arrow-alt-right"></i> </a>
-					</figcaption>
-				</div>
-			</li>
-			<li>
-				<div class="inner-box">
-					<figure style="background:url({{asset('homepage_assets/images/community-bg.jpg')}}) no-repeat center center; background-size: cover;"></figure>
-					<figcaption>
-						<h4>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-						</h4>
-						<a href="#" class="text-button">View More <i class="fas fa-long-arrow-alt-right"></i> </a>
-					</figcaption>
-				</div>
-			</li>
-			<li>
-				<div class="inner-box">
-					<figure style="background:url({{asset('homepage_assets/images/community-bg.jpg')}}) no-repeat center center; background-size: cover;"></figure>
-					<figcaption>
-						<h4>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-						</h4>
-						<a href="#" class="text-button">View More <i class="fas fa-long-arrow-alt-right"></i> </a>
-					</figcaption>
-				</div>
-			</li>
-			<li>
-				<div class="inner-box">
-					<figure style="background:url({{asset('homepage_assets/images/community-bg.jpg')}}) no-repeat center center; background-size: cover;"></figure>
-					<figcaption>
-						<h4>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-						</h4>
-						<a href="#" class="text-button">View More <i class="fas fa-long-arrow-alt-right"></i> </a>
-					</figcaption>
-				</div>
-			</li>
+			@empty
+				<li>No Data!</li>
+			@endforelse
+			
 		</ul>
 
-		<a href="#" class="primery-button orange-btm">More Community</a>
+		{{-- <a href="" class="primery-button orange-btm">More Community</a> --}}
 
 
 	</div>
@@ -226,16 +155,16 @@
 		<h2 class="main-heading">Top rated Local Businesses</h2>
 
 		<ul class="top-list">
-			@forelse ($businesses as $business)
+			@forelse ($threebusinesses as $business)
 			<li class="mt-2">
 				<div class="inner-box" style="background: url({{asset('').$business->image}}) no-repeat center center; background-size: cover;">
 					<div class="grid-content">
-						<a href="#" class="shop-heading">{{$business->name}}</a>
+						<a href="{{route('details',['name' => 'business', 'id' => $business->id])}}" class="shop-heading">{{$business->name}}</a>
 						<a href="#" class="place"><span><img src="{{asset('homepage_assets/images/place-icon.png')}}"></span> {{$business->address}}</a>
 						<hr>
 						<ul class="comment-list">
-							<li><span><img src="{{asset('homepage_assets/images/star.png')}}"></span> 4.5 <a href="#" class="review-link">(60 reviews)</a></li>
-							<li><span><img src="{{asset('homepage_assets/images/comment-icon.png')}}"></span> <a href="#" class="comment-link">40 Comments</a></li>
+							<li><span><img src="{{asset('homepage_assets/images/star.png')}}"></span> {!!(count($business->ratings) > 0)? '4.5': '0'!!} <a href="#" class="review-link">({{count($business->ratings)}} reviews)</a></li>
+							{{-- <li><span><img src="{{asset('homepage_assets/images/comment-icon.png')}}"></span> <a href="#" class="comment-link">40 Comments</a></li> --}}
 						</ul>
 					</div>
 					<span class="rating"><img src="{{asset('homepage_assets/images/rating-icon.png')}}"></span>
@@ -245,7 +174,7 @@
 				<li>No Data!</li>
 			@endforelse
 		</ul>
-
+		<a href="{{route('directory')}}" class="primery-button orange-btm mt-4">More Businesses</a>
 	</div>
 </section>
 <section class="counter-section" style="background: url({{asset('homepage_assets/images/counter-bg.jpg')}}) no-repeat center center; background: cover;">
@@ -274,68 +203,43 @@
 			@forelse ($offers as $offer)
 			<li>
 				<div class="inner-box" style="background:url({{asset('').$offer->image}}) no-repeat center center; background-size: cover;">
-					<div class="grid-content">
-						<a href="#" class="shop-heading">{{$offer->name}}</a>
+					<div class="grid-content p-3">
+						<a href="{{route('details',['name' => 'deal', 'id' => $offer->id])}}" class="shop-heading">{{$offer->title}}</a>
 						<a href="#" class="place"><span><img src="{{asset('homepage_assets/images/place-icon.png')}}"></span> {{$offer->address}}</a>
-						<hr>
+						{{-- <hr>
 						<ul class="comment-list">
 							<li><span><img src="{{asset('homepage_assets/images/star.png')}}"></span> 4.5 <a href="#" class="review-link">(60 reviews)</a></li>
-						</ul>
+						</ul> --}}
 					</div>
 					
 				</div>
 			</li>
 			@empty
-				
+				<li>No Data!</li>
 			@endforelse
 		</ul>
+		<a href="{{route('deals')}}" class="primery-button orange-btm mt-4">More Offers</a>
 	</div>
 </section>
 <section class="gray-section">
 	<h2 class="main-heading">Find a local business</h2>
 	<ul class="business-list">
+		@forelse ($categories as $category)
 		<li>
-			<div class="inner-box" style="background: url({{asset('homepage_assets/images/c1.jpg')}}) no-repeat center center; background-size: cover;">
+			<div class="inner-box" style="background: url({{asset('').$category->image}}) no-repeat center center; background-size: cover;">
 				<div class="grid-content">
-					<a href="#" class="shop-heading">Accommodation</a>
+					<form action="{{route('directory')}}" method="get">
+						@csrf
+						<input type="hidden" name="category" value="{{$category->id}}">
+						<button class="primery-button orange-btm" style="border-style: none;">{{$category->name}}</button>
+					</form>
 				</div>
 			</div>
 		</li>
-		<li>
-			<div class="inner-box" style="background: url({{asset('homepage_assets/images/c2.jpg')}}) no-repeat center center; background-size: cover;">
-				<div class="grid-content">
-					<a href="#" class="shop-heading">Religion</a>
-				</div>
-			</div>
-		</li>
-		<li>
-			<div class="inner-box" style="background: url({{asset('homepage_assets/images/c3.jpg')}}) no-repeat center center; background-size: cover;">
-				<div class="grid-content">
-					<a href="#" class="shop-heading">Food & Beverages</a>
-				</div>
-			</div>
-		</li>
-		<li>
-			<div class="inner-box" style="background: url({{asset('homepage_assets/images/c1.jpg')}}) no-repeat center center; background-size: cover;">
-				<div class="grid-content">
-					<a href="#" class="shop-heading">Accommodation</a>
-				</div>
-			</div>
-		</li>
-		<li>
-			<div class="inner-box" style="background: url({{asset('homepage_assets/images/c2.jpg')}}) no-repeat center center; background-size: cover;">
-				<div class="grid-content">
-					<a href="#" class="shop-heading">Religion</a>
-				</div>
-			</div>
-		</li>
-		<li>
-			<div class="inner-box" style="background: url({{asset('homepage_assets/images/c3.jpg')}}) no-repeat center center; background-size: cover;">
-				<div class="grid-content">
-					<a href="#" class="shop-heading">Food & Beverages</a>
-				</div>
-			</div>
-		</li>
+		@empty
+			
+		@endforelse
+		
 	</ul>
 </section>
 
@@ -343,6 +247,10 @@
 @section('script')
 
 <script type="text/javascript">
+
+$("#category-search").click(function() {
+	alert('hi')
+});
 
 function numericKey(event) {
 	if(event.charCode >= 48 && event.charCode <= 57) {
