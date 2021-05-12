@@ -1,31 +1,40 @@
 @extends('front.home.details-master')
 
+@section('brd_name')
+<li><a href="{{route('events')}}">Events</a></li>
+<li><img src="{{asset('homepage_assets/images/down-arrow.png')}}"></li>
+<li>Event Detail</a></li>
+@endsection
+
 @section('details-content')
 <div class="row">
-    <div class="col-6">
-        <h2 class="bebasnew">Event Details</h2>
-        <hr>
-        <h4>{{$data[0]->name}}</h4>
-        <p>Address: {{$data[0]->address}}</p>
-        <p>Description: {{$data[0]->description}}</p>
-        <p>Duration: {{Date('d M,y', strtotime($data[0]->strat))}} - {{Date('d M,y', strtotime($data[0]->end))}}</p>
-        <p>Price: Rs.{{$data[0]->price}}/-</p>
-        <p>Age Group: {{$data[0]->agegroup->group}}</p>
-        <p>Booking Details: {{$data[0]->booking_details}}</p>
-
-    </div>
-    <div class="col-6">
-        <img src="{{asset($data[0]->image)}}" alt="" width="500">
-    </div>
-</div>
-<div class="row mt-5">
-    <div class="col-12">
-        <h2 class="bebasnew">Organised By</h2>
-        <hr>
-        <a href="{{route('details',['name' => 'business', 'id' =>$data[0]->business->id ])}}"><h4>{{$data[0]->business->name}}</h4></a>
-    </div>
-</div>
-<div class="row mt-5">
-    <a href="{{route('user.event.book',['id' => encrypt($data[0]->id)])}}" class="orange-btm load_btn">Book Event</a>
+    <h2 class="bebasnew">Event Details</h2>
+    <ul class="search_list_items search_list_items-mod">
+        <li>
+            <div class="location_img_wrap">
+                <img src="{{asset($data->image)}}">
+            </div>
+            <div class="list_content_wrap">
+                <ul class="rating_coments">
+                    <li>
+                        <h5>&dollar;{{$data->price}}</h5>
+                    </li>
+                    <li>
+                        <h5>Age Group: {{$data->agegroup->group}}</h5>
+                    </li>
+                </ul>
+                <h4 class="place_title bebasnew">{{$data->name}}</h4>
+                <p><a href="{{route('details',['name' => 'business', 'id' =>$data->business->id ])}}">{{$data->business->name}}</a></p>
+                
+                <div class="location_details">
+                    <p class="location"><img src="{{asset('homepage_assets/images/place.png')}}">{{$data->address}}</p>
+                    <p class="phone_call"><strong>Contact Dertails: </strong> {{$data->contact_details}}</p>
+                    <p class="phone_call"><strong>Duration: </strong> {{Date('d M,y', strtotime($data->start))}} - {{Date('d M,y', strtotime($data->end))}}</p>
+                </div>
+                <p class="history_details">{{$data->booking_details}}</p>
+                <a href="{{route('user.event.book',['id' => encrypt($data->id)])}}" class="orange-btm load_btn text-center">Book Event</a>
+            </div>
+        </li>
+    </ul>
 </div>
 @endsection

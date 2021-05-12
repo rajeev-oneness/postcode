@@ -28,7 +28,7 @@ class CreateCommunitiesTable extends Migration
             $data[] = [
                 'communityCategoryId' => $i+1,
                 'image' => 'homepage_assets/images/community-bg.jpg',
-                'title' => '',
+                'title' => 'Community',
                 'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
             ];
         }

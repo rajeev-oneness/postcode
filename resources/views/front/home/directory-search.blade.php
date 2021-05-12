@@ -27,12 +27,9 @@
 	let locations = [];
 </script>
   <style type="text/css">
-	/* Set the size of the div element that contains the map */
 	#map {
 	  height: 400px;
-	  /* The height is 400 pixels */
 	  width: 100%;
-	  /* The width is the width of the web page */
 	}
   </style>
 @endsection
@@ -43,9 +40,9 @@
 		<div class="row">
 			<div class="col-12">
 				<ul class="breadcumb_list">
-					<li><a href="index.html">Home</a></li>
+					<li><a href="{{route('default.homepage')}}">Home</a></li>
 					<li><img src="{{asset('homepage_assets/images/down-arrow.png')}}"></li>
-					<li>Search in Australia</li>
+					<li>Directory</li>
 				</ul>
 			</div>
 		</div>
@@ -190,12 +187,9 @@
 		
 								// grid view
 								let href = "{{route('details',['name' => 'business', 'id' => 'businessId'])}}";
-								// encryptedId = '{{encrypt('+value.id+')}}';
 								href = href.replace('businessId', value.id);
 								grid_view += "<li>";
-								// grid_view += '';
 								grid_view += '<a href="'+href+'"><h4 class="place_title bebasnew">'+value.name+'</h4></a>'; 	
-								// grid_view += "";
 								grid_view += '<p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p>';
 								grid_view += '';
 								grid_view += '';
@@ -218,8 +212,6 @@
 							});
 							$(".history_list").append(grid_view);
 							$("#list-data").append(list_view);
-							// $('#load-more1').show();
-							// $('#load-more2').show();
 						} else {
 							$('#load-more1').html('No more data!');
 							$('#load-more2').html('No more data!');

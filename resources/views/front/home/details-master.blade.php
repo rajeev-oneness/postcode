@@ -1,7 +1,7 @@
 @extends('front.home.master')
 
 @section('title')
-	Directory-list
+	Details
 @endsection
 
 @section('content')
@@ -11,11 +11,9 @@
 		<div class="row">
 			<div class="col-12">
 				<ul class="breadcumb_list">
-					<li><a href="index.html">Home</a></li>
-					<li><img src="images/down-arrow.png"></li>
-					<li><a href="index.html">Directory</a></li>
-					<li><img src="images/down-arrow.png"></li>
-					<li>Search Result</li>
+					<li><a href="{{route('default.homepage')}}">Home</a></li>
+					<li><img src="{{asset('homepage_assets/images/down-arrow.png')}}"></li>
+					@yield('brd_name')
 				</ul>
 			</div>
 		</div>
