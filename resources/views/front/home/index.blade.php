@@ -114,7 +114,7 @@
 				<p>
 					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal 
 				</p>
-				<a href="#" class="text-button">Ad your business here <i class="fas fa-long-arrow-alt-right"></i> </a>
+				<a href="{{route('user.welcome')}}" class="text-button">Ad your business here <i class="fas fa-long-arrow-alt-right"></i> </a>
 			</div>
 			<div class="col-md-6 text-center">
 				<img src="{{asset('homepage_assets/images/mobile-image.png')}}" class="img-fluid">
@@ -151,7 +151,7 @@
 				</div>
 			</li>
 		</ul>
-		<a href="#" class="primery-button orange-btm">More Events</a>
+		<a href="{{route('events')}}" class="primery-button orange-btm">More Events</a>
 	</div>
 </section>
 <section class="white-section">
@@ -226,11 +226,12 @@
 		<h2 class="main-heading">Top rated Local Businesses</h2>
 
 		<ul class="top-list">
-			<li>
-				<div class="inner-box" style="background: url({{asset('homepage_assets/images/i2.jpg')}}) no-repeat center center; background-size: cover;">
+			@forelse ($businesses as $business)
+			<li class="mt-2">
+				<div class="inner-box" style="background: url({{asset('').$business->image}}) no-repeat center center; background-size: cover;">
 					<div class="grid-content">
-						<a href="#" class="shop-heading">Shop in flower center</a>
-						<a href="#" class="place"><span><img src="{{asset('homepage_assets/images/place-icon.png')}}"></span> 40 Journal Square Plaza, NJ</a>
+						<a href="#" class="shop-heading">{{$business->name}}</a>
+						<a href="#" class="place"><span><img src="{{asset('homepage_assets/images/place-icon.png')}}"></span> {{$business->address}}</a>
 						<hr>
 						<ul class="comment-list">
 							<li><span><img src="{{asset('homepage_assets/images/star.png')}}"></span> 4.5 <a href="#" class="review-link">(60 reviews)</a></li>
@@ -240,34 +241,9 @@
 					<span class="rating"><img src="{{asset('homepage_assets/images/rating-icon.png')}}"></span>
 				</div>
 			</li>
-			<li>
-				<div class="inner-box" style="background: url({{asset('homepage_assets/images/community-bg.jpg')}}) no-repeat center center; background-size: cover;">
-					<div class="grid-content">
-						<a href="#" class="shop-heading">Coffee shop</a>
-						<a href="#" class="place"><span><img src="{{asset('homepage_assets/images/place-icon.png')}}"></span> 75 Prince St, New York, NY 10012</a>
-						<hr>
-						<ul class="comment-list">
-							<li><span><img src="{{asset('homepage_assets/images/star.png')}}"></span> 5 <a href="#" class="review-link">(60 reviews)</a></li>
-							<li><span><img src="{{asset('homepage_assets/images/comment-icon.png')}}"></span> <a href="#" class="comment-link">120 Comments</a></li>
-						</ul>
-					</div>
-					<span class="rating"><img src="{{asset('homepage_assets/images/rating-icon.png')}}"></span>
-				</div>
-			</li>
-			<li>
-				<div class="inner-box" style="background: url({{asset('homepage_assets/images/i1.jpg')}}) no-repeat center center; background-size: cover;">
-					<div class="grid-content">
-						<a href="#" class="shop-heading">Laila's Beauty & Laser</a>
-						<a href="#" class="place"><span><img src="{{asset('homepage_assets/images/place-icon.png')}}"></span> 40 Journal Square Plaza, NJ</a>
-						<hr>
-						<ul class="comment-list">
-							<li><span><img src="{{asset('homepage_assets/images/star.png')}}"></span> 4.5 <a href="#" class="review-link">(60 reviews)</a></li>
-							<li><span><img src="{{asset('homepage_assets/images/comment-icon.png')}}"></span> <a href="#" class="comment-link">40 Comments</a></li>
-						</ul>
-					</div>
-					<span class="rating"><img src="{{asset('homepage_assets/images/rating-icon.png')}}"></span>
-				</div>
-			</li>
+			@empty
+				<li>No Data!</li>
+			@endforelse
 		</ul>
 
 	</div>
@@ -295,11 +271,12 @@
 		<h2 class="main-heading">View Offers in your Local Area</h2>
 
 		<ul class="offers-list">
+			@forelse ($offers as $offer)
 			<li>
-				<div class="inner-box" style="background:url({{asset('homepage_assets/images/p2.jpg')}}) no-repeat center center; background-size: cover;">
+				<div class="inner-box" style="background:url({{asset('').$offer->image}}) no-repeat center center; background-size: cover;">
 					<div class="grid-content">
-						<a href="#" class="shop-heading">Laila's Beauty & Laser</a>
-						<a href="#" class="place"><span><img src="{{asset('homepage_assets/images/place-icon.png')}}"></span> 40 Journal Square Plaza, NJ</a>
+						<a href="#" class="shop-heading">{{$offer->name}}</a>
+						<a href="#" class="place"><span><img src="{{asset('homepage_assets/images/place-icon.png')}}"></span> {{$offer->address}}</a>
 						<hr>
 						<ul class="comment-list">
 							<li><span><img src="{{asset('homepage_assets/images/star.png')}}"></span> 4.5 <a href="#" class="review-link">(60 reviews)</a></li>
@@ -308,54 +285,9 @@
 					
 				</div>
 			</li>
-			<li>
-				<div class="inner-box" style="background:url({{asset('homepage_assets/images/ev2.jpg')}}) no-repeat center center; background-size: cover;">
-					<div class="grid-content">
-						<a href="#" class="shop-heading">Riverside Theatres</a>
-						<a href="#" class="place"><span><img src="{{asset('homepage_assets/images/place-icon.png')}}"></span> Wollongong, NSW, 2500</a>
-						<hr>
-						<ul class="comment-list">
-							<li><span><img src="{{asset('homepage_assets/images/star.png')}}"></span> 4.5 <a href="#" class="review-link">(60 reviews)</a></li>
-						</ul>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="inner-box" style="background:url({{asset('homepage_assets/images/community-bg.jpg')}}) no-repeat center center; background-size: cover;">
-					<div class="grid-content">
-						<a href="#" class="shop-heading">Coffee shop</a>
-						<a href="#" class="place"><span><img src="{{asset('homepage_assets/images/place-icon.png')}}"></span> 75 Prince St, New York, NY 10012</a>
-						<hr>
-						<ul class="comment-list">
-							<li><span><img src="{{asset('homepage_assets/images/star.png')}}"></span> 4.5 <a href="#" class="review-link">(60 reviews)</a></li>
-						</ul>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="inner-box" style="background:url({{asset('homepage_assets/images/ev3.jpg')}}) no-repeat center center; background-size: cover;">
-					<div class="grid-content">
-						<a href="#" class="shop-heading">Presto Photographics</a>
-						<a href="#" class="place"><span><img src="{{asset('homepage_assets/images/place-icon.png')}}"></span> 40 Journal Square Plaza, NJ</a>
-						<hr>
-						<ul class="comment-list">
-							<li><span><img src="{{asset('homepage_assets/images/star.png')}}"></span> 4.5 <a href="#" class="review-link">(60 reviews)</a></li>
-						</ul>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="inner-box" style="background:url({{asset('homepage_assets/images/p1.jpg')}}) no-repeat center center; background-size: cover;">
-					<div class="grid-content">
-						<a href="#" class="shop-heading">Laila's Beauty & Laser</a>
-						<a href="#" class="place"><span><img src="{{asset('homepage_assets/images/place-icon.png')}}"></span> 40 Journal Square Plaza, NJ</a>
-						<hr>
-						<ul class="comment-list">
-							<li><span><img src="{{asset('homepage_assets/images/star.png')}}"></span> 4.5 <a href="#" class="review-link">(60 reviews)</a></li>
-						</ul>
-					</div>
-				</div>
-			</li>
+			@empty
+				
+			@endforelse
 		</ul>
 	</div>
 </section>

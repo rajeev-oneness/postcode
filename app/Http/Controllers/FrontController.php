@@ -24,8 +24,9 @@ class FrontController extends Controller
     public function homepage() {
         $businesses = Business::all();
         $postcodes = Postcode::all();
+        $offers = offer::limit(5)->get();
         $categories = BusinessCategory::all();
-        return view('front.home.index', compact('businesses','postcodes','categories'));
+        return view('front.home.index', compact('businesses','postcodes','categories','offers'));
     }
     
     public function directory(Request $request) {
@@ -44,7 +45,7 @@ class FrontController extends Controller
         ];
         $validate = Validator::make($request->all(),$rules);
         if(!$validate->fails()){
-            $offset = $request->page * 1;
+            $offset = $request->page * 10;
             $business = Business::select('*');
             if(!empty($request->stateId)){
                 $business = $business->where('state_id','like','%'.$request->stateId.'%');
@@ -67,7 +68,7 @@ class FrontController extends Controller
                 $business = $business->where('id', $request->id)->get();
                 return response()->json(['error'=>false,'message'=>'Business Details','data'=>$business, 'details' => 1]);
             }
-            $business = $business->with('ratings')->limit(1)->offset($offset)->get();
+            $business = $business->with('ratings')->limit(10)->offset($offset)->get();
             return response()->json(['error'=>false,'message'=>'Business Data','data'=>$business]);
         }
         return response()->json(['error'=>true,'message'=>$validate->errors()->first()]);
@@ -87,10 +88,10 @@ class FrontController extends Controller
     }
     public function getmarketplace (Request $request) {
         if($request->search == '') {
-            $offset = $request->page * 1;
+            $offset = $request->page * 10;
             $datas = Product::with('category', 'subcategory')->orderBy('created_at', 'DESC')->limit(1)->offset($offset)->get();
         } else {
-            $datas = Product::where('name','like','%'.$request->search.'%')->with('category', 'subcategory')->orderBy('created_at', 'DESC')->limit(1)->offset($offset)->get();
+            $datas = Product::where('name','like','%'.$request->search.'%')->with('category', 'subcategory')->orderBy('created_at', 'DESC')->limit(10)->offset($offset)->get();
         }
         return response()->json(['error'=>false,'message'=>'Product Data','data'=>$datas]);
     }
@@ -103,7 +104,7 @@ class FrontController extends Controller
         ];
         $validate = Validator::make($request->all(),$rules);
         if(!$validate->fails()){
-            $offset = $request->page * 1;
+            $offset = $request->page * 10;
             if($request->search != '') {
                 if($request->menu == 'events') {
                     $datas = Event::select('*')->where('name','like','%'.$request->search.'%')->orWhere('postcode','like','%'.$request->search.'%')->orWhere('address','like','%'.$request->search.'%');         
@@ -120,7 +121,7 @@ class FrontController extends Controller
             if(auth()->check()) {
                 $datas = $datas->where('postcode', auth()->user()->postcode);
             }
-            $datas = $datas->with('business')->orderBy('created_at', 'DESC')->limit(1)->offset($offset)->get();
+            $datas = $datas->with('business')->orderBy('created_at', 'DESC')->limit(10)->offset($offset)->get();
             return response()->json(['error'=>false,'message'=>'Event Data','data'=>$datas]);
         }
         return response()->json(['error'=>true,'message'=>$validate->errors()->first()]);
