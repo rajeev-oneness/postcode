@@ -1,14 +1,12 @@
 <?php 
 
-
-
 //--------------------------------------------------------------Business Profile Section-----------------------------------------------//
-
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
 		Route::group(['prefix' => 'community'],function(){
 			Route::get('manage','Admin\CommunityController@manageCommunity')->name('admin.community.manage');
 			Route::get('create','Admin\CommunityController@createCommunity')->name('admin.community.create');
+			Route::post('store','Admin\CommunityController@storeCommunity')->name('admin.community.store');
 		});
 
 	Route::get('/business_profiles', 'BusinessController@BusinessProfiles')->name('admin.business');
