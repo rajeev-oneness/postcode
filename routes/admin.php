@@ -7,8 +7,8 @@
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
 		Route::group(['prefix' => 'community'],function(){
-			Route::get('community','Admin\CommunityController@index')->name('admin.community');
-			Route::get('community/manage','Admin\CommunityController@manage')->name('admin.manage_community');
+			Route::get('manage','Admin\CommunityController@manageCommunity')->name('admin.community.manage');
+			Route::get('create','Admin\CommunityController@createCommunity')->name('admin.community.create');
 		});
 
 	Route::get('/business_profiles', 'BusinessController@BusinessProfiles')->name('admin.business');
