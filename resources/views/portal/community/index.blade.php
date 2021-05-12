@@ -41,11 +41,12 @@
                           <tr>
                             <th>Sl.</th>
                             <th>Image</th>
+                            <th>Category</th>
                             <th>Title</th>
-                            <th>Description</th>                       
+                            <th>Description</th>
                             <th>Action</th>
                           </tr>
-                        </thead>            
+                        </thead>
                         <tbody>
                           @php
                               $i = 1;
@@ -54,6 +55,7 @@
                             <tr>
                               <td>{{$i++}}</td>
                               <td><img src="{{asset($com->image)}}" height="100" width="100"></td>
+                              <td>{{$com->community_category->name}}</td>
                               <td>{{$com->title}}</td>
                               <td>{!! $com->description !!}</td>
                               <td>

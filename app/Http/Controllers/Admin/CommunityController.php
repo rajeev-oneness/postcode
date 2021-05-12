@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Community;
+use App\Model\CommunityCategory;
 
 class CommunityController extends Controller
 {
@@ -16,13 +17,15 @@ class CommunityController extends Controller
 
     public function createCommunity(Request $req)
     {
-    	return view('portal.community.create');
+        $category = CommunityCategory::get();
+    	return view('portal.community.create',compact('category'));
     }
 
     public function storeCommunity(Request $req)
     {
     	$req->validate([
     		'image' => 'required',
+            'category' => 'required|min:1|numeric|exists:community_categories,id',
     		'title' => 'required|max:255|string',
     		'description' => 'required',
     	]);
@@ -34,6 +37,7 @@ class CommunityController extends Controller
             $imageurl = url('uploads/community/'.$random.'.'.$image->getClientOriginalExtension());
             $community->image = $imageurl;
         }
+        $community->communityCategoryId = $req->category;
     	$community->title = $req->title;
     	$community->description = $req->description;
     	$community->save();
@@ -44,13 +48,15 @@ class CommunityController extends Controller
     {
     	$id = base64_decode($editId);
     	$community = Community::where('id',$id)->first();
-    	return view('portal.community.edit',compact('community'));
+        $category = CommunityCategory::get();
+    	return view('portal.community.edit',compact('community','category'));
     }
 
     public function updateCommunity(Request $req,$updateId)
     {
     	$req->validate([
     		'id' => 'required|min:1|numeric',
+            'category' => 'required|min:1|numeric|exists:community_categories,id',
     		'title' => 'required|max:255|string',
     		'description' => 'required',
     	]);
@@ -62,6 +68,7 @@ class CommunityController extends Controller
             $imageurl = url('uploads/community/'.$random.'.'.$image->getClientOriginalExtension());
             $community->image = $imageurl;
         }
+        $community->communityCategoryId = $req->category;
     	$community->title = $req->title;
     	$community->description = $req->description;
     	$community->save();

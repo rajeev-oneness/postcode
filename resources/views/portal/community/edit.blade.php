@@ -58,6 +58,16 @@
                       @error('title')<span class="text-danger">{{$message}}</span>@enderror
                     </div>
 
+                    <div class="col-md-6 mb-3">
+                      <label for="validationCustom03">Category</label>
+                      <select name="category" class="form-control" required="">
+                          <option value="" selected="" hidden="">Select Category</option>
+                          @foreach($category as $cat)
+                            <option value="{{$cat->id}}" @if(old('category')==$cat->id){{('selected')}}@elseif($community->communityCategoryId == $cat->id){{('selected')}}@endif>{{$cat->name}}</option>
+                          @endforeach
+                      </select>
+                    </div>
+
                     <div class="col-md-12 mb-3">
                       <label for="validationCustom05">Description</label>
                       @error('description')<span class="text-danger">{{$message}}</span>@enderror
