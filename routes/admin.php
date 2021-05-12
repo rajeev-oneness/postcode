@@ -7,6 +7,9 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 			Route::get('manage','Admin\CommunityController@manageCommunity')->name('admin.community.manage');
 			Route::get('create','Admin\CommunityController@createCommunity')->name('admin.community.create');
 			Route::post('store','Admin\CommunityController@storeCommunity')->name('admin.community.store');
+			Route::get('/{id}/edit','Admin\CommunityController@editCommunity')->name('admin.community.edit');
+			Route::post('/{id}/update','Admin\CommunityController@updateCommunity')->name('admin.community.update');
+			Route::get('delete/{id}','Admin\CommunityController@deleteCommunity')->name('admin.community.delete');
 		});
 
 	Route::get('/business_profiles', 'BusinessController@BusinessProfiles')->name('admin.business');

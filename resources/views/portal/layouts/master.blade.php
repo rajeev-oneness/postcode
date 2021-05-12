@@ -303,11 +303,26 @@
   <script src="{{asset('admin_assets/js/tooltip-init.js')}}"></script>
   <script src="{{asset('admin_assets/js/typeahead-search/handlebars.js')}}"></script>
   <script src="{{asset('admin_assets/js/typeahead-search/typeahead-custom.js')}}"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- Plugins JS Ends-->
   <!-- Theme js-->
   <script src="{{asset('admin_assets/js/script.js')}}"></script>
   <!-- <script src="admin_assets/js/theme-customizer/customizer.js"></script> -->
   <!-- Plugin used-->
+  <script type="text/javascript">
+        @if(Session::has('Success'))
+            swal('Success','{{Session::get('Success')}}');
+        @elseif(Session::has('Errors'))
+            swal('Error','{{Session::get('Errors')}}');
+        @endif
+
+        function isNumberKey(evt){
+            if(evt.charCode >= 48 && evt.charCode <= 57 || evt.charCode <= 43){  
+                return true;  
+            }  
+            return false;  
+        }
+  </script>
 </body>
 
 </html>

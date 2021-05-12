@@ -57,8 +57,8 @@
                               <td>{{$com->title}}</td>
                               <td>{!! $com->description !!}</td>
                               <td>
-                                <a class="edit_product" href="#" id=""><i class="fa fa-edit"></i></a>
-                                <a class="delete_app" id="#" onclick="return confirm('Are you sure?')" href="#"><i class="fa fa-trash"></i></a>
+                                <a class="edit_product" href="{{route('admin.community.edit',base64_encode($com->id))}}"><i class="fa fa-edit"></i></a>
+                                <a class="delete_app" onclick="return confirm('Are you sure?')" href="{{route('admin.community.delete',$com->id)}}"><i class="fa fa-trash"></i></a>
                               </td>
                             </tr>
                           @endforeach
