@@ -10,12 +10,12 @@ class CommunityController extends Controller
 {
     public function createCommunity(Request $req)
     {
-    	return view('admin.community.create');
+    	return view('portal.community.create');
     }
 
     public function manageCommunity(Request $req)
     {
     	$community = Community::get();
-    	return view('admin.community.index',compact('community'));
+    	return view('portal.community.index',compact('community'));
     }
 }

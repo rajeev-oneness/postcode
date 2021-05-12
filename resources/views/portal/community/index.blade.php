@@ -40,8 +40,9 @@
                         <thead>
                           <tr>
                             <th>Sl.</th>
-                            <th>Question</th>
-                            <th>Answer</th>                       
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Description</th>                       
                             <th>Action</th>
                           </tr>
                         </thead>            
@@ -52,8 +53,9 @@
                           @foreach ($community as $com)
                             <tr>
                               <td>{{$i++}}</td>
-                              <td>{{$com->question}}</td>
-                              <td>{{$com->answer}}</td>
+                              <td><img src="{{asset($com->image)}}" height="100" width="100"></td>
+                              <td>{{$com->title}}</td>
+                              <td>{!! $com->description !!}</td>
                               <td>
                                 <a class="edit_product" href="#" id=""><i class="fa fa-edit"></i></a>
                                 <a class="delete_app" id="#" onclick="return confirm('Are you sure?')" href="#"><i class="fa fa-trash"></i></a>
