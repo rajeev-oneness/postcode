@@ -15,6 +15,7 @@ class CreateCommunitiesTable extends Migration
     {
         Schema::create('communities', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('communityCategoryId');
             $table->string('image');
             $table->string('title');
             $table->longText('description');
@@ -23,8 +24,9 @@ class CreateCommunitiesTable extends Migration
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
         $data = [];
-        for ($i=0; $i < 5 ; $i++) { 
+        for ($i=0; $i < 6 ; $i++) { 
             $data[] = [
+                'communityCategoryId' => $i+1,
                 'image' => 'homepage_assets/images/community-bg.jpg',
                 'title' => '',
                 'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
