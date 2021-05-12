@@ -160,9 +160,9 @@
 							list_view += '<p class=""><strong>Event organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
 							list_view += '<p class="location"><strong>Date: '+'{{date("d M,y", strtotime('+value.start+'))}} - {{date("d M,y", strtotime('+value.end+'))}}'+'</strong></p>';
 							list_view += '<p class="history_details">'+value.description+'</p>';
-							list_view += '<a href="#"><img src=""></a>';
+							// list_view += '<a href="#"><img src=""></a>';
 							list_view += "</div>"	
-							list_view += "<li>";
+							list_view += "</li>";
 						});
 						$(".history_list").append(grid_view);
 						$("#list-data").append(list_view);

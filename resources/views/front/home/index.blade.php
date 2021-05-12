@@ -10,7 +10,6 @@
 		<h1 class="banner-heading bebasnew">Discover thousands of local businesses</h1>
 		<div class="search-area">
 			<form action="{{route('directory')}}" method="get">
-				@csrf
 			<ul class="search-list">
 				<li class="keyword">
 					<input type="text" list="businesses" id="keyword" name="keyword" placeholder="Search by Keyword">
@@ -56,7 +55,7 @@
 			<ul class="cat-list">
 				@forelse ($categories as $category)
 				<li>
-					<a href="{{route('directory', ['_token'=>csrf_token(), 'category'=>$category->id])}}">
+					<a href="{{route('directory', ['category'=>$category->id])}}">
 						<figure><img src="{{asset('').$category->icon}}"></figure>
 						{{$category->name}}
 					</a>
@@ -229,7 +228,6 @@
 			<div class="inner-box" style="background: url({{asset('').$category->image}}) no-repeat center center; background-size: cover;">
 				<div class="grid-content">
 					<form action="{{route('directory')}}" method="get">
-						@csrf
 						<input type="hidden" name="category" value="{{$category->id}}">
 						<button class="primery-button orange-btm" style="border-style: none;">{{$category->name}}</button>
 					</form>

@@ -159,7 +159,7 @@
 							grid_view += '<h5>'+value.promo_code+'</h5>';
 							grid_view += '<p class="phone_call"><strong>Deal organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
 							grid_view += '<p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p>';
-							grid_view += '<p class="location"><strong>Reedeem before '+'{{date("d M,y", strtotime('+value.expire_date+'))}}'+'</strong></p>';
+							grid_view += '<p class="location"><strong>Reedeem before '+value.expire_date+'</strong></p>';
 							// grid_view += '<p class="rating"><img src="{{url('')}}/'+'homepage_assets/images/rating.png'+'">300 reviews</p>';
 							grid_view += '<p class="history_details">'+value.description+'</p>';
 							grid_view += "</li>";
@@ -172,11 +172,11 @@
 							list_view += '<a href ="'+dealHref+'"><h4 class="place_title bebasnew">'+value.title+'</h4></a>';
 							list_view += '<div class="location_details"><p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p></div>';
 							list_view += '<p class=""><strong>Deal organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
-							list_view += '<p class="location"><strong>Reedeem before '+'{{date("d M,y", strtotime('+value.expire_date+'))}}'+'</strong></p>';
+							list_view += '<p class="location"><strong>Reedeem before '+value.expire_date+'</strong></p>';
 							list_view += '<p class="history_details">'+value.description+'</p>';
-							list_view += '<a href="#"><img src=""></a>';
+							// list_view += '<a href="#"><img src=""></a>';
 							list_view += "</div>"	
-							list_view += "<li>";
+							list_view += "</li>";
 						});
 						$(".history_list").append(grid_view);
 						$("#list-data").append(list_view);

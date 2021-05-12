@@ -208,7 +208,7 @@
 								list_view += '<p class="history_details">'+value.description+'</p>';
 								list_view += '<a href="'+href+'"><img src="{{url('')}}/'+'homepage_assets/images/right-arrow.png"></a>';
 								list_view += "</div>"	
-								list_view += "<li>";
+								list_view += "</li>";
 							});
 							$(".history_list").append(grid_view);
 							$("#list-data").append(list_view);
