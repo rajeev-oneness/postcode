@@ -193,6 +193,13 @@
               </ul>
             </li>
 
+            <li><a class="sidebar-header" href="javascript:void(0)"><i data-feather="align-justify"></i><span>Community</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('admin.community')}}"><i data-feather="server"></i><span>Community</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.manage_community')}}"><i data-feather="server"></i><span>Manage Community</span></a></li>
+              </ul>
+            </li>
+
 
             <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Events Categories</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">

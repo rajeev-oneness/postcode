@@ -6,6 +6,10 @@
 
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
+		Route::group(['prefix' => 'community'],function(){
+			Route::get('community','Admin\CommunityController@index')->name('admin.community');
+			Route::get('community/manage','Admin\CommunityController@manage')->name('admin.manage_community');
+		});
 
 	Route::get('/business_profiles', 'BusinessController@BusinessProfiles')->name('admin.business');
 
