@@ -30,7 +30,7 @@ class FrontController extends Controller
     }
     
     public function directory(Request $request) {
-        $request = $request->all();
+        $request = $request->except('_token');
         return view('front.home.directory-search',compact('request'));
     }
 
