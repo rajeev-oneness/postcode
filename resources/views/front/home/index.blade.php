@@ -129,12 +129,12 @@
 			@forelse ($communities as $community)
 			<li>
 				<div class="inner-box">
-					<figure style="background:url({{asset('').$community->image}}) no-repeat center center; background-size: cover;"></figure>
+					<figure style="background:url({{asset($community->image)}}) no-repeat center center; background-size: cover;"></figure>
 					<figcaption>
 						<h4>
 							{!! $community->description !!}
 						</h4>
-						<a href="{{route('details',['name' => 'community', 'id' => $community->id])}}" class="text-button">View More <i class="fas fa-long-arrow-alt-right"></i> </a>
+						<a href="{{route('community.post.detail',base64_encode($community->id))}}" class="text-button">View More <i class="fas fa-long-arrow-alt-right"></i> </a>
 					</figcaption>
 				</div>
 			</li>
@@ -144,7 +144,7 @@
 			
 		</ul>
 
-		{{-- <a href="" class="primery-button orange-btm">More Community</a> --}}
+		<a href="{{route('community.show')}}" class="primery-button orange-btm">More Community</a>
 
 
 	</div>

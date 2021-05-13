@@ -149,3 +149,25 @@ Route::get('/sign-in/{socialite}','AdminController@socialiteLogin')->name('socia
 Route::get('/sign-in/{socialite}/redirect','AdminController@socialiteLoginRedirect')->name('socialite.login.redirect');
 
 Route::post('/fetch-product-subcategory', 'ProductController@fetchSubcategory')->name('fetch-product-subcategory');
+
+
+Route::get('view-community','CommunityController@showCommunity')->name('community.show');
+Route::get('view-community-category/{id}','CommunityController@showCatgoryWiseCommunity')->name('community.category.show');
+Route::get('post-details/{id}','CommunityController@showDetailCommunity')->name('community.post.detail');
+
+
+Route::group(['middleware' => 'auth'], function () {
+        Route::get('my-posts','CommunityController@showMyPosts')->name('community.my.post');
+        Route::get('add-posts','CommunityController@createCommunity')->name('community.add.post');
+        Route::post('store-post','CommunityController@storeCommunity')->name('community.store.post');
+        Route::get('/{id}/edit-post','CommunityController@editCommunity')->name('community.edit.post');
+        Route::post('/{id}/update-post','CommunityController@updateCommunity')->name('community.update.post');
+        Route::get('delete-post/{id}','CommunityController@deleteCommunity')->name('community.delete.post');
+        Route::post('/add-comment','CommunityController@addComment')->name('community.add.comment');
+        Route::get('/delete-comment/{id}','CommunityController@deleteComment')->name('community.delete.comment');
+        Route::get('/edit-comment/{commentId}/{communityId}','CommunityController@editComment')->name('community.edit.comment');
+        Route::post('/update-comment','CommunityController@updateComment')->name('community.update.comment');
+        Route::post('/add-like','CommunityController@addLike')->name('community.add.like');
+        Route::post('/remove-like','CommunityController@removeLike')->name('community.remove.like');
+
+});

@@ -4,12 +4,12 @@
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
 		Route::group(['prefix' => 'community'],function(){
-			Route::get('manage','Admin\CommunityController@manageCommunity')->name('admin.community.manage');
-			Route::get('create','Admin\CommunityController@createCommunity')->name('admin.community.create');
-			Route::post('store','Admin\CommunityController@storeCommunity')->name('admin.community.store');
-			Route::get('/{id}/edit','Admin\CommunityController@editCommunity')->name('admin.community.edit');
-			Route::post('/{id}/update','Admin\CommunityController@updateCommunity')->name('admin.community.update');
-			Route::get('delete/{id}','Admin\CommunityController@deleteCommunity')->name('admin.community.delete');
+			Route::get('manage','CommunityController@manageCommunity')->name('admin.community.manage');
+			Route::get('create','CommunityController@createCommunity')->name('admin.community.create');
+			Route::post('store','CommunityController@storeCommunity')->name('admin.community.store');
+			Route::get('/{id}/edit','CommunityController@editCommunity')->name('admin.community.edit');
+			Route::post('/{id}/update','CommunityController@updateCommunity')->name('admin.community.update');
+			Route::get('delete/{id}','CommunityController@deleteCommunity')->name('admin.community.delete');
 		});
 
 	Route::get('/business_profiles', 'BusinessController@BusinessProfiles')->name('admin.business');
