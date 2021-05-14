@@ -1,7 +1,37 @@
 @extends('front.home.master')
 
 @section('title')
-	Directory-grid
+	Deals
+@endsection
+
+@section('head-script')
+
+<script>
+    function initMap() {
+		const map = new google.maps.Map(document.getElementById("map"), {
+			zoom: 4,
+			center: { lat: -28.024, lng: 140.887 },
+		});
+		const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		const markers = locations.map((location, i) => {
+			return new google.maps.Marker({
+			position: location,
+			label: labels[i % labels.length],
+			});
+		});
+		new MarkerClusterer(map, markers, {
+			imagePath:
+			"https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+		});
+	}
+	let locations = [];
+</script>
+  <style type="text/css">
+	#map {
+	  height: 400px;
+	  width: 100%;
+	}
+  </style>
 @endsection
 
 @section('content')
@@ -33,9 +63,9 @@
 					  	<li class="nav-item" role="presentation">
 					    	<a class="nav-link" id="gird-tab" onclick="gridView()"><img class="display-none" src="{{asset('homepage_assets/images/grid.png')}}"></a>
 					  	</li>
-					  	{{-- <li class="nav-item" role="presentation">
-					    	<a class="nav-link" id="map-tab"><img class="display-none" src="{{asset('homepage_assets/images/map.png')}}"></a>
-					  </li> --}}
+					  	<li class="nav-item" role="presentation">
+					    	<a class="nav-link" id="map-tab" onclick="mapView()"><img class="display-none" src="{{asset('homepage_assets/images/map.png')}}"></a>
+					  	</li>
 					</ul>
 				</div>
 				<div class="search_form_wrap">
@@ -102,6 +132,10 @@
 			</div>
 		</div>
 	</div>
+	
+	{{-- map view --}}
+	<div id="map"></div>
+
 </section>
 
 
@@ -109,14 +143,22 @@
 <script>
 	$(document).ready(function() {
 		$(".list-view").hide();
+		$("#map").hide();
 	});
 	function listView() {
 		$(".grid-view").hide();
+		$("#map").hide();
 		$(".list-view").show();
 	}
 	function gridView() {
 		$(".list-view").hide();
+		$("#map").hide();
 		$(".grid-view").show();
+	}
+	function mapView() {
+		$(".list-view").hide();
+		$(".grid-view").hide();
+		$("#map").show();
 	}
 
 </script>
@@ -146,7 +188,15 @@
 					if(data.data.length > 0) {
 						// console.log(data.data.length);
 						$.each(data.data, function(index, value){
-							
+							// map view
+							let lat = Number(value.business.latitude);
+							let lng = Number(value.business.longitude);
+							if(lat != 0 && lng != 0){
+								locations.push({ lat : lat, lng : lng });
+								initMap();
+							}
+
+							// grid view
 							dealHref = "{{route('details',['name' => 'deal', 'id' => 'dealId'])}}";
 							dealHref = dealHref.replace('dealId', value.id);
 

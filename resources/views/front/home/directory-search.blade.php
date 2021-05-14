@@ -1,7 +1,7 @@
 @extends('front.home.master')
 
 @section('title')
-	Directory-grid
+	Directory
 @endsection
 
 @section('head-script')
@@ -65,7 +65,7 @@
 					  	</li>
 					  	<li class="nav-item" role="presentation">
 					    	<a class="nav-link" id="map-tab" onclick="mapView()"><img class="display-none" src="{{asset('homepage_assets/images/map.png')}}"></a>
-					  </li>
+					  	</li>
 					</ul>
 				</div>
 				<div class="search_form_wrap">
@@ -119,8 +119,8 @@
 	</div>
 
 	{{-- map view --}}
-
 	<div id="map"></div>
+	
 </section>
 
 

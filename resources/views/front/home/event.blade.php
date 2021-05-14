@@ -1,7 +1,37 @@
 @extends('front.home.master')
 
 @section('title')
-	Directory-grid
+	Events
+@endsection
+
+@section('head-script')
+
+<script>
+    function initMap() {
+		const map = new google.maps.Map(document.getElementById("map"), {
+			zoom: 4,
+			center: { lat: -28.024, lng: 140.887 },
+		});
+		const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		const markers = locations.map((location, i) => {
+			return new google.maps.Marker({
+			position: location,
+			label: labels[i % labels.length],
+			});
+		});
+		new MarkerClusterer(map, markers, {
+			imagePath:
+			"https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+		});
+	}
+	let locations = [];
+</script>
+  <style type="text/css">
+	#map {
+	  height: 400px;
+	  width: 100%;
+	}
+  </style>
 @endsection
 
 @section('content')
@@ -33,9 +63,9 @@
 					  	<li class="nav-item" role="presentation">
 					    	<a class="nav-link" id="gird-tab" onclick="gridView()"><img class="display-none" src="{{asset('homepage_assets/images/grid.png')}}"></a>
 					  	</li>
-					  	{{-- <li class="nav-item" role="presentation">
-					    	<a class="nav-link" id="map-tab"><img class="display-none" src="{{asset('homepage_assets/images/map.png')}}"></a>
-					  </li> --}}
+					  	<li class="nav-item" role="presentation">
+					    	<a class="nav-link" id="map-tab" onclick="mapView()"><img class="display-none" src="{{asset('homepage_assets/images/map.png')}}"></a>
+					  	</li>
 					</ul>
 				</div>
 				<div class="search_form_wrap">
@@ -89,6 +119,10 @@
 			</div>
 		</div>
 	</div>
+		
+	{{-- map view --}}
+	<div id="map"></div>
+
 </section>
 
 
@@ -96,14 +130,22 @@
 <script>
 	$(document).ready(function() {
 		$(".list-view").hide();
+		$("#map").hide();
 	});
 	function listView() {
 		$(".grid-view").hide();
+		$("#map").hide();
 		$(".list-view").show();
 	}
 	function gridView() {
 		$(".list-view").hide();
+		$("#map").hide();
 		$(".grid-view").show();
+	}
+	function mapView() {
+		$(".list-view").hide();
+		$(".grid-view").hide();
+		$("#map").show();
 	}
 
 </script>
@@ -131,8 +173,17 @@
 				list_view = '';
 				if(data.error == false){
 					if(data.data.length > 0) {
-						// console.log(data.data.length);
+						console.log(data.data.length);
 						$.each(data.data, function(index, value){
+							// map view
+							let lat = Number(value.business.latitude);
+							let lng = Number(value.business.longitude);
+							if(lat != 0 && lng != 0){
+								locations.push({ lat : lat, lng : lng });
+								initMap();
+							}
+
+
 							// grid view
 							eventHref = "{{route('details',['name' => 'event', 'id' => 'eventId'])}}";
 							eventHref = eventHref.replace('eventId', value.id);
@@ -144,7 +195,7 @@
 							grid_view += '<a href ="'+eventHref+'"><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
 							grid_view += '<p class="phone_call"><strong>Event organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
 							grid_view += '<p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p>';
-							grid_view += '<p class="location"><strong>Date: '+'{{date("d M,y", strtotime('+value.start+'))}} - {{date("d M,y", strtotime('+value.end+'))}}'+'</strong></p>';
+							grid_view += '<p class="location"><strong>Date: '+value.start+' to '+value.end+'</strong></p>';
 							// grid_view += '<p class="rating"><img src="{{url('')}}/'+'homepage_assets/images/rating.png'+'">300 reviews</p>';
 							grid_view += '<p class="phone_call"><img src="{{url('')}}/'+'homepage_assets/images/phone-call.png'+'">'+value.business.mobile+'</p>';
 							grid_view += '<p class="history_details">'+value.description+'</p>';
@@ -158,7 +209,7 @@
 							list_view += '<a href ="'+eventHref+'"><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
 							list_view += '<div class="location_details"><p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p><p class="phone_call"><img src="{{url('')}}/'+'homepage_assets/images/phone-call.png'+'">'+value.business.mobile+'</p></div>';
 							list_view += '<p class=""><strong>Event organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
-							list_view += '<p class="location"><strong>Date: '+'{{date("d M,y", strtotime('+value.start+'))}} - {{date("d M,y", strtotime('+value.end+'))}}'+'</strong></p>';
+							list_view += '<p class="location"><strong>Date: '+value.start+' to '+value.end+'</strong></p>';
 							list_view += '<p class="history_details">'+value.description+'</p>';
 							// list_view += '<a href="#"><img src=""></a>';
 							list_view += "</div>"	
