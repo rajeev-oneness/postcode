@@ -12,6 +12,16 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 			Route::get('delete/{id}','CommunityController@deleteCommunity')->name('admin.community.delete');
 		});
 
+	//business csv upload
+	Route::view('/upload-business-csv', 'portal.businessprofile.csv-business-upload')->name('admin.business.upload');
+	Route::post('/store-business-csv', 'Upload\UploadController@businessUpload')->name('admin.business.store.csv');
+
+	//community csv upload
+	Route::view('/upload-community-csv', 'portal.community.csv-community-upload')->name('admin.community.upload');
+	Route::post('/store-community-csv', 'Upload\UploadController@communityUpload')->name('admin.community.store.csv');
+	
+
+
 	Route::get('/business_profiles', 'BusinessController@BusinessProfiles')->name('admin.business');
 
 	Route::post('/add_businessprofile','BusinessController@addBusinessProfile')->name('admin.add_businessprofile');
@@ -219,5 +229,9 @@ Route::get('/faq-edit/{id}', 'FaqController@edit')->name('admin.faq.edit');
 Route::post('/faq-update', 'FaqController@update')->name('admin.faq.update');
 Route::get('/faq-delete/{id}', 'FaqController@delete')->name('admin.faq.delete');
 
+
+//-------------newsletter section----------------//
+Route::get('/nesletter-list', 'NewsletterController@manage')->name('admin.newsletter');
+Route::get('/newsletter-delete', 'NewsletterController@delete')->name('admin.newsletter.delete');
 
 });

@@ -1,6 +1,11 @@
 <?php
 
 Route::group(['middleware' => ['auth', 'business']], function () {
+
+	//deals and events csv upload;
+	Route::post('/store-offer-csv', 'Upload\UploadController@offerUpload')->name('business-admin.offer.store.csv');
+	Route::post('/store-event-csv', 'Upload\UploadController@eventUpload')->name('business-admin.event.store.csv');
+
     // //--------------------------------------------------------------Product Section-----------------------------------------------//
 
 

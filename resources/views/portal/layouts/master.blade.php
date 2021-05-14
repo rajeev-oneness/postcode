@@ -135,6 +135,7 @@
             <li><a class="sidebar-header" href="#"><i data-feather="folder-plus"></i><span>Business</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.business')}}"><i data-feather="server"></i><span>Add Business</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.business.upload')}}"><i data-feather="server"></i><span>CSV Upload</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.manage_businessprofiles')}}"><i data-feather="server"></i><span>Manage Business</span></a></li>
 
               </ul>
@@ -196,6 +197,7 @@
             <li><a class="sidebar-header" href="javascript:void(0)"><i data-feather="align-justify"></i><span>Community</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.community.create')}}"><i data-feather="server"></i><span>Add Community</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.community.upload')}}"><i data-feather="server"></i><span>CSV Upload</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.community.manage')}}"><i data-feather="server"></i><span>Manage Community</span></a></li>
               </ul>
             </li>
@@ -311,9 +313,9 @@
   <!-- Plugin used-->
   <script type="text/javascript">
         @if(Session::has('Success'))
-            swal('Success','{{Session::get('Success')}}');
+            swal("Success!", "{{Session::get('Success')}}", "success");
         @elseif(Session::has('Errors'))
-            swal('Error','{{Session::get('Errors')}}');
+            swal("Failed!", "{{Session::get('Errors')}}", "error");
         @endif
 
         function isNumberKey(evt){

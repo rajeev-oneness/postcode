@@ -16,7 +16,7 @@
 
 </head>
 <body class="bg-lightgray">
-
+@yield('modal')
 <header>
   <nav class="mnb navbar navbar-default fixed-top topnav">
     <div class="container-fluid">
@@ -129,7 +129,16 @@
   <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.js')}}"></script>
   <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
   <script src="{{asset('admin_assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
+  
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+  <script type="text/javascript">
+    @if(Session::has('Success'))
+        swal("Success!", "{{Session::get('Success')}}", "success");
+    @elseif(Session::has('Errors'))
+        swal("Failed!", "{{Session::get('Errors')}}", "error");
+    @endif
+  </script>
 
 </body>
 </html>

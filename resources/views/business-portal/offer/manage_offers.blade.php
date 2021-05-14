@@ -9,10 +9,58 @@
     
 
 @extends('business-portal.layouts.master')
-    
+
+@section('modal')
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">CSV Upload</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+            <form class="needs-validation" method="post" action="{{route('business-admin.offer.store.csv')}}" enctype="multipart/form-data">
+              <input type="hidden" id="hid_id" name="hid_id">
+              {{csrf_field()}}
+              <div class="form-row">
+
+                <div class="mb-3">
+                  <a href="{{route('download.csv', 'offer')}}" class="btn btn-primary" ><i class="fas fa-file-csv"></i> Download Sample CSV</a>
+                </div>
+                <div class="mb-3">
+                  <label for="validationCustomUsername">Upload CSV</label>
+                  <div class="d-flex justify-content-center">
+                    <div class="btn btn-mdb-color btn-rounded">
+                      <input class="form-control offrimg" type="file" id="offer_csv" name="offer_csv" required="">
+                      @error('offer_csv')
+                      <span class="text-danger">{{ $message }}</span>
+                      @enderror
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+          </div>
+      </div>
+  </div>
+</div>    
+@endsection
+
 @section('content')
 <div class="row m-1">
-    <div class="mb-3"><a class="btn btn-primary" href="{{route('business-admin.offers')}}"><i class="fas fa-plus"></i>Add Offer</a></div>
+    <div class="mb-3"><a class="btn btn-primary" href="{{route('business-admin.offers')}}"><i class="fas fa-plus"></i> Add Offer</a></div>
+    <div class="mb-3 ml-3"><a class="btn btn-primary" role="button" href="javascript:void(0);" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-file-csv"></i> Upload CSV</a></div>
+    <!-- Modal -->
+    
 </div>
 <div class="row m-0">
     @if (count($categories) == 0)

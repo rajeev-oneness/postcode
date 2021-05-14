@@ -226,15 +226,15 @@ class UserController extends Controller
         return $data;
     }
 
-    public function subscribeNewsletter(request $request) {
-        $request->validate([
-            'email' =>['required','regex:/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/','unique:newsletters'],
-        ]);
-        $newsletter = new Newsletter;
-        $newsletter->email = $request->email;
-        $newsletter->save();
-        $request->session()->flash('newsletter', 'Subscribed successfully!');
-        return back();
-    }
+    // public function subscribeNewsletter(request $request) {
+    //     $request->validate([
+    //         'email' =>['required','regex:/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/','unique:newsletters'],
+    //     ]);
+    //     $newsletter = new Newsletter;
+    //     $newsletter->email = $request->email;
+    //     $newsletter->save();
+    //     $request->session()->flash('newsletter', 'Subscribed successfully!');
+    //     return back();
+    // }
 
 }

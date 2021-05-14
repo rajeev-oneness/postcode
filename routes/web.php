@@ -26,7 +26,7 @@ Route::get('/thankyou', function () {
     return view('user.thankyou');
 })->name('user.thankyou');
 
-Route::post('/subscribe-newsletter','UserController@subscribeNewsletter')->name('newsletter');
+Route::post('/subscribe-newsletter','NewsletterController@subscribeNewsletter')->name('newsletter');
 
 /****************************************************Course Search*************************************/
 // Route::get('/business_search/{id}', 'UserController@BusinessSearch');
@@ -170,4 +170,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/add-like','CommunityController@addLike')->name('community.add.like');
         Route::post('/remove-like','CommunityController@removeLike')->name('community.remove.like');
 
+        Route::get('/download-csv/{format}', 'Upload\UploadController@downloadCSV')->name('download.csv');
+        Route::get('/download-event-category', 'Upload\UploadController@downloadEventCategoryCSV')->name('download.event.category.csv');
+        Route::get('/download-business-category', 'Upload\UploadController@downloadBusinessCategoryCSV')->name('download.business.category.csv');
+        Route::get('/download-community-category', 'Upload\UploadController@downloadCommunityCategoryCSV')->name('download.community.category.csv');
 });
