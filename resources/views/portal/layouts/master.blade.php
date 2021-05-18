@@ -103,7 +103,7 @@
           </script>
       </div>
     </div>
-    <!-- Page Header Ends                              -->
+    <!-- Page Header Ends -->
     <!-- Page Body Start-->
     <div class="page-body-wrapper">
       <!-- Page Sidebar Start-->
@@ -124,13 +124,24 @@
             <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
+            @if (auth()->user()->userType == 4 && checkPermission()[0]->permission_details->name == 'business_categories')
+              <li><a class="sidebar-header" href="#"><i data-feather="command"></i><span>Business Categories</span><i class="fa fa-angle-right pull-right"></i></a>
+                <ul class="sidebar-submenu">
+                  @if (checkPermission()[0]->add == 1)
+                  <li><a class="sidebar-header" href="{{route('admin.business_categories')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
+                  @endif
+                  <li><a class="sidebar-header" href="{{route('admin.manage_businesscategories')}}"><i data-feather="server"></i><span>Manage Categories</span></a></li>
+                </ul>
+              </li>
+            @else
             <li><a class="sidebar-header" href="#"><i data-feather="command"></i><span>Business Categories</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.business_categories')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.manage_businesscategories')}}"><i data-feather="server"></i><span>Manage Categories</span></a></li>
-
               </ul>
             </li>
+            @endif
+            
 
             <li><a class="sidebar-header" href="#"><i data-feather="folder-plus"></i><span>Business</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
@@ -173,12 +184,15 @@
                 <li><a class="sidebar-header" href="{{route('product.category.add')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
                 <li><a class="sidebar-header" href="{{route('product.category')}}"><i data-feather="server"></i><span>Manage Categories</span></a></li>
               </ul>
-            </li><li><a class="sidebar-header" href="#"><i data-feather="list"></i><span>Products Subcategories</span><i class="fa fa-angle-right pull-right"></i></a>
+            </li>
+            
+            <li><a class="sidebar-header" href="#"><i data-feather="list"></i><span>Products Subcategories</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('product.subcategory.add')}}"><i data-feather="server"></i><span>Add Subcategories</span></a></li>
                 <li><a class="sidebar-header" href="{{route('product.subcategory')}}"><i data-feather="server"></i><span>Manage Subcategories</span></a></li>
               </ul>
             </li>
+            
             <li><a class="sidebar-header" href="#"><i data-feather="box"></i><span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.product')}}"><i data-feather="server"></i><span>Add Products</span></a></li>
@@ -186,7 +200,6 @@
               </ul>
             </li>
             
-
             <li><a class="sidebar-header" href="#"><i data-feather="align-justify"></i><span>Services</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.services')}}"><i data-feather="server"></i><span>Services</span></a></li>
@@ -231,6 +244,14 @@
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.states')}}"><i data-feather="server"></i><span>Add States</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.manage_state')}}"><i data-feather="server"></i><span>Manage States</span></a></li>
+
+              </ul>
+            </li>
+            
+            <li><a class="sidebar-header" href="#"><i data-feather="users"></i><span>Administrative</span><i class="fa fa-angle-right pull-right"></i></a>
+              <ul class="sidebar-submenu">
+                <li><a class="sidebar-header" href="{{route('admin.moderator.create')}}"><i data-feather="server"></i><span>Add Moderator</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.moderator.manage')}}"><i data-feather="server"></i><span>Manage Moderator</span></a></li>
 
               </ul>
             </li>

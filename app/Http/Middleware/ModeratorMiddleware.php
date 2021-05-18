@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
-class AdminMiddleware
+
+class ModeratorMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user() && (Auth::user()->userType == 1 || Auth::user()->userType == 4)){
+        if(Auth::user() && Auth::user()->userType == 4){
             return $next($request);
         }
         return redirect(url()->previous())->with('Errors','You are not authorised to move');

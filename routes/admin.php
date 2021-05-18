@@ -3,14 +3,7 @@
 //--------------------------------------------------------------Business Profile Section-----------------------------------------------//
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
-		Route::group(['prefix' => 'community'],function(){
-			Route::get('manage','CommunityController@manageCommunity')->name('admin.community.manage');
-			Route::get('create','CommunityController@createCommunity')->name('admin.community.create');
-			Route::post('store','CommunityController@storeCommunity')->name('admin.community.store');
-			Route::get('/{id}/edit','CommunityController@editCommunity')->name('admin.community.edit');
-			Route::post('/{id}/update','CommunityController@updateCommunity')->name('admin.community.update');
-			Route::get('delete/{id}','CommunityController@deleteCommunity')->name('admin.community.delete');
-		});
+	
 
 	//business csv upload
 	Route::view('/upload-business-csv', 'portal.businessprofile.csv-business-upload')->name('admin.business.upload');
@@ -19,6 +12,30 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 	//community csv upload
 	Route::view('/upload-community-csv', 'portal.community.csv-community-upload')->name('admin.community.upload');
 	Route::post('/store-community-csv', 'Upload\UploadController@communityUpload')->name('admin.community.store.csv');
+
+
+	//community
+	Route::group(['prefix' => 'community'],function(){
+		Route::get('manage','CommunityController@manageCommunity')->name('admin.community.manage');
+		Route::get('create','CommunityController@createCommunity')->name('admin.community.create');
+		Route::post('store','CommunityController@storeCommunity')->name('admin.community.store');
+		Route::get('/{id}/edit','CommunityController@editCommunity')->name('admin.community.edit');
+		Route::post('/{id}/update','CommunityController@updateCommunity')->name('admin.community.update');
+		Route::get('delete/{id}','CommunityController@deleteCommunity')->name('admin.community.delete');
+	});
+	
+	
+	//moderator
+	Route::group(['prefix' => 'moderator'],function(){
+		Route::get('manage','Moderator\ModeratorController@manage')->name('admin.moderator.manage');
+		Route::get('create','Moderator\ModeratorController@create')->name('admin.moderator.create');
+		Route::post('store','Moderator\ModeratorController@store')->name('admin.moderator.store');
+		Route::get('/{id}/edit','Moderator\ModeratorController@edit')->name('admin.moderator.edit');
+		Route::post('update','Moderator\ModeratorController@update')->name('admin.moderator.update');
+		Route::get('delete/{id}','Moderator\ModeratorController@delete')->name('admin.moderator.delete');
+		Route::get('permissions/{userId}','Moderator\ModeratorController@managePermissions')->name('admin.moderator.manage.permission');
+		Route::post('grant-permissions','Moderator\ModeratorController@grantManagePermissions')->name('admin.moderator.grant.permission');
+	});
 	
 
 

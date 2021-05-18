@@ -39,6 +39,8 @@ class HomeController extends Controller
                 return redirect('user.dashboard');break;
             case 3:
                 return redirect('business.dashboard');break;
+            case 4:
+                return redirect('admin.dashboard');break;
             default:
                 return view('home');break;
         }

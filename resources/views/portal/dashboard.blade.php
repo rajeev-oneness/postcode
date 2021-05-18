@@ -18,6 +18,10 @@
                 <div class="col">
                   <div class="page-header-left">
                     <h3>Dashboard View</h3>
+                    @php
+                    echo "<pre>";
+                        print_r(checkPermission()[0]->edit)
+                    @endphp
                     <!-- <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
                       <li class="breadcrumb-item">Dashboard</li>
