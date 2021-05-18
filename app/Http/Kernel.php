@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'business' => \App\Http\Middleware\BusinessMiddleware::class,
         'moderator' => \App\Http\Middleware\ModeratorMiddleware::class,
         'checkType' => \App\Http\Middleware\CheckType::class,
+        'moderatorPermissions' => \App\Http\Middleware\Permission\PermissionMiddleware::class,
     ];
 
     /**

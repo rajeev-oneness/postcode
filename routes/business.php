@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth', 'business']], function () {
     Route::get('/manage_service','ServiceController@manageServiceView')->name('business-admin.manage_service');
 	Route::get('/edit_services/{id}', 'ServiceController@editServices')->name('edit_services');
 	Route::post('/update_services', 'ServiceController@updateServices')->name('business-admin.update_services');
-	Route::post('/delete_services', 'ServiceController@deleteServices')->name('delete_services');
+	Route::get('/delete_services/{id}', 'ServiceController@deleteServices')->name('delete_services');
 
     //--------------------------------------------------------------Event Category Section-----------------------------------------------//
 
@@ -40,9 +40,9 @@ Route::group(['middleware' => ['auth', 'business']], function () {
 	//--------------------------------------------------------------Manage Event Category Section-----------------------------------------------//
 
 	Route::get('/manage_eventcategories','EventcategoryController@manageEventCategories')->name('business-admin.manage_eventcategories');
-	Route::get('/edit_eventcategories/{id}', 'EventcategoryController@editEventCategories')->name('edit_eventcategories');
+	Route::get('/edit_eventcategories/{id}', 'EventcategoryController@editEventCategories')->name('business-admin.edit_eventcategories');
 	Route::post('/update_eventcategories', 'EventcategoryController@updateEventCategories')->name('business-admin.update_eventcategories');
-	Route::post('/delete_eventcategories', 'EventcategoryController@deleteEventCategories')->name('business-admin.delete_eventcategories');
+	Route::get('/delete_eventcategories/{id}', 'EventcategoryController@deleteEventCategories')->name('business-admin.delete_eventcategories');
 	// Route::post('/event_category_details', 'EventcategoryController@eventCategoryDetails')->name('business-admin.event_category_details');
 
 

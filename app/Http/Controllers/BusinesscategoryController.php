@@ -15,58 +15,8 @@ class BusinesscategoryController extends Controller
      * @return view
      */
     public function businessCategoryDetails(Request $request) {
-        $response = [];
-        $perm = null;
-        $statusCode = 200;
-        $users = array(); //Should be changed #4
-        $search_val = array();
-        try {
-            $draw = $request->draw;
-            $offset = $request->start;
-            $length = $request->length;
-            $search = $request->search ["value"];
-            $order = $request->order;
-            //print_r($order);die;
-
-            $users = BusinessCategory::all();
-            
-            
-            $filtered = BusinessCategory::where(function($q) use ($search) {
-                $q->orwhere('name', 'like', '%' . $search . '%');
-               
-            });
-            $ordered = $filtered;
-            $filtered_count = $filtered->count();
-            //echo count ( $order );die;
-            for ($i = 0; $i < count($order); $i ++) {
-                $ordered = $ordered->orderBy($request->columns [$order [$i] ['column']] ['data'], strtoupper($order [$i] ['dir']));
-            }
-            $page_displayed = $ordered->offset($offset)->limit($length)->get();
-            $data = array();
-            if (!empty($page_displayed)) {
-                foreach ($page_displayed as $user) {
-                    $nestedData['id'] = $user->id;                  
-                    $nestedData['name'] = $user->name;
-                    $view = $edit_button = $user->id;
-                    $nestedData['action'] = array('e' => $edit_button);
-                    $data[] = $nestedData;
-                }
-            }
-            $response = array(
-                "draw" => $draw,
-                "recordsTotal" => $users->count(), //Should be changed #7
-                "recordsFiltered" => $filtered_count,
-                'businesscategory_details' => $data //Should be changed #8
-            );
-        } catch (\Exception $e) {
-            $response = array(
-                'exception' => true,
-                'exception_message' => $e->getMessage()
-            );
-            $statusCode = 400;
-        } finally {
-            return response()->json($response, $statusCode);
-        }
+        $businessCategories = BusinessCategory::all();
+        return view('/portal.businesscategory.manage_businesscategories', compact('businessCategories'));
     }
     /**
     * Go to Business Categories View.
@@ -100,9 +50,8 @@ class BusinesscategoryController extends Controller
     *
     * @return view
     */
-    public function editBusinessCategories(Request $request) {      
-        $lead_edit_id = $request->lead_edit_id;
-        $edited_data = BusinessCategory::where('id', $lead_edit_id)->first();
+    public function editBusinessCategories($lead_edit_id) {
+        $edited_data = BusinessCategory::where('id', decrypt($lead_edit_id))->first();
         return view('portal.businesscategory.edit_businesscategories', compact('edited_data'));
         
     }
@@ -132,9 +81,8 @@ class BusinesscategoryController extends Controller
     *
     * @return view
     */
-    public function deleteBusinessCategories(Request $request) {
-        $lead_delete_id = $request->lead_delete_id;
-        $delete_data = BusinessCategory::where('id', $lead_delete_id)->delete();
+    public function deleteBusinessCategories($lead_delete_id) {
+        $delete_data = BusinessCategory::where('id', decrypt($lead_delete_id))->delete();
         return redirect()->route('admin.manage_businesscategories');
     }
 }

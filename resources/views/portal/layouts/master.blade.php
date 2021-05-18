@@ -124,24 +124,13 @@
             <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
-            @if (auth()->user()->userType == 4 && checkPermission()[0]->permission_details->name == 'business_categories')
-              <li><a class="sidebar-header" href="#"><i data-feather="command"></i><span>Business Categories</span><i class="fa fa-angle-right pull-right"></i></a>
-                <ul class="sidebar-submenu">
-                  @if (checkPermission()[0]->add == 1)
-                  <li><a class="sidebar-header" href="{{route('admin.business_categories')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
-                  @endif
-                  <li><a class="sidebar-header" href="{{route('admin.manage_businesscategories')}}"><i data-feather="server"></i><span>Manage Categories</span></a></li>
-                </ul>
-              </li>
-            @else
+            
             <li><a class="sidebar-header" href="#"><i data-feather="command"></i><span>Business Categories</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
-                <li><a class="sidebar-header" href="{{route('admin.business_categories')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.business_categories.create')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.manage_businesscategories')}}"><i data-feather="server"></i><span>Manage Categories</span></a></li>
               </ul>
             </li>
-            @endif
-            
 
             <li><a class="sidebar-header" href="#"><i data-feather="folder-plus"></i><span>Business</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
@@ -160,6 +149,7 @@
               </ul>
             </li>
 
+            @if (auth()->user()->userType == 1)
             <li><a class="sidebar-header" href="#"><i data-feather="map-pin"></i><span>Company Address</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.manage.address')}}"><i data-feather="server"></i><span>Manage Address</span></a></li>
@@ -171,6 +161,7 @@
                 <li><a class="sidebar-header" href="{{route('admin.manage.about-us')}}"><i data-feather="server"></i><span>Manage About Us</span></a></li>
               </ul>
             </li>
+            @endif
 
             <li><a class="sidebar-header" href="#"><i data-feather="help-circle"></i><span>FAQs</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
@@ -202,7 +193,7 @@
             
             <li><a class="sidebar-header" href="#"><i data-feather="align-justify"></i><span>Services</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
-                <li><a class="sidebar-header" href="{{route('admin.services')}}"><i data-feather="server"></i><span>Services</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.services')}}"><i data-feather="server"></i><span>Add Services</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.manage_service')}}"><i data-feather="server"></i><span>Manage Services</span></a></li>
               </ul>
             </li>
@@ -218,7 +209,7 @@
 
             <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Events Categories</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
-                <li><a class="sidebar-header" href="{{route('events_categories')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
+                <li><a class="sidebar-header" href="{{route('admin.events_categories')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.manage_eventcategories')}}"><i data-feather="server"></i><span>Manage Categories</span></a></li>
 
               </ul>
@@ -228,7 +219,6 @@
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.events')}}"><i data-feather="server"></i><span>Add Events</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.manage_events')}}"><i data-feather="server"></i><span>Manage Events</span></a></li>
-
               </ul>
             </li>
 
@@ -240,21 +230,23 @@
               </ul>
             </li>
 
+            @if (auth()->user()->userType == 1)
             <li><a class="sidebar-header" href="#"><i data-feather="printer"></i><span>State</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.states')}}"><i data-feather="server"></i><span>Add States</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.manage_state')}}"><i data-feather="server"></i><span>Manage States</span></a></li>
-
               </ul>
             </li>
+            @endif
             
+            @if (auth()->user()->userType == 1)
             <li><a class="sidebar-header" href="#"><i data-feather="users"></i><span>Administrative</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.moderator.create')}}"><i data-feather="server"></i><span>Add Moderator</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.moderator.manage')}}"><i data-feather="server"></i><span>Manage Moderator</span></a></li>
-
               </ul>
             </li>
+            @endif
             
 
             <!-- <li><a class="sidebar-header" href="/manage_subjects" ><i data-feather="server"></i><span> Manage Subjects</span></a></li>
@@ -327,6 +319,7 @@
   <script src="{{asset('admin_assets/js/typeahead-search/handlebars.js')}}"></script>
   <script src="{{asset('admin_assets/js/typeahead-search/typeahead-custom.js')}}"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  @yield('script')
   <!-- Plugins JS Ends-->
   <!-- Theme js-->
   <script src="{{asset('admin_assets/js/script.js')}}"></script>

@@ -39,12 +39,12 @@ class ProductController extends Controller
     * @return view
     */
     public function Products(){
-        $businessData= BusinessCategory::all();
+        // $businessData= Business::all();
         $productCategory = ProductCategory::all();
         if(auth()->user()->userType == 2) {
-            return view('user-portal.product.product',compact('businessData', 'productCategory'));
+            return view('user-portal.product.product',compact('productCategory'));
         }
-        return view('portal.product.product',compact('businessData', 'productCategory'));
+        return view('portal.product.product',compact('productCategory'));
     }
 
     public function fetchSubcategory(Request $req) {

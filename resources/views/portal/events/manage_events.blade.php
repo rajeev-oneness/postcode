@@ -41,7 +41,7 @@
                             <table class="app_table">
                                     <thead>
                                         <tr>
-                                            <th width="width: 70px;">Business Category</th>
+                                            <th>Sl.</th>
                                             <th>Name</th>
                                             <th>Event Category</th>
                                             <th width="1px;">Image</th>
@@ -50,15 +50,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($categories1 as $categories2)
+                                        @foreach ($categories1 as $key => $categories2)
                                             <tr>
-                                                <td>{{$categories2->eventbusiesstype->name}}</td>
+                                                <td>{{$key+1}}</td>
                                                 <td>{{$categories2->name}}</td>
                                                 <td>{{$categories2->eventcattype->name}}</td>
                                                 
                                             
                                                 <td><img src='{{url($categories2->image)}}' style='width: 40%;'></td>
-                                                <td><a class="edit_event" href="{{route('edit_event', encrypt($categories2->id))}}"  id=""><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$categories2->id}}"><i class="fa fa-trash"></i></a></td>
+                                                <td>
+                                                    <a class="edit_event" href="{{route('admin.edit_event', encrypt($categories2->id))}}"  id=""><i class="fa fa-edit"></i></a>
+                                                    <a class="delete_app" id="{{$categories2->id}}"><i class="fa fa-trash"></i></a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -73,24 +76,18 @@
             </div>
            
             <script>
-               $(document).ready(function (){
-                $('.app_table').DataTable({
-      'order':[]
-    });
-//     $(".edit_event").click(function(){
-        
-// var app_id=this.id;
-//        var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
-// 			redirectPost('edit_event', fd);
-//     });
-    $(".delete_app").click(function(){
-       if(confirm('Are you sure?')){
-        var appdel_id=this.id;
-        var fd = {'appdel_id': appdel_id,'_token':$('input[name="_token"]').val()};
-		redirectPost('delete_events', fd);
-       }
-    });
-               });
+                $(document).ready(function (){
+                    $('.app_table').DataTable({
+                        'order':[]
+                    });
+                    $(".delete_app").click(function(){
+                        if(confirm('Are you sure?')){
+                            var appdel_id=this.id;
+                            var fd = {'appdel_id': appdel_id,'_token':$('input[name="_token"]').val()};
+                            redirectPost("{{route('admin.delete_events')}}", fd);
+                        }
+                    });
+                });
                var redirectPost = function (url, data = null, method = 'post') {
                     var form = document.createElement('form');
                     form.method = method;

@@ -48,7 +48,7 @@
                       <div class="form-row">
                         <div class="col-md-4 mb-3">
                           <div class="form-group">
-                            <label for="validationCustom05">Business Category</label>
+                            <label for="validationCustom05">Business Name</label>
                             <select id="businessId" name="businessId" class="form-control" required="">
                               <option value="{{ old('businessId') }}">Select</option>
                               @foreach($servicesData as $servicesName)

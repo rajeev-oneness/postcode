@@ -60,7 +60,7 @@
                                                 <td><img src='{{url($service_manage_dt->image)}}' style='width: 40%;'></td>
                                                 <td>
                                                     <a class="edit_app" href="{{route('edit_services', encrypt($service_manage_dt->id))}}" id=""><i class="fa fa-edit"></i></a>
-                                                    <a class="delete_app ml-2" id="{{$service_manage_dt->id}}"><i class="fa fa-trash"></i></a>
+                                                    <a onclick="return confirm('Are you sure?');" href="{{route('delete_services', encrypt($service_manage_dt->id))}}"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -70,45 +70,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Zero Configuration  Ends-->
-
-
+                
             </div>
-           
-            <script>
-                $(document).ready(function (){
-                    // $('.app_table').DataTable({
-                    //     'order':[]
-                    // });
-            //     $(".edit_app").click(function(){
-            //          var app_id=this.id;
-            //          var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
-            // 			redirectPost('edit_services', fd);
-            //     });
-                    $(".delete_app").click(function(){
-                        if(confirm('Are you sure?')) {   
-                            var appdel_id=this.id;
-                            var fd = {'appdel_id': appdel_id,'_token':$('input[name="_token"]').val()};
-                            redirectPost('delete_services', fd);
-                        }
-                    });
-                });
-                var redirectPost = function (url, data = null, method = 'post') {
-                    var form = document.createElement('form');
-                    form.method = method;
-                    form.action = url;
-                    for (var name in data) {
-                        var input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = name;
-                        input.value = data[name];
-                        form.appendChild(input);
-                    }
-                    $('body').append(form);
-                    form.submit();
-                }
-            </script>
-
-
-
     @endsection

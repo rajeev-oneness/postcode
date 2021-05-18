@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\BusinessCategory;
+use App\Model\Business;
 use App\Model\Offer;
 use Validator,Redirect,Response;
 
@@ -16,7 +17,7 @@ class OfferController extends Controller
     * @return view
     */
     public function OfferView(){
-        $busCategData= BusinessCategory::all();
+        $busCategData= Business::all();
         $offerCatData= Offer::all();
         if(auth()->user()->userType == 3){
             $offerCatData= Offer::where('created_by', auth()->user()->id)->get();
@@ -108,7 +109,7 @@ class OfferController extends Controller
 
     public function editOffer($id) {      
      
-        $businesofferData= BusinessCategory::all();
+        $businesofferData= Business::all();
         $editedoffers_data = Offer::findOrFail(decrypt($id));
         // echo json_encode($edited_data);die;
         if(auth()->user()->userType == 3){

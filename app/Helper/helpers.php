@@ -7,9 +7,5 @@
 	{
 		return uniqid().''.date('ymdhis').''.uniqid();
 	}
-	function checkPermission()
-	{
-		$permissions = GrantPermission::where('user_id', auth()->id())->get();
-		return $permissions;
-	}
+	
  ?>

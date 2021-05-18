@@ -104,7 +104,7 @@ class BusinessController extends Controller
 
             $Business->save();
         
-            return redirect()->route('admin.manage_businessprofiles');
+            return redirect()->route('admin.manage_businessprofiles')->with('Success','Business Added Successfully');
         }catch (\Exception $e) {
             report($e);
             return false;
@@ -118,66 +118,8 @@ class BusinessController extends Controller
      */
     public function businessProfileDetails(Request $request)
     {
-        $response = [];
-        $perm = null;
-        $statusCode = 200;
-        $users = array(); //Should be changed #4
-        $search_val = array();
-        try {
-            $draw = $request->draw;
-            $offset = $request->start;
-            $length = $request->length;
-            $search = $request->search["value"];
-            $order = $request->order;
-            //print_r($order);die;
-
-            $users = Business::all();
-
-
-            $filtered = Business::with('businesstype')->where(function ($q) use ($search) {
-                $q->orwhere('name', 'like', '%' . $search . '%');
-                $q->orwhere('address', 'like', '%' . $search . '%');
-                $q->orwhere('image', 'like', '%' . $search . '%');
-            });
-            $ordered = $filtered;
-            $filtered_count = $filtered->count();
-            //echo count ( $order );die;
-            for ($i = 0; $i < count($order); $i++) {
-                $ordered = $ordered->orderBy($request->columns[$order[$i]['column']]['data'], strtoupper($order[$i]['dir']));
-            }
-            $page_displayed = $ordered->offset($offset)->limit($length)->get();
-            $data = array();
-            if (!empty($page_displayed)) {
-                foreach ($page_displayed as $user) {
-                    $nestedData['id'] = $user->id;
-                    $business_category = BusinessCategory::find($user->business_categoryId);
-                    $nestedData['businessId'] = $business_category->name;
-                    $nestedData['address'] = $user->address;
-                    $nestedData['name'] = $user->name;
-                    $nestedData['email'] = $user->email;
-                    $nestedData['abn'] = $user->abn;
-                    $nestedData['mobile'] = $user->mobile;
-                    $nestedData['image'] = $user->image;
-                    $view = $edit_button = $user->id;
-                    $nestedData['action'] = array('e' => $edit_button);
-                    $data[] = $nestedData;
-                }
-            }
-            $response = array(
-                "draw" => $draw,
-                "recordsTotal" => $users->count(), //Should be changed #7
-                "recordsFiltered" => $filtered_count,
-                'businessprofile_details' => $data //Should be changed #8
-            );
-        } catch (\Exception $e) {
-            $response = array(
-                'exception' => true,
-                'exception_message' => $e->getMessage()
-            );
-            $statusCode = 400;
-        } finally {
-            return response()->json($response, $statusCode);
-        }
+        $businesses = Business::all();
+        return view('/portal.businessprofile.manage_businessprofiles', compact('businesses'));
     }
 
     /**
@@ -185,11 +127,10 @@ class BusinessController extends Controller
      *
      * @return view
      */
-    public function deleteBusinessProfiles(Request $request)
+    public function deleteBusinessProfiles($lead_delete_id)
     {
-        $lead_delete_id = $request->lead_delete_id;
-        $delete_data = Business::where('id', $lead_delete_id)->delete();
-        return redirect()->route('admin.manage_businessprofiles');
+        $delete_data = Business::where('id', decrypt($lead_delete_id))->delete();
+        return redirect()->route('admin.manage_businessprofiles')->with('Success','Business Deleted Successfully');
     }
 
     /**
@@ -197,14 +138,13 @@ class BusinessController extends Controller
      *
      * @return view
      */
-    public function editBusinessProfiles(Request $request)
+    public function editBusinessProfiles($lead_edit_id)
     {
         $businessCatData = BusinessCategory::all();
         $productsData = Product::all();
         $servicessData = Service::all();
         $stateData = State::all();
-        $lead_edit_id = $request->lead_edit_id;
-        $businessprofile_data = Business::where('id', $lead_edit_id)->first();
+        $businessprofile_data = Business::where('id', decrypt($lead_edit_id))->first();
         return view('portal.businessprofile.edit_businessprofile', compact('businessprofile_data', 'businessCatData', 'productsData', 'servicessData', 'stateData'));
     }
 
@@ -254,7 +194,7 @@ class BusinessController extends Controller
             $user->postcode = $request->pin_code;
             $user->stateId = $request->state_id;
             $user->save();
-            return redirect()->route('admin.manage_businessprofiles');
+            return redirect()->route('admin.manage_businessprofiles')->with('Success','Business Updated Successfully');
         } catch (\Exception $e) {
             report($e);
             return false;

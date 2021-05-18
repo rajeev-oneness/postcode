@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Service;
 use App\Model\BusinessCategory;
+use App\Model\Business;
 
 use Illuminate\Http\Request;
 use Validator,Redirect,Response;
@@ -18,7 +19,7 @@ class ServiceController extends Controller
      */
     public function Services()
     {
-        $servicesData = BusinessCategory::all();
+        $servicesData = Business::all();
         if(auth()->user()->userType == 3) {
             return view('business-portal.service.services', compact('servicesData'));
         }
@@ -96,7 +97,7 @@ class ServiceController extends Controller
 
     public function editServices($id) {      
      
-        $businessSerData = BusinessCategory::all();
+        $businessSerData = Business::all();
         $editedservice_data = Service::findOrFail(decrypt($id));
         // echo json_encode($edited_data);die;
         if(auth()->user()->userType == 3) {
@@ -151,10 +152,9 @@ class ServiceController extends Controller
      *
      * @return view
      */
-    public function deleteServices(Request $request)
+    public function deleteServices($lead_delete_id)
     {
-        $lead_delete_id = $request->appdel_id;
-        $delete_ser = Service::where('id', $lead_delete_id)->delete();
+        $delete_ser = Service::where('id', decrypt($lead_delete_id))->delete();
         if(auth()->user()->userType == 3) {
             return redirect()->route('business-admin.manage_service');
         }

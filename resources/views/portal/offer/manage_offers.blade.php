@@ -41,7 +41,7 @@
                             <table class="app_table">
                                     <thead>
                                         <tr>
-                                            <th>Business Category</th>
+                                            <th>Sl.</th>
                                             <th width="45px;">Title</th>
                                             <th>Promo Code</th>
                                             <th>Price</th>
@@ -52,19 +52,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-  @foreach ($categories as $offercategories)
-    <tr>
-    <td>{{$offercategories->offercattype->name}}</td>
-    <td>{{$offercategories->title}}</td>
-    <td>{{$offercategories->promo_code}}</td>
-    <td>{{$offercategories->price}}</td>
-    <td>{{$offercategories->expire_date}}</td>
-  
-<td><img src='{{url($offercategories->image)}}' style='width: 40%;'></td>
-<td><a class="edit_event" href="{{route('edit_offer', encrypt($offercategories->id))}}" id=""><i class="fa fa-edit"></i></a><a class="delete_app" id="{{$offercategories->id}}"><i class="fa fa-trash"></i></a></td>
-  </tr>
-@endforeach
-</tbody>
+                                    @foreach ($categories as $key => $offercategories)
+                                        <tr>
+                                            <td>{{$key+1}}</td>
+                                            <td>{{$offercategories->title}}</td>
+                                            <td>{{$offercategories->promo_code}}</td>
+                                            <td>{{$offercategories->price}}</td>
+                                            <td>{{$offercategories->expire_date}}</td>
+                                        
+                                            <td><img src='{{url($offercategories->image)}}' style='width: 40%;'></td>
+                                            <td>
+                                                <a class="edit_event" href="{{route('admin.edit_offer', encrypt($offercategories->id))}}" id=""><i class="fa fa-edit"></i></a>
+                                                <a class="delete_app" id="{{$offercategories->id}}"><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -76,25 +79,19 @@
             </div>
            
             <script>
-               $(document).ready(function (){
-                $('.app_table').DataTable({
-      'order':[]
-    });
-//     $(".edit_event").click(function(){
-        
-// var app_id=this.id;
-//        var fd = {'app_id': app_id,'_token':$('input[name="_token"]').val()};
-// 			redirectPost('edit_offer', fd);
-//     });
-    $(".delete_app").click(function(){
-        if(confirm('Are you sure?')) {
-            var appdel_id=this.id;
-            var fd = {'appdel_id': appdel_id,'_token':$('input[name="_token"]').val()};
-            redirectPost('delete_offers', fd);
-        }
-    });
-               });
-               var redirectPost = function (url, data = null, method = 'post') {
+                $(document).ready(function (){
+                    $('.app_table').DataTable({
+                    'order':[]
+                });
+                    $(".delete_app").click(function(){
+                        if(confirm('Are you sure?')) {
+                            var appdel_id=this.id;
+                            var fd = {'appdel_id': appdel_id,'_token':$('input[name="_token"]').val()};
+                            redirectPost("{{route('admin.delete_offers')}}", fd);
+                        }
+                    });
+                });
+                var redirectPost = function (url, data = null, method = 'post') {
                     var form = document.createElement('form');
                     form.method = method;
                     form.action = url;

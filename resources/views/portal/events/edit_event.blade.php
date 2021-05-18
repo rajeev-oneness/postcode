@@ -47,7 +47,7 @@
                   <div class="form-row">
                     <div class="col-md-4 mb-3">
                       <div class="form-group">
-                        <label for="formrow-inputState">Business Category</label>
+                        <label for="formrow-inputState">Business Name</label>
                         <select id="business_categoryId" name="business_categoryId" class="form-control">
                           <option value="{{old('business_categoryId')}}">Select</option>
                           @foreach($businesserData as $businessName)

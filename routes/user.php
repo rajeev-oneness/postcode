@@ -12,7 +12,6 @@ Route::group(['middleware' => ['auth', 'user']], function () {
 
 	Route::get('/manage_products','ProductController@manageProducts')->name('user.marketplace.manage_products');
 	Route::get('/user_edit_product/{id}', 'ProductController@editProduct')->name('user.marketplace.edit_product');
-	Route::post('/product','ProductController@addProduct')->name('user.marketplace.add_product');
 	Route::post('/update_products', 'ProductController@updateProduct')->name('user.marketplace.update_products');
 	Route::get('/delete_products_details/{id}', 'ProductController@deleteProductsDetails')->name('user.marketplace.delete_product');
 

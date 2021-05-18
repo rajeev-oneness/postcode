@@ -60,4 +60,30 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Model\Business', 'user_id', 'id');
     }
+
+    //for permission
+    public function businessCategory()
+    {
+        return $this->hasOne('App\Model\GrantPermission', 'user_id', 'id');
+    }
+
+    public static function permission($module,$action,$userId){
+        $data = \App\Model\GrantPermission::where('user_id',$userId)->where('permission_id',$module)->where($action,1)->first();
+        // switch($action){
+        //     case 'add' : 
+        //         $data = $data->where('add',1);
+        //         break;
+        //     case 'edit' :
+        //         $data = $data->where('edit',1); 
+        //         break;
+        //     case 'delete' :
+        //         $data = $data->where('delete',1); 
+        //         break;
+        // }
+        // $data = $data->first();
+        if($data){
+            return true;
+        }
+        return false;
+    }
 }

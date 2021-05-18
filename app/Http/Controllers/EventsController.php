@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\EventCategory;
 use App\Model\BusinessCategory;
+use App\Model\Business;
 use App\Model\Event;
 use App\Model\AgeGroup;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class EventsController extends Controller
     * @return view
     */
     public function Events(){
-        $busCateData= BusinessCategory::all();
+        $busCateData= Business::all();
         $eventCatData= EventCategory::all();
         $ageGroups= AgeGroup::all();
         if(auth()->user()->userType == 3) {
@@ -121,7 +122,7 @@ class EventsController extends Controller
     public function editEvent($id) {      
      
        
-        $businesserData= BusinessCategory::all();
+        $businesserData= Business::all();
         $eventerData= EventCategory::all();
         $ageGroups= AgeGroup::all();
         $editedevents_data = Event::findOrFail(decrypt($id));

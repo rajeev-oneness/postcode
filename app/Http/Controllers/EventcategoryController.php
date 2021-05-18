@@ -47,9 +47,8 @@ class EventcategoryController extends Controller
     *
     * @return view
     */
-    public function editEventCategories(Request $request) {      
-        $lead_edit_id = $request->lead_edit_id;
-        $edit_data = EventCategory::where('id', $lead_edit_id)->first();
+    public function editEventCategories($lead_edit_id) {
+        $edit_data = EventCategory::where('id', decrypt($lead_edit_id))->first();
         if(auth()->user()->userType == 3) {
             return view('business-portal.eventcategory.edit_eventcategories',compact('edit_data'));
         }
@@ -84,9 +83,8 @@ class EventcategoryController extends Controller
     *
     * @return view
     */
-    public function deleteEventCategories(Request $request) {
-        $lead_delete_id = $request->lead_delete_id;
-        $edit_data = EventCategory::where('id', $lead_delete_id)->delete();
+    public function deleteEventCategories($lead_delete_id) {
+        $edit_data = EventCategory::where('id', decrypt($lead_delete_id))->delete();
         if(auth()->user()->userType == 3) {
             return redirect()->route('business-admin.manage_eventcategories');
         }
