@@ -48,44 +48,45 @@
                 <p class="history_details">{!! $community_group->description !!}</p>
             </div>
         </li>
-        {{-- @forelse ($community->comments as $comment)
+        @forelse ($discussions as $discussion)
+
         <li>
             <div class="col-12">
                 @auth
-                    @if (auth()->id() == $comment->commented_by)
+                    @if (auth()->id() == $discussion->user->id)
                     <p>
-                        <a href="{{route('community.edit.comment', ['commentId'=>$comment->id, 'communityId'=>$community->id])}}"><i class="fas fa-edit text-success"></i></a>&nbsp;&nbsp;&nbsp;
-                        <a onclick="return confirm('Are you sure?')" href="{{route('community.delete.comment', $comment->id)}}"><i class="fas fa-trash text-danger"></i></a>
+                        <a href="{{route('community.edit.discussion', ['discussionId'=>$discussion->id, 'groupId'=>$community_group->id])}}"><i class="fas fa-edit text-success"></i></a>&nbsp;&nbsp;&nbsp;
+                        <a onclick="return confirm('Are you sure?')" href="{{route('community.delete.discussion', $discussion->id)}}"><i class="fas fa-trash text-danger"></i></a>
                     </p>
                     @endif
                 @endauth
-                <h4 class="place_title bebasnew">{{$comment->user->name}}</h4>
-                <p class="text-muted">(On {{date('d M,y', strtotime($comment->created_at))}})</p>
-                <p class="history_details">{!! $comment->comment !!}</p>
+                <h4 class="place_title bebasnew">{{$discussion->user->name}}</h4>
+                <p class="text-muted">(On {{date('d M,y', strtotime($discussion->created_at))}})</p>
+                <p class="history_details">{!! $discussion->message !!}</p>
             </div>
         </li>
         @empty
         <li>
             <div class="col-12">
-                <h4 class="place_title bebasnew">No Comment!</h4>
+                <h4 class="place_title bebasnew">No Disscussion!</h4>
             </div>
         </li>
-        @endforelse --}}
+        @endforelse
         @auth
         <li>
             <div class="col-12">
-                <h4 class="place_title bebasnew">Add Comment</h4>
-                <form class="needs-validation" method="post" action="{{route('community.add.comment')}}" enctype="multipart/form-data">
+                <h4 class="place_title bebasnew">Add Message</h4>
+                <form class="needs-validation" method="post" action="{{route('community.add.discussion')}}" enctype="multipart/form-data">
                     {{csrf_field()}}
-                    <input type="hidden" name="communityId" value="{{$community_group->id}}">
+                    <input type="hidden" name="group_id" value="{{$community_group->id}}">
                     <div class="form-row">
                       <div class="col-md-12 mb-3">
                         @error('description')<span class="text-danger">{{$message}}</span>@enderror
-                        <textarea name="comment" id="description" class="form-control ckeditor" required>{{old('comment')}}</textarea>
+                        <textarea name="message" id="description" class="form-control ckeditor" required>{{old('message')}}</textarea>
                       </div>
                     </div>
 
-                  <button class="btn btn-primary" id="submit_Community" name="submit_Community" type="submit">Add Comment</button>
+                  <button class="btn btn-primary" id="submit_Community" name="submit_Community" type="submit">Add Message</button>
                 </form>
             </div>
         </li>
