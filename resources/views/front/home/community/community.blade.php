@@ -14,7 +14,7 @@
     }
   </style>
 
-  <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>  
+  <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 @endsection
 
 
@@ -37,7 +37,7 @@
     @auth
     <a href="{{route('community.my.post')}}" class="primery-button orange-btm mr-auto">My Posts</a>
     <a href="{{route('community.add.post')}}" class="primery-button orange-btm m-3">Add Posts</a>
-    <a href="{{route('community.add.post')}}" class="primery-button orange-btm m-3">My Groups</a>
+    <a href="{{route('community.my.groups')}}" class="primery-button orange-btm m-3">My Groups</a>
     @endauth
     @guest
 		<a href="{{route('adminlogin')}}" class="primery-button orange-btm mr-auto">Login</a>
