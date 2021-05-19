@@ -42,7 +42,7 @@
     @guest
 		<a href="{{route('adminlogin')}}" class="primery-button orange-btm mr-auto">Login</a>
     @endguest
-		<a href="{{route('adminlogin')}}" class="primery-button orange-btm m-3">Community Groups</a>
+		<a href="{{route('community.all.groups')}}" class="primery-button orange-btm m-3">Community Groups</a>
     <div class="row my-5">
       <div class="col-sm-2">
         <div class="list-group">

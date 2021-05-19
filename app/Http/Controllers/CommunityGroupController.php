@@ -19,6 +19,14 @@ class CommunityGroupController extends Controller
     	return view('front.home.community.my-groups',compact('community_groups'));
     }
 
+    public function showAllGroups()
+    {
+        $community_all_groups = CommunityGroup::orderBy('created_at', 'DESC')->get();
+        // dd($community_all_groups);
+    	return view('front.home.community.community-groups',compact('community_all_groups'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -53,12 +61,14 @@ class CommunityGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function show($id)
-    // {
-    //     $id = base64_decode($id);
-    // 	$community_group = CommunityGroup::where('id',$id)->first();
-    //     return view('front.home.community.edit-groups',compact('community_group'));
-    // }
+    public function showDetailCommunityGroup($id)
+    {
+        $id = base64_decode($id);
+    	$community_group = CommunityGroup::where('id',$id)->first();
+        // dd($community_group);
+    	// $liked = CommunityLike::where('communityId', $community_group->id)->where('liked_by',auth()->id())->first();
+        return view('front.home.community.community-group-details',compact('community_group'));
+    }
 
     /**
      * Show the form for editing the specified resource.

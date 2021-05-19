@@ -155,6 +155,8 @@ Route::post('/fetch-product-subcategory', 'ProductController@fetchSubcategory')-
 Route::get('view-community','CommunityController@showCommunity')->name('community.show');
 Route::get('view-community-category/{id}','CommunityController@showCatgoryWiseCommunity')->name('community.category.show');
 Route::get('post-details/{id}','CommunityController@showDetailCommunity')->name('community.post.detail');
+Route::get('community-groups','CommunityGroupController@showAllGroups')->name('community.all.groups');
+Route::get('community-group-details/{id}','CommunityGroupController@showDetailCommunityGroup')->name('community.group.detail');
 
 
 Route::group(['middleware' => 'auth'], function () {
