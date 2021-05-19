@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('/', function () {
     return view('user.index');
 })->name('user.welcome');
@@ -176,4 +175,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/download-event-category', 'Upload\UploadController@downloadEventCategoryCSV')->name('download.event.category.csv');
         Route::get('/download-business-category', 'Upload\UploadController@downloadBusinessCategoryCSV')->name('download.business.category.csv');
         Route::get('/download-community-category', 'Upload\UploadController@downloadCommunityCategoryCSV')->name('download.community.category.csv');
+        //community group routes
+        Route::get('my-groups','CommunityGroupController@showMyGroups')->name('community.my.groups');
+        Route::get('add-groups','CommunityGroupController@createCommunityGroups')->name('community.add.groups');
+        Route::post('store-groups','CommunityGroupController@storeCommunityGroups')->name('community.store.group');
+        Route::get('/{id}/edit-groups','CommunityGroupController@editCommunityGroups')->name('community.edit.group');
+        Route::post('/{id}/update-groups','CommunityGroupController@updateCommunityGroups')->name('community.update.group');
+        Route::get('delete-groups/{id}','CommunityGroupController@deleteCommunityGroups')->name('community.delete.group');
 });
+
+
