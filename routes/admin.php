@@ -159,12 +159,12 @@ Route::group(['middleware' => ['auth', 'admin', 'moderatorPermissions']], functi
 
 	Route::post('/delete_states', 'StateController@deleteStates')->name('delete_states');
 
-	// //----------------------------Add PostCode Section--------------------------//
+	//----------------------------Add PostCode Section--------------------------//
 	// Route::get('/postcode', 'PostalController@postcodeView')->name('admin.postcode');
 
 	// Route::post('/add_states','PostalController@addStates')->name('admin.add_states');
 
-	// //------------------Manage PostCode Section-----------------//
+	//------------------Manage PostCode Section-----------------//
 
 	// Route::get('/manage_postcode','PostalController@managePostcodeView')->name('admin.manage_postcode');
 
@@ -173,17 +173,17 @@ Route::group(['middleware' => ['auth', 'admin', 'moderatorPermissions']], functi
 
 	Route::post('update_password', 'AdminController@updatePassword')->name('admin.update_password');
 
-	//--------------------------------------------------------------Address Section-----------------------------------------------//
+	//------------------------------------Address Section-----------------------------//
 	Route::get('manage-address', 'ContactController@manageAddress')->name('admin.manage.address');	
 
 	Route::post('update-address', 'ContactController@updateAddress')->name('admin.update.address');
 
-	//--------------------------------------------------------------About us Section-----------------------------------------------//
+	//--------------------------------About us Section-----------------------------//
 	Route::get('manage-about-us', 'AboutUsController@manageAbout')->name('admin.manage.about-us');	
 
 	Route::post('update-about-us', 'AboutUsController@updateAbout')->name('admin.update.about-us');
 
-	//-------------newsletter section----------------//
-	Route::get('/nesletter-list', 'NewsletterController@manage')->name('admin.newsletter');
-	Route::get('/newsletter-delete', 'NewsletterController@delete')->name('admin.newsletter.delete');
+	//-------------------------------------newsletter section-------------------------------//
+	// Route::get('/nesletter-list', 'NewsletterController@manage')->name('admin.newsletter');
+	// Route::get('/newsletter-delete', 'NewsletterController@delete')->name('admin.newsletter.delete');
 });
