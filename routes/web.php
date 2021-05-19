@@ -184,6 +184,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/{id}/edit-groups','CommunityGroupController@editCommunityGroups')->name('community.edit.group');
         Route::post('/{id}/update-groups','CommunityGroupController@updateCommunityGroups')->name('community.update.group');
         Route::get('delete-groups/{id}','CommunityGroupController@deleteCommunityGroups')->name('community.delete.group');
+        Route::post('/add-discussion','CommunityGroupController@addDiscussion')->name('community.add.discussion');
+        Route::get('/delete-discussion/{id}','CommunityGroupController@deleteDiscussion')->name('community.delete.discussion');
+        Route::get('/edit-discussion/{discussionId}/{groupId}','CommunityGroupController@editDiscussion')->name('community.edit.discussion');
+        Route::post('/update-discussion/{$id}','CommunityGroupController@updateDiscussion')->name('community.update.discussion');
 });
 
 

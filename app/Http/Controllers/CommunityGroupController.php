@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Community;
 use App\Model\CommunityGroup;
+use App\Model\CommunityGroupDetail;
+use App\Model\CommunityGroupDiscussion;
 use Illuminate\Http\Request;
 
 class CommunityGroupController extends Controller
@@ -65,9 +68,12 @@ class CommunityGroupController extends Controller
     {
         $id = base64_decode($id);
     	$community_group = CommunityGroup::where('id',$id)->first();
+        $discussions = CommunityGroupDiscussion::where('group_id', $id)->get();
+        // dd($discussions);
+        // $communities = CommunityGroupDetail::where('group_id', $id)->get();
         // dd($community_group);
     	// $liked = CommunityLike::where('communityId', $community_group->id)->where('liked_by',auth()->id())->first();
-        return view('front.home.community.community-group-details',compact('community_group'));
+        return view('front.home.community.community-group-details',compact('community_group', 'discussions'));
     }
 
     /**
@@ -111,5 +117,41 @@ class CommunityGroupController extends Controller
     {
         CommunityGroup::where('id',$id)->delete();
         return redirect(route('community.my.groups'))->with('Success','Community Group Deleted Success');
+    }
+
+    //discussion functions
+    public function addDiscussion(Request $req)
+    {
+        // dd($req);
+        $req->validate([
+    		'group_id' => 'required|min:1|numeric',
+    		'message' => 'required',
+    	]);
+        $discussion = new CommunityGroupDiscussion();
+    	$discussion->group_id = $req->group_id;
+    	$discussion->message = $req->message;
+    	$discussion->user_id = auth()->id();
+    	$discussion->save();
+        return redirect()->back()->with('Success','Message added successfully');
+    }
+    public function editDiscussion($discussionId,$groupId)
+    {
+        $discussion = CommunityGroupDiscussion::find($discussionId);
+        return view('front.home.community.edit-discussion-message',compact('discussion', 'groupId'));
+    }
+    public function updateDiscussion(Request $req, $id)
+    {
+        $req->validate([
+    		'message' => 'required',
+    	]);
+        $discussion = CommunityGroupDiscussion::find($id);
+    	$discussion->message = $req->message;
+    	$discussion->save();
+        return redirect()->route('community.group.detail',base64_encode($req->$id))->with('Success','Comment edited successfully');
+    }
+    public function deleteDiscussion($id)
+    {
+        CommunityGroupDiscussion::where('id',$id)->delete();
+        return redirect()->back()->with('Success','Message deleted successfully');
     }
 }
