@@ -49,9 +49,9 @@ class CommunityController extends Controller
     	$community->created_by = auth()->id();
     	$community->save();
         if(auth()->user()->userType != 1) {
-    	    return redirect(route('community.my.post'))->with('Success','Community Added Success');
+    	    return redirect(route('community.my.post'))->with('Success','Community Added!');
         } else {
-            return redirect(route('admin.community.manage'))->with('Success','Community Added Success');
+            return redirect(route('admin.community.manage'))->with('Success','Community Added!');
         }
     	
     }
@@ -89,9 +89,9 @@ class CommunityController extends Controller
     	$community->description = $req->description;
     	$community->save();
         if(auth()->user()->userType != 1) {
-    	    return redirect(route('community.my.post'))->with('Success','Community Updated Success');
+    	    return redirect(route('community.my.post'))->with('Success','Community Updated!');
         } else {
-            return redirect(route('admin.community.manage'))->with('Success','Community Updated Success');
+            return redirect(route('admin.community.manage'))->with('Success','Community Updated!');
         }
     }
 
@@ -99,9 +99,9 @@ class CommunityController extends Controller
     {
     	Community::where('id',$id)->delete();
         if(auth()->user()->userType != 1) {
-    	    return redirect(route('community.my.post'))->with('Success','Community Deleted Success');
+    	    return redirect(route('community.my.post'))->with('Success','Community Deleted!');
         } else {
-            return redirect(route('admin.community.manage'))->with('Success','Community Deleted Success');
+            return redirect(route('admin.community.manage'))->with('Success','Community Deleted!');
         }
     }
 
@@ -140,7 +140,7 @@ class CommunityController extends Controller
     	$comment->comment = $req->comment;
     	$comment->commented_by = auth()->id();
     	$comment->save();
-        return redirect()->back()->with('Success','Comment added successfully');
+        return redirect()->back()->with('Success','Comment added!');
     }
     public function editComment($commentId,$communityId)
     {
@@ -161,7 +161,7 @@ class CommunityController extends Controller
     public function deleteComment($id)
     {
         CommunityComment::where('id',$id)->delete();
-        return redirect()->back()->with('Success','Comment deleted successfully');
+        return redirect()->back()->with('Success','Comment deleted!');
     }
 
     //like function
