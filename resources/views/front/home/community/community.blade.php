@@ -66,9 +66,9 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
     @if(Session::has('Success'))
-        swal('Success','{{Session::get('Success')}}');
+        swal('Success','{{Session::get('Success')}}', 'success');
     @elseif(Session::has('Errors'))
-        swal('Error','{{Session::get('Errors')}}');
+        swal('Error','{{Session::get('Errors')}}', 'error');
     @endif
 </script>
 @endsection
