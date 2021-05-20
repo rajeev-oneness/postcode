@@ -183,7 +183,6 @@ class FrontController extends Controller
     public function buyNow(Request $request,$product_ids)
     {
         $product_id_array = decrypt($product_ids);
-        dd($product_id_array);
         $total_price = 0;
         foreach ($product_id_array as $product_id) {
             $product = Product::findorFail($product_id);
