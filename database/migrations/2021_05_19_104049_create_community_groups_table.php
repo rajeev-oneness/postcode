@@ -16,8 +16,6 @@ class CreateCommunityGroupsTable extends Migration
         Schema::create('community_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->longText('name');
-            $table->string('image');
-            $table->longText('description');
             $table->integer('created_by');
             $table->softDeletes();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
