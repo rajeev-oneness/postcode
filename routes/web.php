@@ -139,7 +139,7 @@ Route::get('/faq', 'FaqController@index')->name('faq');
 //product purchaase
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/buy-now/product/{productId}', 'FrontController@buyNow')->name('book_now.product');
-    Route::get('item/product/payment/{productId}','FrontController@successfullPayment')->name('item.product.paymet');
+    Route::get('item/product/payment/{productId}','FrontController@successfullPayment')->name('item.product.payment');
 });
 // Stripe Payment Route
 Route::post('stripe/payment/form_submit','StripePaymentController@stripePostForm_Submit')->name('stripe.payment.form_submit');

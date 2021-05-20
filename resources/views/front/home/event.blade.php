@@ -89,7 +89,7 @@
 					  		<ul class="history_list">
 								{{-- grid data rendered here --}}
 					  		</ul>
-					  		<a href="#" class="orange-btm load_btn" id="load-more1">Load More</a>
+					  		<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more1">Load More</a>
 					  	</div>
 					</div>
 				</div>
@@ -112,7 +112,7 @@
 					  		<ul class="search_list_items search_list_items-mod" id="list-data">
 								{{-- list data rendered here --}}
 					  		</ul>
-					  		<a href="#" class="orange-btm load_btn" id="load-more2">Load More</a>
+					  		<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more2">Load More</a>
 					  	</div>
 					</div>
 				</div>

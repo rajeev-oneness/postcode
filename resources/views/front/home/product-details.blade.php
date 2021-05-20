@@ -27,7 +27,10 @@
                 <h4 class="place_title bebasnew">{{$data[0]->name}}</h4>
                 <h4 class="place_title bebasnew">${{$data[0]->price}}</h4>
                 <p class="history_details">{{$data[0]->details}}</p>
-                <a href="{{route('book_now.product',['id' => encrypt($data[0]->id)])}}" class="orange-btm load_btn text-center">Buy Now</a>
+                @php
+                    $product_ids = [$data[0]->id];
+                @endphp
+                <a href="{{route('book_now.product',['id' => encrypt($product_ids)])}}" class="orange-btm load_btn text-center">Buy Now</a>
             </div>
         </li>
     </ul>
