@@ -49,15 +49,15 @@
             <div class="menu_wrap">
                 <a href="{{route('user.welcome')}}" class="logo_icon"><img src="{{asset('user_assets/image/logo.png')}}"></a>
             </div>
-            <div class="row">
-                <div class="col-12 col-md-6">
+            <div class="row m-0">
+                <div class="col-12 col-md-6 pl-0 pr-0 pl-md-2 pr-md-2">
                     <div class="banner_inner">
                         <h2 class="banner_title font-bebas text-white">OUR POSTCODE</h2>
                         <h2 class="banner_title2 text-white">Where Local Matters</h2>
                         <p class="banner_content text-white">Australia’s Newest Website to Help Local Businesses Promote Achieve Marketing Success</p>
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-6 pl-0 pr-0 pl-md-2 pr-md-2">
               
                     <div class="form_wrapper">
                         <img src="{{asset('user_assets/image/form-border.png')}}" class="form_bg">
@@ -72,8 +72,8 @@
 
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">
-                                {{-- <label>BUSINESS NAME</label> --}}
-                                <input type="text" name="name" value="{{old('name')}}" id="inputSearchTextFilter" class="textbox" placeholder="BUSINESS NAME" autofocus required>
+                                <label>BUSINESS NAME</label>
+                                <input type="text" name="name" value="{{old('name')}}" id="inputSearchTextFilter" class="textbox" autofocus required>
                                 @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -81,8 +81,8 @@
                             @else
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">
-                                {{-- <label>BUSINESS NAME</label> --}}
-                                <input type="text" name="name" value="{{old('name')}}" id="name" class="textbox" required placeholder="BUSINESS NAME">
+                                <label>BUSINESS NAME</label>
+                                <input type="text" name="name" value="{{old('name')}}" id="name" class="textbox" required>
                                 @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -104,8 +104,8 @@
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/pin.png')}}">
-                                {{-- <label>ADDRESS</label> --}}
-                                <input type="text" name="address" value="{{ old('address') }}" id="address" class="textbox" maxlength="255" placeholder="ADDRESS" required>
+                                <label>ADDRESS</label>
+                                <input type="text" name="address" value="{{ old('address') }}" id="address" class="textbox" maxlength="255" required>
                                 @error('address')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -115,8 +115,8 @@
 
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/postcode.png')}}">
-                                {{-- <label>pincode</label> --}}
-                                <input type="text" name="pincode" value="{{ old('pincode') }}" id="pincode" class="textbox" maxlength="4" placeholder="PINCODE" onkeypress="return isNumberKey(event);" required>
+                                <label>PINCODE</label>
+                                <input type="text" name="pincode" value="{{ old('pincode') }}" id="pincode" class="textbox" maxlength="4"  onkeypress="return isNumberKey(event);" required>
                                 @error('pincode')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -124,39 +124,39 @@
 
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/abn.png')}}">
-                                {{-- <label>ABN</label> --}}
-                                <input type="text" name="abn" value="{{ old('abn') }}" id="abn" class="textbox" onkeypress="return isNumberKey(event);" placeholder="ABN">
+                                <label>ABN</label>
+                                <input type="text" name="abn" value="{{ old('abn') }}" id="abn" class="textbox" onkeypress="return isNumberKey(event);">
                                 @error('abn')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/team.png')}}">
-                                {{-- <label>COMPANY WEBSITE</label> --}}
-                                <input type="text" name="company_website" value="{{ old('company_website') }}" id="company_website" class="textbox" placeholder="COMPANY WEBSITE">
+                                <label>COMPANY WEBSITE</label>
+                                <input type="text" name="company_website" value="{{ old('company_website') }}" id="company_website" class="textbox">
                                 @error('company_website')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/email-icon.png')}}">
-                                {{-- <label>EMAIL ADDRESS</label> --}}
-                                <input type="email" name="email" value="{{ old('email') }}" id="email" class="textbox" required placeholder="EMAIL ADDRESS">
+                                <label>EMAIL ADDRESS</label>
+                                <input type="email" name="email" value="{{ old('email') }}" id="email" class="textbox" required>
                                 @error('email')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/Science-Business-icon.png')}}">
-                                {{-- <label>PHONE NO.</label> --}}
-                                <input type="text" name="mobile" value="{{ old('mobile') }}" id="mobile" class="textbox" onkeypress="return isNumberKey(event);" placeholder="PHONE NO." required>
+                                <label>PHONE NO.</label>
+                                <input type="text" name="mobile" value="{{ old('mobile') }}" id="mobile" class="textbox" onkeypress="return isNumberKey(event);" required>
                                 @error('mobile')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/upload.png')}}">
-                                <label>UPLOAD AN IMAGE</label>
+                                <label style="top:20px;">UPLOAD AN IMAGE</label>
                                 <input type="file" name="image" value="{{ old('image') }}" id="image" required class="textbox">
                                 @error('image')
                                 <span class="text-danger">{{ $message }}</span>
@@ -166,16 +166,16 @@
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/open.png')}}">
-                                {{-- <label>opening hours</label> --}}
-                                <input type="text" name="open_hour" value="{{ old('open_hour') }}" id="open_hour" class="textbox" required placeholder="OPENING HOUR">
+                                <label>opening hours</label>
+                                <input type="text" name="open_hour" value="{{ old('open_hour') }}" id="open_hour" class="textbox" required>
                                 @error('open_hour')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="sign_in_form">
                                 <img src="{{asset('user_assets/image/closed.png')}}">
-                                {{-- <label>opening hours</label> --}}
-                                <input type="text" name="closing_hour" value="{{ old('closing_hour') }}" id="closing_hour" class="textbox" required placeholder="CLOSING HOUR">
+                                <label>opening hours</label>
+                                <input type="text" name="closing_hour" value="{{ old('closing_hour') }}" id="closing_hour" class="textbox" required>
                                 @error('closing_hour')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror

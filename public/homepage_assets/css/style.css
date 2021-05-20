@@ -441,7 +441,7 @@ header {
     padding: 53px 0;
 }
 .community-list {
-    margin: 55px 0 !important;
+    margin: 55px 0 90px 0 !important;
 }
 .community-list li {
     text-align: left;
@@ -467,9 +467,11 @@ header {
 .slick-dots li button:before {
     width: 24px;
     height: 24px;
-    font-size: 73px;
+    font-size: 48px;
 }
-
+.slick-dots li{
+	margin:0px
+}
 .slick-dots li.slick-active button:before {
     opacity: 1;
     color: #012d6a;
@@ -1170,7 +1172,54 @@ footer {
 .location_details p:last-child {
     margin-right: 0;
 }
+.list-group {
+    border-radius: 0;
+}
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: .75rem 1.25rem;
+    background-color: #022d6a;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    color: #fff;
+    font-size: 14px;
+    border-left: 4px solid #022d6a;
+}
+.list-group-item-action:focus, .list-group-item-action:hover {
+    z-index: 1;
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #022d6a;
+	border-left: 4px solid #f25d23;
+}
+.border-dark{
+	border:0 !important;
+	border-color:transparent !important;
+	padding:0px !important;
+}
 
+.community_table tr th{
+	border:none;
+	padding:10px;
+	background:#f25d23;
+	color:#fff;
+	font-size:14px;
+	border-bottom: 5px solid #ffffff;
+	border-right: 5px solid #ffffff;
+}
+
+.community_table tr td{
+	padding:10px;
+	font-size:13px;
+	border:0;
+}
+.w-150{
+	width:150px !important;
+	
+}
+.w-200{
+	width:200px !important;
+}
 /*=====Responsive
 =====================*/
 

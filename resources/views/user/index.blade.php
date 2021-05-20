@@ -26,7 +26,7 @@
                 <ul class="menu_icon">
                     <li>
                         <a href="{{route('default.homepage')}}">
-                            {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
+                           <img src="{{asset('user_assets/image/home-icon.png')}}">
                             Homepage
                         </a>
                     </li>
@@ -62,7 +62,7 @@
                     @else
                         <li>
                             <a href="{{route('adminlogin')}}">
-                                {{-- <img src="{{asset('user_assets/image/log-icon.png')}}"> --}}
+                                <img src="{{asset('user_assets/image/log-icon.png')}}">
                                 Log in
                             </a>
                         </li>
