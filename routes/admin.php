@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 //---------------------------------Business Profile Section-------------------------------//
 
 Route::group(['middleware' => ['auth', 'admin', 'moderatorPermissions']], function () {
-	
+
 	//----------------------------------Moderator---------------------//
 	Route::group(['prefix' => 'moderator'],function(){
 		Route::get('manage','Moderator\ModeratorController@manage')->name('admin.moderator.manage');
@@ -15,7 +15,7 @@ Route::group(['middleware' => ['auth', 'admin', 'moderatorPermissions']], functi
 		Route::get('permissions/{userId}','Moderator\ModeratorController@managePermissions')->name('admin.moderator.manage.permission');
 		Route::post('grant-permissions','Moderator\ModeratorController@grantManagePermissions')->name('admin.moderator.grant.permission');
 	});
-	
+
 	//----------------------------------Business Category Section---------------------//
 	Route::group(['prefix' => 'business_categories'],function () {
 		Route::get('/create', 'BusinesscategoryController@businessCategories')->name('admin.business_categories.create');
@@ -25,8 +25,8 @@ Route::group(['middleware' => ['auth', 'admin', 'moderatorPermissions']], functi
 		Route::post('/update', 'BusinesscategoryController@updateBusinessCategories')->name('admin.update_businesscategories');
 		Route::get('/delete/{id}', 'BusinesscategoryController@deleteBusinessCategories')->name('admin.delete_businesscategories');
 	});
-	
-	
+
+
 	//---------------------------- Manage Business Profile Section--------------------//
 	Route::group(['prefix' => 'business'],function () {
 		Route::get('/business_profiles/create', 'BusinessController@BusinessProfiles')->name('admin.business');
@@ -40,7 +40,7 @@ Route::group(['middleware' => ['auth', 'admin', 'moderatorPermissions']], functi
 		Route::post('/store/business-csv', 'Upload\UploadController@businessUpload')->name('admin.business.store.csv');
 	});
 
-	
+
 	//------------------------------customer section----------------------------------//
 	Route::group(['prefix' => 'customer'],function () {
 		Route::get('/manage', 'CustomerController@index')->name('admin.customers');
@@ -88,7 +88,7 @@ Route::group(['middleware' => ['auth', 'admin', 'moderatorPermissions']], functi
 		Route::get('/manage','ProductController@manageProducts')->name('admin.manage_products');
 		Route::get('/edit/{id}', 'ProductController@editProduct')->name('edit_products');
 		Route::post('/update', 'ProductController@updateProduct')->name('admin.update_products');
-		Route::get('/delete/{id}', 'ProductController@deleteProductsDetails')->name('admin.delete_product');	
+		Route::get('/delete/{id}', 'ProductController@deleteProductsDetails')->name('admin.delete_product');
 	});
 
 	//---------------------------------------ServicesSection----------------------------------//
@@ -124,7 +124,7 @@ Route::group(['middleware' => ['auth', 'admin', 'moderatorPermissions']], functi
 		Route::get('/delete/{id}', 'EventcategoryController@deleteEventCategories')->name('admin.delete_eventcategories');
 		// Route::post('/event_category_details', 'EventcategoryController@eventCategoryDetails')->name('admin.event_category_details');
 	});
-	
+
 	//-----------------------------------Event Section--------------------------------------//
 	Route::group(['prefix' => 'event'],function(){
 		Route::get('/create', 'EventsController@Events')->name('admin.events');
@@ -134,7 +134,7 @@ Route::group(['middleware' => ['auth', 'admin', 'moderatorPermissions']], functi
 		Route::post('/update', 'EventsController@updateEvent')->name('admin.update_event');
 		Route::post('/delete', 'EventsController@deleteEvents')->name('admin.delete_events');
 	});
-	
+
 	//---------------------------------Offers Section-------------------------------//
 	Route::group(['prefix' => 'offer'],function(){
 		Route::get('/create', 'OfferController@OfferView')->name('admin.offers');
@@ -169,21 +169,34 @@ Route::group(['middleware' => ['auth', 'admin', 'moderatorPermissions']], functi
 	// Route::get('/manage_postcode','PostalController@managePostcodeView')->name('admin.manage_postcode');
 
 	//----------------------Admin Logout Section---------------------------//
-	Route::get('change_password', 'AdminController@changePassword')->name('admin.change_password');	
+	Route::get('change_password', 'AdminController@changePassword')->name('admin.change_password');
 
 	Route::post('update_password', 'AdminController@updatePassword')->name('admin.update_password');
 
 	//------------------------------------Address Section-----------------------------//
-	Route::get('manage-address', 'ContactController@manageAddress')->name('admin.manage.address');	
+	Route::get('manage-address', 'ContactController@manageAddress')->name('admin.manage.address');
 
 	Route::post('update-address', 'ContactController@updateAddress')->name('admin.update.address');
 
 	//--------------------------------About us Section-----------------------------//
-	Route::get('manage-about-us', 'AboutUsController@manageAbout')->name('admin.manage.about-us');	
+	Route::get('manage-about-us', 'AboutUsController@manageAbout')->name('admin.manage.about-us');
 
 	Route::post('update-about-us', 'AboutUsController@updateAbout')->name('admin.update.about-us');
 
 	//-------------------------------------newsletter section-------------------------------//
 	// Route::get('/nesletter-list', 'NewsletterController@manage')->name('admin.newsletter');
 	// Route::get('/newsletter-delete', 'NewsletterController@delete')->name('admin.newsletter.delete');
+
+    //-------------------------------------Community Groups-----------------------------------------//
+	Route::group(['prefix' => 'community-group'],function(){
+		Route::get('manage','CommunityGroupController@manageCommunityGroups')->name('admin.community-groups.manage');
+		Route::get('create','CommunityGroupController@createCommunityGroups')->name('admin.community-groups.create');
+		Route::post('store','CommunityGroupController@storeCommunityGroups')->name('admin.community-groups.store');
+		Route::get('/{id}/edit','CommunityGroupController@editCommunityGroups')->name('admin.community-groups.edit');
+		Route::post('/{id}/update','CommunityGroupController@updateCommunityGroups')->name('admin.community-groups.update');
+		Route::get('delete/{id}','CommunityGroupController@deleteCommunityGroups')->name('admin.community-groups.delete');
+		//community csv upload
+		// Route::view('/create/community-csv', 'portal.community.csv-community-upload')->name('admin.community.upload');
+		// Route::post('/store/community-csv', 'Upload\UploadController@communityUpload')->name('admin.community.store.csv');
+	});
 });
