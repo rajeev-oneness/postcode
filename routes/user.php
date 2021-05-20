@@ -44,4 +44,8 @@ Route::group(['middleware' => ['auth', 'user']], function () {
     
 });
 
+Route::group(['middleware' => 'auth'],function () {
+    Route::post('/product/add-to-cart', 'FrontController@addToCart')->name('product.add-to-cart');
+    Route::get('/product/my-cart', 'FrontController@myCart')->name('product.view-cart');
+});
  ?>

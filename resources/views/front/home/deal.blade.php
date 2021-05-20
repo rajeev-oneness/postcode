@@ -87,22 +87,8 @@
 					  	<div class="tab-pane fade show active" id="gird" role="tabpanel" aria-labelledby="gird-tab">
 					  		{{-- <h5 class="result_tab_title"> <span id="data-count"></span> results found in <a href="#">Australia</a></h5> --}}
 					  		<ul class="history_list">
-								{{-- @foreach ($deals as $deal)
-									<li>
-										<h4 class="place_title bebasnew">{{$deal->title}}</h4>
-										<h5>{{$deal->promo_code}}</h5>
-										<p class="phone_call"><strong>deal organiser: <a href="#">{{$deal->business->name}}</a></strong></p>
-                                        <p class="location"><img src="{{asset('homepage_assets/images/place.png')}}">{{$deal->business->address}}</p>
-										<p class="location">
-                                            <strong>
-                                                Expied on: {{date("d'M,y", strtotime($deal->expire_date))}} 
-                                            </strong>
-                                        </p>
-										<p class="history_details">{{$deal->description}}</p>
-									</li>
-								@endforeach --}}
 					  		</ul>
-					  		<a href="#" class="orange-btm load_btn" id="load-more1">Load More</a>
+					  		<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more1">Load More</a>
 					  	</div>
 					</div>
 				</div>
@@ -125,7 +111,7 @@
 					  		<ul class="search_list_items search_list_items-mod" id="list-data">
 								{{-- list goes here --}}
 					  		</ul>
-					  		<a href="#" class="orange-btm load_btn" id="load-more2">Load More</a>
+					  		<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more2">Load More</a>
 					  	</div>
 					</div>
 				</div>

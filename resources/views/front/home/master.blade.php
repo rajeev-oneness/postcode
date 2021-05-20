@@ -200,10 +200,10 @@
  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPuZ9AcP4PHUBgbUsT6PdCRUUkyczJ66I&callback=initMap&libraries=&v=weekly"
       async
     ></script>
-{{-- <script src="js/jquery.min.js"></script> --}}
 <script src="{{asset('homepage_assets/js/popper.min.js')}}"></script>
 <script src="{{asset('homepage_assets/js/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('homepage_assets/js/slick.min.js')}}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 @yield('script')
 

@@ -15,6 +15,7 @@ use App\Model\State;
 use App\Model\Postcode;
 use App\Model\UserPurchase;
 use App\Model\Community;
+use App\Model\ProductCart;
 use Auth;
 use Validator;
 use Illuminate\Support\Facades\DB;
@@ -92,7 +93,7 @@ class FrontController extends Controller
     public function getmarketplace (Request $request) {
         if($request->search == '') {
             $offset = $request->page * 10;
-            $datas = Product::with('category', 'subcategory')->orderBy('created_at', 'DESC')->limit(1)->offset($offset)->get();
+            $datas = Product::with('category', 'subcategory')->orderBy('created_at', 'DESC')->limit(10)->offset($offset)->get();
         } else {
             $datas = Product::where('name','like','%'.$request->search.'%')->with('category', 'subcategory')->orderBy('created_at', 'DESC')->limit(10)->offset($offset)->get();
         }
@@ -161,24 +162,49 @@ class FrontController extends Controller
         } 
     }
 
-    public function buyNow(Request $request,$product_id)
+    public function addToCart(Request $req)
     {
-        $product = Product::findorFail(decrypt($product_id));
+        $product_cart = new ProductCart;
+        $product_cart->user_id = auth()->id();
+        $product_cart->product_id = $req->product_id;
+        $product_cart->amount = 1;
+        $product_cart->price = $req->price;
+        $product_cart->save();
+        
+        return response()->json(['data' => $product_cart]);
+    }
+
+    public function myCart()
+    {
+        $cart = ProductCart::where('user_id', auth()->id())->get();
+        return view('front.home.marketplace-cart', compact('cart'));
+    }
+
+    public function buyNow(Request $request,$product_ids)
+    {
+        $product_id_array = decrypt($product_ids);
+        dd($product_id_array);
+        $total_price = 0;
+        foreach ($product_id_array as $product_id) {
+            $product = Product::findorFail($product_id);
+            $total_price = $total_price+$product->price;
+        }
         $data = [
-            'redirectUrl' => route('item.product.paymet',$product->id),
-            'price' => $product->price,
+            'redirectUrl' => route('item.product.payment',$product_ids),
+            'price' => $total_price,
         ];
         return view('stripe.index',compact('data'));
     }
 
-    public function successfullPayment(Request $request,$product_id){
-        
-        $userPurchase = new UserPurchase;
-        $userPurchase->user_id = auth()->user()->id;
-        $userPurchase->product_id = $product_id;
-        $userPurchase->stripeTransactionId = $request->stripeTransactionId;
-        $userPurchase->save();
-
+    public function successfullPayment(Request $request,$product_ids){
+        $product_id_array = decrypt($product_ids);
+        foreach ($product_id_array as $product_id) {
+            $userPurchase = new UserPurchase;
+            $userPurchase->user_id = auth()->user()->id;
+            $userPurchase->product_id = $product_id;
+            $userPurchase->stripeTransactionId = $request->stripeTransactionId;
+            $userPurchase->save();
+        }
         return redirect(route('payment.successfull.thankyou',$request->stripeTransactionId));
     }
 
