@@ -1067,6 +1067,7 @@ footer {
 }
 .list_content_wrap {
     padding: 21px 6px 15px;
+	position:relative;
 }
 .location_img_wrap > img {
     width: 100%;
@@ -1130,7 +1131,7 @@ footer {
 .list_content_wrap a {
     display: block;
     /* width: 19px; */
-    margin-left: auto;
+    margin-left: auto !important;
 }
 .search_list_items-mod > li {
     display: flex;
@@ -1206,12 +1207,14 @@ footer {
 	font-size:14px;
 	border-bottom: 5px solid #ffffff;
 	border-right: 5px solid #ffffff;
+	font-family: "Lato", sans-serif;
 }
 
 .community_table tr td{
 	padding:10px;
-	font-size:13px;
+	font-size:14px;
 	border:0;
+	font-family: "Lato", sans-serif;
 }
 .w-150{
 	width:150px !important;
@@ -1220,6 +1223,28 @@ footer {
 .w-200{
 	width:200px !important;
 }
+
+.con_left-bg{
+	background:#012d6a;
+	color:#fff !important;
+	padding:20px;
+}
+.con-right{
+	padding:0 20px;
+}
+.con-right .form-control{
+	padding:12px 10px;
+	border-radius:0;
+	font-size:14px;
+	color:#000;
+	height: 50px;
+	resize: none;
+}
+.con-right textarea{
+	height:inherit !important;
+}
+
+
 /*=====Responsive
 =====================*/
 
@@ -1364,6 +1389,14 @@ footer {
     .search-list li select {
         background-position: 97% center;
     }
+	.con-right{
+		padding:0px;
+		margin-top:20px;
+	}
+	.con-right .form-group{
+		padding:0px !important;
+	}
+	
 }
 
 @media (max-width: 767px) {

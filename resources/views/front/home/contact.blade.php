@@ -30,42 +30,44 @@ function initMap() {
 		</div>
 	</div>
 </section>
-    <div class="container row m-4">
-        <div class="col-md-7 text-right border-right">
-            <h4 class="footer-heading">Address</h4>
-            <h4>{{$address->name}}</h4>
-            {{$address->address}} <br>
-            <strong>Email : </strong>{{$address->email}} <br>
-            <strong>Contact No : </strong>{{$address->mobile}} <br><br>
-            <h4 class="footer-heading" class="mt-1">Location</h4>
-            <div id="googleMap" style="width:100%;height:280px;"></div>
-        </div>
-        <div class="col-md-5">
-            <h4 class="footer-heading">Contact Us</h4>
-            <form>
-                <div class="form-group">
-                    <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Your email" required>
-                </div>
-                <div class="form-group">
-                    <input type="number" name="mobile" id="mobile" class="form-control" placeholder="Your mobile" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="subject" id="subject" class="form-control" placeholder="Message Subject" required>
-                </div>
-                <div class="form-group">
-                    <textarea name="message" id="message" cols="30" rows="5" placeholder="Message..." class="form-control" required></textarea>
-                </div>
-
-                <button type="submit" id="send-button" class="orange-btm load_btn" style="outline: none; border:none; width: 100%">Send</button>
-                
-                <div id="msg" class="mt-3"></div>
-                
-            </form>
-        </div>
-    </div>
+    <div class="container">
+		<div class="row m-0 mt-5 mb-5">
+			<div class="col-md-6 text-left con_left-bg">
+				<h4 class="footer-heading text-white">Quick find us</h4>
+				<h4 class="text-white">{{$address->name}}</h4>
+				{{$address->address}} <br>
+				<strong class="text-white">Email : </strong>{{$address->email}} <br>
+				<strong class="text-white">Contact No : </strong>{{$address->mobile}} <br><br>
+				<!--<h4 class="footer-heading" class="mt-1">Location</h4>-->
+				<div id="googleMap" style="width:100%;height:280px;"></div>
+			</div>
+			<div class="col-md-6 con-right">
+				<h4 class="footer-heading pl-0 pl-md-3">Get in touch</h4>
+				<form class="row m-0">
+					<div class="form-group col-12 col-md-6">
+						<input type="text" name="name" id="name" class="form-control" placeholder="Your Name" required>
+					</div>
+					<div class="form-group col-12 col-md-6">
+						<input type="email" name="email" id="email" class="form-control" placeholder="Your email" required>
+					</div>
+					<div class="form-group col-12 col-md-6">
+						<input type="number" name="mobile" id="mobile" class="form-control" placeholder="Your mobile" required>
+					</div>
+					<div class="form-group col-12 col-md-6">
+						<input type="text" name="subject" id="subject" class="form-control" placeholder="Message Subject" required>
+					</div>
+					<div class="form-group col-12">
+						<textarea name="message" id="message" cols="30" rows="5" placeholder="Message..." class="form-control" required></textarea>
+					</div>
+					<div class="text-left pl-0 pl-md-3">
+						<button type="submit" id="send-button" class="orange-btm load_btn" style="outline: none; border:none;">Send</button>
+					</div>
+					<div id="msg" class="mt-3"></div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
 @endsection
 
 @section('script')

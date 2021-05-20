@@ -2282,6 +2282,11 @@ a {
     .msb {
         max-height: 90vh;
     }
+    .btn-blue{
+		width: 128px;
+		line-height: 30px;
+		font-weight: 500 !important;
+	}
 }
 
 @media (max-width: 767px) {
