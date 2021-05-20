@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('/', function () {
     return view('user.index');
 })->name('user.welcome');
@@ -156,6 +155,8 @@ Route::post('/fetch-product-subcategory', 'ProductController@fetchSubcategory')-
 Route::get('view-community','CommunityController@showCommunity')->name('community.show');
 Route::get('view-community-category/{id}','CommunityController@showCatgoryWiseCommunity')->name('community.category.show');
 Route::get('post-details/{id}','CommunityController@showDetailCommunity')->name('community.post.detail');
+Route::get('community-groups','CommunityGroupController@showAllGroups')->name('community.all.groups');
+Route::get('community-group-details/{id}','CommunityGroupController@showDetailCommunityGroup')->name('community.group.detail');
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -176,4 +177,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/download-event-category', 'Upload\UploadController@downloadEventCategoryCSV')->name('download.event.category.csv');
         Route::get('/download-business-category', 'Upload\UploadController@downloadBusinessCategoryCSV')->name('download.business.category.csv');
         Route::get('/download-community-category', 'Upload\UploadController@downloadCommunityCategoryCSV')->name('download.community.category.csv');
+        //community group routes
+        Route::get('my-groups','CommunityGroupController@showMyGroups')->name('community.my.groups');
+        Route::get('add-groups','CommunityGroupController@createCommunityGroups')->name('community.add.groups');
+        Route::post('store-groups','CommunityGroupController@storeCommunityGroups')->name('community.store.group');
+        Route::get('/{id}/edit-groups','CommunityGroupController@editCommunityGroups')->name('community.edit.group');
+        Route::post('/{id}/update-groups','CommunityGroupController@updateCommunityGroups')->name('community.update.group');
+        Route::get('delete-groups/{id}','CommunityGroupController@deleteCommunityGroups')->name('community.delete.group');
+        Route::post('/add-discussion','CommunityGroupController@addDiscussion')->name('community.add.discussion');
+        Route::get('/delete-discussion/{id}','CommunityGroupController@deleteDiscussion')->name('community.delete.discussion');
+        Route::get('/edit-discussion/{discussionId}/{groupId}','CommunityGroupController@editDiscussion')->name('community.edit.discussion');
+        Route::post('/update-discussion','CommunityGroupController@updateDiscussion')->name('community.update.discussion');
 });
+
+
