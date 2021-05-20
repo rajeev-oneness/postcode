@@ -90,7 +90,7 @@
           <div class="d-lg-none mobile-toggle pull-right"><i data-feather="more-horizontal"></i></div>
         </div>
         <script id="result-template" type="text/x-handlebars-template">
-          <div class="ProfileCard u-cf">                        
+          <div class="ProfileCard u-cf">
             <div class="ProfileCard-avatar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay m-0"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></div>
             <div class="ProfileCard-details">
             <div class="ProfileCard-realName"></div>
@@ -99,7 +99,7 @@
           </script>
         <script id="empty-template" type="text/x-handlebars-template">
           <div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div>
-            
+
           </script>
       </div>
     </div>
@@ -124,7 +124,7 @@
             <li><a class="sidebar-header" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span><span class="badge badge-pill badge-primary"></span></a>
             </li>
 
-            
+
             <li><a class="sidebar-header" href="#"><i data-feather="command"></i><span>Business Categories</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.business_categories.create')}}"><i data-feather="server"></i><span>Add Categories</span></a></li>
@@ -176,21 +176,21 @@
                 <li><a class="sidebar-header" href="{{route('product.category')}}"><i data-feather="server"></i><span>Manage Categories</span></a></li>
               </ul>
             </li>
-            
+
             <li><a class="sidebar-header" href="#"><i data-feather="list"></i><span>Products Subcategories</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('product.subcategory.add')}}"><i data-feather="server"></i><span>Add Subcategories</span></a></li>
                 <li><a class="sidebar-header" href="{{route('product.subcategory')}}"><i data-feather="server"></i><span>Manage Subcategories</span></a></li>
               </ul>
             </li>
-            
+
             <li><a class="sidebar-header" href="#"><i data-feather="box"></i><span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.product')}}"><i data-feather="server"></i><span>Add Products</span></a></li>
                 <li><a class="sidebar-header" href="{{route('admin.manage_products')}}"><i data-feather="server"></i><span>Manage Products</span></a></li>
               </ul>
             </li>
-            
+
             <li><a class="sidebar-header" href="#"><i data-feather="align-justify"></i><span>Services</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
                 <li><a class="sidebar-header" href="{{route('admin.services')}}"><i data-feather="server"></i><span>Add Services</span></a></li>
@@ -205,6 +205,14 @@
                 <li><a class="sidebar-header" href="{{route('admin.community.manage')}}"><i data-feather="server"></i><span>Manage Community</span></a></li>
               </ul>
             </li>
+
+            <li><a class="sidebar-header" href="javascript:void(0)"><i data-feather="align-justify"></i><span>Community Groups</span><i class="fa fa-angle-right pull-right"></i></a>
+                <ul class="sidebar-submenu">
+                  <li><a class="sidebar-header" href="{{route('admin.community-groups.create')}}"><i data-feather="server"></i><span>Add Group</span></a></li>
+                  {{-- <li><a class="sidebar-header" href="{{route('admin.community-groups.upload')}}"><i data-feather="server"></i><span>CSV Upload</span></a></li> --}}
+                  <li><a class="sidebar-header" href="{{route('admin.community-groups.manage')}}"><i data-feather="server"></i><span>Manage Groups</span></a></li>
+                </ul>
+              </li>
 
 
             <li><a class="sidebar-header" href="#"><i data-feather="airplay"></i><span>Events Categories</span><i class="fa fa-angle-right pull-right"></i></a>
@@ -238,7 +246,7 @@
               </ul>
             </li>
             @endif
-            
+
             @if (auth()->user()->userType == 1)
             <li><a class="sidebar-header" href="#"><i data-feather="users"></i><span>Administrative</span><i class="fa fa-angle-right pull-right"></i></a>
               <ul class="sidebar-submenu">
@@ -247,7 +255,7 @@
               </ul>
             </li>
             @endif
-            
+
 
             <!-- <li><a class="sidebar-header" href="/manage_subjects" ><i data-feather="server"></i><span> Manage Subjects</span></a></li>
               <li><a class="sidebar-header" href="/add_question" ><i data-feather="server"></i><span> Questions</span></a></li>
@@ -333,10 +341,10 @@
         @endif
 
         function isNumberKey(evt){
-            if(evt.charCode >= 48 && evt.charCode <= 57 || evt.charCode <= 43){  
-                return true;  
-            }  
-            return false;  
+            if(evt.charCode >= 48 && evt.charCode <= 57 || evt.charCode <= 43){
+                return true;
+            }
+            return false;
         }
   </script>
 </body>
