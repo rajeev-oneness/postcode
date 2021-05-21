@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{{asset('homepage_assets/css/bootstrap.min.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('homepage_assets/css/slick.css')}}"/>
   <link rel="stylesheet" type="text/css" href="{{asset('homepage_assets/css/slick-theme.css')}}"/>
+  <link rel="stylesheet" href="{{ asset('admin_assets/css/sumoselect.css')}}">
   <link rel="stylesheet" href="{{asset('homepage_assets/css/style.css')}}">
 	<style>
 		a {
@@ -59,7 +60,7 @@
 			</ul>
 		</div>
 		<ul class="button-list">
-			@if (auth()->check())	
+			@if (auth()->check())
 				@if (auth()->user()->userType == 2)
 					<li>
 						<a href="{{route('user.newsfeed')}}">
@@ -83,7 +84,7 @@
 					<span><img src="{{asset('homepage_assets/images/login-icon.png')}}"></span>
 					Logout
 				</a>
-			</li>	
+			</li>
 			@else
 			<li>
 				<a href="{{route('adminlogin')}}">
@@ -132,7 +133,7 @@
                     <input type="text" name="email" value="{{old('email')}}" id="usr" placeholder="Enter your email" required>
                     {{-- <input type="submit" class="submt_form" value="Send"> --}}
 					<input type="submit" id="43t" value="Send">
-                    
+
                 </form>
             </div>
 			@error('email')
@@ -204,6 +205,7 @@
 <script src="{{asset('homepage_assets/js/popper.min.js')}}"></script>
 <script src="{{asset('homepage_assets/js/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('homepage_assets/js/slick.min.js')}}"></script>
+<script src="{{ asset('admin_assets/js/jquery.sumoselect.min.js') }}"></script>
 
 @yield('script')
 

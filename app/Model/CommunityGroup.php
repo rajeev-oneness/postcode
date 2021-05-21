@@ -18,4 +18,7 @@ class CommunityGroup extends Model
     // {
     //     return $this->hasMany('App\Model\Community', 'communityId', 'id');
     // }
+    public function communities(){
+        return $this->belongsToMany('App\Model\Community','community_group_details','group_id', 'community_id');
+    }
 }
