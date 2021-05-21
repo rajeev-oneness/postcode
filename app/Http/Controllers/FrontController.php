@@ -80,7 +80,8 @@ class FrontController extends Controller
 
     public function event(Request $request) {
         $request = $request->all();
-        return view('front.home.event', compact('request'));
+        $event = Event::all();
+        return view('front.home.event', compact('request', 'event'));
     }
     public function deal(Request $request) {
         $request = $request->all();
