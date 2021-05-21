@@ -20,7 +20,7 @@
             <div class="list_content_wrap">
                 <ul class="rating_coments">
                     <li>
-                        <h5>{{$community->community_category->name}}</h5>
+                        <h5><span>{{$community->community_category->name}}</span></h5>
                     </li>
                 </ul>
                 <h4 class="place_title bebasnew">{{$community->title}}</h4>

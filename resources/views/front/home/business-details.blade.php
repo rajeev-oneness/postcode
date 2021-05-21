@@ -17,7 +17,7 @@
                 <div class="list_content_wrap">
                     <ul class="rating_coments">
                         <li>
-                            <h5>Category: {{$data[0]['businesstype']['name']}}</h5>
+                            <h5><span>Category : <b>{{$data[0]['businesstype']['name']}}</b></span></h5>
                         </li>
                     </ul>
                     <h4 class="place_title bebasnew">{{$data[0]['name']}}</h4>

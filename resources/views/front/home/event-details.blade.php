@@ -20,7 +20,7 @@
                         <h5>&dollar;{{$data->price}}</h5>
                     </li>
                     <li>
-                        <h5>Age Group: {{$data->agegroup->group}}</h5>
+                        <h5><span>Age Group: <b>{{$data->agegroup->group}}</b></span></h5>
                     </li>
                 </ul>
                 <h4 class="place_title bebasnew">{{$data->name}}</h4>
@@ -32,7 +32,10 @@
                     <p class="phone_call"><strong>Duration: </strong> {{Date('d M,y', strtotime($data->start))}} - {{Date('d M,y', strtotime($data->end))}}</p>
                 </div>
                 <p class="history_details">{{$data->booking_details}}</p>
-                <a href="{{route('user.event.book',['id' => encrypt($data->id)])}}" class="orange-btm load_btn text-center">Book Event</a>
+                <div class="text-right float-right">
+                    <a href="{{route('user.event.book',['id' => encrypt($data->id)])}}" class="orange-btm load_btn text-center">Book Event</a>
+                </div>
+                
             </div>
         </li>
     </ul>

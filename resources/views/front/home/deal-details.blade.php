@@ -20,7 +20,7 @@
                         <h5>&dollar;{{$data->price}}</h5>
                     </li>
                     <li>
-                        <h5>{{$data->promo_code}}</h5>
+                        <h5><span><b>{{$data->promo_code}}</b></span></h5>
                     </li>
                 </ul>
                 <h4 class="place_title bebasnew">{{$data->title}}</h4>

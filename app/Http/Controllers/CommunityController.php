@@ -53,7 +53,7 @@ class CommunityController extends Controller
         } else {
             return redirect(route('admin.community.manage'))->with('Success','Community Added!');
         }
-    	
+
     }
 
     public function editCommunity(Request $req,$editId)

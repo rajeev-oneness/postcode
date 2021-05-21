@@ -32,6 +32,8 @@
 <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/daterange-picker.css')}}">
 <!-- Bootstrap css-->
 <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/bootstrap.css')}}">
+<!-- Sumoselect css-->
+<link rel="stylesheet" href="{{ asset('admin_assets/css/sumoselect.css')}}">
 <!-- App css-->
 <link rel="stylesheet" type="text/css" href="{{asset('admin_assets/css/style.css')}}">
 <link id="color" rel="stylesheet" href="{{asset('admin_assets/css/light-1.css')}}" media="screen">
@@ -327,6 +329,7 @@
   <script src="{{asset('admin_assets/js/typeahead-search/handlebars.js')}}"></script>
   <script src="{{asset('admin_assets/js/typeahead-search/typeahead-custom.js')}}"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="{{ asset('admin_assets/js/jquery.sumoselect.min.js') }}"></script>
   @yield('script')
   <!-- Plugins JS Ends-->
   <!-- Theme js-->

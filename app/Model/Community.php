@@ -25,4 +25,7 @@ class Community extends Model
     {
         return $this->hasMany('App\Model\CommunityLike', 'communityId', 'id');
     }
+    public function community_groups(){
+        return $this->belongsToMany('App\Model\CommunityGroup','community_group_details','community_id','group_id')->using(CommunityGroupDetail::class);
+    }
 }

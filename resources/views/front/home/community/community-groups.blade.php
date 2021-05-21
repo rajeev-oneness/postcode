@@ -11,7 +11,6 @@
 @endsection
 
 @section('community')
-
 <table class="table table-striped community_table table-sm">
     <thead>
       <tr>

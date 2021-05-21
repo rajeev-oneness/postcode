@@ -204,7 +204,7 @@
 							list_view += "<li>";
 							list_view += '<div class="location_img_wrap"><img src="{{url('')}}/'+value.image+'"></div>';
 							list_view += '<div class="list_content_wrap">';
-							list_view += '<ul class="rating_coments"><h5>'+value.promo_code+'</h5></ul>';
+							list_view += '<ul class="rating_coments"><li><h5><span><b>'+value.promo_code+'</b></span></h5></li></ul>';
 							list_view += '<a href ="'+dealHref+'"><h4 class="place_title bebasnew">'+value.title+'</h4></a>';
 							list_view += '<div class="location_details"><p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p></div>';
 							list_view += '<p class=""><strong>Deal organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';

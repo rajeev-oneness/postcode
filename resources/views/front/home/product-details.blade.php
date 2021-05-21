@@ -18,10 +18,10 @@
             <div class="list_content_wrap">
                 <ul class="rating_coments">
                     <li>
-                        <h5>{{$data[0]->category->name}}</h5>
+                        <h5><span>{{$data[0]->category->name}}</span></h5>
                     </li>
                     <li>
-                        <h5>{{$data[0]->subcategory->name}}</h5>
+                        <h5><span>{{$data[0]->subcategory->name}}</span></h5>
                     </li>
                 </ul>
                 <h4 class="place_title bebasnew">{{$data[0]->name}}</h4>
