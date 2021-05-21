@@ -979,9 +979,9 @@ footer {
     margin-right: 13px;
 }
 .history_details {
-    font-size: 15px;
-    line-height: 1.93;
-    color: #454545;
+	font-size: 14px;
+	line-height: 22px;
+	color: #454545;
 }
 .load_btn {
     font-size: 17px;
