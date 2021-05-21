@@ -104,11 +104,17 @@ class CommunityGroupController extends Controller
         $id = base64_decode($id);
     	$community_group = CommunityGroup::where('id',$id)->first();
         $discussions = CommunityGroupDiscussion::where('group_id', $id)->get();
+        $communities = Community::all();
+        $communities_group_details = CommunityGroupDetail::where('group_id', $community_group->id)->get();
+        $community_id = [];
+        foreach($communities_group_details as $community_group_detail){
+            $community_id[] = $community_group_detail->community_id;
+        }
         // dd($discussions);
         // $communities = CommunityGroupDetail::where('group_id', $id)->get();
         // dd($community_group);
     	// $liked = CommunityLike::where('communityId', $community_group->id)->where('liked_by',auth()->id())->first();
-        return view('front.home.community.community-group-details',compact('community_group', 'discussions'));
+        return view('front.home.community.community-group-details',compact('community_group', 'discussions','community_id','communities'));
     }
 
     /**

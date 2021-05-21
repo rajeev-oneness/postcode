@@ -26,7 +26,7 @@ class CreatePostcodesTable extends Migration
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
         //queensland
-        for ($i=200; $i <= 9999; $i++) { 
+        for ($i=200; $i <= 9999; $i++) {
             //queensland
             if($i >= 4000 && $i <= 4999) {
                 $data = [
@@ -186,7 +186,7 @@ class CreatePostcodesTable extends Migration
                 DB::table('postcodes')->insert($data);
             }
         }
-              
+
     }
 
     /**
