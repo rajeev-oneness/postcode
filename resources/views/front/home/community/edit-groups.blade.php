@@ -36,6 +36,21 @@
             @error('name')<span class="text-danger">{{$message}}</span>@enderror
           </div>
 
+          <div class="col-md-6 mb-3">
+            <select name="communities[]" multiple="multiple" placeholder="Search Communities" class="search-box form-control">
+                <option disabled >Select Communities</option>
+                @foreach($communities as $community)
+                  {{-- <option value="{{$community->id}}" @if(old('community')==$community->id){{('selected')}}@endif>{{$community->title}}</option> --}}
+                  {{-- <option value="{{$community->id}}" @if(old('community')==$community->id){{('selected')}}@elseif($community_group->id == $communities_group_details->group_id){{('selected')}}@endif>{{$community->title}}</option> --}}
+                    @if(in_array($community->id, $community_id))
+                        <option value="{{ $community->id }}" selected>{{ $community->title }}</option>
+                    @else
+                        <option value="{{ $community->id }}">{{ $community->title }}</option>
+                    @endif
+                @endforeach
+             </select>
+          </div>
+
           <div class="col-md-12 mb-3">
             <label for="validationCustom05">Description</label>
             @error('description')<span class="text-danger">{{$message}}</span>@enderror
@@ -47,4 +62,12 @@
     </form>
 </div>
 
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function () {
+        window.Search = $('.search-box').SumoSelect({ csvDispCount: 3, search: true, searchText:'Enter here.' });
+    });
+</script>
 @endsection

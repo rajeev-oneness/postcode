@@ -25,11 +25,15 @@
                 </ul> --}}
                 <h4 class="place_title bebasnew">{{$community_group->name}}</h4>
 
-                {{-- <div class="location_details">
+                <div class="location_details">
+                    @foreach($communities as $community)
+                    @if(in_array($community->id, $community_id))
                     <p class="location">
-                        <i class="fas fa-thumbs-up text-primary"></i> {{count($community->get_likes)}} Likes
+                        <i class="fas fa-users text-primary"></i> {{$community->title}}
                     </p>
-                    <p class="phone_call">
+                    @endif
+                @endforeach
+                    {{-- <p class="phone_call">
                         <i class="fas fa-comment text-warning"></i> {{count($community->comments)}} Comments
                     </p>
                     @auth
@@ -42,9 +46,9 @@
                         <button id="like_button" class="btn btn-primary"><i class="fas fa-thumbs-up"></i> Like</button>
                         @endif
                     </p>
-                    @endauth
-                    <p class="text-muted">(On {{date('d M,y', strtotime($community->created_at))}}. By {{$community->user->name}})</p>
-                </div> --}}
+                    @endauth --}}
+                    <p class="text-muted">(On {{date('d M,y', strtotime($community_group->created_at))}}. By {{$community_group->user->name}})</p>
+                </div>
                 <p class="history_details">{!! $community_group->description !!}</p>
             </div>
         </li>

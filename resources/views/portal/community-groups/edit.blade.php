@@ -57,6 +57,18 @@
                       <input type="text" name="name" required class="form-control @error('name'){{('is-invalid')}}@enderror" placeholder="Group name" value="@if(old('name')){{old('name')}}@else{{$community_group->name}}@endif">
                       @error('name')<span class="text-danger">{{$message}}</span>@enderror
                     </div>
+                    <div class="col-md-6 mb-3">
+                        <select name="communities[]" multiple="multiple" placeholder="Search Communities" class="search-box form-control">
+                            <option disabled >Select Communities</option>
+                            @foreach($communities as $community)
+                                @if(in_array($community->id, $community_id))
+                                    <option value="{{ $community->id }}" selected>{{ $community->title }}</option>
+                                @else
+                                    <option value="{{ $community->id }}">{{ $community->title }}</option>
+                                @endif
+                            @endforeach
+                         </select>
+                      </div>
 
                     <div class="col-md-12 mb-3">
                       <label for="validationCustom05">Description</label>
@@ -78,4 +90,12 @@
     </div>
 
 
+    @endsection
+
+    @section('script')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            window.Search = $('.search-box').SumoSelect({ csvDispCount: 3, search: true, searchText:'Enter here.' });
+        });
+    </script>
     @endsection

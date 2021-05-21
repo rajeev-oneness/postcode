@@ -43,10 +43,13 @@ class CommunityGroupController extends Controller
      */
     public function createCommunityGroups()
     {
+        // $communities = CommunityGroup::where('id',1)->with('communities')->get();
+        $communities = Community::all();
+        // dd($communities);
         if(auth()->user()->userType != 1) {
-            return view('front.home.community.add-groups');
+            return view('front.home.community.add-groups',compact('communities'));
         } else {
-            return view('portal.community-groups.create');
+            return view('portal.community-groups.create',compact('communities'));
         }
     }
 
@@ -58,9 +61,10 @@ class CommunityGroupController extends Controller
      */
     public function storeCommunityGroups(Request $request)
     {
+
         $request->validate([
     		'name' => 'required|max:255|string',
-            'image' => 'required',
+            // 'image' => 'required',
     		'description' => 'required',
     	]);
         $community_group = new CommunityGroup();
@@ -75,6 +79,13 @@ class CommunityGroupController extends Controller
     	$community_group->description = $request->description;
     	$community_group->created_by = auth()->id();
     	$community_group->save();
+        foreach($request->communities as $community){
+            $communities_group_details = new CommunityGroupDetail();
+            $communities_group_details->group_id = $community_group->id;
+            $communities_group_details->community_id = $community;
+            $communities_group_details->save();
+        }
+
         if(auth()->user()->userType != 1) {
     	    return redirect(route('community.my.groups'))->with('Success','Community Group Added Success');
         } else {
@@ -93,11 +104,17 @@ class CommunityGroupController extends Controller
         $id = base64_decode($id);
     	$community_group = CommunityGroup::where('id',$id)->first();
         $discussions = CommunityGroupDiscussion::where('group_id', $id)->get();
+        $communities = Community::all();
+        $communities_group_details = CommunityGroupDetail::where('group_id', $community_group->id)->get();
+        $community_id = [];
+        foreach($communities_group_details as $community_group_detail){
+            $community_id[] = $community_group_detail->community_id;
+        }
         // dd($discussions);
         // $communities = CommunityGroupDetail::where('group_id', $id)->get();
         // dd($community_group);
     	// $liked = CommunityLike::where('communityId', $community_group->id)->where('liked_by',auth()->id())->first();
-        return view('front.home.community.community-group-details',compact('community_group', 'discussions'));
+        return view('front.home.community.community-group-details',compact('community_group', 'discussions','community_id','communities'));
     }
 
     /**
@@ -110,11 +127,16 @@ class CommunityGroupController extends Controller
     {
         $id = base64_decode($id);
     	$community_group = CommunityGroup::where('id',$id)->first();
-        // return view('front.home.community.edit-groups',compact('community_group'));
+        $communities = Community::all();
+        $communities_group_details = CommunityGroupDetail::where('group_id', $community_group->id)->get();
+        $community_id = [];
+        foreach($communities_group_details as $community_group_detail){
+            $community_id[] = $community_group_detail->community_id;
+        }
         if(auth()->user()->userType != 1) {
-            return view('front.home.community.edit-groups',compact('community_group'));
+            return view('front.home.community.edit-groups',compact('community_group', 'communities','community_id'));
         } else {
-    	    return view('portal.community-groups.edit',compact('community_group'));
+    	    return view('portal.community-groups.edit',compact('community_group', 'communities', 'community_id'));
         }
     }
 
@@ -144,7 +166,13 @@ class CommunityGroupController extends Controller
     	$community_group->name = $request->name;
         $community_group->description = $request->description;
     	$community_group->save();
-        // return redirect(route('community.my.groups'))->with('Success','Community Group Name Updated Success');
+        CommunityGroupDetail::where('group_id',$request->id)->delete();
+        foreach($request->communities as $community_id){
+            CommunityGroupDetail::create([
+                'group_id' => $request->id,
+                'community_id' =>$community_id
+            ]);
+        }
         if(auth()->user()->userType != 1) {
     	    return redirect(route('community.my.groups'))->with('Success','Community Group Updated Success');
         } else {
@@ -161,7 +189,7 @@ class CommunityGroupController extends Controller
     public function deleteCommunityGroups($id)
     {
         CommunityGroup::where('id',$id)->delete();
-        // return redirect(route('community.my.groups'))->with('Success','Community Group Deleted Success');
+        CommunityGroupDetail::where('group_id', $id)->delete();
         if(auth()->user()->userType != 1) {
     	    return redirect(route('community.my.post'))->with('Success','Community Group Deleted Success');
         } else {
