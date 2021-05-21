@@ -87,7 +87,7 @@
 					  	<div class="tab-pane fade show active" id="gird" role="tabpanel" aria-labelledby="gird-tab">
 					  		<!--<h5 class="result_tab_title"> <span id="data-count"></span> results found in <a href="#">Australia</a></h5>-->
 							<div class="result_tab_title_wrap">
-					  			<h5 class="result_tab_title">153 results found in <a href="#">Australia</a></h5>
+					  			<h5 class="result_tab_title">{{count($event)}} results found in <a href="#">Australia</a></h5>
 					  			<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
 					  		</div>
 					  		<ul class="history_list">
@@ -206,7 +206,7 @@
 							grid_view += "<li>";
 							grid_view += '<div class="location_img_wrap"><img src="{{url('')}}/'+value.image+'"><p><span><img src="{{url('')}}/'+'homepage_assets/images/star.png'+'"> <b>4.5</b> <small>(60 reviews)</small></span> |  <span><small><img src="{{url('')}}/'+'homepage_assets/images/chat.png'+'"> 40 Comments</small></span></p></div>';
 							grid_view += '<a href ="'+eventHref+'" class="evgrid-padding"><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
-							grid_view += '<div class="tupe-grid"><p><img src="{{url('')}}/'+'homepage_assets/images/cat-gov.png'+'" class="d-block">Government</p></div>';
+							// grid_view += '<div class="tupe-grid"><p><img src="{{url('')}}/'+'homepage_assets/images/cat-gov.png'+'" class="d-block">Government</p></div>';
 							//grid_view += '<p class="phone_call"><strong>Event organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
 							grid_view += '<p class="location gred-p"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p>';
 							//grid_view += '<p class="location"><strong>Date: '+value.start+' to '+value.end+'</strong></p>';
@@ -221,7 +221,7 @@
 							list_view += "<li>";
 							list_view += '<div class="location_img_wrap"><img src="{{url('')}}/'+value.image+'"></div>';
 							list_view += '<div class="list_content_wrap">';
-							list_view += '<div class="tupe-grid"><p><img src="{{url('')}}/'+'homepage_assets/images/cat-gov.png'+'" class="d-block">Government</p></div>';
+							// list_view += '<div class="tupe-grid"><p><img src="{{url('')}}/'+'homepage_assets/images/cat-gov.png'+'" class="d-block">Government</p></div>';
 							list_view += '<ul class="rating_coments"><li><img src="{{url('')}}/'+'homepage_assets/images/star.png'+'"><h5>4.5 <span>(60 reviews)</span></h5></li><li><img src="{{url('')}}/'+'homepage_assets/images/chat.png'+'"><h5><span>40 Comments</span></h5></li></ul>';
 							list_view += '<a href ="'+eventHref+'" class="list-title"><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
 							list_view += '<div class="location_details"><p class="location list-location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p><p class="phone_call"><img src="{{url('')}}/'+'homepage_assets/images/phone-call.png'+'">'+value.business.mobile+'</p></div>';
