@@ -85,11 +85,17 @@
 				<div class="col-12">
 					<div class="tab-content" id="myTabContent">
 					  	<div class="tab-pane fade show active" id="gird" role="tabpanel" aria-labelledby="gird-tab">
-					  		{{-- <h5 class="result_tab_title"> <span id="data-count"></span> results found in <a href="#">Australia</a></h5> --}}
+					  		<!--<h5 class="result_tab_title"> <span id="data-count"></span> results found in <a href="#">Australia</a></h5>-->
+							<div class="result_tab_title_wrap">
+					  			<h5 class="result_tab_title">153 results found in <a href="#">Australia</a></h5>
+					  			<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+					  		</div>
 					  		<ul class="history_list">
 								{{-- grid data rendered here --}}
 					  		</ul>
-					  		<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more1">Load More</a>
+							<div class="text-center">
+								<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more1">Load More</a>
+							</div>
 					  	</div>
 					</div>
 				</div>
@@ -105,14 +111,20 @@
 				<div class="col-12">
 					<div class="tab-content" id="myTabContent">
 					  	<div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
-					  		<div class="result_tab_title_wrap">
-					  			{{-- <h5 class="result_tab_title"> <span id="data-count"></span> results found in <a href="#">Australia</a></h5> --}}
-					  			{{-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p> --}}
+					  		<!-- <div class="result_tab_title_wrap">
+					  			<h5 class="result_tab_title"> <span id="data-count"></span> results found in <a href="#">Australia</a></h5>
+					  			<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+					  		</div>-->
+							<div class="result_tab_title_wrap">
+					  			<h5 class="result_tab_title">153 results found in <a href="#">Australia</a></h5>
+					  			<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
 					  		</div>
 					  		<ul class="search_list_items search_list_items-mod" id="list-data">
 								{{-- list data rendered here --}}
 					  		</ul>
-					  		<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more2">Load More</a>
+							<div class="text-center">
+								<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more2">Load More</a>
+							</div>
 					  	</div>
 					</div>
 				</div>
@@ -192,26 +204,31 @@
 							businessHref = businessHref.replace('businessId', value.business.id);
 
 							grid_view += "<li>";
-							grid_view += '<a href ="'+eventHref+'"><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
-							grid_view += '<p class="phone_call"><strong>Event organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
-							grid_view += '<p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p>';
-							grid_view += '<p class="location"><strong>Date: '+value.start+' to '+value.end+'</strong></p>';
+							grid_view += '<div class="location_img_wrap"><img src="{{url('')}}/'+value.image+'"><p><span><img src="{{url('')}}/'+'homepage_assets/images/star.png'+'"> <b>4.5</b> <small>(60 reviews)</small></span> |  <span><small><img src="{{url('')}}/'+'homepage_assets/images/chat.png'+'"> 40 Comments</small></span></p></div>';
+							grid_view += '<a href ="'+eventHref+'" class="evgrid-padding"><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
+							grid_view += '<div class="tupe-grid"><p><img src="{{url('')}}/'+'homepage_assets/images/cat-gov.png'+'" class="d-block">Government</p></div>';
+							//grid_view += '<p class="phone_call"><strong>Event organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
+							grid_view += '<p class="location gred-p"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p>';
+							//grid_view += '<p class="location"><strong>Date: '+value.start+' to '+value.end+'</strong></p>';
 							// grid_view += '<p class="rating"><img src="{{url('')}}/'+'homepage_assets/images/rating.png'+'">300 reviews</p>';
-							grid_view += '<p class="phone_call"><img src="{{url('')}}/'+'homepage_assets/images/phone-call.png'+'">'+value.business.mobile+'</p>';
-							grid_view += '<p class="history_details">'+value.description+'</p>';
+							grid_view += '<p class="phone_call gred-p"><img src="{{url('')}}/'+'homepage_assets/images/phone-call.png'+'">'+value.business.mobile+'</p>';
+							grid_view += '<div class="card-border mt-0 mb-3"></div>';
+							grid_view += '<p class="history_details pl-3 pb-0 mb-0">'+value.description+'</p>';
+							grid_view += '<div class="view-det"><a href ="'+eventHref+'" class="d-block"><img src="{{url('')}}/'+'homepage_assets/images/right-arrow.png'+'" class="d-block"></a></div>';
 							grid_view += "</li>";
 
 							// list view
 							list_view += "<li>";
 							list_view += '<div class="location_img_wrap"><img src="{{url('')}}/'+value.image+'"></div>';
 							list_view += '<div class="list_content_wrap">';
-							// list_view += '<ul class="rating_coments"><li><img src="{{url('')}}/'+'homepage_assets/images/star.png'+'"><h5>4.5 <span>(60 reviews)</span></h5></li><li><img src="{{url('')}}/'+'homepage_assets/images/chat.png'+'"><h5><span>40 Comments</span></h5></li></ul>';
-							list_view += '<a href ="'+eventHref+'"><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
-							list_view += '<div class="location_details"><p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p><p class="phone_call"><img src="{{url('')}}/'+'homepage_assets/images/phone-call.png'+'">'+value.business.mobile+'</p></div>';
-							list_view += '<p class=""><strong>Event organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
-							list_view += '<p class="location"><strong>Date: '+value.start+' to '+value.end+'</strong></p>';
+							list_view += '<div class="tupe-grid"><p><img src="{{url('')}}/'+'homepage_assets/images/cat-gov.png'+'" class="d-block">Government</p></div>';
+							list_view += '<ul class="rating_coments"><li><img src="{{url('')}}/'+'homepage_assets/images/star.png'+'"><h5>4.5 <span>(60 reviews)</span></h5></li><li><img src="{{url('')}}/'+'homepage_assets/images/chat.png'+'"><h5><span>40 Comments</span></h5></li></ul>';
+							list_view += '<a href ="'+eventHref+'" class="list-title"><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
+							list_view += '<div class="location_details"><p class="location list-location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p><p class="phone_call"><img src="{{url('')}}/'+'homepage_assets/images/phone-call.png'+'">'+value.business.mobile+'</p></div>';
+							//list_view += '<p class="location"><strong>Event organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
+							//list_view += '<p class="location"><strong>Date: '+value.start+' to '+value.end+'</strong></p>';
 							list_view += '<p class="history_details">'+value.description+'</p>';
-							// list_view += '<a href="#"><img src=""></a>';
+							list_view += '<div class="view-det"><a href ="'+eventHref+'" class="d-block"><img src="{{url('')}}/'+'homepage_assets/images/right-arrow.png'+'" class="d-block"></a></div>';
 							list_view += "</div>"	
 							list_view += "</li>";
 						});
