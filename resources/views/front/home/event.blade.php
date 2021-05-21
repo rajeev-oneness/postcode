@@ -125,7 +125,7 @@
 					  			<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
 					  		</div>-->
 							<div class="result_tab_title_wrap">
-					  			<h5 class="result_tab_title">153 results found in <a href="#">Australia</a></h5>
+					  			<h5 class="result_tab_title">{{count($event)}} results found in <a href="#">Australia</a></h5>
 					  			<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
 					  		</div>
 					  		<ul class="search_list_items search_list_items-mod" id="list-data">
