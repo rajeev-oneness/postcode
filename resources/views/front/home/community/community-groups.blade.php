@@ -11,12 +11,13 @@
 @endsection
 
 @section('community')
-<table class="table table-hover">
+
+<table class="table table-striped community_table table-sm">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col" width="40%">Name</th>
-        <th scope="col">Created By</th>
+        <!--<th scope="col">#</th>-->
+        <th class="w-200">Name</th>
+        <th>Created By</th>
       </tr>
     </thead>
     <tbody>
@@ -25,8 +26,8 @@
         @endphp
       @forelse ($community_all_groups as $item)
           <tr>
-              <td>{{$i++}}</td>
-              <td><a href="{{route('community.group.detail',base64_encode($item->id))}}">{{$item->name}}</a></td>
+              <!--<td>{{$i++}}</td>-->
+              <td class="border-right"><a href="{{route('community.group.detail',base64_encode($item->id))}}">{{$item->name}}</a></td>
               <td>
                   <strong>{{$item->user->name}}</strong>
                   <span class="text-muted">(On {{date('d M,y', strtotime($item->created_at))}})</span>

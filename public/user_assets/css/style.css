@@ -450,9 +450,9 @@ h2.banner_title {
 }
 .sign_in_form label {
     position: absolute;
-    left: 100px;
-    top: 20px;
-    font-size: 16px;
+    left: 85px;
+    top: 6px;
+    font-size: 14px;
     line-height: 20px;
     font-weight: 500;
     color: #898989;
@@ -460,15 +460,16 @@ h2.banner_title {
     transition: all ease-in-out 0.5s;
     font-family: 'Montserrat', sans-serif;
     margin: 0;
+	text-transform:uppercase;
 }
 .sign_in_form input {
     width: 100%;
     border: 0;
     height: 70px;
-    padding: 18px 15px 30px 100px;
-    font-size: 16px;
+    padding: 37px 15px 30px 85px;
+    font-size: 14px;
     color: #232323;
-    font-weight: 500;
+    font-weight: 600;
     transition: all ease-in-out 0.5s;
 }
 .sign_in_form.label_up label {
@@ -564,6 +565,24 @@ h2.banner_title {
 	.orange_btn{
 		font-size: 12px;
 	}
+	.form_submit{
+		width:120px;
+	}
+	.back_btn {
+		width: 120px;
+	}
+	.form_wrapper {
+		padding: 20px 10px;
+	}
+	.sign_in_form img {
+		left: 10px;
+	}
+	.sign_in_form input {
+		padding: 37px 15px 30px 65px;
+	}
+	.sign_in_form label {
+		left: 69px;
+	}
 }
 @media (max-width: 768px) {
 	
@@ -631,6 +650,15 @@ h2.banner_title {
 	}
 	.newswrap_content{
 		margin-bottom:25px;
+	}
+	h2.banner_title {
+		font-size: 68px;
+	}
+	.form_wrapper .form_bg {
+		position: absolute;
+		top: -7px;
+		left: 0;
+		width: 100%;
 	}
 }
 @media (max-width: 860px) {
