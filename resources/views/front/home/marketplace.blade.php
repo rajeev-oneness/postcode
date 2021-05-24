@@ -27,25 +27,25 @@
 			<div class="row">
 				<div class="col-8">
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
-					  	<li class="nav-item" role="presentation">
-					    	<a class="nav-link" id="list-tab" onclick="listView()" title="List View"><img class="display-none" src="{{asset('homepage_assets/images/list-2.png')}}"></a>
+						<li class="nav-item" role="presentation">
+					    	<a class="nav-link active" id="gird-tab" data-toggle="tab" href="#gird" role="tab" aria-controls="gird" aria-selected="false" onclick="gridView()"><img class="display-none" src="{{asset('homepage_assets/images/grid.png')}}"><img class="display-block" src="{{asset('homepage_assets/images/active-grid.png')}}"></a>
 					  	</li>
-					  	<li class="nav-item" role="presentation">
-					    	<a class="nav-link" id="gird-tab" onclick="gridView()" title="Grid View"><img class="display-none" src="{{asset('homepage_assets/images/grid.png')}}"></a>
+						<li class="nav-item" role="presentation">
+					    	<a class="nav-link" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="true" onclick="listView()"><img class="display-none" src="{{asset('homepage_assets/images/list-2.png')}}"><img class="display-block" src="{{asset('homepage_assets/images/list-active.png')}}"></a>
 					  	</li>
 					  	<li class="nav-item" role="presentation">
 					    	<a class="nav-link" id="cart-tab" style="color: #000000;" title="Cart" href="{{route('product.view-cart')}}"><i class="fas fa-shopping-cart" style="font-size: 27px;"></i></a>
 					  </li>
 					</ul>
 				</div>
-				{{-- <div class="search_form_wrap">
+				<div class="search_form_wrap">
 					<form action="{{route('marketplace')}}">
 						@csrf
 						<input type="hidden" name="menu" value="marketplace">
 						<input type="text" name="search" placeholder="Search by product name">
 						<button><img src="{{asset('homepage_assets/images/magnify.png')}}"></button>
 					</form>
-				</div> --}}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -140,12 +140,12 @@
 							// grid view
 							grid_view += "<li>";
 							grid_view += '<a href ="'+productHref+'"><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
-							grid_view += '<h5>$'+value.price+'</h5>';
+							grid_view += '<h5 class="phone_call font-weight-bold" style="font-size: 1.3rem;">$'+value.price+'</h5>';
 							// grid_view += '<p class="phone_call"><strong>Deal organiser: <a href=""></a></strong></p>';
 							grid_view += '<p class="location"><strong>Category: </strong>'+value.category.name+'</p>';
                             grid_view += '<p class="location"><strong>Sub-category: </strong>'+value.subcategory.name+'</p>';
 							grid_view += '<p class="history_details">'+value.details+'</p>';
-							grid_view += '<button class="orange-btm load_btn text-center add-to-cart-btn" data-id="'+value.id+'" price="'+value.price+'" style="border-style: none;">Add To Cart</button>';
+							grid_view += '<p class="history_details"><button class="orange-btm load_btn text-center add-to-cart-btn" data-id="'+value.id+'" price="'+value.price+'" style="border-style: none;">Add To Cart</button></p>';
 							grid_view += "</li>";
 
 							// list view

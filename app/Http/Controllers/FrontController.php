@@ -92,8 +92,8 @@ class FrontController extends Controller
         return view('front.home.marketplace', compact('request'));
     }
     public function getmarketplace (Request $request) {
+        $offset = $request->page * 10;
         if($request->search == '') {
-            $offset = $request->page * 10;
             $datas = Product::with('category', 'subcategory')->orderBy('created_at', 'DESC')->limit(10)->offset($offset)->get();
         } else {
             $datas = Product::where('name','like','%'.$request->search.'%')->with('category', 'subcategory')->orderBy('created_at', 'DESC')->limit(10)->offset($offset)->get();
