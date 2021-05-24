@@ -70,7 +70,6 @@
 				</div>
 				<div class="search_form_wrap">
 					<form action="{{route('events')}}">
-						@csrf
 						<input type="hidden" name="menu" value="events">
 						<input type="text" name="search" placeholder="Seatch  by postcode">
 						<button><img src="{{asset('homepage_assets/images/magnify.png')}}"></button>
@@ -180,12 +179,11 @@
 			success:function(data) {
 				grid_view = '';
 				list_view = '';
+				//total data count
+				count = data.total+' results found in <a href="javascript:void(0);">Australia</a>';
+				$(".result_tab_title").html(count);
 				if(data.error == false){
 					if(data.data.length > 0) {
-						
-						//total data count
-						count = data.total+' results found in <a href="javascript:void(0);">Australia</a>';
-
 						$.each(data.data, function(index, value){
 							// map view
 							let lat = Number(value.business.latitude);
@@ -205,27 +203,26 @@
 							grid_view += "<li>";
 							grid_view += '<div class="location_img_wrap"><img src="{{url('')}}/'+value.image+'"><p><span><img src="{{url('')}}/'+'homepage_assets/images/star.png'+'"> <b>4.5</b> <small>(60 reviews)</small></span> |  <span><small><img src="{{url('')}}/'+'homepage_assets/images/chat.png'+'"> 40 Comments</small></span></p></div>';
 							grid_view += '<a href ="'+eventHref+'" class="evgrid-padding"><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
-							// grid_view += '<div class="tupe-grid"><p><img src="{{url('')}}/'+'homepage_assets/images/cat-gov.png'+'" class="d-block">Government</p></div>';
-							//grid_view += '<p class="phone_call"><strong>Event organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
+							grid_view += '<div class="tupe-grid"><p><img src="{{url('')}}/'+'homepage_assets/images/cat-gov.png'+'" class="d-block">'+value.eventcattype.name+'</p></div>';
+							grid_view += '<p class="phone_call"><strong>Event organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
 							grid_view += '<p class="location gred-p"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p>';
-							//grid_view += '<p class="location"><strong>Date: '+value.start+' to '+value.end+'</strong></p>';
-							// grid_view += '<p class="rating"><img src="{{url('')}}/'+'homepage_assets/images/rating.png'+'">300 reviews</p>';
+							// grid_view += '<p class="location"><strong>Date: '+value.start+' to '+value.end+'</strong></p>';
 							grid_view += '<p class="phone_call gred-p"><img src="{{url('')}}/'+'homepage_assets/images/phone-call.png'+'">'+value.business.mobile+'</p>';
 							grid_view += '<div class="card-border mt-0 mb-3"></div>';
 							grid_view += '<p class="history_details pl-3 pb-0 mb-0">'+value.description+'</p>';
-							grid_view += '<div class="view-det"><a href ="'+eventHref+'" class="d-block"><img src="{{url('')}}/'+'homepage_assets/images/right-arrow.png'+'" class="d-block"></a></div>';
+							grid_view += '<div class="view-det1"><a href ="'+eventHref+'" class="d-block"><img src="{{url('')}}/'+'homepage_assets/images/right-arrow.png'+'" class="d-block"></a></div>';
 							grid_view += "</li>";
 
 							// list view
 							list_view += "<li>";
 							list_view += '<div class="location_img_wrap"><img src="{{url('')}}/'+value.image+'"></div>';
 							list_view += '<div class="list_content_wrap">';
-							// list_view += '<div class="tupe-grid"><p><img src="{{url('')}}/'+'homepage_assets/images/cat-gov.png'+'" class="d-block">Government</p></div>';
+							list_view += '<div class="tupe-grid"><p><img src="{{url('')}}/'+'homepage_assets/images/cat-gov.png'+'" class="d-block">'+value.eventcattype.name+'</p></div>';
 							list_view += '<ul class="rating_coments"><li><img src="{{url('')}}/'+'homepage_assets/images/star.png'+'"><h5>4.5 <span>(60 reviews)</span></h5></li><li><img src="{{url('')}}/'+'homepage_assets/images/chat.png'+'"><h5><span>40 Comments</span></h5></li></ul>';
 							list_view += '<a href ="'+eventHref+'" class="list-title"><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
 							list_view += '<div class="location_details"><p class="location list-location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p><p class="phone_call"><img src="{{url('')}}/'+'homepage_assets/images/phone-call.png'+'">'+value.business.mobile+'</p></div>';
-							//list_view += '<p class="location"><strong>Event organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
-							//list_view += '<p class="location"><strong>Date: '+value.start+' to '+value.end+'</strong></p>';
+							list_view += '<p class="location"><strong>Event organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
+							list_view += '<p class="location"><strong>Date: '+value.start+' to '+value.end+'</strong></p>';
 							list_view += '<p class="history_details">'+value.description+'</p>';
 							list_view += '<div class="view-det"><a href ="'+eventHref+'" class="d-block"><img src="{{url('')}}/'+'homepage_assets/images/right-arrow.png'+'" class="d-block"></a></div>';
 							list_view += "</div>"	
@@ -241,9 +238,8 @@
 					//here goes the error
 					$('#load-more1').html('No more data!');
 					$('#load-more2').html('No more data!');
-					count = '0 results found in <a href="javascript:void(0);">Australia</a>';
 				}
-				$(".result_tab_title").html(count);
+				console.log(data);
 			}
 		})
 	}

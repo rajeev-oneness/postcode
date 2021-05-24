@@ -149,7 +149,7 @@ class OfferController extends Controller
             'price' => $request->price, 
             'short_description' => $request->short_description, 
             'promo_code' => $request->promo_code, 
-            'expire_date' => $request->expire_date, 
+            'expire_date' => date("Y-m-d", strtotime($request->expire_date)), 
             'howcanredeem' => $request->howcanredeem
         ]);   
             if(auth()->user()->userType == 3){

@@ -87,7 +87,9 @@
 					  		<ul class="history_list">
 								{{-- load by ajax --}}
 					  		</ul>
-					  		<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more1">Load More</a>
+							<div class="text-center">
+					  			<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more1">Load More</a>
+							</div>
 					  	</div>
 					</div>
 				</div>
@@ -110,8 +112,10 @@
 					  		<ul class="search_list_items search_list_items-mod" id="list-data">
 								{{-- load by ajax --}}
 					  		</ul>
-					  		<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more2">Load More</a>
-					  	</div>
+							<div class="text-center">
+					  			<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more2">Load More</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -172,12 +176,12 @@
 				success:function(data) {
 					grid_view = '';
 					list_view = '';
+					//total data count
+					count = data.total+' results found in <a href="javascript:void(0);">Australia</a>';
+					$(".result_tab_title").html(count);
 					
 					if(data.error == false) {
 						if(data.data.length > 0) {
-							//total data count
-							count = data.total+' results found in <a href="javascript:void(0);">Australia</a>';
-							
 							$.each(data.data, function( index, value ) {
 								// map view
 								let lat = Number(value.latitude);
@@ -204,7 +208,7 @@
 								list_view += "<li>";
 								list_view += '<div class="location_img_wrap"><img src="{{url('')}}/'+value.image+'"></div>';
 								list_view += '<div class="list_content_wrap">';
-								list_view += '<ul class="rating_coments"><li><img src="{{url('')}}/'+'homepage_assets/images/star.png'+'"><h5>4.5 <span>(60 reviews)</span></h5></li><li><img src="{{url('')}}/'+'homepage_assets/images/chat.png'+'"><h5><span>40 Comments</span></h5></li></ul>';
+								list_view += '<ul class="rating_coments"><li><img src="{{url('')}}/'+'homepage_assets/images/star.png'+'"><h5>4.5 <span>('+value.ratings.length+' reviews)</span></h5></li><li><img src="{{url('')}}/'+'homepage_assets/images/chat.png'+'"><h5><span>'+value.ratings.length+' Comments</span></h5></li></ul>';
 								list_view += '<h4 class="place_title bebasnew">'+value.name+'</h4>';
 								list_view += '<div class="location_details"><p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p><p class="phone_call"><img src="{{url('')}}/'+'homepage_assets/images/phone-call.png'+'">'+value.mobile+'</p></div>';
 								list_view += '<p class="history_details">'+value.description+'</p>';
@@ -217,9 +221,7 @@
 						} else {
 							$('#load-more1').html('No more data!');
 							$('#load-more2').html('No more data!');
-							count = '0 results found in <a href="javascript:void(0);">Australia</a>';
 						}
-						$(".result_tab_title").html(count);
 					} else {
 						// error handling
 					}

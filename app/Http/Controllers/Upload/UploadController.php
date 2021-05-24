@@ -165,7 +165,7 @@ class UploadController extends Controller
                                 $offer->description = $data[2];         
                                 $offer->promo_code = $data[3];
                                 $offer->howcanredeem = $data[6];
-                                $offer->expire_date = $data[5];
+                                $offer->expire_date = date("Y-m-d", strtotime($data[5])) ;
                                 $offer->created_by = auth()->user()->id;
                                 $offer->address = auth()->user()->address;
                                 $offer->postcode = auth()->user()->postcode;
@@ -224,8 +224,8 @@ class UploadController extends Controller
                                 $event->country_id = auth()->user()->countryId;
                                 $event->state_id = auth()->user()->stateId;
                                 $event->postcode = auth()->user()->postcode;
-                                $event->start = $data[4];
-                                $event->end = $data[5];           
+                                $event->start = date("Y-m-d", strtotime($data[4])) ;
+                                $event->end = date("Y-m-d", strtotime($data[5])) ;   
                                 $event->frequency = $data[6];  
                                 $event->age_group = $data[7];         
                                 $event->booking_details = $data[9];

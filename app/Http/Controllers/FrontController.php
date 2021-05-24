@@ -80,16 +80,19 @@ class FrontController extends Controller
     }
 
     public function event(Request $request) {
-        $request = $request->all();
+        $request = $request->except('_token');
+        // $request = $request->all();
         $event = Event::all();
         return view('front.home.event', compact('request', 'event'));
     }
     public function deal(Request $request) {
-        $request = $request->all();
+        $request = $request->except('_token');
+        // $request = $request->all();
         return view('front.home.deal', compact('request'));
     }
     public function marketplace(Request $request) {
-        $request = $request->all();
+        $request = $request->except('_token');
+        // $request = $request->all();
         return view('front.home.marketplace', compact('request'));
     }
     public function getmarketplace (Request $request) {
@@ -112,16 +115,29 @@ class FrontController extends Controller
         if(!$validate->fails()){
             $offset = $request->page * 10;
             if($request->search != '') {
+                $search = $request->search;
                 if($request->menu == 'events') {
-                    $datas = Event::select('*')->where('name','like','%'.$request->search.'%')->orWhere('postcode','like','%'.$request->search.'%')->orWhere('address','like','%'.$request->search.'%');         
+                    $datas = Event::select('*')
+                    ->where('end', '>=', date("Y-m-d"))
+                    ->where(function($datas) use ($search) {
+                        $datas->where('name', 'like', '%' . $search . '%')
+                        ->orWhere('postcode','like','%'.$search.'%')
+                        ->orWhere('address','like','%'.$search.'%');
+                    })
+                    ->with('eventcattype');         
                 } else if ($request->menu == 'deals') {
-                    $datas = Offer::select('*')->orWhere('postcode','like','%'.$request->search.'%')->orWhere('address','like','%'.$request->search.'%');
+                    $datas = Offer::select('*')
+                    ->where('expire_date', '>=', date("Y-m-d"))
+                    ->where(function($datas) use ($search) {
+                        $datas->whereBetween('postcode', [$search-5, $search+5])
+                        ->orWhere('title','like','%'.$search.'%');
+                    });
                 }
             } else {
                 if($request->menu == 'events') {
-                    $datas = Event::select('*');         
+                    $datas = Event::select('*')->where('end', '>=', date("Y-m-d"))->with('eventcattype');         
                 } else if ($request->menu == 'deals') {
-                    $datas = Offer::select('*');
+                    $datas = Offer::select('*')->where('expire_date', '>=', date("Y-m-d"));
                 }
             }
             if(auth()->check()) {
@@ -129,6 +145,8 @@ class FrontController extends Controller
             }
             $count = $datas->count();
             $datas = $datas->with('business')->orderBy('created_at', 'DESC')->limit(10)->offset($offset)->get();
+
+            //dd($datas);
             return response()->json(['error'=>false,'message'=>'Data','data'=>$datas, 'total' => $count]);
         }
         return response()->json(['error'=>true,'message'=>$validate->errors()->first()]);
@@ -137,7 +155,6 @@ class FrontController extends Controller
     //details of each sections
     public function details(Request $request) {
         if($request->name == 'business') {
-
             $data = Business::where('id', $request->id)->with('businesstype','services','products','events','offers','ratings')->get()->toArray();
             $ratings = Rating::with('user')->where('business_id' ,$request->id)->get();
             return view('front.home.business-details', compact('data', 'ratings'));

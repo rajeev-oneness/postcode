@@ -70,7 +70,6 @@
 				</div>
 				<div class="search_form_wrap">
 					<form action="{{route('deals')}}">
-						@csrf
 						<input type="hidden" name="menu" value="deals">
 						<input type="text" name="search" placeholder="Seatch  by postcode">
 						<button><img src="{{asset('homepage_assets/images/magnify.png')}}"></button>
@@ -88,7 +87,9 @@
 					  		<h5 class="result_tab_title"> </h5>
 					  		<ul class="history_list">
 					  		</ul>
-					  		<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more1">Load More</a>
+							<div class="text-center">
+					  			<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more1">Load More</a>
+							</div>
 					  	</div>
 					</div>
 				</div>
@@ -111,7 +112,9 @@
 					  		<ul class="search_list_items search_list_items-mod" id="list-data">
 								{{-- list goes here --}}
 					  		</ul>
-					  		<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more2">Load More</a>
+							<div class="text-center">
+								<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more2">Load More</a>
+							</div>
 					  	</div>
 					</div>
 				</div>
@@ -170,11 +173,12 @@
 			success:function(data) {
 				grid_view = '';
 				list_view = '';
+				//total data count
+				count = data.total+' results found in <a href="javascript:void(0);">Australia</a>';
+				$(".result_tab_title").html(count);
+
 				if(data.error == false){
 					if(data.data.length > 0) {
-						//total data count
-						count = data.total+' results found in <a href="javascript:void(0);">Australia</a>';
-
 						$.each(data.data, function(index, value){
 							// map view
 							let lat = Number(value.business.latitude);
@@ -226,9 +230,7 @@
 					//here goes the error
 					$('#load-more1').html('No more data!');
 					$('#load-more2').html('No more data!');
-					count = '0 results found in <a href="javascript:void(0);">Australia</a>';
 				}
-				$(".result_tab_title").html(count);
 			}
 		})
 	}
