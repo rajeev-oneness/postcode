@@ -1373,6 +1373,13 @@ footer {
     top: 0;
 }
 
+.history_list .location{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 /*=====Responsive
 =====================*/
 
