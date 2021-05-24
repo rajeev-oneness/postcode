@@ -85,7 +85,7 @@
 				<div class="col-12">
 					<div class="tab-content" id="myTabContent">
 					  	<div class="tab-pane fade show active" id="gird" role="tabpanel" aria-labelledby="gird-tab">
-					  		{{-- <h5 class="result_tab_title"> <span id="data-count"></span> results found in <a href="#">Australia</a></h5> --}}
+					  		<h5 class="result_tab_title"> </h5>
 					  		<ul class="history_list">
 					  		</ul>
 					  		<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more1">Load More</a>
@@ -105,8 +105,8 @@
 					<div class="tab-content" id="myTabContent">
 					  	<div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
 					  		<div class="result_tab_title_wrap">
-					  			{{-- <h5 class="result_tab_title"> <span id="data-count"></span> results found in <a href="#">Australia</a></h5> --}}
-					  			{{-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p> --}}
+								<h5 class="result_tab_title"></h5>
+					  			<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
 					  		</div>
 					  		<ul class="search_list_items search_list_items-mod" id="list-data">
 								{{-- list goes here --}}
@@ -172,7 +172,9 @@
 				list_view = '';
 				if(data.error == false){
 					if(data.data.length > 0) {
-						// console.log(data.data.length);
+						//total data count
+						count = data.total+' results found in <a href="javascript:void(0);">Australia</a>';
+
 						$.each(data.data, function(index, value){
 							// map view
 							let lat = Number(value.business.latitude);
@@ -207,7 +209,7 @@
 							list_view += '<ul class="rating_coments"><li><h5><span><b>'+value.promo_code+'</b></span></h5></li></ul>';
 							list_view += '<a href ="'+dealHref+'"><h4 class="place_title bebasnew">'+value.title+'</h4></a>';
 							list_view += '<div class="location_details"><p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p></div>';
-							list_view += '<p class=""><strong>Deal organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
+							list_view += '<p class="location"><strong>Deal organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
 							list_view += '<p class="location"><strong>Reedeem before '+value.expire_date+'</strong></p>';
 							list_view += '<p class="history_details">'+value.description+'</p>';
 							// list_view += '<a href="#"><img src=""></a>';
@@ -224,31 +226,15 @@
 					//here goes the error
 					$('#load-more1').html('No more data!');
 					$('#load-more2').html('No more data!');
+					count = '0 results found in <a href="javascript:void(0);">Australia</a>';
 				}
-				// $('#load-more').hide();
-				console.log(data);
+				$(".result_tab_title").html(count);
 			}
 		})
 	}
 </script>
 
 
-{{-- <script type="text/javascript">
-	$(document).ready(function(){
-		$('.ham').click(function(e){
-			e.stopPropagation();
-			$('.navigation').toggleClass('slide');
-		});
-
-		$(document).click(function(){
-			$('.navigation').removeClass('slide');
-		});
-
-		$('.navigation').click(function(e){
-			e.stopPropagation();
-		});
-	});
-</script> --}}
 
 
 @endsection

@@ -83,7 +83,7 @@
 				<div class="col-12">
 					<div class="tab-content" id="myTabContent">
 					  	<div class="tab-pane fade show active" id="gird" role="tabpanel" aria-labelledby="gird-tab">
-					  		{{-- <h5 class="result_tab_title"> <span id="data-count"></span> results found in <a href="#">Australia</a></h5> --}}
+					  		<h5 class="result_tab_title"> </h5>
 					  		<ul class="history_list">
 								{{-- load by ajax --}}
 					  		</ul>
@@ -104,8 +104,8 @@
 					<div class="tab-content" id="myTabContent">
 					  	<div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
 					  		<div class="result_tab_title_wrap">
-					  			{{-- <h5 class="result_tab_title"> <span id="data-count"></span> results found in <a href="#">Australia</a></h5>
-					  			<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p> --}}
+								<h5 class="result_tab_title"></h5>
+					  			<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
 					  		</div>
 					  		<ul class="search_list_items search_list_items-mod" id="list-data">
 								{{-- load by ajax --}}
@@ -170,12 +170,14 @@
             	url:'{{route('getBusinessByState')}}',
 				data : params,
 				success:function(data) {
-					// console.log(locations);
-					// initMap(data.data[0].latitude, data.data[0].longitude);
+					grid_view = '';
+					list_view = '';
+					
 					if(data.error == false) {
 						if(data.data.length > 0) {
-							grid_view = '';
-							list_view = '';
+							//total data count
+							count = data.total+' results found in <a href="javascript:void(0);">Australia</a>';
+							
 							$.each(data.data, function( index, value ) {
 								// map view
 								let lat = Number(value.latitude);
@@ -215,7 +217,9 @@
 						} else {
 							$('#load-more1').html('No more data!');
 							$('#load-more2').html('No more data!');
+							count = '0 results found in <a href="javascript:void(0);">Australia</a>';
 						}
+						$(".result_tab_title").html(count);
 					} else {
 						// error handling
 					}

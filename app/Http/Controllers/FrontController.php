@@ -72,8 +72,9 @@ class FrontController extends Controller
                 $business = $business->where('id', $request->id)->get();
                 return response()->json(['error'=>false,'message'=>'Business Details','data'=>$business, 'details' => 1]);
             }
+            $count = $business->count();
             $business = $business->with('ratings')->limit(10)->offset($offset)->get();
-            return response()->json(['error'=>false,'message'=>'Business Data','data'=>$business]);
+            return response()->json(['error' => false, 'message' => 'Business Data', 'data' => $business, 'total' => $count]);
         }
         return response()->json(['error'=>true,'message'=>$validate->errors()->first()]);
     }
@@ -126,8 +127,9 @@ class FrontController extends Controller
             if(auth()->check()) {
                 $datas = $datas->where('postcode', auth()->user()->postcode);
             }
+            $count = $datas->count();
             $datas = $datas->with('business')->orderBy('created_at', 'DESC')->limit(10)->offset($offset)->get();
-            return response()->json(['error'=>false,'message'=>'Event Data','data'=>$datas]);
+            return response()->json(['error'=>false,'message'=>'Data','data'=>$datas, 'total' => $count]);
         }
         return response()->json(['error'=>true,'message'=>$validate->errors()->first()]);
     }

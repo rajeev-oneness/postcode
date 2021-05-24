@@ -17,12 +17,23 @@
 		a {
 			margin-left: 0px !important;
 		}
+		#loading {
+			position: fixed;
+			width: 100%;
+			height: 100vh;
+			background: rgba(0, 0, 0, 0.589);
+			z-index: 9999;
+		}
 	</style>
 	<script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
 
 	@yield('head-script')
 </head>
-<body>
+<body onload="preLoader()">
+
+{{-- <div id="loading" style="background: rgb(255, 248, 248) url('{{asset("homepage_assets/images/logo.png")}}') center no-repeat; "></div> --}}
+<div id="loading"></div>
+
 <header>
 	<a href="{{route('default.homepage')}}" class="logo">
 		<img src="{{asset('homepage_assets/images/logo.png')}}">
@@ -205,6 +216,14 @@
 <script src="{{asset('homepage_assets/js/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('homepage_assets/js/slick.min.js')}}"></script>
 <script src="{{ asset('admin_assets/js/jquery.sumoselect.min.js') }}"></script>
+
+<script>
+	function preLoader() {
+		$("#loading").fadeOut(1000, function() {
+			$("#loading").css("display", 'none');
+		});
+	}
+</script>
 
 @yield('script')
 

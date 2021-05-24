@@ -85,11 +85,11 @@
 				<div class="col-12">
 					<div class="tab-content" id="myTabContent">
 					  	<div class="tab-pane fade show active" id="gird" role="tabpanel" aria-labelledby="gird-tab">
-					  		<!--<h5 class="result_tab_title"> <span id="data-count"></span> results found in <a href="#">Australia</a></h5>-->
-							<div class="result_tab_title_wrap">
-					  			<h5 class="result_tab_title">{{count($event)}} results found in <a href="#">Australia</a></h5>
-					  			<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-					  		</div>
+					  		<h5 class="result_tab_title"> </h5>
+							{{-- <div class="result_tab_title_wrap">
+								<h5 class="result_tab_title"></h5>
+								<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+					  		</div> --}}
 					  		<ul class="history_list">
 								{{-- grid data rendered here --}}
 					  		</ul>
@@ -111,13 +111,10 @@
 				<div class="col-12">
 					<div class="tab-content" id="myTabContent">
 					  	<div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
-					  		<!-- <div class="result_tab_title_wrap">
-					  			<h5 class="result_tab_title"> <span id="data-count"></span> results found in <a href="#">Australia</a></h5>
-					  			<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-					  		</div>-->
 							<div class="result_tab_title_wrap">
-					  			<h5 class="result_tab_title">{{count($event)}} results found in <a href="#">Australia</a></h5>
-					  			<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+								{{-- data count rendered here --}}
+								<h5 class="result_tab_title"></h5>
+								<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
 					  		</div>
 					  		<ul class="search_list_items search_list_items-mod" id="list-data">
 								{{-- list data rendered here --}}
@@ -185,7 +182,10 @@
 				list_view = '';
 				if(data.error == false){
 					if(data.data.length > 0) {
-						console.log(data.data.length);
+						
+						//total data count
+						count = data.total+' results found in <a href="javascript:void(0);">Australia</a>';
+
 						$.each(data.data, function(index, value){
 							// map view
 							let lat = Number(value.business.latitude);
@@ -194,7 +194,6 @@
 								locations.push({ lat : lat, lng : lng });
 								initMap();
 							}
-
 
 							// grid view
 							eventHref = "{{route('details',['name' => 'event', 'id' => 'eventId'])}}";
@@ -242,32 +241,14 @@
 					//here goes the error
 					$('#load-more1').html('No more data!');
 					$('#load-more2').html('No more data!');
+					count = '0 results found in <a href="javascript:void(0);">Australia</a>';
 				}
-				// $('#load-more').hide();
-				console.log(data);
+				$(".result_tab_title").html(count);
 			}
 		})
 	}
 </script>
 
-
-
-{{-- <script type="text/javascript">
-	$(document).ready(function(){
-		$('.ham').click(function(e){
-			e.stopPropagation();
-			$('.navigation').toggleClass('slide');
-		});
-
-		$(document).click(function(){
-			$('.navigation').removeClass('slide');
-		});
-
-		$('.navigation').click(function(e){
-			e.stopPropagation();
-		});
-	});
-</script> --}}
 
 
 @endsection
