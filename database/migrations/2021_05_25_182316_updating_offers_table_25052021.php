@@ -14,7 +14,7 @@ class UpdatingOffersTable25052021 extends Migration
     public function up()
     {
         Schema::table('offers', function (Blueprint $table) {
-            $table->integer('popular')->comment('0: not popular, 1: popular')->default(0)->after('created_by');
+            $table->tinyInteger('popular')->comment('0: not popular, 1: popular')->default(0)->after('created_by');
         });
     }
 
