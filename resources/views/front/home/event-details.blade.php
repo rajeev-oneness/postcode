@@ -46,16 +46,16 @@
 		<ul class="detail-evtext">
 			<li>
 				<p class="w-100 catagoris_ev">
-					<span><img src="./images/cat-gov.png" class="mr-2"> {{$data->business->name}}</span>
+					<span><img src="{{asset('homepage_assets/images/cat-gov.png')}}" class="mr-2"> {{$data->business->name}}</span>
 					<span class="float-right w-142">
-						<small class="d-block">START : 10:00 PM </small>
-						<small>END : 10:50 PM </small>
+						<small class="d-block">START : {{$data->start}} </small>
+						<small>END : {{$data->end}} </small>
 					</span>
 				</p>
-				<a href="#"><h1>{{$data->name}}</h1></a>
+				<a href="javascript:void(0);"><h1>{{$data->name}}</h1></a>
 				<h6>Description</h6>
 				<p class="text-white">
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+					{{$data->short_description}}
 				</p>
 			<li>
 		</ul>
@@ -95,7 +95,15 @@
 				</div>
 				<div class="tab-pane" id="about" role="tabpanel">
 					<p class="mb-0">
-						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+						{{$data->description}}
+					</p>
+					<p class="mb-0">
+						<h1 class="footer-heading mb-0 mt-2">Booking details</h1>
+						{{$data->booking_details}}
+					</p>
+					<p class="mb-0">
+						<h1 class="footer-heading mb-0 mt-2">Age Group</h1>
+						{{$data->agegroup->group}}
 					</p>
 				</div>
 				<div class="tab-pane" id="photos" role="tabpanel">
