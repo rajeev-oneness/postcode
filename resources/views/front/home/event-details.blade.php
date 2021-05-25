@@ -9,7 +9,7 @@
 @section('details-content')
 <div class="row">
     <h2 class="bebasnew">Event Details</h2>
-    <ul class="search_list_items search_list_items-mod">
+    <!--<ul class="search_list_items search_list_items-mod">
         <li>
             <div class="location_img_wrap">
                 <img src="{{asset($data->image)}}">
@@ -38,6 +38,101 @@
                 
             </div>
         </li>
-    </ul>
+    </ul>-->
 </div>
+
+<div class="row m-0 mt-5 mb-5">
+	<div class="col-12 col-md-6 bg-bipblue p-4">
+		<ul class="detail-evtext">
+			<li>
+				<p class="w-100 catagoris_ev">
+					<span><img src="./images/cat-gov.png" class="mr-2"> {{$data->business->name}}</span>
+					<span class="float-right w-142">
+						<small class="d-block">START : 10:00 PM </small>
+						<small>END : 10:50 PM </small>
+					</span>
+				</p>
+				<a href="#"><h1>{{$data->name}}</h1></a>
+				<h6>Description</h6>
+				<p class="text-white">
+					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+				</p>
+			<li>
+		</ul>
+	</div>
+	<div class="col-12 col-md-6 p-0 image-part" style="background:url({{asset($data->image)}});">
+		<a href="javascript:void(0);" class="all_pic shadow-lg">View All 3 Images</a>
+	</div>
+</div> <!--upper Row-->
+
+<div class="row m-0 mt-4 mb-5">
+	<div class="col-md-8 pl-2 pl-md-0 details_left">
+		<div class="card position-relative">
+			<div class="price-deat">
+				<h1>&dollar;{{$data->price}}<span>Inc. of all taxes<span></h1>
+			</div>
+			<ul class="nav nav-tabs" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" data-toggle="tab" href="#deals" role="tab">Deals</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#about" role="tab">About</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#photos" role="tab">Photos</a>
+				</li>
+			</ul><!-- Tab panes -->
+			<div class="tab-content">
+				<div class="tab-pane active" id="deals" role="tabpanel">
+					<h5>Lorem Ipsum is simply dummy</h5>
+					<ul class="deals-contant">
+						<li>Valid for : 1 Person</li>
+						<li>|</li>
+						<li>Valid on : All Days</li>
+						<li>|</li>
+						<li>Timings : 10:30 AM - 2:00 PM</li>
+					</ul>
+				</div>
+				<div class="tab-pane" id="about" role="tabpanel">
+					<p class="mb-0">
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+					</p>
+				</div>
+				<div class="tab-pane" id="photos" role="tabpanel">
+					<ul class="photo_tab">
+						<li><img src="{{asset($data->image)}}"></li>
+						<li><img src="{{asset($data->image)}}"></li>
+						<li><img src="{{asset($data->image)}}"></li>
+						<li><img src="{{asset($data->image)}}"></li>
+						<li><img src="{{asset($data->image)}}"></li>
+						<li><img src="{{asset($data->image)}}"></li>
+					</ul>
+				</div>
+			</div>
+			<div class="mt-4 text-right">
+				<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more2">DETAILS</a>
+				<a href="javascript:void(0);" class="blue-btn load_btn" id="load-more2">+ Add</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 p-0 details_right">
+		<div class="card position-relative">
+			<div class="card-header text-center border-0 bg-bipblue text-white">
+				<h4>Your Bookings</h4>
+			</div>
+			<div class="card-body p-0">
+				<div class="bg-light p-3 text-center">
+					<h5>Please add an option <span class="d-block">Your order is empty</span></h5>
+				</div>
+				<div class="p-3">
+					<h4><span>Total</span> : $0</h4>
+				</div>
+			</div>
+			<div class="card-footer border-0 p-0">
+				<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more2">BOOK NOW</a>
+			</div>
+		</div>
+	</div>
+</div>
+
 @endsection
