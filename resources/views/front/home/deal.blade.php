@@ -180,6 +180,19 @@
 				if(data.error == false){
 					if(data.data.length > 0) {
 						$.each(data.data, function(index, value){
+							//offer expire date calculation
+							const expDate1 = new Date(value.expire_date);
+							const expDate2 = new Date();
+							const expDiffTime = Math.abs(expDate2 - expDate1);
+							const expDiffDays = Math.ceil(expDiffTime / (1000 * 60 * 60 * 24)); 
+							
+							//offer creating date calculation
+							const creationDate1 = new Date(value.created_at);
+							const creationDate2 = new Date();
+							const creationDiffTime = Math.abs(creationDate2 - creationDate1);
+							const creationDiffDays = Math.ceil(creationDiffTime / (1000 * 60 * 60 * 24));
+
+
 							// map view
 							let lat = Number(value.business.latitude);
 							let lng = Number(value.business.longitude);
@@ -197,12 +210,21 @@
 							
 							// grid view
 							grid_view += "<li>";
+							if(expDiffDays <= 7){
+								grid_view += '<p class="float-right" style="margin-right: 10px;margin-top: 10px;"><span class="badge badge-danger">Expiring soon!</span></p><br>';
+							}
+							if(value.popular == 1){
+								grid_view += '<p class="float-right" style="margin-right: 5px;margin-top: 10px;"><span class="badge badge-warning">Popular!</span></p><br>';
+							}
+							if(expDiffDays >= 7 && creationDiffDays<=7){
+								grid_view += '<p class="float-right" style="margin-right: 5px;margin-top: 10px;"><span class="badge badge-success">Recent!</span></p><br>';
+							}
 							grid_view += '<a href ="'+dealHref+'"><h4 class="place_title bebasnew">'+value.title+'</h4></a>';
 							grid_view += '<h5 class="phone_call font-weight-bold">'+value.promo_code+'</h5>';
 							grid_view += '<p class="phone_call"><strong>Deal organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
 							grid_view += '<p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p>';
 							grid_view += '<p class="location"><strong>Reedeem before '+value.expire_date+'</strong></p>';
-							// grid_view += '<p class="rating"><img src="{{url('')}}/'+'homepage_assets/images/rating.png'+'">300 reviews</p>';
+							
 							grid_view += '<p class="history_details">'+value.description+'</p>';
 							grid_view += "</li>";
 
@@ -210,7 +232,17 @@
 							list_view += "<li>";
 							list_view += '<div class="location_img_wrap"><img src="{{url('')}}/'+value.image+'"></div>';
 							list_view += '<div class="list_content_wrap">';
-							list_view += '<ul class="rating_coments"><li><h5><span><b>'+value.promo_code+'</b></span></h5></li></ul>';
+							list_view += '<ul class="rating_coments"><li><h5><span><b>'+value.promo_code+'</b></span></h5></li>';
+							if(expDiffDays <= 7){
+								list_view += '<li><h5><span class="badge badge-danger text-white">Expiring soon!</span></h5></li>';
+							}
+							if(value.popular == 1){
+								list_view += '<li><h5><span class="badge badge-warning">Popular!</span></h5></li>';
+							}
+							if(expDiffDays >= 7 && creationDiffDays<=7){
+								list_view += '<li><h5><span class="badge badge-success">Recent!</span></h5></li>';
+							}
+							list_view += '</ul>';
 							list_view += '<a href ="'+dealHref+'"><h4 class="place_title bebasnew">'+value.title+'</h4></a>';
 							list_view += '<div class="location_details"><p class="location"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p></div>';
 							list_view += '<p class="location"><strong>Deal organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
