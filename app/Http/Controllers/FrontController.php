@@ -124,7 +124,7 @@ class FrontController extends Controller
                         ->orWhere('postcode','like','%'.$search.'%')
                         ->orWhere('address','like','%'.$search.'%');
                     })
-                    ->with('eventcattype');         
+                    ->with('eventcattype','ratings');         
                 } else if ($request->menu == 'deals') {
                     $datas = Offer::select('*')
                     ->where('expire_date', '>=', date("Y-m-d"))
@@ -135,7 +135,7 @@ class FrontController extends Controller
                 }
             } else {
                 if($request->menu == 'events') {
-                    $datas = Event::select('*')->where('end', '>=', date("Y-m-d"))->with('eventcattype');         
+                    $datas = Event::select('*')->where('end', '>=', date("Y-m-d"))->with('eventcattype','ratings');         
                 } else if ($request->menu == 'deals') {
                     $datas = Offer::select('*')->where('expire_date', '>=', date("Y-m-d"));
                 }

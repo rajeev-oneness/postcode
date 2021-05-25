@@ -47,20 +47,7 @@
                     <input type="hidden" id="hid_id" name="hid_id" value="{{ $editedservice_data->id }}">
                     {{csrf_field()}}
                       <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                          <div class="form-group">
-                            <label for="formrow-inputState">Business Category</label>
-                            <select id="business_categoryId" name="business_categoryId" class="form-control">
-                                <option value="">Select</option>
-                                @foreach($businessSerData as $servicesData)
-                                  <option value="{{$servicesData->id}}"  <?php echo $editedservice_data->businessId ==  $servicesData->id ? "selected" : ""; ?>>{{$servicesData->name}}</option>
-                                @endforeach
-                            </select>
-                            @error('business_categoryId')
-                              <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                          </div>
-                        </div>
+                        
                         <div class="col-md-4 mb-3">
                           <label for="validationCustom05">Service Name</label>
                           <input class="form-control" id="name" name="name" value="{{ $editedservice_data->name }}" type="text" placeholder="Enter Product Name" required="">

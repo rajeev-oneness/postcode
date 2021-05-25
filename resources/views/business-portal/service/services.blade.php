@@ -46,20 +46,7 @@
                     <input type="hidden" id="hid_id" name="hid_id">
                     {{csrf_field()}}
                       <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                          <div class="form-group">
-                            <label for="validationCustom05">Business Category</label>
-                            <select id="businessId" name="businessId" class="form-control" required="">
-                              <option value="{{ old('businessId') }}">Select</option>
-                              @foreach($servicesData as $servicesName)
-                                <option value="{{$servicesName->id}}">{{$servicesName->name}}</option>
-                              @endforeach
-                            </select>                      
-                            @error('businessId')
-					                    <span class="text-danger">{{ $message }}</span>
-					                  @enderror
-                          </div>
-                        </div>
+                        
                         <div class="col-md-4 mb-3">
                           <label for="validationCustom05">Service Name</label>
                           <input class="form-control" id="name" name="name" type="text" value="{{ old('name') }}" placeholder="Enter Product Name" maxlength="255" required="">

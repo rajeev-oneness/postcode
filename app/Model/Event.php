@@ -26,4 +26,8 @@ class Event extends Model
     {
         return $this->hasOne('App\Model\AgeGroup','id','age_group');
     }
+    public function ratings()
+    {
+        return $this->hasMany('App\Model\Rating','business_id','business_id');
+    }
 }

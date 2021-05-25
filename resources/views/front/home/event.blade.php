@@ -201,10 +201,10 @@
 							businessHref = businessHref.replace('businessId', value.business.id);
 
 							grid_view += "<li>";
-							grid_view += '<div class="location_img_wrap"><img src="{{url('')}}/'+value.image+'"><p><span><img src="{{url('')}}/'+'homepage_assets/images/star.png'+'"> <b>4.5</b> <small>(60 reviews)</small></span> |  <span><small><img src="{{url('')}}/'+'homepage_assets/images/chat.png'+'"> 40 Comments</small></span></p></div>';
+							grid_view += '<div class="location_img_wrap"><img src="{{url('')}}/'+value.image+'"><p><span><img src="{{url('')}}/'+'homepage_assets/images/star.png'+'"> <b>4.5</b> <small>('+value.ratings.length+' reviews)</small></span> |  <span><small><img src="{{url('')}}/'+'homepage_assets/images/chat.png'+'"> '+value.ratings.length+' Comments</small></span></p></div>';
 							grid_view += '<a href ="'+eventHref+'" class="evgrid-padding"><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
 							grid_view += '<div class="tupe-grid"><p><img src="{{url('')}}/'+'homepage_assets/images/cat-gov.png'+'" class="d-block">'+value.eventcattype.name+'</p></div>';
-							grid_view += '<p class="phone_call"><strong>Event organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
+							grid_view += '<p class="phone_call gred-p"><strong>Organiser: <a href="'+businessHref+'">'+value.business.name+'</a></strong></p>';
 							grid_view += '<p class="location gred-p"><img src="{{url('')}}/'+'homepage_assets/images/place.png'+'">'+value.address+'</p>';
 							// grid_view += '<p class="location"><strong>Date: '+value.start+' to '+value.end+'</strong></p>';
 							grid_view += '<p class="phone_call gred-p"><img src="{{url('')}}/'+'homepage_assets/images/phone-call.png'+'">'+value.business.mobile+'</p>';

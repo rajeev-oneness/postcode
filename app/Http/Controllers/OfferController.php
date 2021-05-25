@@ -46,8 +46,14 @@ class OfferController extends Controller
         $timestamp = strtotime($dob);
         $new_date = date("Y-m-d", $timestamp);
 
+        $business = Business::where('user_id', auth()->user()->id)->first();
+
         $Offer = new Offer();
-        $Offer->businessId = $request->business_categoryId;         
+        if(auth()->user()->userType != 3){
+            $Offer->businessId = $request->business_categoryId;         
+        } else {
+            $Offer->businessId = $business->id;
+        }
         $Offer->title = $request->title;
         $Offer->image = $offerimg;
         $Offer->price = $request->price;           
@@ -132,26 +138,32 @@ class OfferController extends Controller
         ]);
        $validator->validate();
        try {
-        $hid_id = $request->hid_id;
-        if($request->hasFile('image')) {
-            $fileName = time().'.'.$request->image->extension(); 
-            $request->image->move(public_path('uploads/'), $fileName);
-            $imgupdate ='uploads/'.$fileName;
+            $business = Business::where('user_id', auth()->user()->id)->first();
+            if(auth()->user()->userType != 3){
+                $businessId = $request->business_categoryId;         
+            } else {
+                $businessId = $business->id;
+            }
+            $hid_id = $request->hid_id;
+            if($request->hasFile('image')) {
+                $fileName = time().'.'.$request->image->extension(); 
+                $request->image->move(public_path('uploads/'), $fileName);
+                $imgupdate ='uploads/'.$fileName;
+                $update_offer_data = Offer::where('id', $hid_id)->update([
+                    'image' => $imgupdate
+                ]);
+            }
+            
             $update_offer_data = Offer::where('id', $hid_id)->update([
-                'image' => $imgupdate
-            ]);
-        }
-        
-        $update_offer_data = Offer::where('id', $hid_id)->update([
-            'title' => $request->title, 
-            'businessId' => $request->business_categoryId, 
-            'description' => $request->description,  
-            'price' => $request->price, 
-            'short_description' => $request->short_description, 
-            'promo_code' => $request->promo_code, 
-            'expire_date' => date("Y-m-d", strtotime($request->expire_date)), 
-            'howcanredeem' => $request->howcanredeem
-        ]);   
+                'title' => $request->title, 
+                'businessId' => $businessId, 
+                'description' => $request->description,  
+                'price' => $request->price, 
+                'short_description' => $request->short_description, 
+                'promo_code' => $request->promo_code, 
+                'expire_date' => date("Y-m-d", strtotime($request->expire_date)), 
+                'howcanredeem' => $request->howcanredeem
+            ]);   
             if(auth()->user()->userType == 3){
                 return redirect()->route('business-admin.manage_offers');
             }

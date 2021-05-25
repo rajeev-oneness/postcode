@@ -47,20 +47,6 @@
                   {{csrf_field()}}
                   <div class="form-row">
                     <div class="col-md-4 mb-3">
-                      <div class="form-group">
-                        <label for="validationCustom05">Business Name</label>
-                        <select id="business_categoryId" name="business_categoryId" class="form-control" required="">
-                          <option value="{{old('business_categoryId')}}">Select</option>
-                          @foreach($busCateData as $businessName)
-                          <option value="{{$businessName->id}}">{{$businessName->name}}</option>
-                          @endforeach
-                        </select>
-                        @error('business_categoryId')
-                        <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                      </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Event Name</label>
                       <input class="form-control" id="name" name="name" value="{{old('name')}}" type="text" placeholder="Business Name" required="">
                       @error('name')

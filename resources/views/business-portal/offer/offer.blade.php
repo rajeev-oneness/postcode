@@ -39,7 +39,7 @@
                   <input type="hidden" id="hid_id" name="hid_id">
                   {{csrf_field()}}
                   <div class="form-row">
-                    <div class="col-md-4 mb-3">
+                    {{-- <div class="col-md-4 mb-3">
                       <div class="form-group">
                         <label for="validationCustom05">Business Name</label>
                         <select id="business_categoryId" name="business_categoryId" class="form-control" required="">
@@ -49,10 +49,10 @@
                           @endforeach
                         </select>
                         @error('business_categoryId')
-                      <span class="text-danger">{{ $message }}</span>
-                      @enderror
+                          <span class="text-danger">{{ $message }}</span>
+                        @enderror
                       </div>
-                    </div>
+                    </div> --}}
                     <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Title</label>
                       <input class="form-control" id="title" name="title" value="{{old('title')}}" type="text" placeholder="Title Required" required="">

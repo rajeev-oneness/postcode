@@ -29,9 +29,9 @@ class Business extends Model
         return $this->hasMany('App\Model\Product','created_by','user_id');
     }
     public function events() {
-        return $this->hasMany('App\Model\Event','created_by','user_id');
+        return $this->hasMany('App\Model\Event','business_id','id');
     }
     public function offers() {
-        return $this->hasMany('App\Model\Offer','created_by','user_id');
+        return $this->hasMany('App\Model\Offer','businessId','id');
     }
 }

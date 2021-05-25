@@ -158,7 +158,8 @@ class UploadController extends Controller
                                 if(!$offer){
                                     $offer = new Offer;
                                 }
-                                        
+                                $business = Business::where('user_id', auth()->user()->id)->first();
+                                $Offer->businessId = $business->id;
                                 $offer->title = $data[0];
                                 $offer->price = $data[4];           
                                 $offer->short_description = $data[1]; 
@@ -215,6 +216,9 @@ class UploadController extends Controller
                                 \DB::beginTransaction();
                                 
                                 $event = new Event;
+
+                                $business = Business::where('user_id', auth()->user()->id)->first();
+                                $Offer->business_id = $business->id;
                                 $event->name = $data[1];
                                 $event->short_description = $data[3];           
                                 $event->description = $data[2];           

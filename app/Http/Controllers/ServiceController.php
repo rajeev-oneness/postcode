@@ -43,7 +43,13 @@ class ServiceController extends Controller
             $servicedesc = 'uploads/' . $fileName;
 
             $Service = new Service();
-            $Service->businessId = $request->businessId;
+            $business = Business::where('user_id', auth()->user()->id)->first();
+            if(auth()->user()->userType != 3){
+                $businessId = $request->businessId;         
+            } else {
+                $businessId = $business->id;
+            }
+            $Service->businessId = $businessId;
             $Service->name = $request->name;
             $Service->image = $servicedesc;
             $Service->details = $request->details;
@@ -121,6 +127,12 @@ class ServiceController extends Controller
         $validator->validate();
         try {
             $hid_id = $request->hid_id;
+            $business = Business::where('user_id', auth()->user()->id)->first();
+            if(auth()->user()->userType != 3){
+                $businessId = $request->business_categoryId;         
+            } else {
+                $businessId = $business->id;
+            }
             if($request->hasFile('image')) {
                 $fileName = time() . '.' . $request->image->extension();
                 $request->image->move(public_path('uploads/'), $fileName);
@@ -132,7 +144,7 @@ class ServiceController extends Controller
 
             $update_service_data = Service::where('id', $hid_id)->update([
                 'name' => $request->name, 
-                'businessId' => $request->business_categoryId, 
+                'businessId' => $businessId, 
                 'details' => $request->details,
                 'price' => $request->price
             ]);

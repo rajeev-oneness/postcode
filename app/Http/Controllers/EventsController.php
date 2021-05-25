@@ -44,9 +44,14 @@ class EventsController extends Controller
             $fileName = time().'.'.$request->image->extension(); 
             $request->image->move(public_path('uploads/'), $fileName);
             $eventsdesc ='uploads/'.$fileName;
+            $business = Business::where('user_id', auth()->user()->id)->first();
 
             $event = new Event();
-            $event->business_id = $request->business_categoryId;         
+            if(auth()->user()->userType != 3){
+                $event->business_id = $request->business_categoryId;         
+            } else {
+                $event->business_id = $business->id;
+            }
             $event->name = $request->name;
             $event->image = $eventsdesc;
             $event->short_description = $request->short_description;           
@@ -148,31 +153,37 @@ class EventsController extends Controller
         ]);
        $validator->validate();
       try {
-        $hid_id = $request->hid_id;
-          if($request->hasFile('image')) {
-            $fileName = time().'.'.$request->image->extension(); 
-            $request->image->move(public_path('uploads/'), $fileName);
-            $imgevent ='uploads/'.$fileName;
+            $business = Business::where('user_id', auth()->user()->id)->first();
+            if(auth()->user()->userType != 3){
+                $businessId = $request->business_categoryId;         
+            } else {
+                $businessId = $business->id;
+            }
+            $hid_id = $request->hid_id;
+            if($request->hasFile('image')) {
+                $fileName = time().'.'.$request->image->extension(); 
+                $request->image->move(public_path('uploads/'), $fileName);
+                $imgevent ='uploads/'.$fileName;
+                $update_event_data = Event::where('id', $hid_id)->update([
+                    'image' => $imgevent, 
+                ]);
+            }
+            
             $update_event_data = Event::where('id', $hid_id)->update([
-                'image' => $imgevent, 
+                'name' => $request->name, 
+                'business_id' => $businessId, 
+                'short_description' => $request->short_description,
+                'description' => $request->description, 
+                'price' => $request->price, 
+                'event_category_id' => $request->event_category_id, 
+                'address' => $request->address, 
+                'start' => date("Y-m-d", $request->start), 
+                'end' => date("Y-m-d", $request->end), 
+                'frequency' => $request->frequency, 
+                'age_group' => $request->age_group, 
+                'booking_details' => $request->booking_details, 
+                'contact_details' => $request->contact_details
             ]);
-          }
-        
-        $update_event_data = Event::where('id', $hid_id)->update([
-            'name' => $request->name, 
-            'business_id' => $request->business_categoryId, 
-            'short_description' => $request->short_description,
-            'description' => $request->description, 
-            'price' => $request->price, 
-            'event_category_id' => $request->event_category_id, 
-            'address' => $request->address, 
-            'start' => date("Y-m-d", $request->start), 
-            'end' => date("Y-m-d", $request->end), 
-            'frequency' => $request->frequency, 
-            'age_group' => $request->age_group, 
-            'booking_details' => $request->booking_details, 
-            'contact_details' => $request->contact_details
-        ]);
             if(auth()->user()->userType == 3) {
                 return redirect()->route('business-admin.manage_events');
             }  

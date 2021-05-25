@@ -48,20 +48,6 @@
                   {{csrf_field()}}
                   <div class="form-row">
                     <div class="col-md-4 mb-3">
-                      <div class="form-group">
-                        <label for="validationCustom05">Business Name</label>
-                        <select id="business_categoryId" name="business_categoryId" class="form-control" required="">
-                          <option value="{{old('business_categoryId')}}">Select Category</option>
-                          @foreach($businesofferData as $businessName)
-                          <option value="{{$businessName->id}}"  <?php echo $editedoffers_data->businessId ==  $businessName->id ? "selected" : ""; ?>>{{$businessName->name}}</option>
-                          @endforeach
-                        </select>
-                        @error('business_categoryId')
-                        {{$message}}
-                        @enderror
-                      </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
                       <label for="validationCustom05">Title</label>
                       <input class="form-control" id="title" name="title" value="{{$editedoffers_data->title}}" type="text" placeholder="Title Required" required="">
                       @error('title')
