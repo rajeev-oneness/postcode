@@ -265,6 +265,8 @@
 
             var autocomplete= new google.maps.places.Autocomplete(document.getElementById('inputSearchTextFilter'));
 
+            autocomplete.setComponentRestrictions({'country': ['au']});
+
             google.maps.event.addListener(autocomplete, 'place_changed', function(){
 
                 var places = autocomplete.getPlace();

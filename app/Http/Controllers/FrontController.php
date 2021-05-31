@@ -129,8 +129,8 @@ class FrontController extends Controller
                     $datas = Offer::select('*')
                     ->where('expire_date', '>=', date("Y-m-d"))
                     ->where(function($datas) use ($search) {
-                        $datas->whereBetween('postcode', [$search-5, $search+5])
-                        ->orWhere('title','like','%'.$search.'%');
+                        // $datas->where('title','like','%'.$search.'%');
+                        $datas->whereBetween('postcode', [$search-5, $search+5]);
                     });
                 }
             } else {

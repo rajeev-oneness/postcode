@@ -71,7 +71,7 @@
 				<div class="search_form_wrap">
 					<form action="{{route('deals')}}">
 						<input type="hidden" name="menu" value="deals">
-						<input type="text" name="search" placeholder="Seatch  by postcode">
+						<input type="text" name="search" placeholder="Search  by postcode">
 						<button><img src="{{asset('homepage_assets/images/magnify.png')}}"></button>
 					</form>
 				</div>
