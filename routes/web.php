@@ -109,6 +109,10 @@ Route::get('/homepage', 'FrontController@homepage')->name('default.homepage');
 Route::get('/directory', 'FrontController@directory')->name('directory');
 Route::post('/get-business-by-State', 'FrontController@getBusinessByState')->name('getBusinessByState');
 
+Route::get('/lead-lists', 'LeadController@leads')->name('lead.lists');
+Route::get('/local-leads', 'LeadController@search')->name('lead.search');
+Route::post('/get-leads', 'LeadController@getQuotes')->name('getQuotes');
+
 //menu bar(events)
 Route::get('/events', 'FrontController@event')->name('events');
 Route::get('/deals', 'FrontController@deal')->name('deals');

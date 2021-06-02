@@ -59,8 +59,8 @@
 				<li><a href="{{route('deals')}}">Deals </a></li>
 				<li><a href="{{route('community.show')}}">Community </a></li>
 				<li><a href="{{route('marketplace')}}">Marketplace</a></li>
-				{{-- <li><a href="#">Local Leads</a></li>
-				<li><a href="#">Resources</a></li> --}}
+				<li><a href="{{route('lead.search')}}">Local Leads</a></li>
+				{{-- <li><a href="#">Resources</a></li> --}}
 				<li><a href="{{route('about-us')}}">About Us <span><i class="fas fa-chevron-down"></i></span> </a>
 					<ul>
 						<li><a href="{{route('faq')}}">FAQs</a></li>

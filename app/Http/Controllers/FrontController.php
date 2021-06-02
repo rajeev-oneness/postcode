@@ -32,7 +32,7 @@ class FrontController extends Controller
         $communities = Community::all();
         return view('front.home.index', compact('threebusinesses','businesses','postcodes','categories','offers','communities'));
     }
-    
+
     public function directory(Request $request) {
         $request = $request->except('_token');
         return view('front.home.directory-search',compact('request'));
@@ -124,7 +124,7 @@ class FrontController extends Controller
                         ->orWhere('postcode','like','%'.$search.'%')
                         ->orWhere('address','like','%'.$search.'%');
                     })
-                    ->with('eventcattype');         
+                    ->with('eventcattype');
                 } else if ($request->menu == 'deals') {
                     $datas = Offer::select('*')
                     ->where('expire_date', '>=', date("Y-m-d"))
@@ -135,7 +135,7 @@ class FrontController extends Controller
                 }
             } else {
                 if($request->menu == 'events') {
-                    $datas = Event::select('*')->where('end', '>=', date("Y-m-d"))->with('eventcattype');         
+                    $datas = Event::select('*')->where('end', '>=', date("Y-m-d"))->with('eventcattype');
                 } else if ($request->menu == 'deals') {
                     $datas = Offer::select('*')->where('expire_date', '>=', date("Y-m-d"));
                 }
@@ -151,35 +151,35 @@ class FrontController extends Controller
         }
         return response()->json(['error'=>true,'message'=>$validate->errors()->first()]);
     }
-    
+
     //details of each sections
     public function details(Request $request) {
         if($request->name == 'business') {
             $data = Business::where('id', $request->id)->with('businesstype','services','products','events','offers','ratings')->get()->toArray();
             $ratings = Rating::with('user')->where('business_id' ,$request->id)->get();
             return view('front.home.business-details', compact('data', 'ratings'));
-        
+
         } else if($request->name == 'event') {
 
             $data = Event::where('id', $request->id)->with('business','agegroup')->first();
             return view('front.home.event-details', compact('data'));
-        
+
         } else if($request->name == 'deal') {
 
             $data = Offer::where('id', $request->id)->with('business')->first();
             return view('front.home.deal-details', compact('data'));
-        
+
         } else if($request->name == 'marketplace') {
 
             $data = Product::where('id', $request->id)->get();
             return view('front.home.product-details', compact('data'));
-        
+
         }  else if($request->name == 'community') {
 
             $data = Community::where('id', $request->id)->first();
             return view('front.home.community-details', compact('data'));
-        
-        } 
+
+        }
     }
 
     public function addToCart(Request $req)
@@ -190,7 +190,7 @@ class FrontController extends Controller
         $product_cart->amount = 1;
         $product_cart->price = $req->price;
         $product_cart->save();
-        
+
         return response()->json(['data' => $product_cart]);
     }
 

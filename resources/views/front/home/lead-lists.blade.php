@@ -1,7 +1,7 @@
 @extends('front.home.master')
 
 @section('title')
-	Directory
+	Leads
 @endsection
 
 @section('head-script')
@@ -42,7 +42,7 @@
 				<ul class="breadcumb_list">
 					<li><a href="{{route('default.homepage')}}">Home</a></li>
 					<li><img src="{{asset('homepage_assets/images/down-arrow.png')}}"></li>
-					<li>Directory</li>
+					<li>Leads</li>
 				</ul>
 			</div>
 		</div>
@@ -88,8 +88,55 @@
 								{{-- load by ajax --}}
 					  		</ul>
 							<div class="text-center">
-					  			<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more1">Load More</a>
+					  			<button class="orange-btm load_btn" id="modal" data-toggle="modal" data-target="#contact-modal">Get Quote</button>
 							</div>
+                            <div id="contact-modal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <a class="close" data-dismiss="modal">×</a>
+                                            <h3>Get Quote</h3>
+                                        </div>
+                                        <form id="contactForm">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="name">Selected Quotes</label>
+                                                    <div id="quote_list">
+                                                        {{-- load by ajax --}}
+                                                    </div>
+                                                    <div id="quote_name"></div>
+                                                    <input type="hidden" name="postcodeId" id="postcodeId" value ="{{ $postcode->id }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="name">Name</label>
+                                                    <input type="text" name="name" class="form-control" id="name" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email">Email</label>
+                                                    <input type="email" name="email" class="form-control" id="email" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="mobile">Phone</label>
+                                                    <input type="mobile" name="mobile" class="form-control" id="mobile" required>
+                                                </div>
+                                                {{-- <div class="form-group">
+                                                    <label for="message">Select</label>
+                                                    <select class="browser-default custom-select">
+                                                        <option selected>Open this select menu</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+                                                </div> --}}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <input type="submit" class="btn btn-success" id="submit">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
 					  	</div>
 					</div>
 				</div>
@@ -115,6 +162,10 @@
 							<div class="text-center">
 					  			<a href="javascript:void(0);" class="orange-btm load_btn" id="load-more2">Load More</a>
 							</div>
+
+                            <div id="contact"><button type="button" class="btn btn-info btn" data-toggle="modal" data-target="#contact-modal">Show Contact Form</button></div>
+
+
 						</div>
 					</div>
 				</div>
@@ -129,6 +180,58 @@
 
 
 @section('script')
+
+
+<script>
+$(document).ready(function(){
+	$("#contactForm").submit(function(event){
+        event.preventDefault();
+		let params = {
+            _token:'{{csrf_token()}}',
+            name: $("#name").val(),
+            email: $("#email").val(),
+            mobile: $("#mobile").val(),
+            businessId: $("#businessId").val(),
+            postcodeId: $("#postcodeId").val(),
+            };
+        $.ajax({
+            type: "POST",
+            url: "{{route('getQuotes')}}",
+            data: params,
+            success: function(response){
+                $("#contact-modal").modal('hide');
+                alert("Success");
+                $("#contactForm")[0].reset();
+                $("#business_id").prop('checked',false);
+            },
+            error: function(){
+                alert("Error");
+            }
+        });
+	});
+});
+
+
+$("#modal").click(function(){
+    var selectedQuoteId = new Array();
+    var selectedQuoteName = new Array();
+    $('input[name="business_id"]:checked').each(function() {
+        selectedQuoteId.push(this.value);
+        selectedQuoteName.push(this.getAttribute("data-name"));
+    });
+    // console.log(selectedQuoteName);
+    quotes = "<input type='hidden' name='quote_id[]' id='businessId' value='"+selectedQuoteId+"'>";
+    quoteName = "<textarea name='quote_names[]'>"+selectedQuoteName+"</textarea>";
+    if(selectedQuoteId.length > 0 && selectedQuoteName.length > 0) {
+        $("#quote_list").append(quotes);
+        $("#quote_name").append(quoteName);
+    }
+});
+</script>
+
+
+
+
 <script>
 	$(document).ready(function() {
 		$(".list-view").hide();
@@ -177,7 +280,6 @@
 					grid_view = '';
 					list_view = '';
 					//total data count
-                    // console.log(data);
 					count = data.total+' results found in <a href="javascript:void(0);">Australia</a>';
 					$(".result_tab_title").html(count);
 
@@ -194,7 +296,7 @@
 
 								// grid view
 								let href = "{{route('details',['name' => 'business', 'id' => 'businessId'])}}";
-                                // console.log(value);
+
 								href = href.replace('businessId', value.id);
 								grid_view += "<li>";
 								grid_view += '<a href="'+href+'"><h4 class="place_title bebasnew">'+value.name+'</h4></a>';
@@ -204,6 +306,7 @@
 								grid_view += '<p class="rating"><img src="{{url('')}}/'+'homepage_assets/images/rating.png'+'">'+value.ratings.length+' reviews</p>';
 								grid_view += '<p class="phone_call"><img src="{{url('')}}/'+'homepage_assets/images/phone-call.png'+'">'+value.mobile+'</p>';
 								grid_view += '<p class="history_details">'+value.description+'</p>';
+								grid_view += '<p class="quote_details"><input type="checkbox" id="business_id" name="business_id" value="'+value.id+'" data-name="'+value.name+'"> Add to Quote</p>';
 								grid_view += "</li>";
 
 								//list view

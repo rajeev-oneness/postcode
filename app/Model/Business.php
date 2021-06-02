@@ -9,7 +9,7 @@ class Business extends Model
 {
     use SoftDeletes;
     protected $table = 'businesses';
-    
+
     public function ratings()
     {
         return $this->hasMany('App\Model\Rating','business_id','id');
@@ -20,7 +20,7 @@ class Business extends Model
     }
     public function businessuserid()
     {
-        return $this->belongsTo('App\User','userId','id');
+        return $this->belongsTo('App\User','user_id','id');
     }
     public function services() {
         return $this->hasMany('App\Model\Service','created_by','user_id');

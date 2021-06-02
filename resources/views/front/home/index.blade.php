@@ -79,7 +79,7 @@
 			<div class="col-md-4 mb-md-0 mb-sm-4 ">
 				<h2 class="main-heading">Advertise your Business</h2>
 				<p>
-					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal 
+					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
 				</p>
 				<a href="{{route('user.welcome')}}" class="text-button">Ad your business here <i class="fas fa-long-arrow-alt-right"></i> </a>
 			</div>
@@ -141,7 +141,7 @@
 			@empty
 				<li>No Data!</li>
 			@endforelse
-			
+
 		</ul>
 
 		<a href="{{route('community.show')}}" class="primery-button orange-btm">More Community</a>
@@ -210,7 +210,7 @@
 							<li><span><img src="{{asset('homepage_assets/images/star.png')}}"></span> 4.5 <a href="#" class="review-link">(60 reviews)</a></li>
 						</ul> --}}
 					</div>
-					
+
 				</div>
 			</li>
 			@empty
@@ -235,9 +235,9 @@
 			</div>
 		</li>
 		@empty
-			
+
 		@endforelse
-		
+
 	</ul>
 </section>
 
