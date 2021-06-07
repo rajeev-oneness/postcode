@@ -216,7 +216,7 @@
 <script src="{{asset('homepage_assets/js/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('homepage_assets/js/slick.min.js')}}"></script>
 <script src="{{ asset('admin_assets/js/jquery.sumoselect.min.js') }}"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 	function preLoader() {
 		$("#loading").fadeOut(1000, function() {

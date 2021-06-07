@@ -71,7 +71,7 @@
 				<div class="search_form_wrap">
 					<form action="{{route('events')}}">
 						<input type="hidden" name="menu" value="events">
-						<input type="text" name="search" placeholder="Seatch  by postcode">
+						<input type="text" name="search" placeholder="Search  by postcode">
 						<button><img src="{{asset('homepage_assets/images/magnify.png')}}"></button>
 					</form>
 				</div>
@@ -177,10 +177,11 @@
 			url:'{{route('event.deal.ajax')}}',
 			data:params,
 			success:function(data) {
+				console.warn(data.data);
 				grid_view = '';
 				list_view = '';
 				//total data count
-				count = data.total+' results found in <a href="javascript:void(0);">Australia</a>';
+				count = data.total+' results found ';
 				$(".result_tab_title").html(count);
 				if(data.error == false){
 					if(data.data.length > 0) {

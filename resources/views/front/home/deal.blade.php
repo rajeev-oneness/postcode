@@ -174,7 +174,7 @@
 				grid_view = '';
 				list_view = '';
 				//total data count
-				count = data.total+' results found in <a href="javascript:void(0);">Australia</a>';
+				count = data.total+' results found ';
 				$(".result_tab_title").html(count);
 
 				if(data.error == false){

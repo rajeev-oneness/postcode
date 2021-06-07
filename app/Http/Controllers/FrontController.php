@@ -83,6 +83,7 @@ class FrontController extends Controller
         $request = $request->except('_token');
         // $request = $request->all();
         $event = Event::all();
+        // dd($event);
         return view('front.home.event', compact('request', 'event'));
     }
     public function deal(Request $request) {
@@ -121,8 +122,7 @@ class FrontController extends Controller
                     ->where('end', '>=', date("Y-m-d"))
                     ->where(function($datas) use ($search) {
                         $datas->where('name', 'like', '%' . $search . '%')
-                        ->orWhere('postcode','like','%'.$search.'%')
-                        ->orWhere('address','like','%'.$search.'%');
+                        ->orWhere('postcode','like','%'.$search.'%');
                     })
                     ->with('eventcattype','ratings');         
                 } else if ($request->menu == 'deals') {
@@ -147,7 +147,7 @@ class FrontController extends Controller
             $datas = $datas->with('business')->orderBy('created_at', 'DESC')->limit(10)->offset($offset)->get();
 
             //dd($datas);
-            return response()->json(['error'=>false,'message'=>'Data','data'=>$datas, 'total' => $count]);
+            return response()->json(['error'=>false,'message'=>'Data','data'=>$datas, 'search'=>$search, 'total' => $count]);
         }
         return response()->json(['error'=>true,'message'=>$validate->errors()->first()]);
     }
