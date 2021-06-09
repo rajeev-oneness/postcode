@@ -93,7 +93,7 @@
             <li><a href="{{route('business-admin.manage_offers')}}"><i class="fas fa-percent"></i>Offers</a></li>
             <li><a href="{{route('business-admin.manage_events')}}"><i class="fas fa-calendar-alt"></i>Events</a></li>
             <li><a href="{{route('business-admin.manage_ratings')}}"><i class="fas fa-star"></i>Ratings</a></li>
-            <li><a href="{{route('my.business.leads')}}"><i class="fas fa-user"></i>Leads</a></li>
+            <li><a href="{{route('my.business.lead')}}"><i class="fas fa-user"></i>Leads</a></li>
             <li><a href="{{route('logout')}}" class="logout-bg"><i class="fas fa-sign-out-alt"></i>LOGOUT</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
