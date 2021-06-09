@@ -57,7 +57,9 @@
               <h6>{{auth()->user()->name}}</h6>
               <ul class="left-menuadd">
                 {{-- style="white-space: normal;" --}}
-                <li><i class="fas fa-map-marker-alt"></i> {{auth()->user()->address}}</li>
+                <li><i class="fas fa-map-marker-alt"></i>
+                      {{substr(auth()->user()->address, 0, 25) . '...'}}
+                </li>
                 <li><i class="far fa-envelope"></i> {{auth()->user()->email}}</li>
                 {{-- <li><i class="fas fa-globe"></i> www. jdgroup.co.in</li>
                 <li><i class="fas fa-phone-alt"></i> 80-600-800</li> --}}
@@ -91,6 +93,7 @@
             <li><a href="{{route('business-admin.manage_offers')}}"><i class="fas fa-percent"></i>Offers</a></li>
             <li><a href="{{route('business-admin.manage_events')}}"><i class="fas fa-calendar-alt"></i>Events</a></li>
             <li><a href="{{route('business-admin.manage_ratings')}}"><i class="fas fa-star"></i>Ratings</a></li>
+            <li><a href="{{route('my.business.leads')}}"><i class="fas fa-user"></i>Leads</a></li>
             <li><a href="{{route('logout')}}" class="logout-bg"><i class="fas fa-sign-out-alt"></i>LOGOUT</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->

@@ -104,4 +104,10 @@ class LeadController extends Controller
             return false;
         }
     }
+    public function showLeads()
+    {
+        $business = Business::where('user_id', auth()->id())->first();
+        $leads = Lead::where('business_id', $business->id)->orderBy('created_at', 'DESC')->get();
+        return view('business-portal.leads.index', compact('leads'));
+    }
 }
