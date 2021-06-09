@@ -85,7 +85,13 @@
                               @enderror 
                           </div>
                           <div class="row px-3 mb-4">
-                              <div class="custom-control custom-checkbox custom-control-inline"> <input id="chk1" type="checkbox" name="chk" class="custom-control-input"> <label for="chk1" class="custom-control-label text-sm text-dark">Remember me</label> </div> <a href="#" class="ml-auto mb-0 text-sm text-primary">Forgot Password?</a>
+                              <div class="custom-control custom-checkbox custom-control-inline"> <input id="chk1" type="checkbox" name="chk" class="custom-control-input"> <label for="chk1" class="custom-control-label text-sm text-dark">Remember me</label> </div>
+                              @if (Route::has('password.request'))
+                                    <a class="ml-auto mb-0 text-sm text-primary" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                              @endif 
+                              {{-- <a href="#" class="ml-auto mb-0 text-sm text-primary">Forgot Password?</a> --}}
                           </div>
                           <div class="row mb-3 px-3"> 
                               <button type="submit" id="admin_signup" class="btn btn-blue text-center">Login</button>

@@ -10,6 +10,7 @@ use App\Model\Lead;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Mail;
+use App\User;
 
 class LeadController extends Controller
 {

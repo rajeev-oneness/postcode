@@ -20,7 +20,10 @@ Route::get('/migrate/rollback', function(){
     dd('migration rolled 1 step back!');
 });
 Route::get('/config', function(){
-    \Artisan::call('config:cache');;
+    \Artisan::call('config:clear');
+    \Artisan::call('config:cache');
+    \Artisan::call('view:clear');
+    \Artisan::call('route:clear');
     dd('Config cache cleared successfully');
 });
 
