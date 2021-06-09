@@ -137,7 +137,7 @@ class UserController extends Controller
     {
         $request->validate([
             'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'email' => 'regex:/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$/'
+            'email' => 'regex:/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$/|unique:users'
         ]);
     
     DB::beginTransaction();
@@ -192,7 +192,7 @@ class UserController extends Controller
 
         \Mail::send('emails/mail', array('name' => $name, 'email' => $email, 'password' => $password), function ($message) use ($name, $email, $password) {
             $message->to($email, $name)->subject('Welcome To PostCode');
-            $message->from('sagaranimesh3317@gmail.com', 'Post Code');
+            $message->from('ourpostcode.onenesstechs@gmail.com', 'Post Code');
         });
 
         DB::commit();

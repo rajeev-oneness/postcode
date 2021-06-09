@@ -86,7 +86,6 @@ Route::group(['middleware' => ['auth', 'business']], function () {
 	Route::post('/business-profile-update', 'BusinessController@updateMyBusinessProfile')->name('my.business.profile.update');
 	
 	//--------------------------------------------------------------Manage Leads Section-----------------------------------------------//
-	Route::prefix('leads')->group(function () {
-		Route::get('/', 'LeadController@showLeads')->name('my.business.leads');
-	});
+	Route::get('/lead-listings', 'LeadController@showLeads')->name('my.business.leads');
+
 });
