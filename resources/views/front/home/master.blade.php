@@ -59,9 +59,8 @@
 				<li><a href="{{route('deals')}}">Deals </a></li>
 				<li><a href="{{route('community.show')}}">Community </a></li>
 				<li><a href="{{route('marketplace')}}">Marketplace</a></li>
-				{{-- <li><a href="#">Local Leads</a></li>
-				<li><a href="#">Resources</a></li> --}}
-				<li><a href="{{route('about-us')}}">About Us <span><i class="fas fa-chevron-down"></i></span> </a>
+				<li><a href="{{route('local.leads')}}">Leads</a></li>
+				<li><a href="{{route('about-us')}}">About<span><i class="fas fa-chevron-down"></i></span> </a>
 					<ul>
 						<li><a href="{{route('faq')}}">FAQs</a></li>
 					</ul>
@@ -218,6 +217,11 @@
 <script src="{{ asset('admin_assets/js/jquery.sumoselect.min.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
+	@if(Session::has('Success'))
+		swal("Success!", "{{Session::get('Success')}}", "success");
+	@elseif(Session::has('Errors'))
+		swal("Failed!", "{{Session::get('Errors')}}", "error");
+	@endif
 	function preLoader() {
 		$("#loading").fadeOut(1000, function() {
 			$("#loading").css("display", 'none');

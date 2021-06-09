@@ -11,6 +11,19 @@
 |
 */
 
+Route::get('/migrate', function(){
+    \Artisan::call('migrate');
+    dd('migrated!');
+});
+Route::get('/migrate/rollback', function(){
+    \Artisan::call('migrate:rollback --step=1');
+    dd('migration rolled 1 step back!');
+});
+Route::get('/config', function(){
+    \Artisan::call('config:cache');;
+    dd('Config cache cleared successfully');
+});
+
 Route::get('/', function () {
     return view('user.index');
 })->name('user.welcome');
@@ -157,6 +170,12 @@ Route::get('view-community-category/{id}','CommunityController@showCatgoryWiseCo
 Route::get('post-details/{id}','CommunityController@showDetailCommunity')->name('community.post.detail');
 Route::get('community-groups','CommunityGroupController@showAllGroups')->name('community.all.groups');
 Route::get('community-group-details/{id}','CommunityGroupController@showDetailCommunityGroup')->name('community.group.detail');
+
+//lead generation
+Route::get('/local-leads', 'LeadController@index')->name('local.leads');
+Route::get('/local-lead-search', 'LeadController@search')->name('lead.search.list');
+Route::post('/get-leads', 'LeadController@getLeads')->name('get.leads');
+Route::post('/submit-quote-request', 'LeadController@submitQuoteRequest')->name('submit.quote.request');
 
 
 Route::group(['middleware' => 'auth'], function () {
