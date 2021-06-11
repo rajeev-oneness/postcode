@@ -212,4 +212,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/update-discussion','CommunityGroupController@updateDiscussion')->name('community.update.discussion');
 });
 
-
+// Route::get('/postcode-details', 'FrontController@postcodeDeatils');
+Route::get('/postcode-details', 'FrontController@postcodeDeatils')->name('postcode.deatils');
+Route::post('/get-business-lat-lng', 'FrontController@getLatLng')->name('getLatLng');

@@ -9,9 +9,10 @@
 	<div class="banner-inner">
 		<h1 class="banner-heading bebasnew">Discover thousands of local businesses</h1>
 		<div class="search-area">
-			<form action="{{route('directory')}}" method="get">
+			<form action="{{route('postcode.deatils')}}" method="get">
+			{{-- <form action="{{route('directory')}}" method="get"> --}}
 			<ul class="search-list">
-				<li class="keyword">
+				{{-- <li class="keyword">
 					<input type="text" list="businesses" id="keyword" name="keyword" placeholder="Search by Keyword">
 					<datalist id="businesses">
 						@foreach ($businesses as $business)
@@ -19,7 +20,7 @@
 						@endforeach
 					</datalist>
 					<span><img src="{{asset('homepage_assets/images/magnify.png')}}"></span>
-				</li>
+				</li> --}}
 				<li class="postcode">
 					<input type="text" list="postcodes" id="postcode" name="postcode" placeholder="Search by Postcode" onkeypress="return numericKey(event)">
 					<datalist id="postcodes">

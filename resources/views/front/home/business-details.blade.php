@@ -34,7 +34,7 @@
         </ul>
 </div>
 
-<ul class="history_list">
+{{-- <ul class="history_list">
     <h2 class="bebasnew">Services</h2>
     @foreach ($data[0]['services'] as $item)
         <li>
@@ -43,7 +43,7 @@
             <p class="history_details">{{$item['details']}}</p>
         </li>
     @endforeach
-</ul>
+</ul> --}}
 <ul class="history_list">
     <h2 class="bebasnew">Deals</h2>
     @foreach ($data[0]['offers'] as $item)

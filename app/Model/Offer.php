@@ -18,4 +18,8 @@ class Offer extends Model
     {
         return $this->hasOne('App\Model\Business','user_id','created_by');
     }
+    public function ratings()
+    {
+        return $this->hasMany('App\Model\Rating','business_id','businessId');
+    }
 }

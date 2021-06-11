@@ -32,6 +32,46 @@ class FrontController extends Controller
         $communities = Community::all();
         return view('front.home.index', compact('threebusinesses','businesses','postcodes','categories','offers','communities'));
     }
+    public function postcodeDeatils(Request $req) {
+        // businesses
+        $businesses = Business::select('*');
+        if ($req->postcode != '' && $req->category != '') {
+            $businesses = $businesses->where('pin_code', $req->postcode)->where('business_categoryId', $req->category);
+        } elseif ($req->postcode == '' && $req->category != '') {
+            $request = new Request([
+                'postcode' => '',
+                'category' => $req->category,
+            ]);
+            return $this->directory($request);
+        } elseif ($req->postcode != '' && $req->category == '') {
+            $businesses = $businesses->where('pin_code', $req->postcode);
+        }
+        $businesses = $businesses->get();
+        //postcode details
+        $postcode = Postcode::where('postcode', $req->postcode)->first();
+        //offers
+        $offers = Offer::where('postcode', $req->postcode)->where('expire_date', '>=', date("Y-m-d"))->limit(5)->get();
+        //events
+        $events = Event::where('postcode', $req->postcode)->where('end', '>=', date("Y-m-d"))->limit(3)->get();
+        //communities
+        $communities = Community::all();
+        $category = $req->category;
+        return view('front.home.postcode-details', compact('businesses','postcode','offers','events','communities','category'));
+    }
+    public function getLatLng(Request $req) {
+        // businesses
+        $businesses = Business::select('*');
+        if ($req->postcode != '' && $req->category != '') {
+            $businesses = $businesses->where('pin_code', $req->postcode)->where('business_categoryId', $req->category);
+        } elseif ($req->postcode == '' && $req->category != '') {
+            $businesses = $businesses->where('business_categoryId', $req->category);
+        } elseif ($req->postcode != '' && $req->category == '') {
+            $businesses = $businesses->where('pin_code', $req->postcode);
+        }
+        $businesses = $businesses->get();
+        
+        return response()->json(['error' => false, 'data' => $businesses]);
+    }
     
     public function directory(Request $request) {
         $request = $request->except('_token');
@@ -147,7 +187,7 @@ class FrontController extends Controller
             $datas = $datas->with('business')->orderBy('created_at', 'DESC')->limit(10)->offset($offset)->get();
 
             //dd($datas);
-            return response()->json(['error'=>false,'message'=>'Data','data'=>$datas, 'search'=>$search, 'total' => $count]);
+            return response()->json(['error'=>false,'message'=>'Data','data'=>$datas, 'total' => $count]);
         }
         return response()->json(['error'=>true,'message'=>$validate->errors()->first()]);
     }
