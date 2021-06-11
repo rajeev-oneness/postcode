@@ -31,6 +31,7 @@ Add Community Group
           </div>
 
           <div class="col-md-6 mb-3">
+            <label for="validationCustom05">Choose Communities</label>
             <select name="communities[]" multiple="multiple" placeholder="Search Communities" class="search-box form-control">
                 <option disabled >Select Communities</option>
                 @foreach($communities as $community)
@@ -39,6 +40,11 @@ Add Community Group
              </select>
           </div>
 
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom05">Postcode</label>
+            <input type="number" name="postcode" required class="form-control @error('postcode'){{('is-invalid')}}@enderror" placeholder="Postcode" value="{{old('postcode')}}">
+            @error('postcode')<span class="text-danger">{{$message}}</span>@enderror
+          </div>
 
           <div class="col-md-12 mb-3">
             <label for="validationCustom05">Description</label>

@@ -15,6 +15,7 @@ use App\Model\State;
 use App\Model\Postcode;
 use App\Model\UserPurchase;
 use App\Model\Community;
+use App\Model\CommunityGroup;
 use App\Model\ProductCart;
 use Auth;
 use Validator;
@@ -47,16 +48,25 @@ class FrontController extends Controller
             $businesses = $businesses->where('pin_code', $req->postcode);
         }
         $businesses = $businesses->get();
+        
+        //ratings
+        $pluck = $businesses->pluck('id');
+        $ratingsDetails = Rating::whereIn('business_id',$pluck)->get();
+        
         //postcode details
         $postcode = Postcode::where('postcode', $req->postcode)->first();
+        
         //offers
         $offers = Offer::where('postcode', $req->postcode)->where('expire_date', '>=', date("Y-m-d"))->limit(5)->get();
+        
         //events
         $events = Event::where('postcode', $req->postcode)->where('end', '>=', date("Y-m-d"))->limit(3)->get();
+        
         //communities
-        $communities = Community::all();
+        $communities = CommunityGroup::where('postcode', $req->postcode)->get();
+        //category
         $category = $req->category;
-        return view('front.home.postcode-details', compact('businesses','postcode','offers','events','communities','category'));
+        return view('front.home.postcode-details', compact('businesses','postcode','offers','events','communities','category', 'ratingsDetails'));
     }
     public function getLatLng(Request $req) {
         // businesses

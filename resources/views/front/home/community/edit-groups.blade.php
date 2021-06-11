@@ -51,6 +51,12 @@
              </select>
           </div>
 
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom05">Postcode</label>
+            <input type="number" name="postcode" required class="form-control @error('postcode'){{('is-invalid')}}@enderror" placeholder="Postcode" value="{{ $community_group->postcode }}">
+            @error('postcode')<span class="text-danger">{{$message}}</span>@enderror
+          </div>
+
           <div class="col-md-12 mb-3">
             <label for="validationCustom05">Description</label>
             @error('description')<span class="text-danger">{{$message}}</span>@enderror

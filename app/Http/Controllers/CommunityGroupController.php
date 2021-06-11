@@ -64,7 +64,7 @@ class CommunityGroupController extends Controller
 
         $request->validate([
     		'name' => 'required|max:255|string',
-            // 'image' => 'required',
+            'image' => 'required',
     		'description' => 'required',
     	]);
         $community_group = new CommunityGroup();
@@ -76,6 +76,7 @@ class CommunityGroupController extends Controller
             $community_group->image = $imageurl;
         }
     	$community_group->name = $request->name;
+    	$community_group->postcode = $request->postcode;
     	$community_group->description = $request->description;
     	$community_group->created_by = auth()->id();
     	$community_group->save();
@@ -164,6 +165,7 @@ class CommunityGroupController extends Controller
             $community_group->image = $imageurl;
         }
     	$community_group->name = $request->name;
+    	$community_group->postcode = $request->postcode;
         $community_group->description = $request->description;
     	$community_group->save();
         CommunityGroupDetail::where('group_id',$request->id)->delete();

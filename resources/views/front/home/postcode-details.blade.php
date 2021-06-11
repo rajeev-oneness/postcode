@@ -116,7 +116,7 @@
 							<div class="text-center relative-heading">
 								<h2 class="main-heading">Events</h2>
 							</div>
-							<ul class="history_list">
+							<ul class="history_list text-left">
 								@forelse ($events as $event)
 								<li>
 									<div class="location_img_wrap">
@@ -151,13 +151,15 @@
 									</div>
 								</li>
 								@empty
-									<h3>Oops! No events</h3>
+								<div class="col-12">
+									<h3 class="text-center">Oops! No events</h3>
+								</div>
 								@endforelse
 							</ul>
 							@if (count($events) > 0)
 							<a href="{{route('events', ['menu'=>'events', 'search'=> $postcode->postcode])}}" class="primery-button orange-btm mt-4">More Events</a>
 							@else
-							<a href="{{route('events')}}" class="primery-button orange-btm mt-4">More Events</a>
+							<a href="{{route('events')}}" class="primery-button orange-btm mt-4">All Events</a>
 							@endif
 							
 						</div>
@@ -195,7 +197,7 @@
 		@if (count($offers) > 0)
 		<a href="{{route('deals',['menu'=>'deals', 'search'=> $postcode->postcode])}}" class="primery-button orange-btm mt-4">More Offers</a>
 		@else
-		<a href="{{route('deals')}}" class="primery-button orange-btm mt-4">More Offers</a>
+		<a href="{{route('deals')}}" class="primery-button orange-btm mt-4">All Offers</a>
 		@endif
 		
 	</div>
@@ -205,7 +207,7 @@
 		<h2 class="main-heading">Reviews</h2>
 
 		<div class="row m-0">
-			@for ($i = 0; $i < 3; $i++)
+			@forelse ($ratingsDetails as $rating)
 			<div class="col-12 col-md-4 col-lg-4 col-sm-4 mb-3 pl-md-0 text-left">
 				<div class="card review-card active">
 					<div class="card-body event-body">
@@ -216,18 +218,16 @@
 								</div>
 							</div>
 							<div class="col-8 col-md-9 p-0">
-								<h5 class="card-title text-white">SAMUAL WILLIAM</h5>
+								<h5 class="card-title text-white">{{$rating->user->name}}</h5>
 								<h6 class="card-subtitle mb-2 star-color">
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star-half-alt"></i>
+									@for ($i = 0; $i < $rating->rating; $i++)
+									<i class="fas fa-star"></i>
+									@endfor
 								</h6>
 							</div>
 						</div>
 						<p class="card-text text-white">
-						It is a long established fact that a reader will point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packag and web page editors
+							{{$rating->description}}
 						</p>
 						<p class="text-right">
 							<img src="{{asset('business_user_asset/images/quote-rev.png')}}">
@@ -235,7 +235,11 @@
 					</div>
 				</div>
 			</div>
-			@endfor
+			@empty
+			<div class="col-12">
+				<h3 class="text-center">Oops! No ratings</h3>
+			</div>
+			@endforelse
 		</div>
 	</div>
 </section>
@@ -259,27 +263,26 @@
 	</div>
 </section> --}}
 
-{{-- <section class="gray-section">
-	<h2 class="main-heading">Find a local business</h2>
+
+<section class="gray-section">
+	<h2 class="main-heading">Groups</h2>
 	<ul class="business-list">
-		@forelse ($categories as $category)
+		@forelse ($communities as $community)
 		<li>
-			<div class="inner-box" style="background: url({{asset('').$category->image}}) no-repeat center center; background-size: cover;">
+			<div class="inner-box" style="background: url({{asset($community->image)}}) no-repeat center center; background-size: cover;">
 				<div class="grid-content">
-					<form action="{{route('directory')}}" method="get">
-						<input type="hidden" name="category" value="{{$category->id}}">
-						<button class="primery-button orange-btm" style="border-style: none;">{{$category->name}}</button>
-					</form>
+					<a href="{{route('community.group.detail',base64_encode($community->id))}}" class="primery-button orange-btm mt-4">{{$community->name}}</a>
 				</div>
 			</div>
 		</li>
 		@empty
-			
+			<h3 class="text-center">Oops! No groups</h3>
 		@endforelse
-		
 	</ul>
-</section> --}}
-<section class="gray-section">
+	<a href="{{route('community.all.groups')}}" class="primery-button orange-btm mt-4 text-center">All groups</a>
+</section>
+
+<section class="white-section">
 	<div class="container">
 		<h2 class="main-heading">View Events in your Area</h2>
 		<ul class="event-list">
@@ -311,36 +314,6 @@
 		<a href="{{route('events')}}" class="primery-button orange-btm">More Events</a>
 	</div>
 </section>
-
-<section class="white-section">
-	<div class="container">
-		<h2 class="main-heading">Connect with your Community</h2>
-
-		<ul class="community-list">
-			@forelse ($communities as $community)
-			<li>
-				<div class="inner-box">
-					<figure style="background:url({{asset($community->image)}}) no-repeat center center; background-size: cover;"></figure>
-					<figcaption>
-						<h4>
-							{!! $community->description !!}
-						</h4>
-						<a href="{{route('community.post.detail',base64_encode($community->id))}}" class="text-button">View More <i class="fas fa-long-arrow-alt-right"></i> </a>
-					</figcaption>
-				</div>
-			</li>
-			@empty
-				<li>No Data!</li>
-			@endforelse
-			
-		</ul>
-
-		<a href="{{route('community.show')}}" class="primery-button orange-btm">More Community</a>
-
-
-	</div>
-</section>
-
 @section('script')
 
 <script type="text/javascript">
