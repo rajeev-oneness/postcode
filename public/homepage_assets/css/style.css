@@ -1569,6 +1569,216 @@ footer {
 
 
 
+/*------------ OUR POSTCODE COMMUNITY ---------------*/
+
+
+.community-banner 
+{
+    background-repeat: no-repeat;
+    padding: 40px 0 110px 0;
+    background-size: cover;
+    background-position: center;
+}
+
+.comm-heading 
+{
+    font-size: 60px;
+    line-height: 1.5;
+    color: #FFF;
+    font-family: "Bebas Neue", cursive;
+    margin-top: 40px;
+}
+
+.community-details {
+    display: flex;
+    align-items: flex-start;
+}
+
+
+.left-community {
+    background: #012d6a;
+    width: 507px;
+    padding-left: 12%;
+    padding-top: 55px;
+    padding-right: 50px;
+    flex: 0 0 507px;
+    min-height: 480px;
+}
+
+.left-community ul{
+    height: 390px;
+    overflow-y: scroll;
+}
+
+
+.left-community ul::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 50px;
+}
+ 
+.left-community ul::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+  border: 1px solid #ffffff52;
+  border-radius: 50px;
+}
+ 
+.left-community ul::-webkit-scrollbar-thumb {
+  background-color: #396aae;
+  /* outline: 1px solid #FFF; */
+  border-radius: 50px;
+  width: 10px;
+}
+
+
+.left-community ul li a 
+{
+    font-size: 20px;
+    color: #ffffff;
+    display: inline-block;
+    line-height: 2.5;
+}
+
+
+
+
+
+
+.details-community {
+    padding: 42px 0% 0 55px;
+    flex: 0 0 730px;
+}
+
+.heading-content 
+{
+    font-size: 38px;
+    color: #000000;
+    font-family: "Bebas Neue", cursive;
+    padding-bottom: 25px;
+    margin: 0;
+}
+
+
+.details-community > p 
+{
+    color: #000000;
+    font-size: 20px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+.cover-comments {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+
+.client-image {
+    width: 88px;
+    flex: 0 0 88px;
+    overflow: hidden;
+    border-radius: 50%;
+    height: 88px;
+    margin-right: 25px;
+}
+
+.comments-area h3 
+{
+    font-size: 30px;
+    margin-bottom: 55px;
+}
+
+.client-details  
+{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.client-details h4
+{
+    margin: 0;
+    font-size: 16px;
+    color: #000000;
+}
+
+.client-details p 
+{
+    margin: 0;
+    padding-left: 25px;
+}
+
+.client-details p span 
+{
+    margin-right: 15px;
+}
+
+.date 
+{
+    color: #e67021 !important;
+    font-size: 14px;
+}
+
+.time 
+{
+    color: #e67021 !important;
+    font-size: 14px;
+}
+.time span 
+{
+    opacity: 0.5;
+}
+
+.details-client p 
+{
+    color: #1f1f1f;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+.reply-part h4 
+{
+    font-size: 30px;
+    color: #000000;
+    margin-bottom: 25px;
+}
+
+.reply-part p 
+{
+    font-size: 17px; 
+    color: #000000;
+}
+
+.reply-part textarea {
+    width: 100%;
+    padding: 10px 15px;
+    background: #f7f5f5;
+    border: none;
+    margin-bottom: 30px;
+}
+
+.reply-part textarea:focus-visible
+{
+    border: none;
+}
+
+.leave-comments 
+{
+    width: 230px;
+    background: #f25d23;
+    padding: 10px 20px;
+    color: #FFF;
+    border: none;
+    text-transform: capitalize;
+}
+
+
+
+
+
 
 /*=====Responsive
 =====================*/
@@ -1639,6 +1849,20 @@ footer {
     .navigation.slide {
         transform: translateX(0);
     }
+
+
+    /****/
+
+    .left-community {
+     
+    padding-left: 10%;
+    flex: 0 0 400px;
+}
+
+
+
+
+
 }
 
 @media (max-width: 1199px) {
@@ -1657,6 +1881,22 @@ footer {
     .comment-list li a {
         font-size: 12px;
     }
+
+    /*****/
+
+    .community-details {
+    flex-flow: wrap;
+}
+.left-community {
+    padding-left: 10%;
+    flex: 0 0 100%;
+}
+
+.details-community {
+    padding: 42px 50px 0 55px;
+    flex: 0 0 100%;
+}
+
 }
 
 @media (max-width: 991px) {
@@ -1730,6 +1970,19 @@ footer {
     .evgrid-padding h4 {
         width: 172px;
     }
+
+    /***/
+    .details-community {
+    padding: 42px 15px 0 15px;
+    flex: 0 0 100%;
+    width: 100%;
+}
+
+.comm-pic 
+{
+    width: 100%;
+}
+
 }
 
 @media (max-width: 767px) {
