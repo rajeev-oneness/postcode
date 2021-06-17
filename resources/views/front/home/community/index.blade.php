@@ -1,4 +1,4 @@
-@extends('front.home.community.community')
+@extends('front.home.community.master')
 
 @section('com-title')
     View
@@ -45,6 +45,130 @@
   </table>  
 </div>
 --}}
+<section class="banner" style="background: url({{asset('homepage_assets/images/community-banner-new.jpg')}}) no-repeat center center; background-size:cover;">
+	<div class="banner-inner">
+		<h1 class="banner-heading bebasnew">Community</h1>
+		<div class="search-area">
+			<form action="{{route('search.community')}}" method="get">
+			<ul class="search-list">
+				<li class="postcode">
+					<input type="text" id="community" name="community" placeholder="Search by Keyword">
+					</datalist>
+					<span><img src="{{asset('homepage_assets/images/magnify.png')}}"></span>
+				</li>
+				<li class="category">
+					<select name="category">
+						<option value="">Search by category</option>
+						@foreach ($categories as $category)
+						<option value="{{$category->id}}"> {{$category->name}} </option>
+						@endforeach
+					</select>
+					<span><img src="{{asset('homepage_assets/images/category.png')}}"></span>
+				</li>
+				<li class="button">
+					<input type="submit" value="Search">
+				</li>
+			</ul>
+			</form>
+		</div>
+		@if (Session::has('noData'))
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			<strong>{{session('noData')}}</strong>
+		  </div>
+		@endif
+	</div>
+	<div class="category-place">
+		<div class="container">
+			<ul class="cat-list">
+				@forelse ($categories as $category)
+				<li>
+					<a href="{{route('community.category.show', $category->id)}}">
+						{{-- <figure><img src="{{asset('').$category->icon}}"></figure> --}}
+						{{$category->name}}
+					</a>
+				</li>
+				@empty
+				<li>No Data!</li>
+				@endforelse
+				
+			</ul>
+		</div>
+	</div>
+</section>
+{{-- <li>
+	<a href="#">
+		<figure><img src="{{asset('homepage_assets/images/cat-list.png')}}"></figure>
+		See all
+	</a>
+</li> --}}
+<section class="white-section">
+	<div class="container">
+		<h2 class="main-heading">Latest Posts</h2>
 
+		<ul class="community-list">
+			@forelse ($communities as $community)
+			<li>
+				<div class="inner-box">
+					<figure style="background:url({{asset($community->image)}}) no-repeat center center; background-size: cover;"></figure>
+					<figcaption>
+						<h4>
+							{!! substr($community->title, 0, 100) . '...' !!}
+						</h4>
+						<a href="{{route('community.post.detail',base64_encode($community->id))}}" class="text-button">View More <i class="fas fa-long-arrow-alt-right"></i> </a>
+					</figcaption>
+				</div>
+			</li>
+			@empty
+				<li>No Data!</li>
+			@endforelse
+			
+		</ul>
+
+		<a href="{{route('community.show')}}" class="primery-button orange-btm">More Community</a>
+
+
+	</div>
+</section>
     
+@endsection
+
+@section('community-scripts')
+    
+<script>
+//community slider
+$('.community-list').slick({
+  dots: true,
+  infinite: false,
+  speed: 300,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 481,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+
+  ]
+});
+</script>
+
 @endsection

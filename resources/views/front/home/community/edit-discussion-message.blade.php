@@ -10,7 +10,7 @@
 <li>Edit Message</a>
 @endsection
 
-@section('community')
+@section('community-details')
 <div class="row p-3">
     <ul class="search_list_items search_list_items-mod">
         @auth

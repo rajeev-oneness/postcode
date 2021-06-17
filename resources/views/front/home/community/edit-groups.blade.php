@@ -10,7 +10,7 @@
 <li>Edit Group</a></li>
 @endsection
 
-@section('community')
+@section('community-details')
 
 <div class="p-4">
     <h4>Edit Group</h4>
@@ -70,10 +70,10 @@
 
 @endsection
 
-@section('script')
+@section('community-script')
 <script type="text/javascript">
-    $(document).ready(function () {
-        window.Search = $('.search-box').SumoSelect({ csvDispCount: 3, search: true, searchText:'Enter here.' });
-    });
+  $(document).ready(function () {
+      window.Search = $('.search-box').SumoSelect({ csvDispCount: 3, search: true, searchText:'Enter here.' });
+  });
 </script>
 @endsection

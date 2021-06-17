@@ -10,7 +10,7 @@
 <li>Edit</a></li>
 @endsection
 
-@section('community')
+@section('community-details')
 
 <div class="p-4">
     <h4>Edit Post</h4>

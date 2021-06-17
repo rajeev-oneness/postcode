@@ -57,7 +57,16 @@
 				<li><a href="{{route('directory')}}">Directory</a></li>
 				<li><a href="{{route('events')}}">Events </a></li>
 				<li><a href="{{route('deals')}}">Deals </a></li>
-				<li><a href="{{route('community.show')}}">Community </a></li>
+				<li><a href="{{route('community.show')}}">Community <span><i class="fas fa-chevron-down"></i></span></a>
+					<ul>
+						@auth
+						<li><a href="{{route('community.my.post')}}">My Posts</a></li>
+						<li><a href="{{route('community.add.post')}}">Add Posts</a></li>
+						<li><a href="{{route('community.my.groups')}}">My Groups</a></li>
+						@endauth
+						<li><a href="{{route('community.all.groups')}}">Groups</a></li>
+					</ul>
+				</li>
 				<li><a href="{{route('marketplace')}}">Marketplace</a></li>
 				<li><a href="{{route('local.leads')}}">Leads</a></li>
 				<li><a href="{{route('about-us')}}">About<span><i class="fas fa-chevron-down"></i></span> </a>

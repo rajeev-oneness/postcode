@@ -10,8 +10,8 @@
 <li>Post Details</a>
 @endsection
 
-@section('community')
-<div class="row p-3">
+@section('community-details')
+{{-- <div class="row p-3">
     <ul class="search_list_items search_list_items-mod">
         <li>
             <div class="location_img_wrap">
@@ -98,6 +98,67 @@
         </li>
         @endguest
     </ul>
+</div> --}}
+<div class="details-community">
+    <h2 class="heading-content">{{$community->title}}</h2>
+    {!! $community->description !!}
+    
+    <div class="mt-5 mb-5">
+      <img class="comm-pic" src="{{asset($community->image)}}" width="700px">
+    </div>
+
+    <div class="comments-area">
+      <h3>Comments</h3>
+
+      @forelse ($community->comments as $comment)
+      <div class="cover-comments">
+        <div class="client-image">
+          <img src="{{asset('homepage_assets/images/comments-clients.png')}}">
+        </div>
+        <div class="details-client">
+          <div class="client-details">
+            <h4>{{$comment->user->name}}</h4>
+            <p class="date"><span><img src="{{asset('homepage_assets/images/calender.png')}}"></span>{{date('d . m . Y', strtotime($comment->created_at))}}</p>
+            <p class="time"><span><img src="{{asset('homepage_assets/images/clock.png')}}"></span>{{date('h : ia', strtotime($comment->created_at))}}</p>
+            @auth
+                @if (auth()->id() == $comment->commented_by)
+                <p class="time">
+                    <a href="{{route('community.edit.comment', ['commentId'=>$comment->id, 'communityId'=>$community->id])}}"><i class="fas fa-edit text-success"></i></a>&nbsp;&nbsp;&nbsp;
+                    <a onclick="return confirm('Are you sure?')" href="{{route('community.delete.comment', $comment->id)}}"><i class="fas fa-trash text-danger"></i></a>
+                </p>
+                @endif
+            @endauth
+          </div>
+          <p>{!! $comment->comment !!}</p>
+        </div>
+      </div>
+      @empty
+      <div class="cover-comments">
+        oops! no comments
+      </div>
+      @endforelse
+
+    </div>
+
+
+    <div class="reply-part mt-5 mb-5">
+      <h4>Leave A Reply</h4>
+      @auth
+      <p>Your Email Address Will Not Be Published. Required Fields Are Marked</p>
+      <form class="needs-validation" method="post" action="{{route('community.add.comment')}}" enctype="multipart/form-data">
+        {{csrf_field()}}
+        <input type="hidden" name="communityId" value="{{$community->id}}">
+        <textarea placeholder="Comment" name="comment" rows="3">{{old('comment')}}</textarea>
+        @error('description')<span class="text-danger">{{$message}}</span>@enderror
+        <input class="leave-comments" type="submit" value="Leave a comment">
+      </form>
+      @endauth
+      @guest
+      <p>Login/Register to reply</p>
+      @endguest
+    </div>
+
+
 </div>
 @endsection
 

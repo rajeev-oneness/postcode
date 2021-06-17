@@ -105,20 +105,20 @@ class CommunityController extends Controller
         }
     }
 
-    public function showCommunity()
+    public function showCommunity(Request $req)
     {
-        $community = Community::orderBy('created_at', 'DESC')->get();
-    	return view('front.home.community.index',compact('community'));
-    }
-    public function showCatgoryWiseCommunity($id)
-    {
-        $community = Community::where('communityCategoryId', $id)->orderBy('created_at', 'DESC')->get();
-    	return view('front.home.community.index',compact('community'));
+        $communities = Community::select('*');
+        if(!empty($req->categoryId)) {
+            $communities = $communities->where('communityCategoryId', $req->categoryId);
+        }
+        $communities = $communities->orderBy('created_at', 'DESC')->get();
+        $categories = CommunityCategory::orderBy('created_at', 'DESC')->get();
+    	return view('front.home.community.index',compact('communities', 'categories'));
     }
     public function showMyPosts()
     {
-        $community = Community::where('created_by', auth()->id())->orderBy('created_at', 'DESC')->get();
-    	return view('front.home.community.my-posts',compact('community'));
+        $communities = Community::where('created_by', auth()->id())->orderBy('created_at', 'DESC')->get();
+    	return view('front.home.community.my-posts',compact('communities'));
     }
     public function showDetailCommunity($id)
     {
@@ -178,5 +178,32 @@ class CommunityController extends Controller
         $like = CommunityLike::find($req->like_id);
         $like->delete();
         return response()->json(['error'=>false, 'message'=>'You have removed your like from this post!']);
+    }
+
+    public function getCommunityCategory()
+    {
+        $categories = CommunityCategory::orderBy('created_at', 'DESC')->get();
+        return response()->json(['message'=> 'Community Categories', 'data' => $categories]);
+    }
+
+    public function searchCommunity(Request $req)
+    {
+        $request = $req->all();
+        return view('front.home.community.search-list',compact('request'));
+    }
+
+    public function getSearchResult(Request $req)
+    {
+        // dd($req->all());
+        $offset = $req->page * 10;
+        $communities = Community::select('*');
+        if(!empty($req->community)) {
+            $communities = $communities->where('title', 'like', '%' . $req->community . '%');
+        }
+        if(!empty($req->category)) {
+            $communities = $communities->where('communityCategoryId', $req->category);
+        }
+        $communities = $communities->with('community_category','user','comments','get_likes','community_groups')->orderBy('created_at', 'DESC')->limit(10)->offset($offset)->get();
+        return response()->json(['error' => false, 'message' => 'Community search result', 'data' => $communities]);
     }
 }

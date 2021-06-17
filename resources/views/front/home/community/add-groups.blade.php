@@ -10,7 +10,7 @@ Add Community Group
 <li>Add Community Group</a></li>
 @endsection
 
-@section('community')
+@section('community-details')
 
 <div class="p-4">
     <h4>Add Community Group</h4>

@@ -169,10 +169,16 @@ Route::post('/fetch-product-subcategory', 'ProductController@fetchSubcategory')-
 
 
 Route::get('view-community','CommunityController@showCommunity')->name('community.show');
-Route::get('view-community-category/{id}','CommunityController@showCatgoryWiseCommunity')->name('community.category.show');
+Route::get('view-community-category/{categoryId}','CommunityController@showCommunity')->name('community.category.show');
 Route::get('post-details/{id}','CommunityController@showDetailCommunity')->name('community.post.detail');
 Route::get('community-groups','CommunityGroupController@showAllGroups')->name('community.all.groups');
 Route::get('community-group-details/{id}','CommunityGroupController@showDetailCommunityGroup')->name('community.group.detail');
+
+//get community categories
+Route::post('/get-community-categories', 'CommunityController@getCommunityCategory')->name('get.community.categories');
+Route::get('/search-community', 'CommunityController@searchCommunity')->name('search.community');
+Route::post('/get-search-result', 'CommunityController@getSearchResult')->name('get.search.result');
+
 
 //lead generation
 Route::get('/local-leads', 'LeadController@index')->name('local.leads');
@@ -215,3 +221,5 @@ Route::group(['middleware' => 'auth'], function () {
 // Route::get('/postcode-details', 'FrontController@postcodeDeatils');
 Route::get('/postcode-details', 'FrontController@postcodeDeatils')->name('postcode.deatils');
 Route::post('/get-business-lat-lng', 'FrontController@getLatLng')->name('getLatLng');
+
+

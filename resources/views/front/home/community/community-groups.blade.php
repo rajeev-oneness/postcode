@@ -1,7 +1,7 @@
-@extends('front.home.community.community')
+@extends('front.home.community.master')
 
 @section('com-title')
-    Community Groups
+Community Groups
 @endsection
 
 @section('brd_name')
@@ -11,34 +11,74 @@
 @endsection
 
 @section('community')
-<table class="table table-striped community_table table-sm">
-    <thead>
-      <tr>
-        <!--<th scope="col">#</th>-->
-        <th class="w-200">Name</th>
-        <th>Created By</th>
-      </tr>
-    </thead>
-    <tbody>
-        @php
-            $i = 1;
-        @endphp
-      @forelse ($community_all_groups as $item)
-          <tr>
-              <!--<td>{{$i++}}</td>-->
-              <td class="border-right"><a href="{{route('community.group.detail',base64_encode($item->id))}}">{{$item->name}}</a></td>
-              <td>
-                  <strong>{{$item->user->name}}</strong>
-                  <span class="text-muted">(On {{date('d M,y', strtotime($item->created_at))}})</span>
-              </td>
+<section class="white-section">
+	<div class="container">
+		<h2 class="main-heading">Community Groups</h2>
 
-          </tr>
-      @empty
-          <tr class="text-center">No Data!</tr>
-      @endforelse
-    </tbody>
-  </table>
-</div>
+		<ul class="community-list">
+			@forelse ($community_all_groups as $item)
+			<li>
+				<div class="inner-box">
+					<figure style="background:url({{$item->image}}) no-repeat center center; background-size: cover;"></figure>
+					<figcaption>
+						<h4>
+							{!! substr($item->name, 0, 100) . '...' !!}
+						</h4>
+						<a href="{{route('community.group.detail',base64_encode($item->id))}}" class="text-button">View More <i class="fas fa-long-arrow-alt-right"></i> </a>
+					</figcaption>
+				</div>
+			</li>
+			@empty
+				<li>No Data!</li>
+			@endforelse
+			
+		</ul>
 
+		<a href="{{route('community.add.post')}}" class="primery-button orange-btm m-3">Add Posts</a>
+
+
+	</div>
+</section>
+    
+@endsection
+
+@section('community-scripts')
+    
+<script>
+//community slider
+$('.community-list').slick({
+  dots: true,
+  infinite: false,
+  speed: 300,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 481,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+
+  ]
+});
+</script>
 
 @endsection
